@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateVendor;
 use App\Vendor;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,7 @@ class VendorController extends Controller
         return view('vendors/create');
     }
 
-    public function create(Request $request)
+    public function create(CreateVendor $request)
     {
         $vendor = new Vendor();
         $vendor->name = $request->vendor_name;
