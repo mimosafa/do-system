@@ -16,4 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/vendors', 'VendorController@index')->name('vendors.index');
-Route::get('/vendors/{id}', 'VendorController@details')->name('vendors.details');
+
+Route::get('/vendors/create', 'VendorController@showCreateForm')->name('vendors.create');
+Route::post('/vendors/create', 'VendorController@create');
+
+Route::get('/vendors/{id}', 'VendorController@show')->name('vendors.show');

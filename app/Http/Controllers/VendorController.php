@@ -16,11 +16,27 @@ class VendorController extends Controller
         ]);
     }
 
-    public function details(int $id)
+    public function show(int $id)
     {
         $vendor = Vendor::find($id);
-        return view('vendors/details', [
+        return view('vendors/show', [
             'vendor' => $vendor,
+        ]);
+    }
+
+    public function showCreateForm()
+    {
+        return view('vendors/create');
+    }
+
+    public function create(Request $request)
+    {
+        $vendor = new Vendor();
+        $vendor->name = $request->vendor_name;
+        $vendor->save();
+
+        return redirect()->route('vendors.show', [
+            'id' => $vendor->id,
         ]);
     }
 }
