@@ -2,10 +2,10 @@
 
 namespace App;
 
-use App\Car;
+use App\Vendor;
 use Illuminate\Database\Eloquent\Model;
 
-class Vendor extends Model
+class Car extends Model
 {
     /**
      * 状態定義
@@ -14,11 +14,11 @@ class Vendor extends Model
         0 => ['label' => '未登録', 'class' => 'label-warning'],
         1 => ['label' => '登録済み', 'class' => 'label-info'],
         8 => ['label' => '休止中', 'class' => 'label-muted'],
-        9 => ['label' => '退会済み', 'class' => 'label-muted'],
+        9 => ['label' => '登録抹消', 'class' => 'label-muted'],
     ];
 
-    public function cars() {
-        return $this->hasMany(Car::class);
+    public function vendor() {
+        return $this->belongsTo(Vendor::class);
     }
 
     public function getStatusLabelAttribute()
@@ -33,22 +33,11 @@ class Vendor extends Model
 
     public function getStatusClassAttribute()
     {
-        // 状態値
         $status = $this->attributes['status'];
 
-        // 定義されていなければ空文字を返す
         if (!isset(self::STATUS[$status])) {
             return '';
         }
-
         return self::STATUS[$status]['class'];
-    }
-
-    /**
-     * @todo '0', '1' がマジックナンバー...
-     */
-    public function getCanAddCarsAttribute()
-    {
-        return in_array($this->attributes['status'], [0, 1]);
     }
 }
