@@ -13,7 +13,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="text-right">
-                            <a href="#" class="btn btn-default btn-block">
+                            <a href="{{ route('vendors.edit', ['id' => $vendor->id]) }}" class="btn btn-default btn-block">
                                 事業者を編集する
                             </a>
                         </div>

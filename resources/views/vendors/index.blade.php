@@ -33,7 +33,7 @@
                             <td>
                                 <span class="label {{ $vendor->status_class}}">{{ $vendor->status_label }}</span>
                             </td>
-                            <td><a href="#">編集</a></td>
+                            <td><a href="{{ route('vendors.edit', ['id' => $vendor->id]) }}">編集</a></td>
                         </tr>
                         @endforeach
                     </tbody>
