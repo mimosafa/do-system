@@ -19,7 +19,7 @@
             @csrf
             <div class="form-group">
                 <label for="title">事業者名</label>
-                <input type="text" class="form-control" name="vendor_name" id="vendor_name" value="{{ old('vendor_name') }}" />
+                <input type="text" class="form-control" name="vendor_name" id="vendor_name" value="{{ old('vendor_name') }}" autocomplete="off" />
             </div>
             <div class="text-right">
                 <div class="btn-group" role="group">

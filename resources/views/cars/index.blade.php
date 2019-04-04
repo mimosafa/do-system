@@ -24,7 +24,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="#">
+                    <a href="{{ route('cars.show', ['id' => $car->id]) }}">
                         {{ $car->name }}
                     </td>
                 <td>{{ $car->vin }}</td>
@@ -38,7 +38,7 @@
     </table>
     <div class="panel-body">
         <div class="text-right">
-            <a href="#" class="btn btn-default btn-block">
+            <a href="{{ route('cars.create') }}" class="btn btn-default btn-block">
                 車両を追加する
             </a>
         </div>
