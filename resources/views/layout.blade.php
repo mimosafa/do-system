@@ -15,7 +15,16 @@
         </nav>
     </header>
     <main>
-        @yield('content')
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-4">
+                    <!-- 何か -->
+                </div>
+                <div class="column col-md-8">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
     </main>
     @yield('scripts')
 </body>

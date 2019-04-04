@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="page-header">
-    <h3>事業者編集</h3>
+    <h3>車両編集</h3>
 </div>
 <nav class="panel panel-default">
     <div class="panel-body">
@@ -14,21 +14,25 @@
         </div>
         @endif
         <form
-            action="{{ route('vendors.edit', ['id' => $vendor->id]) }}"
+            action="{{ route('cars.edit', ['id' => $car->id]) }}"
             method="POST"
         >
             @csrf
             <div class="form-group">
-                <label for="title">事業者名</label>
-                <input type="text" class="form-control" name="vendor_name" id="vendor_name" value="{{ old('vendor_name') ?? $vendor->name }}" />
+                <label for="title">車両名</label>
+                <input type="text" class="form-control" name="car_name" id="car_name" value="{{ old('car_name') ?? $car->name }}" />
+            </div>
+            <div class="form-group">
+                <label for="title">車両ナンバー</label>
+                <input type="text" class="form-control" name="vin" id="vin" value="{{ old('vin') ?? $car->vin }}" />
             </div>
             <div class="form-group">
                 <label for="status">状態</label>
                 <select name="status" id="status" class="form-control">
-                    @foreach(\App\Vendor::STATUS as $key => $val)
+                    @foreach(\App\Car::STATUS as $key => $val)
                     <option
                         value="{{ $key }}"
-                        {{ $key == old('status', $vendor->status) ? 'selected' : '' }}
+                        {{ $key == old('status', $car->status) ? 'selected' : '' }}
                     >
                         {{ $val['label'] }}
                     </option>
@@ -37,7 +41,7 @@
             </div>
             <div class="text-right">
                 <div class="btn-group" role="group">
-                    <a href="{{ route('vendors.show', ['id' => $vendor->id]) }}" class="btn btn-default">キャンセル</a>
+                    <a href="{{ route('cars.show', ['id' => $car->id]) }}" class="btn btn-default">キャンセル</a>
                     <button type="submit" class="btn btn-primary">送信</button>
                 </div>
             </div>
