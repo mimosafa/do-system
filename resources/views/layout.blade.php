@@ -26,6 +26,11 @@
             </div>
         </div>
     </main>
+    <footer class="footer" style="margin-top: 150px">
+        <div class="container">
+            <div class="footer-copyright text-center">Copyright © 2019 Workstore Tokyo Do.All rights reserved.</div>
+        </div>
+    </footer>
     @yield('scripts')
 </body>
 </html>
