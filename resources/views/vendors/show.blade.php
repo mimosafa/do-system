@@ -55,7 +55,7 @@
     @if ($vendor->can_add_cars)
     <div class="panel-body">
         <div class="text-right">
-            <a href="#" class="btn btn-default btn-block">
+            <a href="{{ route('cars.createWith', ['id' => $vendor->id]) }}" class="btn btn-default btn-block">
                 車両を追加する
             </a>
         </div>
