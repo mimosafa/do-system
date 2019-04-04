@@ -39,7 +39,7 @@
         <a href="{{ route('cars.index') }}" class="btn btn-default">
             車両一覧に戻る
         </a>
-        <a href="#" class="btn btn-default">
+        <a href="{{ route('cars.edit', ['id' => $car->id]) }}" class="btn btn-default">
             車両を編集する
         </a>
     </div>

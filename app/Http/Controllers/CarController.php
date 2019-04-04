@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Car;
 use App\Vendor;
 use App\Http\Requests\CreateCar;
+use App\Http\Requests\EditCar;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -52,5 +53,26 @@ class CarController extends Controller
         $car->save();
 
         return redirect()->route('cars.index');
+    }
+
+    public function showEditForm(int $id)
+    {
+        return view('cars/edit', [
+            'car' => Car::find($id),
+        ]);
+    }
+
+    public function edit(int $id, EditCar $request)
+    {
+        $car = Car::find($id);
+
+        $car->name = $request->car_name;
+        $car->vin = $request->vin;
+        $car->status = $request->status;
+        $car->save();
+
+        return redirect()->route('cars.show', [
+            'id' => $car->id,
+        ]);
     }
 }
