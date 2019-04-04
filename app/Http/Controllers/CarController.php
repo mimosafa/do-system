@@ -36,7 +36,7 @@ class CarController extends Controller
             ];
         } else {
             $args = [
-                'vendors' => Vendor::all(),
+                'vendors' => Vendor::whereIn('status', [0, 1])->get(),
                 'ref' => route('cars.index'),
             ];
         }
