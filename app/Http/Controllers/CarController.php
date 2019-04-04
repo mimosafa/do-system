@@ -18,6 +18,12 @@ class CarController extends Controller
         ]);
     }
 
+    public function show(int $id) {
+        return view('cars.show', [
+            'car' => Car::find($id),
+        ]);
+    }
+
     public function showCreateForm(int $id = 0)
     {
         if ($id) {

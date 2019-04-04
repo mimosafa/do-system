@@ -22,6 +22,9 @@ Route::get('/cars', 'CarController@index')->name('cars.index');
 Route::get('/cars/create', 'CarController@showCreateForm')->name('cars.create');
 Route::post('/cars/create', 'CarController@create');
 
+// 車両詳細
+Route::get('/cars/{id}', 'CarController@show')->name('cars.show');
+
 // 事業者一覧
 Route::get('/vendors', 'VendorController@index')->name('vendors.index');
 

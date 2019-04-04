@@ -24,7 +24,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="#">
+                    <a href="{{ route('cars.show', ['id' => $car->id]) }}">
                         {{ $car->name }}
                     </td>
                 <td>{{ $car->vin }}</td>

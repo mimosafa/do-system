@@ -37,7 +37,7 @@
         <tbody>
             @foreach ($vendor->cars as $car)
             <tr>
-                <td><a href="#">{{ $car->name }}</a></td>
+                <td><a href="{{ route('cars.show', ['id' => $car->id]) }}">{{ $car->name }}</a></td>
                 <td>{{ $car->vin }}</td>
                 <td>
                     <span class="label {{ $car->status_class }}">{{ $car->status_label }}</span>
