@@ -27,7 +27,8 @@
                     @endforeach
                 </select>
                 @elseif (isset($vendor))
-                <input class="form-control" type="text" name="vendor_id" id="vendor_id" value="{{ $vendor->name }}" readonly>
+                <input class="form-control" value="{{ $vendor->name }}" readonly>
+                <input type="hidden" name="vendor_id" id="vendor_id" value="{{ $vendor->id }}" readonly>
                 @endif
             </div>
             <div class="form-group">
