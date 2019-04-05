@@ -29,6 +29,13 @@ Route::get('/cars/{id}', 'CarController@show')->name('cars.show');
 Route::get('/cars/{id}/edit', 'CarController@showEditForm')->name('cars.edit');
 Route::post('/cars/{id}/edit', 'CarController@edit');
 
+// ファイル
+Route::get('/files/upload', 'FileController@showCreateForm')->name('files.create');
+Route::post('/files/upload', 'FileController@create');
+
+Route::get('/files/{id}', 'FileController@show')->name('files.show');
+
+
 // 事業者一覧
 Route::get('/vendors', 'VendorController@index')->name('vendors.index');
 
