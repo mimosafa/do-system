@@ -14,6 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/vendors', 'VendorController@index')->name('vendors.index');
-Route::get('/vendors/{id}', 'VendorController@details')->name('vendors.details');
