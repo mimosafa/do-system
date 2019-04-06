@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+<<<<<<< HEAD
 
 // 全車両一覧
 Route::get('/cars', 'CarController@index')->name('cars.index');
@@ -52,3 +53,5 @@ Route::post('/vendors/{id}/edit', 'VendorController@edit');
 
 // 事業者に車両を作成
 Route::get('/vendors/{id}/cars/create', 'CarController@showCreateForm')->name('cars.createWith');
+=======
+>>>>>>> refresh
