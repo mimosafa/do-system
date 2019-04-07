@@ -175,11 +175,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        /*
-         * https://github.com/orangehill/iseed
-         */
-        Orangehill\Iseed\IseedServiceProvider::class,
-
     ],
 
     /*
