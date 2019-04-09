@@ -19,14 +19,16 @@
     </thead>
     <tbody>
         @foreach ($vendors as $vendor)
-        <tr>
+        <tr class="{{ $vendor->status->isActive() ? '' : 'table-secondary' }}">
             <td>
                 <a href="{{ route('admin.vendors.show', ['id' => $vendor->id]) }}">
                     {{ $vendor->name }}
                 </a>
             </td>
             <td>
-                {{ $vendor->status }}
+                <span class="badge badge-{{ $vendor->status_attr['class'] }}">
+                    {{ $vendor->status_attr['label'] }}
+                </span>
             </td>
             <td>
                 {{ $vendor->id }}

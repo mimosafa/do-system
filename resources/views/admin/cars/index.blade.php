@@ -20,9 +20,11 @@
     </thead>
     <tbody>
         @foreach ($cars as $car)
-        <tr>
+        <tr class="{{ $car->status->isActive() ? '' : 'table-secondary' }}">
             <td>
-                <a href="{{ route('admin.cars.show', ['id' => $car->id]) }}">{{ $car->name }}</a>
+                <a href="{{ route('admin.cars.show', ['id' => $car->id]) }}">
+                    {{ $car->name }}
+                </a>
                 <small>
                     [ <a href="{{ route('admin.vendors.show', ['id' => $car->vendor->id]) }}">{{ $car->vendor->name }}</a> ]
                 </small>
@@ -31,7 +33,9 @@
                 {{ $car->vin }}
             </td>
             <td>
-                {{ $car->status }}
+                <span class="badge badge-{{ $car->status_attr['class'] }}">
+                    {{ $car->status_attr['label'] }}
+                </span>
             </td>
             <td>
                 {{ $car->id }}
