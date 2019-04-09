@@ -10,7 +10,7 @@ abstract class Enum extends PhpEnum
     /**
      * `is$Key` メソッドで equals 判定
      */
-    public static function __call($name, $arguments = [])
+    public function __call($name, $arguments = [])
     {
         if (preg_match('/^is(.+)$/', $name, $match)) {
             $key = strtoupper(Str::snake($match[1]));
