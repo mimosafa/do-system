@@ -57,7 +57,7 @@ class VendorController extends Controller
         $vendor = Vendor::find($id);
 
         $vendor->name = $request->name;
-        $vendor->status = $request->status;
+        $vendor->status = (int) $request->status;
 
         $vendor->save();
 
