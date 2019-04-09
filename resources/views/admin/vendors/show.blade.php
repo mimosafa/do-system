@@ -16,7 +16,7 @@
 
 <div class="card mb-3">
     <div class="card-header">状態</div>
-    <div class="card-body">{{ $vendor->status }}</div>
+    <div class="card-body">{{ $vendor->status_attr['label'] }}</div>
 </div>
 
 <div class="card mb-3">
@@ -55,6 +55,12 @@
     @endif
     <div class="card-footer text-right">
         <a href="{{ route('admin.cars.createWith', ['id' => $vendor->id]) }}">車両を追加する</a>
+    </div>
+</div>
+
+<div class="text-right">
+    <div class="btn-group">
+        <a href="{{ route('admin.vendors.edit', ['id' => $vendor->id]) }}" class="btn btn-primary">編集</a>
     </div>
 </div>
 

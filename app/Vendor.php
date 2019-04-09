@@ -15,12 +15,12 @@ class Vendor extends Model
 
     public function getStatusAttribute()
     {
-        return new Status($this->attributes['status']);
+        return new Status((int) $this->attributes['status']);
     }
 
     public function getStatusAttrAttribute()
     {
-        $status = new Status($this->attributes['status']);
+        $status = new Status((int) $this->attributes['status']);
         return $status->getAttribute();
     }
 }
