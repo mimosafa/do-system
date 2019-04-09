@@ -14,3 +14,44 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+// 管理者専用ページ
+Route::prefix('admin')->middleware('auth')->group(function() {
+
+    // 車両一覧
+    Route::get('cars', 'CarController@index')->name('admin.cars.index');
+
+    // 車両作成
+    Route::get('cars/create', 'CarController@create')->name('admin.cars.create');
+    Route::post('cars/create', 'CarController@store');
+
+    // 車両詳細
+    Route::get('cars/{id}', 'CarController@show')->name('admin.cars.show');
+
+    // 車両編集
+    Route::get('cars/{id}/edit', 'CarController@edit')->name('admin.cars.edit');
+    Route::post('cars/{id}/edit', 'CarController@update');
+
+    // 事業者一覧
+    Route::get('vendors', 'VendorController@index')->name('admin.vendors.index');
+
+    // 事業者作成
+    Route::get('vendors/create', 'VendorController@create')->name('admin.vendors.create');
+    Route::post('vendors/create', 'VendorController@store');
+
+    // 事業者詳細
+    Route::get('vendors/{id}', 'VendorController@show')->name('admin.vendors.show');
+
+    // 事業者編集
+    Route::get('vendors/{id}/edit', 'VendorController@edit')->name('admin.vendors.edit');
+    Route::post('vendors/{id}/edit', 'VendorController@update');
+
+    // 事業者詳細から車両作成
+    Route::get('vendors/{id}/cars/create', 'CarController@create')->name('admin.cars.createWith');
+    Route::post('vendors/{id}/cars/create', 'CarController@store');
+
+});
