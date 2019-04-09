@@ -20,7 +20,7 @@
     <div class="card mb-3">
         <div class="card-header">事業者名</div>
         <div class="card-body">
-            <input type="text" class="form-control" name="name" id="name">
+            <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
         </div>
     </div>
 

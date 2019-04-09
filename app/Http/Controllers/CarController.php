@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Car;
 use App\Vendor;
 use App\Http\Requests\CreateCar;
+use App\Http\Requests\EditCar;
 
 class CarController extends Controller
 {
@@ -57,6 +58,29 @@ class CarController extends Controller
         $car->vin = $request->vin;
         $car->save();
 
-        return redirect()->route('admin.cars.index');
+        return redirect()->route('admin.cars.show', ['car' => $car]);
+    }
+
+    public function edit(int $id)
+    {
+        $car = Car::find($id);
+
+        return view('admin/cars/edit', [
+            'car' => $car,
+        ]);
+    }
+
+    public function update(int $id, EditCar $request)
+    {
+        $car = Car::find($id);
+
+        $car->name = $request->name;
+        $car->vin = $request->vin;
+        $car->status = (int) $request->status;
+        $car->save();
+
+        return redirect()->route('admin.cars.show', [
+            'car' => $car,
+        ]);
     }
 }

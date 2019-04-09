@@ -25,7 +25,13 @@
 
 <div class="card mb-3">
     <div class="card-header">状態</div>
-    <div class="card-body">{{ $car->status }}</div>
+    <div class="card-body">{{ $car->status_attr['label'] }}</div>
+</div>
+
+<div class="text-right">
+    <div class="btn-group">
+        <a href="{{ route('admin.cars.edit', ['id' => $car->id]) }}" class="btn btn-primary">編集</a>
+    </div>
 </div>
 
 @endsection
