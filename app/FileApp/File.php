@@ -2,6 +2,7 @@
 
 namespace App\FileApp;
 
+use App\FileApp\FileHolder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
@@ -30,6 +31,11 @@ class File extends Model
      * @var array[]
      */
     protected static $publishedUrls = [];
+
+    public function holders()
+    {
+        return $this->hasMany(FileHolder::class);
+    }
 
     public function save(array $options = [])
     {
