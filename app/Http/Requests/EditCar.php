@@ -32,6 +32,7 @@ class EditCar extends CreateCar
 
         return $rules + [
             'status' => 'required|' . $status_rule,
+            'image' => 'file|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }

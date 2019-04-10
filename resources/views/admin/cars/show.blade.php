@@ -28,6 +28,17 @@
     <div class="card-body">{{ $car->status_attr['label'] }}</div>
 </div>
 
+<div class="card mb-3">
+    <div class="card-header">車両写真</div>
+    <div class="card-body">
+        <ul>
+            @foreach ($car->files as $holder)
+            <li>{{ $holder->file->url }}</li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+
 <div class="text-right">
     <div class="btn-group">
         <a href="{{ route('admin.cars.edit', ['id' => $car->id]) }}" class="btn btn-primary">編集</a>
