@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\FileApp;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -9,6 +9,11 @@ use Illuminate\Support\Str;
 
 class File extends Model
 {
+    /**
+     * @var string
+     */
+    protected $table = 'files';
+
     /**
      * @var array
      */

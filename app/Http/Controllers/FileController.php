@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\File;
+use App\FileApp\File;
 use App\Http\Requests\CreateFile;
 
 class FileController extends Controller
