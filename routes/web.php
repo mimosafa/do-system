@@ -36,6 +36,10 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('cars/{id}/edit', 'CarController@edit')->name('admin.cars.edit');
     Route::post('cars/{id}/edit', 'CarController@update');
 
+    // ファイル
+    Route::get('files/upload', 'FileController@create')->name('admin.files.create');
+    Route::post('files/upload', 'FileController@store');
+
     // 事業者一覧
     Route::get('vendors', 'VendorController@index')->name('admin.vendors.index');
 
