@@ -10,11 +10,6 @@ use Illuminate\Support\Str;
 class File extends Model
 {
     /**
-     * @var string
-     */
-    protected $table = 'files';
-
-    /**
      * @var array
      */
     protected $upload_where = [
@@ -39,9 +34,8 @@ class File extends Model
     public function save(array $options = [])
     {
         $this->prepareForSave();
-        if (! empty($this->uploaded_file)) {
-            $this->saveUploadedFile();
-        }
+        $this->saveUploadedFile();
+
         parent::save($options);
     }
 
@@ -109,7 +103,7 @@ class File extends Model
      */
     protected function saveUploadedFile()
     {
-        if ($this->uploaded_file->isValid()) {
+        if (isset($this->uploaded_file) && $this->uploaded_file->isValid()) {
             // Storage instance
             $disk = Storage::disk($this->attributes['disk']);
             // Store file & get path
