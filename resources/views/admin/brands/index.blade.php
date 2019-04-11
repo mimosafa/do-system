@@ -1,0 +1,65 @@
+@extends('admin.layout_1col')
+
+@section('main')
+<div class="h3 float-left">ブランド一覧</div>
+
+<ol class="breadcrumb float-right ml-auto mb-0 pb-0" style="background-color:transparent;">
+    <li class="breadcrumb-item">
+        <a href="#">すべて</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="{{ route('admin.brands.create') }}">新規作成</a>
+    </li>
+</ol>
+
+<div class="clearfix"></div>
+
+<div class="card">
+@if ($brands->isEmpty())
+<div class="card-body">
+    ブランドの登録はありません。
+</div>
+@else
+<table class="table mb-0">
+    <thead>
+        <tr>
+            <th>ブランド名 <small>[ 事業者 ]</small></th>
+            <th>コピー</th>
+            <th>ジャンル</th>
+            <th>ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($brands as $brand)
+        <tr class="">
+            <td>
+                <a href="{{ route('admin.brands.show', ['id' => $brand->id]) }}">
+                    {{ $brand->name }}
+                </a>
+                <small>
+                    [ <a href="{{ route('admin.vendors.show', ['id' => $brand->vendor->id]) }}">{{ $brand->vendor->name }}</a> ]
+                </small>
+            </td>
+            <td>
+                {{ $brand->ad_copy }}
+            </td>
+            <td>
+                <!-- -->
+            </td>
+            <td>
+                {{ $brand->id }}
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+@endif
+</div>
+
+@endsection
+
+@section('sidebar')
+<a href="{{ route('admin.brands.create') }}">
+    ブランドを作成する
+</a>
+@endsection

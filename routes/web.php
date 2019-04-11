@@ -22,6 +22,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 // 管理者専用ページ
 Route::prefix('admin')->middleware('auth')->group(function() {
 
+    // ブランド一覧
+    Route::get('brands', 'BrandController@index')->name('admin.brands.index');
+
+    // ブランド作成
+    Route::get('brands/create', 'BrandController@create')->name('admin.brands.create');
+    Route::post('brands/create', 'BrandController@store');
+
+    // ブランド詳細
+    Route::get('brands/{id}', 'BrandController@show')->name('admin.brands.show');
+
+    // ブランド編集
+    Route::get('brands/{id}/edit', 'BrandController@edit')->name('admin.brands.edit');
+    Route::post('brands/{id}/edit', 'BrandController@update');
+
     // 車両一覧
     Route::get('cars', 'CarController@index')->name('admin.cars.index');
 
