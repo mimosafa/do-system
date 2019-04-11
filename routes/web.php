@@ -72,6 +72,10 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('vendors/{id}/edit', 'VendorController@edit')->name('admin.vendors.edit');
     Route::post('vendors/{id}/edit', 'VendorController@update');
 
+    // 事業者詳細からブランド作成
+    Route::get('vendors/{id}/brands/create', 'BrandController@create')->name('admin.brands.createWith');
+    Route::post('vendors/{id}/brands/create', 'BrandController@create');
+
     // 事業者詳細から車両作成
     Route::get('vendors/{id}/cars/create', 'CarController@create')->name('admin.cars.createWith');
     Route::post('vendors/{id}/cars/create', 'CarController@store');
