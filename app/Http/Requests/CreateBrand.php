@@ -30,6 +30,7 @@ class CreateBrand extends FormRequest
             'ad_copy' => 'max:20',
             'ad_copy' => 'max:20',
             'description' => 'max:255',
+            'genres' => 'array',
         ];
     }
 }

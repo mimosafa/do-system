@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Genre;
 use App\Vendor;
 use App\Http\Requests\CreateBrand;
 use App\Http\Requests\EditBrand;
@@ -66,9 +67,18 @@ class BrandController extends Controller
     public function edit(int $id)
     {
         $brand = Brand::find($id);
+        $genre_ids = [];
+        $genres = $brand->genres;
+        if ($genres->isNotEmpty()) {
+            foreach ($genres as $genre) {
+                $genre_ids[] = $genre->id;
+            }
+        }
 
         return view('admin/brands/edit', [
             'brand' => $brand,
+            'genre_ids' => $genre_ids,
+            'all_genres' => Genre::all(),
         ]);
     }
 
@@ -80,6 +90,10 @@ class BrandController extends Controller
         $brand->ad_copy = $request->ad_copy;
         $brand->ad_text = $request->ad_text;
         $brand->description = $request->description;
+        if ($request->genres) {
+            $brand->genres()->detach();
+            $brand->genres()->attach($request->genres);
+        }
         $brand->save();
 
         return redirect()->route('admin.brands.show', [

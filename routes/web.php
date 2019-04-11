@@ -54,6 +54,10 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('files/upload', 'FileController@create')->name('admin.files.create');
     Route::post('files/upload', 'FileController@store');
 
+    // ジャンル一覧・作成
+    Route::get('genres', 'GenreController@create')->name('admin.genres.index');
+    Route::post('genres', 'GenreController@store');
+
     // 事業者一覧
     Route::get('vendors', 'VendorController@index')->name('admin.vendors.index');
 

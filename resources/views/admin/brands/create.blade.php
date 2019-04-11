@@ -44,23 +44,22 @@
     </div>
 
     <div class="card mb-3">
-        <div class="card-header">短文コピー <small>※ 20文字以内</small></div>
+        <div class="card-header">紹介文</div>
         <div class="card-body">
-            <input type="text" class="form-control" name="ad_copy" id="ad_copy" value="{{ old('ad_copy') }}" maxlength="20">
-        </div>
-    </div>
-
-    <div class="card mb-3">
-        <div class="card-header">紹介文 <small>※ 40文字以内</small></div>
-        <div class="card-body">
-            <input type="text" class="form-control" name="ad_text" id="ad_text" value="{{ old('ad_text') }}" maxlength="40">
-        </div>
-    </div>
-
-    <div class="card mb-3">
-        <div class="card-header">長文紹介</div>
-        <div class="card-body">
-            <input type="text" class="form-control" name="description" id="description" value="{{ old('description') }}">
+            <dl class="row">
+                <dt class="col-lg-2 col-md-3">20文字以内</dt>
+                <dd class="col-lg-10 col-md-9">
+                    <input type="text" class="form-control" name="ad_copy" id="ad_copy" value="{{ old('ad_copy') }}" maxlength="20">
+                </dd>
+                <dt class="col-lg-2 col-md-3">40文字以内</dt>
+                <dd class="col-lg-10 col-md-9">
+                    <input type="text" class="form-control" name="ad_text" id="ad_text" value="{{ old('ad_text') }}" maxlength="40">
+                </dd>
+                <dt class="col-lg-2 col-md-3">制限なし</dt>
+                <dd class="col-lg-10 col-md-9">
+                    <input type="text" class="form-control" name="description" id="description" value="{{ old('description') }}">
+                </dd>
+            </dl>
         </div>
     </div>
 

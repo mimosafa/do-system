@@ -24,18 +24,34 @@
 </div>
 
 <div class="card mb-3">
-    <div class="card-header">短文コピー</div>
-    <div class="card-body">{{ $brand->ad_copy }}</div>
+    <div class="card-header">ジャンル</div>
+    <div class="card-body">
+        @if ($brand->genres->isNotEmpty())
+        <div>
+            @foreach ($brand->genres as $genre)
+            <a href="#" class="btn btn-link">
+                {{ $genre->name }}
+            </a>
+            @endforeach
+        </div>
+        @else
+        ジャンルは登録されていません。
+        @endif
+    </div>
 </div>
 
 <div class="card mb-3">
     <div class="card-header">紹介文</div>
-    <div class="card-body">{{ $brand->ad_text }}</div>
-</div>
-
-<div class="card mb-3">
-    <div class="card-header">長文紹介</div>
-    <div class="card-body">{{ $brand->description }}</div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-lg-2 col-md-3">20文字以内</dt>
+            <dd class="col-lg-10 col-md-9">{{ $brand->ad_copy }}</dd>
+            <dt class="col-lg-2 col-md-3">40文字以内</dt>
+            <dd class="col-lg-10 col-md-9">{{ $brand->ad_text }}</dd>
+            <dt class="col-lg-2 col-md-3">制限なし</dt>
+            <dd class="col-lg-10 col-md-9">{{ $brand->description }}</dd>
+        </dl>
+    </div>
 </div>
 
 <div class="text-right">

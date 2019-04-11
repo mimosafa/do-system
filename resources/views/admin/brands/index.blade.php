@@ -24,7 +24,6 @@
     <thead>
         <tr>
             <th>ブランド名 <small>[ 事業者 ]</small></th>
-            <th>コピー</th>
             <th>ジャンル</th>
             <th>ID</th>
         </tr>
@@ -41,10 +40,10 @@
                 </small>
             </td>
             <td>
-                {{ $brand->ad_copy }}
-            </td>
-            <td>
-                <!-- -->
+                @for ($i = 0; $i < count($brand->genres); $i++)
+                {{ $brand->genres[$i]->name }}
+                {{ $i !== count($brand->genres) - 1 ? ', ' : '' }}
+                @endfor
             </td>
             <td>
                 {{ $brand->id }}
