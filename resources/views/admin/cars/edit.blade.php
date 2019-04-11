@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout_2col')
 
 @section('main')
 
@@ -14,7 +14,7 @@
 </div>
 @endif
 
-<form action="{{ route('admin.cars.edit', ['id' => $car->id]) }}" method="post">
+<form action="{{ route('admin.cars.edit', ['id' => $car->id]) }}" method="post" enctype="multipart/form-data">
     @csrf
 
     <div class="card mb-3">
@@ -41,6 +41,13 @@
                 </option>
                 @endforeach
             </select>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">車両写真</div>
+        <div class="card-body">
+            <input type="file" name="image" id="image">
         </div>
     </div>
 

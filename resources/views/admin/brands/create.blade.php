@@ -2,7 +2,7 @@
 
 @section('main')
 
-<div class="h3">車両作成</div>
+<div class="h3">ブランド作成</div>
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -14,7 +14,7 @@
 </div>
 @endif
 
-<form action="{{ route('admin.cars.create') }}" method="post">
+<form action="{{ route('admin.brands.create') }}" method="post">
     @csrf
 
     <div class="card mb-3">
@@ -37,16 +37,29 @@
     </div>
 
     <div class="card mb-3">
-        <div class="card-header">車両名</div>
+        <div class="card-header">ブランド名</div>
         <div class="card-body">
             <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
         </div>
     </div>
 
     <div class="card mb-3">
-        <div class="card-header">車両ナンバー</div>
+        <div class="card-header">紹介文</div>
         <div class="card-body">
-            <input type="text" class="form-control" name="vin" id="vin" value="{{ old('vin') }}">
+            <dl class="row">
+                <dt class="col-lg-2 col-md-3">20文字以内</dt>
+                <dd class="col-lg-10 col-md-9">
+                    <input type="text" class="form-control" name="ad_copy" id="ad_copy" value="{{ old('ad_copy') }}" maxlength="20">
+                </dd>
+                <dt class="col-lg-2 col-md-3">40文字以内</dt>
+                <dd class="col-lg-10 col-md-9">
+                    <input type="text" class="form-control" name="ad_text" id="ad_text" value="{{ old('ad_text') }}" maxlength="40">
+                </dd>
+                <dt class="col-lg-2 col-md-3">制限なし</dt>
+                <dd class="col-lg-10 col-md-9">
+                    <input type="text" class="form-control" name="description" id="description" value="{{ old('description') }}">
+                </dd>
+            </dl>
         </div>
     </div>
 

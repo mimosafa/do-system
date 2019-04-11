@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Values\Car\Status;
 use Illuminate\Validation\Rule;
 
-class EditCar extends CreateCar
+class EditBrand extends CreateBrand
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,10 +27,10 @@ class EditCar extends CreateCar
         $rules = parent::rules();
         unset($rules['vendor_id']);
 
-        $status_rule = Rule::in(Status::values());
+        # $status_rule = Rule::in(Status::values());
 
         return $rules + [
-            'status' => 'required|' . $status_rule,
+            # 'status' => 'required|' . $status_rule,
             'image' => 'file|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }

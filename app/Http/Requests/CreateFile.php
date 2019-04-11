@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Values\Car\Status;
-use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
-class EditCar extends CreateCar
+class CreateFile extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +24,9 @@ class EditCar extends CreateCar
      */
     public function rules()
     {
-        $rules = parent::rules();
-        unset($rules['vendor_id']);
-
-        $status_rule = Rule::in(Status::values());
-
-        return $rules + [
-            'status' => 'required|' . $status_rule,
-            'image' => 'file|image|mimes:jpeg,png,jpg,gif|max:2048',
+        return [
+            'file' => 'required|file|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'client_name' => 'max:255',
         ];
     }
 }

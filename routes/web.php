@@ -22,6 +22,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 // 管理者専用ページ
 Route::prefix('admin')->middleware('auth')->group(function() {
 
+    // ブランド一覧
+    Route::get('brands', 'BrandController@index')->name('admin.brands.index');
+
+    // ブランド作成
+    Route::get('brands/create', 'BrandController@create')->name('admin.brands.create');
+    Route::post('brands/create', 'BrandController@store');
+
+    // ブランド詳細
+    Route::get('brands/{id}', 'BrandController@show')->name('admin.brands.show');
+
+    // ブランド編集
+    Route::get('brands/{id}/edit', 'BrandController@edit')->name('admin.brands.edit');
+    Route::post('brands/{id}/edit', 'BrandController@update');
+
     // 車両一覧
     Route::get('cars', 'CarController@index')->name('admin.cars.index');
 
@@ -36,6 +50,14 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('cars/{id}/edit', 'CarController@edit')->name('admin.cars.edit');
     Route::post('cars/{id}/edit', 'CarController@update');
 
+    // ファイル
+    Route::get('files/upload', 'FileController@create')->name('admin.files.create');
+    Route::post('files/upload', 'FileController@store');
+
+    // ジャンル一覧・作成
+    Route::get('genres', 'GenreController@create')->name('admin.genres.index');
+    Route::post('genres', 'GenreController@store');
+
     // 事業者一覧
     Route::get('vendors', 'VendorController@index')->name('admin.vendors.index');
 
@@ -49,6 +71,10 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     // 事業者編集
     Route::get('vendors/{id}/edit', 'VendorController@edit')->name('admin.vendors.edit');
     Route::post('vendors/{id}/edit', 'VendorController@update');
+
+    // 事業者詳細からブランド作成
+    Route::get('vendors/{id}/brands/create', 'BrandController@create')->name('admin.brands.createWith');
+    Route::post('vendors/{id}/brands/create', 'BrandController@create');
 
     // 事業者詳細から車両作成
     Route::get('vendors/{id}/cars/create', 'CarController@create')->name('admin.cars.createWith');

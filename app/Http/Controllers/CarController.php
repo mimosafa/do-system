@@ -77,6 +77,9 @@ class CarController extends Controller
         $car->name = $request->name;
         $car->vin = $request->vin;
         $car->status = (int) $request->status;
+        if ($image = $request->image) {
+            $car->uploaded_file = $image;
+        }
         $car->save();
 
         return redirect()->route('admin.cars.show', [

@@ -2,30 +2,35 @@
 
 namespace App;
 
+use App\Genre;
 use App\Vendor;
-use App\Values\Car as Values;
+use App\Values\Brand as Values;
 use App\FileApp\File;
 use App\FileApp\FileHolderTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Car extends Model
+class Brand extends Model
 {
     use FileHolderTrait;
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class);
+    }
 
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
     }
 
-    public function getStatusAttribute()
+    public function getRawNameAttribute()
     {
-        return new Values\Status($this->attributes['status']);
+        return $this->attributes['name'];
     }
 
-    public function getStatusAttrAttribute()
+    public function getNameAttribute($value)
     {
-        $status = new Values\Status($this->attributes['status']);
-        return $status->getAttribute();
+        return $value ?: $this->vendor->name;
     }
 
     public function getImagesAttribute()

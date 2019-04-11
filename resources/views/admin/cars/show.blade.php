@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout_2col')
 
 @section('main')
 
@@ -26,6 +26,26 @@
 <div class="card mb-3">
     <div class="card-header">状態</div>
     <div class="card-body">{{ $car->status_attr['label'] }}</div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">車両写真</div>
+    <div class="card-body">
+        @if ($car->images)
+        <ul class="list-unstyled mb-0">
+            @foreach ($car->images as $image)
+            <li>
+                <figure class="figure">
+                  <img src="{{ $image->url }}" class="figure-img img-fluid rounded" alt="">
+                  <figcaption class="figure-caption">{{ $image->client_name }}</figcaption>
+                </figure>
+            </li>
+            @endforeach
+        </ul>
+        @else
+        写真はありません
+        @endif
+    </div>
 </div>
 
 <div class="text-right">
