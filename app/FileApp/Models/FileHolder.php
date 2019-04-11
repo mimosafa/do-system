@@ -1,8 +1,8 @@
 <?php
 
-namespace App\FileApp;
+namespace App\FileApp\Models;
 
-use App\FileApp\File;
+use App\FileApp\Models\File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\FileApp\Traits;
+namespace App\FileApp;
 
-use App\FileApp\File;
-use App\FileApp\FileHolder;
+use App\FileApp\Models\File;
+use App\FileApp\Models\FileHolder;
 use Illuminate\Http\UploadedFile;
 
-trait Holder
+trait FileHolderTrait
 {
     public function files()
     {

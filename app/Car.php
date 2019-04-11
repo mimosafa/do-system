@@ -4,12 +4,12 @@ namespace App;
 
 use App\Vendor;
 use App\Values\Car\Status;
-use App\FileApp\Traits\Holder;
+use App\FileApp\FileHolderTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
 {
-    use Holder;
+    use FileHolderTrait;
 
     public function vendor()
     {
