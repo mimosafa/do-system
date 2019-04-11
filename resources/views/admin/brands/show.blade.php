@@ -54,6 +54,26 @@
     </div>
 </div>
 
+<div class="card mb-3">
+    <div class="card-header">ブランド写真</div>
+    <div class="card-body">
+        @if ($brand->images)
+        <ul class="list-unstyled mb-0">
+            @foreach ($brand->images as $image)
+            <li>
+                <figure class="figure">
+                  <img src="{{ $image->url }}" class="figure-img img-fluid rounded" alt="">
+                  <figcaption class="figure-caption">{{ $image->client_name }}</figcaption>
+                </figure>
+            </li>
+            @endforeach
+        </ul>
+        @else
+        写真はありません
+        @endif
+    </div>
+</div>
+
 <div class="text-right">
     <div class="btn-group">
         <a href="{{ route('admin.brands.edit', ['id' => $brand->id]) }}" class="btn btn-primary">編集</a>

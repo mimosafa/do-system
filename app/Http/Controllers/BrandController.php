@@ -90,6 +90,7 @@ class BrandController extends Controller
         $brand->ad_copy = $request->ad_copy;
         $brand->ad_text = $request->ad_text;
         $brand->description = $request->description;
+        $brand->uploaded_file = $request->image;
         if ($request->genres) {
             $brand->genres()->detach();
             $brand->genres()->attach($request->genres);

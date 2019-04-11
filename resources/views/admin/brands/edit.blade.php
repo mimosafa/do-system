@@ -56,6 +56,13 @@
         </div>
     </div>
 
+    <div class="card mb-3">
+        <div class="card-header">ブランド写真</div>
+        <div class="card-body">
+            <input type="file" name="image" id="image">
+        </div>
+    </div>
+
     <div class="text-right">
         <div class="btn-group">
             <a href="{{ route('admin.brands.show', ['id' => $brand->id]) }}" class="btn btn-light">キャンセル</a>
