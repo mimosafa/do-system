@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\FileApp\Models;
 
+use App\FileApp\Models\FileHolder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
@@ -31,12 +32,16 @@ class File extends Model
      */
     protected static $publishedUrls = [];
 
+    public function holders()
+    {
+        return $this->hasMany(FileHolder::class);
+    }
+
     public function save(array $options = [])
     {
         $this->prepareForSave();
-        if (! empty($this->uploaded_file)) {
-            $this->saveUploadedFile();
-        }
+        $this->saveUploadedFile();
+
         parent::save($options);
     }
 
@@ -61,8 +66,7 @@ class File extends Model
      */
     public function setDiskAttribute(string $disk)
     {
-        $disks = config('filesystems.disks');
-        if (isset($disks[$disk])) {
+        if (self::isDisk($disk)) {
             $this->upload_where['disk'] = $disk;
         }
         return $this;
@@ -104,7 +108,7 @@ class File extends Model
      */
     protected function saveUploadedFile()
     {
-        if ($this->uploaded_file->isValid()) {
+        if (isset($this->uploaded_file) && $this->uploaded_file->isValid()) {
             // Storage instance
             $disk = Storage::disk($this->attributes['disk']);
             // Store file & get path
@@ -126,6 +130,12 @@ class File extends Model
             return true;
         }
         return false;
+    }
+
+    public static function isDisk(string $disk): bool
+    {
+        $disks = config('filesystems.disks');
+        return isset($disks[$disk]);
     }
 
     protected static function getPublishedUrl(string $disk)
