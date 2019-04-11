@@ -3,7 +3,8 @@
 namespace App;
 
 use App\Vendor;
-use App\Values\Car\Status;
+use App\Values\Car as Values;
+use App\FileApp\File;
 use App\FileApp\FileHolderTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,12 +19,25 @@ class Car extends Model
 
     public function getStatusAttribute()
     {
-        return new Status($this->attributes['status']);
+        return new Values\Status($this->attributes['status']);
     }
 
     public function getStatusAttrAttribute()
     {
-        $status = new Status($this->attributes['status']);
+        $status = new Values\Status($this->attributes['status']);
         return $status->getAttribute();
+    }
+
+    public function getImagesAttribute()
+    {
+        $images = new Values\Image($this);
+        return $images->findAll();
+    }
+
+    public function setUploadedFileAttribute($file)
+    {
+        $images = new Values\Image($this);
+        $images->store($file);
+        return $this;
     }
 }
