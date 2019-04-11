@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use App\Vendor;
+use App\Http\Requests\CreateBrand;
 use App\Http\Requests\EditBrand;
 
 class BrandController extends Controller
