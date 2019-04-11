@@ -58,6 +58,44 @@
     </div>
 </div>
 
+<div class="card mb-3">
+    <div class="card-header">ブランド</div>
+    @if ($vendor->brands->isEmpty())
+    <div class="card-body">
+        ブランドの登録はありません。
+    </div>
+    @else
+    <table class="table mb-0">
+        <thead>
+            <tr>
+                <th>ブランド名</th>
+                <th>ジャンル</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($vendor->brands as $brand)
+            <tr class="">
+                <td>
+                    <a href="{{ route('admin.brands.show', ['id' => $brand->id]) }}">
+                        {{ $brand->name }}
+                    </a>
+                </td>
+                <td>
+                    @for ($i = 0; $i < count($brand->genres); $i++)
+                    {{ $brand->genres[$i]->name }}
+                    {{ $i !== count($brand->genres) - 1 ? ', ' : '' }}
+                    @endfor
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @endif
+    <div class="card-footer text-right">
+        <a href="{{ route('admin.brands.createWith', ['id' => $vendor->id]) }}">ブランドを追加する</a>
+    </div>
+</div>
+
 <div class="text-right">
     <div class="btn-group">
         <a href="{{ route('admin.vendors.edit', ['id' => $vendor->id]) }}" class="btn btn-primary">編集</a>
