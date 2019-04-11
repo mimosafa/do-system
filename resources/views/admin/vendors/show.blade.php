@@ -5,18 +5,8 @@
 <div class="h3">事業者詳細</div>
 
 <div class="card mb-3">
-    <div class="card-header">ID</div>
-    <div class="card-body">{{ $vendor->id }}</div>
-</div>
-
-<div class="card mb-3">
     <div class="card-header">事業者名</div>
     <div class="card-body">{{ $vendor->name }}</div>
-</div>
-
-<div class="card mb-3">
-    <div class="card-header">状態</div>
-    <div class="card-body">{{ $vendor->status_attr['label'] }}</div>
 </div>
 
 <div class="card mb-3">
@@ -105,6 +95,25 @@
 @endsection
 
 @section('sidebar')
+<div class="h3">管理情報</div>
+<div class="card bg-light mb-3">
+    <table class="table mb-0">
+        <tbody>
+            <tr>
+                <th>事業者ID</th>
+                <td>
+                    {{ $vendor->id }}
+                </td>
+            </tr>
+            <tr>
+                <th>状態</th>
+                <td>
+                    {{ $vendor->status_attr['label'] }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <a href="{{ route('admin.vendors.index') }}">
     事業者一覧に戻る
 </a>

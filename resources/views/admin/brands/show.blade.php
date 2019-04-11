@@ -5,20 +5,6 @@
 <div class="h3">ブランド詳細</div>
 
 <div class="card mb-3">
-    <div class="card-header">ID</div>
-    <div class="card-body">{{ $brand->id }}</div>
-</div>
-
-<div class="card mb-3">
-    <div class="card-header">事業者</div>
-    <div class="card-body">
-        <a href="{{ route('admin.vendors.show', ['id' => $brand->vendor->id]) }}">
-            {{ $brand->vendor->name }}
-        </a>
-    </div>
-</div>
-
-<div class="card mb-3">
     <div class="card-header">ブランド名</div>
     <div class="card-body">{{ $brand->name }}</div>
 </div>
@@ -43,7 +29,7 @@
 <div class="card mb-3">
     <div class="card-header">紹介文</div>
     <div class="card-body">
-        <dl class="row">
+        <dl class="row mb-0">
             <dt class="col-lg-2 col-md-3">20文字以内</dt>
             <dd class="col-lg-10 col-md-9">{{ $brand->ad_copy }}</dd>
             <dt class="col-lg-2 col-md-3">40文字以内</dt>
@@ -83,6 +69,33 @@
 @endsection
 
 @section('sidebar')
+<div class="h3">管理情報</div>
+<div class="card bg-light mb-3">
+    <table class="table mb-0">
+        <tbody>
+            <tr>
+                <th>ブランドID</th>
+                <td>
+                    {{ $brand->id }}
+                </td>
+            </tr>
+            <tr>
+                <th>事業者</th>
+                <td>
+                    <a href="{{ route('admin.vendors.show', ['id' => $brand->vendor->id]) }}">
+                        {{ $brand->vendor->name }}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>状態</th>
+                <td>
+                    <!-- -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <a href="{{ route('admin.brands.index') }}">
     ブランド一覧に戻る
 </a>
