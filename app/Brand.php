@@ -4,6 +4,7 @@ namespace App;
 
 use App\Advertisement;
 use App\Genre;
+use App\Shop;
 use App\Vendor;
 use App\Values\Brand as Values;
 use App\FileApp\File;
@@ -17,6 +18,11 @@ class Brand extends Model
     public function genres()
     {
         return $this->belongsToMany(Genre::class);
+    }
+
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
     }
 
     public function vendor()

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Shop;
 use App\Vendor;
 use App\Values\Car as Values;
 use App\FileApp\File;
@@ -11,6 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     use FileHolderTrait;
+
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
 
     public function vendor()
     {
