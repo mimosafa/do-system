@@ -19,6 +19,7 @@
     <table class="table mb-0">
         <thead>
             <tr>
+                <th class="imagesTh">写真</th>
                 <th>車両名</th>
                 <th>車両ナンバー</th>
                 <th>状態</th>
@@ -27,6 +28,13 @@
         <tbody>
             @foreach ($vendor->cars as $car)
             <tr class="{{ $car->status->isActive() ? '' : 'table-secondary' }}">
+                <td>
+                    @if ($car->images->isNotEmpty())
+                    <a href="#" style="background-image:url({{ $car->images->first()->url }})" class="thumbImage rounded"></a>
+                    @else
+                    <span class="noImage rounded">No Image</span>
+                    @endif
+                </td>
                 <td>
                     <a href="{{ route('admin.cars.show', ['id' => $car->id]) }}">
                         {{ $car->name }}
@@ -58,6 +66,7 @@
     <table class="table mb-0">
         <thead>
             <tr>
+                <th class="imagesTh">写真</th>
                 <th>ブランド名</th>
                 <th>ジャンル</th>
             </tr>
@@ -65,6 +74,13 @@
         <tbody>
             @foreach ($vendor->brands as $brand)
             <tr class="">
+                <td>
+                    @if ($brand->images->isNotEmpty())
+                    <a href="#" style="background-image:url({{ $brand->images->first()->url }})" class="thumbImage rounded"></a>
+                    @else
+                    <span class="noImage rounded">No Image</span>
+                    @endif
+                </td>
                 <td>
                     <a href="{{ route('admin.brands.show', ['id' => $brand->id]) }}">
                         {{ $brand->name }}

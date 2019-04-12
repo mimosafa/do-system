@@ -17,7 +17,7 @@
 <div class="card mb-3">
     <div class="card-header">車両写真</div>
     <div class="card-body">
-        @if ($car->images)
+        @if ($car->images->isNotEmpty())
         <ul class="list-unstyled mb-0">
             @foreach ($car->images as $image)
             <li>

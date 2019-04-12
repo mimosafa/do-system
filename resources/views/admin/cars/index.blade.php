@@ -23,15 +23,22 @@
     <table class="table mb-0">
         <thead>
             <tr>
+                <th class="imagesTh">写真</th>
                 <th>車両名 <small>[ 事業者 ]</small></th>
                 <th>車両ナンバー</th>
                 <th>状態</th>
-                <th>ID</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($cars as $car)
             <tr class="{{ $car->status->isActive() ? '' : 'table-secondary' }}">
+                <td>
+                    @if ($car->images->isNotEmpty())
+                    <a href="#" style="background-image:url({{ $car->images->first()->url }})" class="thumbImage rounded"></a>
+                    @else
+                    <span class="noImage rounded">No Image</span>
+                    @endif
+                </td>
                 <td>
                     <a href="{{ route('admin.cars.show', ['id' => $car->id]) }}">
                         {{ $car->name }}
@@ -47,9 +54,6 @@
                     <span class="badge badge-{{ $car->status_attr['class'] }}">
                         {{ $car->status_attr['label'] }}
                     </span>
-                </td>
-                <td>
-                    {{ $car->id }}
                 </td>
             </tr>
             @endforeach

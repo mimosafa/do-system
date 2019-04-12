@@ -43,7 +43,7 @@
 <div class="card mb-3">
     <div class="card-header">ブランド写真</div>
     <div class="card-body">
-        @if ($brand->images)
+        @if ($brand->images->isNotEmpty())
         <ul class="list-unstyled mb-0">
             @foreach ($brand->images as $image)
             <li>

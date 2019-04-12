@@ -18,6 +18,55 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- inline styles by mimoto -->
+    <style>
+        th.imagesTh {
+            width: 100px;
+        }
+        @media (min-width: 768px) {
+            th.imagesTh {
+                width: 150px;
+            }
+        }
+        .noImage {
+            display: block;
+            height: 60px;
+            width: 80px;
+            background: #ccc;
+            text-align: center;
+            color: #fff;
+            font-weight: 400;
+            line-height: 60px;
+        }
+        @media (min-width: 768px) {
+            .noImage {
+                height: 90px;
+                width: 120px;
+                font-weight: 700;
+                line-height: 90px;
+            }
+        }
+        .thumbImage {
+            display: block;
+            height: 60px;
+            width: 80px;
+            overflow: hidden;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        @media (min-width: 768px) {
+            .thumbImage {
+                height: 90px;
+                width: 120px;
+            }
+            .thumbImage:hover {
+                background-size: contain;
+                background-color: #ddd;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="app">
