@@ -20,19 +20,28 @@
     <div class="card mb-3">
         <div class="card-header">ブランド名</div>
         <div class="card-body">
-            <input type="text" class="form-control" name="name" id="name" value="{{ old('name') ?? $brand->raw_name }}" {{ $brand->raw_name ? '' : 'placeholder=' . $brand->vendor->name }}>
+            <input type="text" class="form-control"
+                name="name" id="name"
+                value="{{ old('name') ?? $brand->raw_name }}"
+                {{ $brand->raw_name ? '' : 'placeholder=' . $brand->vendor->name }}
+            >
         </div>
     </div>
 
     <div class="card mb-3">
         <div class="card-header">ジャンル</div>
         <div class="card-body">
-            @foreach ($all_genres as $genre)
+            @forelse ($all_genres as $genre)
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="genres[]" id="genre-{{ $genre->id }}" value="{{ $genre->id }}" {{ in_array($genre->id, $genre_ids) ? 'checked' : '' }}>
+                <input class="form-check-input" type="checkbox"
+                    name="genres[]" id="genre-{{ $genre->id }}"
+                    value="{{ $genre->id }}" {{ in_array($genre->id, $genre_ids) ? 'checked' : '' }}
+                >
                 <label class="form-check-label" for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
             </div>
-            @endforeach
+            @empty
+            まだジャンルは作成されていません。<a href="{{ route('admin.genres.index') }}">作成しますか？</a>
+            @endforelse
         </div>
     </div>
 
@@ -42,15 +51,25 @@
             <dl class="row">
                 <dt class="col-lg-2 col-md-3">20文字以内</dt>
                 <dd class="col-lg-10 col-md-9">
-                    <input type="text" class="form-control" name="ad_copy" id="ad_copy" value="{{ old('ad_copy') ?? $brand->ad_copy }}" maxlength="20">
+                    <input type="text" class="form-control"
+                        name="ad_copy" id="ad_copy"
+                        value="{{ old('ad_copy') ?? $brand->advertisement->title_secondary }}"
+                        maxlength="20"
+                    >
                 </dd>
                 <dt class="col-lg-2 col-md-3">40文字以内</dt>
                 <dd class="col-lg-10 col-md-9">
-                    <input type="text" class="form-control" name="ad_text" id="ad_text" value="{{ old('ad_text') ?? $brand->ad_text }}" maxlength="40">
+                    <input type="text" class="form-control"
+                        name="ad_text" id="ad_text"
+                        value="{{ old('ad_text') ?? $brand->advertisement->description_primary }}"
+                        maxlength="40"
+                    >
                 </dd>
                 <dt class="col-lg-2 col-md-3">制限なし</dt>
                 <dd class="col-lg-10 col-md-9">
-                    <input type="text" class="form-control" name="description" id="description" value="{{ old('description') ?? $brand->description }}">
+                    <textarea class="form-control"
+                        name="description" id="description"
+                    >{{ old('description') ?? $brand->advertisement->content_primary }}</textarea>
                 </dd>
             </dl>
         </div>

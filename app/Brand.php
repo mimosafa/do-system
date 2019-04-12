@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Advertisement;
 use App\Genre;
 use App\Vendor;
 use App\Values\Brand as Values;
@@ -23,14 +24,19 @@ class Brand extends Model
         return $this->belongsTo(Vendor::class);
     }
 
+    public function advertisement()
+    {
+        return $this->morphOne(Advertisement::class, 'advertisable');
+    }
+
     public function getRawNameAttribute()
     {
         return $this->attributes['name'];
     }
 
-    public function getNameAttribute($value)
+    public function getNameAttribute()
     {
-        return $value ?: $this->vendor->name;
+        return $this->getRawNameAttribute() ?: $this->vendor->name;
     }
 
     public function getImagesAttribute()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Advertisement;
 use App\Brand;
 use App\Genre;
 use App\Vendor;
@@ -56,10 +57,15 @@ class BrandController extends Controller
         $brand = new Brand();
         $brand->vendor_id = $request->vendor_id;
         $brand->name = $request->name;
-        $brand->ad_copy = $request->ad_copy;
-        $brand->ad_text = $request->ad_text;
-        $brand->description = $request->description;
         $brand->save();
+
+        $ad = new Advertisement([
+            'title_secondary' => $request->ad_copy,
+            'description_primary' => $request->ad_text,
+            'content_primary' => $request->description,
+        ]);
+
+        $brand->advertisement()->save($ad);
 
         return redirect()->route('admin.brands.show', ['brand' => $brand]);
     }
@@ -86,10 +92,16 @@ class BrandController extends Controller
     {
         $brand = Brand::find($id);
 
+        $ad = $brand->advertisement;
+
+        $ad->title_secondary = $request->ad_copy;
+        $ad->description_primary = $request->ad_text;
+        $ad->description_secondary = '';
+        $ad->content_primary = $request->description;
+
+        $ad->save();
+
         $brand->name = $request->name;
-        $brand->ad_copy = $request->ad_copy;
-        $brand->ad_text = $request->ad_text;
-        $brand->description = $request->description;
         if ($image = $request->image) {
             $brand->uploaded_file = $image;
         }
