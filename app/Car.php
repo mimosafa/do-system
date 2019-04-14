@@ -46,4 +46,9 @@ class Car extends Model
         $images->store($file);
         return $this;
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
 }
