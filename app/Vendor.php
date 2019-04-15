@@ -29,4 +29,9 @@ class Vendor extends Model
         $status = new Status($this->attributes['status']);
         return $status->getAttribute();
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
 }

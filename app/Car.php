@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Shop;
 use App\Vendor;
 use App\Values\Car as Values;
 use App\FileApp\File;
@@ -11,6 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     use FileHolderTrait;
+
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
 
     public function vendor()
     {
@@ -39,5 +45,10 @@ class Car extends Model
         $images = new Values\Image($this);
         $images->store($file);
         return $this;
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
     }
 }

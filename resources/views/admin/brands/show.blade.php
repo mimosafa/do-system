@@ -31,11 +31,11 @@
     <div class="card-body">
         <dl class="row mb-0">
             <dt class="col-lg-2 col-md-3">20文字以内</dt>
-            <dd class="col-lg-10 col-md-9">{{ $brand->ad_copy }}</dd>
+            <dd class="col-lg-10 col-md-9">{{ $brand->advertisement->title_secondary }}</dd>
             <dt class="col-lg-2 col-md-3">40文字以内</dt>
-            <dd class="col-lg-10 col-md-9">{{ $brand->ad_text }}</dd>
+            <dd class="col-lg-10 col-md-9">{{ $brand->advertisement->description_primary }}</dd>
             <dt class="col-lg-2 col-md-3">制限なし</dt>
-            <dd class="col-lg-10 col-md-9">{{ $brand->description }}</dd>
+            <dd class="col-lg-10 col-md-9">{{ $brand->advertisement->content_primary }}</dd>
         </dl>
     </div>
 </div>
@@ -96,7 +96,12 @@
         </tbody>
     </table>
 </div>
-<a href="{{ route('admin.brands.index') }}">
-    ブランド一覧に戻る
-</a>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.brands.index') }}">
+        ブランド一覧に戻る
+    </a>
+    <a class="nav-link" href="{{ route('admin.shops.createWith', ['models' => 'brands', 'id' => $brand->id]) }}">
+        このブランドを出店者リスト追加
+    </a>
+</nav>
 @endsection
