@@ -21,7 +21,7 @@ class CarController extends Controller
     public function show(int $id)
     {
         return view('admin/cars/show', [
-            'car' => Car::find($id),
+            'car' => Car::findOrFail($id),
         ]);
     }
 

@@ -19,10 +19,8 @@ class VendorController extends Controller
 
     public function show(int $id)
     {
-        $vendor = Vendor::find($id);
-
         return view('admin/vendors/show', [
-            'vendor' => $vendor,
+            'vendor' => Vendor::findOrFail($id),
         ]);
     }
 

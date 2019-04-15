@@ -23,7 +23,7 @@ class BrandController extends Controller
     public function show(int $id)
     {
         return view('admin/brands/show', [
-            'brand' => Brand::find($id),
+            'brand' => Brand::findOrFail($id),
         ]);
     }
 
