@@ -63,12 +63,6 @@
     <table class="table mb-0">
         <tbody>
             <tr>
-                <th>事業者ID</th>
-                <td>
-                    {{ $shop->car->id }}
-                </td>
-            </tr>
-            <tr>
                 <th>事業者</th>
                 <td>
                     <a href="{{ route('admin.vendors.show', ['id' => $shop->car->vendor->id]) }}">
@@ -77,15 +71,27 @@
                 </td>
             </tr>
             <tr>
-                <th>状態</th>
+                <th>車両</th>
                 <td>
-                    {{ $shop->car->status_attr['label'] }}
+                    <a href="{{ route('admin.cars.show', ['id' => $shop->car->id]) }}">
+                        {{ $shop->car->name }}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>ブランド</th>
+                <td>
+                    <a href="{{ route('admin.brands.show', ['id' => $shop->brand->id]) }}">
+                        {{ $shop->brand->name }}
+                    </a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-<a href="{{ route('admin.shops.index') }}">
-    出店者リスト一覧に戻る
-</a>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.shops.index') }}">
+        出店者リスト一覧に戻る
+    </a>
+</nav>
 @endsection

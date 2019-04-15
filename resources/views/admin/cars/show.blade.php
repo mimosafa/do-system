@@ -70,7 +70,12 @@
         </tbody>
     </table>
 </div>
-<a href="{{ route('admin.cars.index') }}">
-    車両一覧に戻る
-</a>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.cars.index') }}">
+        車両一覧に戻る
+    </a>
+    <a class="nav-link" href="{{ route('admin.shops.createWith', ['models' => 'cars', 'id' => $car->id]) }}">
+        この車両を出店者リスト追加
+    </a>
+</nav>
 @endsection

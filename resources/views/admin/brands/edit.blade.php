@@ -94,7 +94,9 @@
 @endsection
 
 @section('sidebar')
-<a href="{{ route('admin.brands.index') }}">
-    ブランド一覧に戻る
-</a>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.brands.index') }}">
+        ブランド一覧に戻る
+    </a>
+</nav>
 @endsection

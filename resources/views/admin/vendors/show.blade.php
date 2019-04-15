@@ -130,7 +130,12 @@
         </tbody>
     </table>
 </div>
-<a href="{{ route('admin.vendors.index') }}">
-    事業者一覧に戻る
-</a>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.vendors.index') }}">
+        事業者一覧に戻る
+    </a>
+    <a class="nav-link" href="{{ route('admin.shops.createWith', ['models' => 'vendors', 'id' => $vendor->id]) }}">
+        この事業者を出店者リスト追加
+    </a>
+</nav>
 @endsection

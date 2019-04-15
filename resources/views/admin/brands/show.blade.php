@@ -96,7 +96,12 @@
         </tbody>
     </table>
 </div>
-<a href="{{ route('admin.brands.index') }}">
-    ブランド一覧に戻る
-</a>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.brands.index') }}">
+        ブランド一覧に戻る
+    </a>
+    <a class="nav-link" href="{{ route('admin.shops.createWith', ['models' => 'brands', 'id' => $brand->id]) }}">
+        このブランドを出店者リスト追加
+    </a>
+</nav>
 @endsection

@@ -33,22 +33,25 @@
     </div>
     @else
 
-    @if (! isset($car) && isset($vendor))
+    @if (isset($cars))
     <div class="card mb-3">
         <div class="card-header">車両</div>
-        @if ($vendor->cars->isNotEmpty())
+        @if ($cars->isNotEmpty())
         <table class="table mb-0">
             <thead>
                 <tr>
+                    @if ($next === 'store')
                     <th style="width: 60px;">選択</th>
+                    @endif
                     <th class="imagesTh">写真</th>
                     <th>車両名</th>
                     <th>車両ナンバー</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($vendor->cars as $_car)
+                @foreach ($cars as $_car)
                 <tr class="{{ $_car->status->isActive() ? '' : 'table-secondary' }}">
+                    @if ($next === 'store')
                     <td>
                         <div class="form-check">
                             <input class="form-check-input position-static" type="radio"
@@ -56,6 +59,7 @@
                             >
                         </div>
                     </td>
+                    @endif
                     <td>
                         @if ($_car->images->isNotEmpty())
                         <a href="#" style="background-image:url({{ $_car->images->first()->url }})" class="thumbImage rounded"></a>
@@ -82,24 +86,29 @@
         </div>
         @endif
     </div>
+    @elseif (isset($car))
+    <input type="hidden" name="car_id" id="car_id" value="{{ $car->id }}">
     @endif
 
-    @if (! isset($brand) && isset($vendor))
+    @if (isset($brands))
     <div class="card mb-3">
         <div class="card-header">ブランド</div>
-        @if ($vendor->brands->isNotEmpty())
+        @if ($brands->isNotEmpty())
         <table class="table mb-0">
             <thead>
                 <tr>
+                    @if ($next === 'store')
                     <th style="width: 60px;">選択</th>
+                    @endif
                     <th class="imagesTh">写真</th>
                     <th>ブランド名</th>
                     <th>ジャンル</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($vendor->brands as $_brand)
+                @foreach ($brands as $_brand)
                 <tr class="">
+                    @if ($next === 'store')
                     <td>
                         <div class="form-check">
                             <input class="form-check-input position-static" type="radio"
@@ -107,6 +116,7 @@
                             >
                         </div>
                     </td>
+                    @endif
                     <td>
                         @if ($_brand->images->isNotEmpty())
                         <a href="#" style="background-image:url({{ $_brand->images->first()->url }})" class="thumbImage rounded"></a>
@@ -135,16 +145,20 @@
         </div>
         @endif
     </div>
+    @elseif (isset($brand))
+    <input type="hidden" name="brand_id" id="brand_id" value="{{ $brand->id }}">
     @endif
 
     @endif
 
+    @if ($next !== 'disabled')
     <div class="text-right">
         <div class="btn-group">
             <a href="#" class="btn btn-light">キャンセル</a>
             <button type="submit" class="btn btn-primary">{{ $next === 'store' ? '作成' : '続ける' }}</button>
         </div>
     </div>
+    @endif
 
 </form>
 
@@ -195,7 +209,9 @@
     </table>
 </div>
 @endif
-<a href="{{ route('admin.shops.index') }}">
-    出店者リストに戻る
-</a>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.shops.index') }}">
+        出店者リスト一覧に戻る
+    </a>
+</nav>
 @endsection

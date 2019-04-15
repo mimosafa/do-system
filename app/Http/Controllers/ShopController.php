@@ -26,28 +26,37 @@ class ShopController extends Controller
         ]);
     }
 
-    public function create(?string $models = '', ?int $id = 0)
+    public function create(string $models = '', int $id = 0)
     {
-        if (! $models) {
-            $vendors = Vendor::active()->get();
-            return view('admin/shops/create', [
-                'vendors' =>$vendors,
-                'next' => 'continue',
-            ]);
-        }
-
         $params = [];
-        if ($models = 'venders') {
-            $params['vendor'] = Vendor::findOrFail($id);
-            $params['next'] = 'continue';
+        $next = 'disabled';
+
+        if (! $models) {
+            $params['vendors'] = Vendor::active()->get();
+            $next = 'continue';
+        } else if ($models === 'vendors') {
+            $params['vendor'] = $vendor = Vendor::findOrFail($id);
+            $params['cars']   = $cars   = $vendor->cars;
+            $params['brands'] = $brands = $vendor->brands;
+            if ($cars->isNotEmpty() && $brands->isNotEmpty()) {
+                $next = 'store';
+            }
         } else if ($models === 'cars') {
-            $params['car'] = Car::findOrFail($id);
-            $params['vendor'] = $params['car']->vendor;
+            $params['car']    = $car    = Car::findOrFail($id);
+            $params['vendor'] = $vendor = $car->vendor;
+            $params['brands'] = $brands = $vendor->brands;
+            if ($brands->isNotEmpty()) {
+                $next = 'store';
+            }
         } else if ($models === 'brands') {
-            $params['brand'] = Brand::findOrFail($id);
-            $params['vendor'] = $params['brand']->vendor;
+            $params['brand']   = $brand  = Brand::findOrFail($id);
+            $paramas['vendor'] = $vendor = $brand->vendor;
+            $params['cars']    = $cars   = $vendor->cars;
+            if ($cars->isNotEmpty()) {
+                $next = 'store';
+            }
         }
-        $params['next'] = $params['next'] ?? 'store';
+        $params['next'] = $next;
 
         return view('admin/shops/create', $params);
     }
@@ -72,8 +81,8 @@ class ShopController extends Controller
             $shop->brand_id = $brand->id;
             $shop->save();
 
-            return view('admin/shops/show', [
-                'shop' => $shop,
+            return redirect()->route('admin.shops.show', [
+                'id' => $shop->id,
             ]);
         }
 

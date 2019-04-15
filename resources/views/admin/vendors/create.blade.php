@@ -36,7 +36,9 @@
 @endsection
 
 @section('sidebar')
-<a href="{{ route('admin.vendors.index') }}">
-    事業者一覧に戻る
-</a>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.vendors.index') }}">
+        事業者一覧に戻る
+    </a>
+</nav>
 @endsection
