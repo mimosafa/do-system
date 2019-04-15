@@ -25,7 +25,7 @@
         <tr>
             <th class="imagesTh">車両</th>
             <th class="imagesTh">商品</th>
-            <th>出店名th>
+            <th>出店名</th>
             <th>ジャンル</th>
         </tr>
     </thead>
@@ -33,15 +33,30 @@
         @foreach ($shops as $shop)
         <tr class="">
             <td>
-                <!-- -->
+                @if ($shop->car->images->isNotEmpty())
+                <a href="#" style="background-image:url({{ $shop->car->images->first()->url }})" class="thumbImage rounded"></a>
+                @else
+                <span class="noImage rounded">No Image</span>
+                @endif
             </td>
             <td>
-                <!-- -->
+                @if ($shop->brand->images->isNotEmpty())
+                <a href="#" style="background-image:url({{ $shop->brand->images->first()->url }})" class="thumbImage rounded"></a>
+                @else
+                <span class="noImage rounded">No Image</span>
+                @endif
             </td>
             <td>
-                {{ $shop->brand->name }}
+                <a href="{{ route('admin.shops.show', ['id' => $shop->id]) }}">
+                    {{ $shop->brand->name }}
+                </a>
             </td>
-            <td></td>
+            <td>
+                @for ($i = 0; $i < count($shop->brand->genres); $i++)
+                {{ $shop->brand->genres[$i]->name }}
+                {{ $i !== count($shop->brand->genres) - 1 ? ', ' : '' }}
+                @endfor
+            </td>
         </tr>
         @endforeach
     </tbody>

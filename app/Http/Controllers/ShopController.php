@@ -18,89 +18,75 @@ class ShopController extends Controller
         ]);
     }
 
-    public function create(?string $models = '', ?int $id = 0)
+    public function show(int $id)
     {
-        $vendors = Vendor::active()->get();
-        return view('admin/shops/create', [
-            'vendors' =>$vendors,
-            'filled' => [],
+        $shop = Shop::findOrFail($id);
+        return view('admin/shops/show', [
+            'shop' => $shop,
         ]);
     }
 
-    public function which(Request $request)
+    public function create(?string $models = '', ?int $id = 0)
     {
-        $validatedData = $request->validate([
-            'vendor_id' => 'integer',
-            'car_id' => 'integer',
-            'brand_id' => 'integer',
-        ]);
+        if (! $models) {
+            $vendors = Vendor::active()->get();
+            return view('admin/shops/create', [
+                'vendors' =>$vendors,
+                'next' => 'continue',
+            ]);
+        }
 
         $params = [];
-        $filled_params = [];
-
-        if (isset($validatedData['vendor_id'])) {
-            $vendor = Vendor::find($validatedData['vendor_id']);
-            $params['vendor'] = $vendor;
-            $filled_params[] = 'vendor';
+        if ($models = 'venders') {
+            $params['vendor'] = Vendor::findOrFail($id);
+            $params['next'] = 'continue';
+        } else if ($models === 'cars') {
+            $params['car'] = Car::findOrFail($id);
+            $params['vendor'] = $params['car']->vendor;
+        } else if ($models === 'brands') {
+            $params['brand'] = Brand::findOrFail($id);
+            $params['vendor'] = $params['brand']->vendor;
         }
-
-        if (isset($validatedData['car_id'])) {
-            $car = Car::find($validatedData['car_id']);
-            if (! isset($params['vendor'])) {
-                $params['vendor'] = $car->vendor;
-                if (! in_array('vendor', $filled_params)) {
-                    $filled_params[] = 'vendor';
-                }
-                $filled_params[] = 'vendor';
-            }
-            $params['car'] = $car;
-            $filled_params[] = 'car';
-        } else {
-            if (isset($vendor)) {
-                $params['cars'] = $vendor->cars;
-            }
-        }
-
-        if (isset($validatedData['brand_id'])) {
-            $brand = Brand::find($validatedData['brand_id']);
-            if (! isset($params['vendor'])) {
-                $params['vendor'] = $brand->vendor;
-                if (! in_array('vendor', $filled_params)) {
-                    $filled_params[] = 'vendor';
-                }
-            }
-            $params['brand'] = $brand;
-            $filled_params[] = 'brand';
-        } else {
-            if (isset($vendor)) {
-                $params['brands'] = $vendor->brands;
-            }
-        }
-
-        if ($filled = count($filled_params) === 3) {
-            return $this->store($request);
-        }
-
-        $params['filled'] = $filled;
+        $params['next'] = $params['next'] ?? 'store';
 
         return view('admin/shops/create', $params);
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validated_1 = $request->validate([
+            'car_id' => 'integer',
+            'brand_id' => 'integer',
+        ]);
+
+        if (isset($validated_1['brand_id'])) {
+            $brand = Brand::findOrFail($validated_1['brand_id']);
+        }
+        if (isset($validated_1['car_id'])) {
+            $car = Car::findOrFail($validated_1['car_id']);
+        }
+
+        if (isset($brand) && isset($car)) {
+            $shop = new Shop();
+            $shop->car_id = $car->id;
+            $shop->brand_id = $brand->id;
+            $shop->save();
+
+            return view('admin/shops/show', [
+                'shop' => $shop,
+            ]);
+        }
+
+        if (isset($brand)) {
+            return $this->create('brands', $brand->id);
+        } else if (isset($car)) {
+            return $this->create('cars', $car->id);
+        }
+
+        $validated_2 = $request->validate([
             'vendor_id' => 'required|integer',
-            'car_id' => 'required|integer',
-            'brand_id' => 'required|integer',
         ]);
 
-        $shop = new Shop();
-        $shop->brand_id = $validatedData['brand_id'];
-        $shop->car_id = $validatedData['car_id'];
-        $shop->save();
-
-        return view('admin/shop/index', [
-            'shop' => Shop::all(),
-        ]);
+        return $this->create('vendors', $validated_2['vendor_id']);
     }
 }

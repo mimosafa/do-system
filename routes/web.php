@@ -66,7 +66,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
 
     // 出店者リストに新規追加
     Route::get('shops/create', 'ShopController@create')->name('shops.create');
-    Route::post('shops/create', 'ShopController@which');
+    Route::post('shops/create', 'ShopController@store');
+
+    // 出店者詳細
+    Route::get('shops/{id}', 'ShopController@show')->name('shops.show');
 
     // 事業者一覧
     Route::get('vendors', 'VendorController@index')->name('vendors.index');
