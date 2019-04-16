@@ -25,7 +25,7 @@ class CarsTableSeeder extends Seeder
                 'vin' => '品川88つ555',
                 'status' => 1,
                 'created_at' => '2019-04-03 08:42:36',
-                'updated_at' => '2019-04-04 07:19:22',
+                'updated_at' => '2019-04-16 18:33:55',
             ),
             1 => 
             array (
@@ -43,9 +43,9 @@ class CarsTableSeeder extends Seeder
                 'vendor_id' => 1,
                 'name' => 'グラマン搬入車',
                 'vin' => '品川100す251',
-                'status' => 1,
+                'status' => 8,
                 'created_at' => '2019-04-03 08:42:36',
-                'updated_at' => '2019-04-09 18:55:43',
+                'updated_at' => '2019-04-16 18:25:29',
             ),
             3 => 
             array (
@@ -103,9 +103,9 @@ class CarsTableSeeder extends Seeder
                 'vendor_id' => 3,
                 'name' => 'HANA',
                 'vin' => '品川41き329',
-                'status' => 0,
+                'status' => 9,
                 'created_at' => '2019-04-09 10:53:54',
-                'updated_at' => '2019-04-09 10:53:54',
+                'updated_at' => '2019-04-16 18:20:44',
             ),
             9 => 
             array (
@@ -113,9 +113,9 @@ class CarsTableSeeder extends Seeder
                 'vendor_id' => 8,
                 'name' => 'タコデリオ３号車',
                 'vin' => '品川800す5439',
-                'status' => 0,
+                'status' => 8,
                 'created_at' => '2019-04-09 11:13:44',
-                'updated_at' => '2019-04-09 11:13:44',
+                'updated_at' => '2019-04-16 18:24:32',
             ),
             10 => 
             array (
@@ -123,9 +123,9 @@ class CarsTableSeeder extends Seeder
                 'vendor_id' => 9,
                 'name' => 'M\'s com上野号',
                 'vin' => '春日部40さ9588',
-                'status' => 0,
+                'status' => 9,
                 'created_at' => '2019-04-09 11:39:09',
-                'updated_at' => '2019-04-09 11:39:09',
+                'updated_at' => '2019-04-16 18:24:44',
             ),
             11 => 
             array (
@@ -133,9 +133,9 @@ class CarsTableSeeder extends Seeder
                 'vendor_id' => 10,
                 'name' => 'スブラキハウス１号車',
                 'vin' => '山梨800さ7184',
-                'status' => 0,
+                'status' => 9,
                 'created_at' => '2019-04-09 11:40:03',
-                'updated_at' => '2019-04-09 11:40:03',
+                'updated_at' => '2019-04-16 18:24:54',
             ),
             12 => 
             array (
@@ -143,9 +143,9 @@ class CarsTableSeeder extends Seeder
                 'vendor_id' => 17,
                 'name' => 'ビーンズカート',
                 'vin' => '練馬880あ34',
-                'status' => 0,
+                'status' => 9,
                 'created_at' => '2019-04-09 18:25:39',
-                'updated_at' => '2019-04-09 18:25:39',
+                'updated_at' => '2019-04-16 18:25:03',
             ),
             13 => 
             array (
@@ -153,9 +153,9 @@ class CarsTableSeeder extends Seeder
                 'vendor_id' => 18,
                 'name' => 'マハッタ',
                 'vin' => '山梨800さ6556',
-                'status' => 0,
+                'status' => 9,
                 'created_at' => '2019-04-09 18:28:31',
-                'updated_at' => '2019-04-09 18:28:31',
+                'updated_at' => '2019-04-16 18:25:12',
             ),
         ));
         

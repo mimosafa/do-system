@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Car;
 use App\Vendor;
+use App\Values\Car\Status;
 use App\Http\Requests\CreateCar;
 use App\Http\Requests\EditCar;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::all();
+        $status = $request->status ?? Status::getIndexableValues();
+        $cars = Car::inStatus($status)->get();
 
         return view('admin.cars.index', [
             'cars' => $cars,
+            'shown_statuses' => $status,
+            'all_statuses' => Status::all(),
         ]);
     }
 

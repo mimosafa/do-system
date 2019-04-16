@@ -19,19 +19,13 @@ class Vendor extends Model
         return $this->hasMany(Car::class);
     }
 
-    public function getStatusAttribute()
+    public function getStatusAttribute(): Status
     {
         return new Status($this->attributes['status']);
     }
 
-    public function getStatusAttrAttribute()
+    public function scopeInStatus($query, array $status)
     {
-        $status = new Status($this->attributes['status']);
-        return $status->getAttribute();
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('status', 1);
+        return $query->whereIn('status', $status);
     }
 }
