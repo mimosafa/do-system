@@ -5,20 +5,6 @@
 <div class="h3">ブランド詳細</div>
 
 <div class="card mb-3">
-    <div class="card-header">ID</div>
-    <div class="card-body">{{ $brand->id }}</div>
-</div>
-
-<div class="card mb-3">
-    <div class="card-header">事業者</div>
-    <div class="card-body">
-        <a href="{{ route('admin.vendors.show', ['id' => $brand->vendor->id]) }}">
-            {{ $brand->vendor->name }}
-        </a>
-    </div>
-</div>
-
-<div class="card mb-3">
     <div class="card-header">ブランド名</div>
     <div class="card-body">{{ $brand->name }}</div>
 </div>
@@ -43,13 +29,13 @@
 <div class="card mb-3">
     <div class="card-header">紹介文</div>
     <div class="card-body">
-        <dl class="row">
+        <dl class="row mb-0">
             <dt class="col-lg-2 col-md-3">20文字以内</dt>
-            <dd class="col-lg-10 col-md-9">{{ $brand->ad_copy }}</dd>
+            <dd class="col-lg-10 col-md-9">{{ $brand->advertisement->title_secondary }}</dd>
             <dt class="col-lg-2 col-md-3">40文字以内</dt>
-            <dd class="col-lg-10 col-md-9">{{ $brand->ad_text }}</dd>
+            <dd class="col-lg-10 col-md-9">{{ $brand->advertisement->description_primary }}</dd>
             <dt class="col-lg-2 col-md-3">制限なし</dt>
-            <dd class="col-lg-10 col-md-9">{{ $brand->description }}</dd>
+            <dd class="col-lg-10 col-md-9">{{ $brand->advertisement->content_primary }}</dd>
         </dl>
     </div>
 </div>
@@ -57,7 +43,7 @@
 <div class="card mb-3">
     <div class="card-header">ブランド写真</div>
     <div class="card-body">
-        @if ($brand->images)
+        @if ($brand->images->isNotEmpty())
         <ul class="list-unstyled mb-0">
             @foreach ($brand->images as $image)
             <li>
@@ -83,7 +69,39 @@
 @endsection
 
 @section('sidebar')
-<a href="{{ route('admin.brands.index') }}">
-    ブランド一覧に戻る
-</a>
+<div class="h3">管理情報</div>
+<div class="card bg-light mb-3">
+    <table class="table mb-0">
+        <tbody>
+            <tr>
+                <th>ブランドID</th>
+                <td>
+                    {{ $brand->id }}
+                </td>
+            </tr>
+            <tr>
+                <th>事業者</th>
+                <td>
+                    <a href="{{ route('admin.vendors.show', ['id' => $brand->vendor->id]) }}">
+                        {{ $brand->vendor->name }}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>状態</th>
+                <td>
+                    <!-- -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.brands.index') }}">
+        ブランド一覧に戻る
+    </a>
+    <a class="nav-link" href="{{ route('admin.shops.createWith', ['models' => 'brands', 'id' => $brand->id]) }}">
+        このブランドを出店者リスト追加
+    </a>
+</nav>
 @endsection

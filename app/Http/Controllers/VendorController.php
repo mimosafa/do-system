@@ -3,26 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Vendor;
+use App\Values\Vendor\Status;
 use App\Http\Requests\CreateVendor;
 use App\Http\Requests\EditVendor;
+use Illuminate\Http\Request;
 
 class VendorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $vendors = Vendor::all();
+        $status = $request->status ?? Status::getIndexableValues();
+        $vendors = Vendor::inStatus($status)->get();
 
         return view('admin/vendors/index', [
             'vendors' => $vendors,
+            'shown_statuses' => $status,
+            'all_statuses' => Status::all(),
         ]);
     }
 
     public function show(int $id)
     {
-        $vendor = Vendor::find($id);
-
         return view('admin/vendors/show', [
-            'vendor' => $vendor,
+            'vendor' => Vendor::findOrFail($id),
         ]);
     }
 

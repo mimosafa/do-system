@@ -5,18 +5,8 @@
 <div class="h3">事業者詳細</div>
 
 <div class="card mb-3">
-    <div class="card-header">ID</div>
-    <div class="card-body">{{ $vendor->id }}</div>
-</div>
-
-<div class="card mb-3">
     <div class="card-header">事業者名</div>
     <div class="card-body">{{ $vendor->name }}</div>
-</div>
-
-<div class="card mb-3">
-    <div class="card-header">状態</div>
-    <div class="card-body">{{ $vendor->status_attr['label'] }}</div>
 </div>
 
 <div class="card mb-3">
@@ -29,6 +19,7 @@
     <table class="table mb-0">
         <thead>
             <tr>
+                <th class="imagesTh">写真</th>
                 <th>車両名</th>
                 <th>車両ナンバー</th>
                 <th>状態</th>
@@ -37,6 +28,13 @@
         <tbody>
             @foreach ($vendor->cars as $car)
             <tr class="{{ $car->status->isActive() ? '' : 'table-secondary' }}">
+                <td>
+                    @if ($car->images->isNotEmpty())
+                    <a href="#" style="background-image:url({{ $car->images->first()->url }})" class="thumbImage rounded"></a>
+                    @else
+                    <span class="noImage rounded">No Image</span>
+                    @endif
+                </td>
                 <td>
                     <a href="{{ route('admin.cars.show', ['id' => $car->id]) }}">
                         {{ $car->name }}
@@ -68,6 +66,7 @@
     <table class="table mb-0">
         <thead>
             <tr>
+                <th class="imagesTh">写真</th>
                 <th>ブランド名</th>
                 <th>ジャンル</th>
             </tr>
@@ -75,6 +74,13 @@
         <tbody>
             @foreach ($vendor->brands as $brand)
             <tr class="">
+                <td>
+                    @if ($brand->images->isNotEmpty())
+                    <a href="#" style="background-image:url({{ $brand->images->first()->url }})" class="thumbImage rounded"></a>
+                    @else
+                    <span class="noImage rounded">No Image</span>
+                    @endif
+                </td>
                 <td>
                     <a href="{{ route('admin.brands.show', ['id' => $brand->id]) }}">
                         {{ $brand->name }}
@@ -105,7 +111,31 @@
 @endsection
 
 @section('sidebar')
-<a href="{{ route('admin.vendors.index') }}">
-    事業者一覧に戻る
-</a>
+<div class="h3">管理情報</div>
+<div class="card bg-light mb-3">
+    <table class="table mb-0">
+        <tbody>
+            <tr>
+                <th>事業者ID</th>
+                <td>
+                    {{ $vendor->id }}
+                </td>
+            </tr>
+            <tr>
+                <th>状態</th>
+                <td>
+                    {{ $vendor->status->getLabel() }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.vendors.index') }}">
+        事業者一覧に戻る
+    </a>
+    <a class="nav-link" href="{{ route('admin.shops.createWith', ['models' => 'vendors', 'id' => $vendor->id]) }}">
+        この事業者を出店者リスト追加
+    </a>
+</nav>
 @endsection

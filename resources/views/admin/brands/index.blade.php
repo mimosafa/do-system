@@ -23,14 +23,21 @@
 <table class="table mb-0">
     <thead>
         <tr>
+            <th class="imagesTh">写真</th>
             <th>ブランド名 <small>[ 事業者 ]</small></th>
             <th>ジャンル</th>
-            <th>ID</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($brands as $brand)
         <tr class="">
+            <td>
+                @if ($brand->images->isNotEmpty())
+                <a href="#" style="background-image:url({{ $brand->images->first()->url }})" class="thumbImage rounded"></a>
+                @else
+                <span class="noImage rounded">No Image</span>
+                @endif
+            </td>
             <td>
                 <a href="{{ route('admin.brands.show', ['id' => $brand->id]) }}">
                     {{ $brand->name }}
@@ -44,9 +51,6 @@
                 {{ $brand->genres[$i]->name }}
                 {{ $i !== count($brand->genres) - 1 ? ', ' : '' }}
                 @endfor
-            </td>
-            <td>
-                {{ $brand->id }}
             </td>
         </tr>
         @endforeach

@@ -42,9 +42,8 @@ class File
             foreach ($holders as $holder) {
                 $collection[] = $holder->file;
             }
-            return collect($collection);
         }
-        return $collection;
+        return collect($collection);
     }
 
     public function store(UploadedFile $uploaded_file)

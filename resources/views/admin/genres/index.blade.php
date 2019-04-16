@@ -4,7 +4,7 @@
 
 <div class="h3">ジャンル一覧</div>
 
-<div class="card">
+<div class="card mb-3">
     <div class="card-body">
         @if ($genres->isEmpty())
         ジャンルの登録はまだありません。

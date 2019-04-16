@@ -35,9 +35,9 @@
         <div class="card-header">状態</div>
         <div class="card-body">
             <select name="status" id="status" class="form-control">
-                @foreach($car->status->getAttributes() as $key => $attr)
-                <option value="{{ $car->status::{$key}() }}" {{ $car->status->equals($car->status::{$key}()) ? 'selected' : '' }}>
-                    {{ $attr['label'] }}
+                @foreach($car->status::all() as $status)
+                <option value="{{ $status->getValue() }}" {{ $status->equals($car->status) ? 'selected' : '' }}>
+                    {{ $status->getLabel() }}
                 </option>
                 @endforeach
             </select>
@@ -63,7 +63,9 @@
 @endsection
 
 @section('sidebar')
-<a href="{{ route('admin.cars.index') }}">
-    車両一覧に戻る
-</a>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ route('admin.cars.index') }}">
+        車両一覧に戻る
+    </a>
+</nav>
 @endsection

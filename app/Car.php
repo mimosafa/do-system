@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Shop;
 use App\Vendor;
 use App\Values\Car as Values;
 use App\FileApp\File;
@@ -12,20 +13,19 @@ class Car extends Model
 {
     use FileHolderTrait;
 
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
+
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
     }
 
-    public function getStatusAttribute()
+    public function getStatusAttribute(): Values\Status
     {
         return new Values\Status($this->attributes['status']);
-    }
-
-    public function getStatusAttrAttribute()
-    {
-        $status = new Values\Status($this->attributes['status']);
-        return $status->getAttribute();
     }
 
     public function getImagesAttribute()
@@ -39,5 +39,10 @@ class Car extends Model
         $images = new Values\Image($this);
         $images->store($file);
         return $this;
+    }
+
+    public function scopeInStatus($query, array $status)
+    {
+        return $query->whereIn('status', $status);
     }
 }

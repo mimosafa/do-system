@@ -62,7 +62,9 @@
 @endsection
 
 @section('sidebar')
-<a href="{{ $ref['url'] }}">
-    {{ $ref['text'] }}に戻る
-</a>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{{ $ref['url'] }}">
+        {{ $ref['text'] }}に戻る
+    </a>
+</nav>
 @endsection

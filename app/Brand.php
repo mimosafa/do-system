@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Advertisement;
 use App\Genre;
+use App\Shop;
 use App\Vendor;
 use App\Values\Brand as Values;
 use App\FileApp\File;
@@ -18,9 +20,19 @@ class Brand extends Model
         return $this->belongsToMany(Genre::class);
     }
 
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
+
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
+    }
+
+    public function advertisement()
+    {
+        return $this->morphOne(Advertisement::class, 'advertisable');
     }
 
     public function getRawNameAttribute()
@@ -28,9 +40,9 @@ class Brand extends Model
         return $this->attributes['name'];
     }
 
-    public function getNameAttribute($value)
+    public function getNameAttribute()
     {
-        return $value ?: $this->vendor->name;
+        return $this->getRawNameAttribute() ?: $this->vendor->name;
     }
 
     public function getImagesAttribute()
