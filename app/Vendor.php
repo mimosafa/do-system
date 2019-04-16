@@ -6,9 +6,12 @@ use App\Brand;
 use App\Car;
 use App\Values\Vendor\Status;
 use Illuminate\Database\Eloquent\Model;
+use Wstd\Status\HasStatusTrait;
 
 class Vendor extends Model
 {
+    use HasStatusTrait;
+
     public function brands()
     {
         return $this->hasMany(Brand::class);
@@ -17,15 +20,5 @@ class Vendor extends Model
     public function cars()
     {
         return $this->hasMany(Car::class);
-    }
-
-    public function getStatusAttribute(): Status
-    {
-        return new Status($this->attributes['status']);
-    }
-
-    public function scopeInStatus($query, array $status)
-    {
-        return $query->whereIn('status', $status);
     }
 }
