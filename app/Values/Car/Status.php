@@ -2,29 +2,19 @@
 
 namespace App\Values\Car;
 
-use App\Values\Enum;
+use Wstd\Status\Status as EnumStatus;
 
-class Status extends Enum
+class Status extends EnumStatus
 {
-    const UNREGISTERED = 0;
-    const ACTIVE       = 1;
-    const INACTIVE     = 8;
-    const DEREGISTERED = 9;
-
-    private $attributes = [
-        'UNREGISTERED' => ['label' => '未登録', 'class' => 'warning'],
-        'ACTIVE'       => ['label' => '登録済', 'class' => 'primary'],
-        'INACTIVE'     => ['label' => '休止中', 'class' => 'secondary'],
-        'DEREGISTERED' => ['label' => '抹消済', 'class' => 'dark'],
+    protected static $indexables = [
+        'UNREGISTERED',
+        'ACTIVE',
     ];
 
-    public function getAttribute()
-    {
-        return $this->attributes[$this->getKey()];
-    }
-
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
+    protected $labels = [
+        'UNREGISTERED' => '未登録',
+        'ACTIVE'       => '登録済',
+        'INACTIVE'     => '休止中',
+        'DEREGISTERED' => '廃車/売却',
+    ];
 }

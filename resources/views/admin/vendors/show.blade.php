@@ -124,7 +124,7 @@
             <tr>
                 <th>状態</th>
                 <td>
-                    {{ $vendor->status_attr['label'] }}
+                    {{ $vendor->status->getLabel() }}
                 </td>
             </tr>
         </tbody>

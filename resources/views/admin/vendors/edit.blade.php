@@ -28,9 +28,9 @@
         <div class="card-header">状態</div>
         <div class="card-body">
             <select name="status" id="status" class="form-control">
-                @foreach($vendor->status->getAttributes() as $key => $attr)
-                <option value="{{ $vendor->status::{$key}() }}" {{ $vendor->status->equals($vendor->status::{$key}()) ? 'selected' : '' }}>
-                    {{ $attr['label'] }}
+                @foreach($vendor->status::all() as $status)
+                <option value="{{ $status->getValue() }}" {{ $status->equals($vendor->status) ? 'selected' : '' }}>
+                    {{ $status->getLabel() }}
                 </option>
                 @endforeach
             </select>

@@ -66,6 +66,16 @@
                 background-color: #ddd;
             }
         }
+        .table-status-unregistered, .table-status-unregistered>td, .table-status-unregistered>th {
+            background-color: #c3e6cb;
+        }
+        .table-status-inactive, .table-status-inactive>td, .table-status-inactive>th,
+        .table-status-deregistered, .table-status-deregistered>td, .table-status-deregistered>th {
+            background-color: #d6d8db;
+        }
+        .table-status-deregistered, .table-status-deregistered>td, .table-status-deregistered>th {
+            opacity: .85;
+        }
     </style>
 </head>
 <body>
@@ -134,6 +144,8 @@
                 </div>
             </div>
         </nav>
+
+        @yield('hidden_content')
 
         <main class="py-4">
             @yield('content')

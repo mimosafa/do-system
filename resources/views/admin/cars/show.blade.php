@@ -64,7 +64,7 @@
             <tr>
                 <th>状態</th>
                 <td>
-                    {{ $car->status_attr['label'] }}
+                    {{ $car->status->getLabel() }}
                 </td>
             </tr>
         </tbody>

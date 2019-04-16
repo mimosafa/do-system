@@ -23,15 +23,9 @@ class Car extends Model
         return $this->belongsTo(Vendor::class);
     }
 
-    public function getStatusAttribute()
+    public function getStatusAttribute(): Values\Status
     {
         return new Values\Status($this->attributes['status']);
-    }
-
-    public function getStatusAttrAttribute()
-    {
-        $status = new Values\Status($this->attributes['status']);
-        return $status->getAttribute();
     }
 
     public function getImagesAttribute()
@@ -47,8 +41,8 @@ class Car extends Model
         return $this;
     }
 
-    public function scopeActive($query)
+    public function scopeInStatus($query, array $status)
     {
-        return $query->where('status', 1);
+        return $query->whereIn('status', $status);
     }
 }
