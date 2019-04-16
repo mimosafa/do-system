@@ -69,7 +69,7 @@
         .table-status-unregistered, .table-status-unregistered>td, .table-status-unregistered>th {
             background-color: #c3e6cb;
         }
-        .table-status-inactive, .table-status-inactive>td, .table-status-inactive>th,
+        .table-status-suspended, .table-status-suspended>td, .table-status-suspended>th,
         .table-status-deregistered, .table-status-deregistered>td, .table-status-deregistered>th {
             background-color: #d6d8db;
         }

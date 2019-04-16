@@ -8,9 +8,20 @@ use Illuminate\Support\Str;
 class Status extends Enum
 {
     const UNREGISTERED = 0;
-    const ACTIVE       = 1;
-    const INACTIVE     = 8;
+    const REGISTERED   = 1;
+    // const MORE_STATUS = 2;
+    const ACTIVE       = 3;
+    // const MORE_STATUS = 4;
+    // const MORE_STATUS = 5;
+    const INACTIVE     = 6;
+    // const MORE_STATUS = 7;
+    const SUSPENDED    = 8;
     const DEREGISTERED = 9;
+
+    protected static $disabled = [
+        // self::ACTIVE,
+        // self::INACTIVE,
+    ];
 
     /**
      * 一覧表示可能なステイタス定数の配列
@@ -18,12 +29,23 @@ class Status extends Enum
      * @var array[integer]
      */
     protected static $indexables = [
+        self::REGISTERED,
         self::ACTIVE,
     ];
 
-    protected $slags = [];
+    protected $slags = [
+        // 'UNREGISTERED' => 'unregistered',
+        // 'ACTIVE'       => 'active',
+        // 'INACTIVE'     => 'inactive',
+        // 'DEREGISTERED' => 'deregistered',
+    ];
 
-    protected $labels = [];
+    protected $labels = [
+        // 'UNREGISTERED' => 'Unregistered',
+        // 'ACTIVE'       => 'Active',
+        // 'INACTIVE'     => 'Inactive',
+        // 'DEREGISTERED' => 'Deregistered',
+    ];
 
     /**
      * 定義されている全てのステイタスインスタンスの配列を取得
@@ -35,9 +57,13 @@ class Status extends Enum
      */
     public static function all(): array
     {
-        return array_map(function($value) {
-            return new static($value);
-        }, static::values());
+        $array = [];
+        foreach (self::toArray() as $value) {
+            if (! in_array($value, static::$disabled)) {
+                $array[] = new static($value);
+            }
+        }
+        return $array;
     }
 
     /**
