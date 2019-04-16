@@ -7,8 +7,8 @@ use Wstd\Status\Status as EnumStatus;
 class Status extends EnumStatus
 {
     protected static $indexables = [
-        'UNREGISTERED',
-        'ACTIVE',
+        self::UNREGISTERED,
+        self::ACTIVE,
     ];
 
     protected $labels = [

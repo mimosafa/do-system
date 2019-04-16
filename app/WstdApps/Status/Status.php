@@ -15,9 +15,11 @@ class Status extends Enum
     /**
      * 一覧表示可能なステイタス定数の配列
      *
-     * @var array[string]
+     * @var array[integer]
      */
-    protected static $indexables = ['ACTIVE'];
+    protected static $indexables = [
+        self::ACTIVE,
+    ];
 
     protected $slags = [];
 
@@ -46,17 +48,9 @@ class Status extends Enum
      *
      * @return array[integer]
      */
-    public static function indexableValues(): array
+    public static function getIndexableValues(): array
     {
-        $values = [];
-
-        foreach (static::toArray() as $key => $value) {
-            if (in_array($key, static::$indexables)) {
-                $values[] = $value;
-            }
-        }
-
-        return $values;
+        return static::$indexables;
     }
 
     public function getSlug(): string

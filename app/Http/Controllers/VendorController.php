@@ -12,7 +12,7 @@ class VendorController extends Controller
 {
     public function index(Request $request)
     {
-        $status = $request->status ?? Status::indexableValues();
+        $status = $request->status ?? Status::getIndexableValues();
         $vendors = Vendor::inStatus($status)->get();
 
         return view('admin/vendors/index', [
