@@ -7,6 +7,7 @@ use App\Values\Vendor\Status;
 use App\Http\Requests\CreateVendor;
 use App\Http\Requests\EditVendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VendorController extends Controller
 {
@@ -38,6 +39,7 @@ class VendorController extends Controller
     {
         $vendor = new Vendor();
 
+        $vendor->user_id = Auth::user()->id;
         $vendor->name = $request->name;
         $vendor->save();
 

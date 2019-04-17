@@ -10,6 +10,7 @@ use App\Values\Shop\Status;
 use App\Http\Requests\CreateShop;
 use App\Http\Requests\EditShop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -60,8 +61,10 @@ class ShopController extends Controller
     public function store(CreateShop $request)
     {
         $shop = new Shop();
+
+        $shop->user_id = Auth::user()->id;
         $shop->vendor_id = $request->vendor_id;
-        $shop->name = $request->name;
+        $shop->name = $request->name ?? Vendor::find($shop->vendor_id)->name;
         $shop->save();
 
         $ad = new Advertisement([
