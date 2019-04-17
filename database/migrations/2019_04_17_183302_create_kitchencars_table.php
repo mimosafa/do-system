@@ -15,7 +15,7 @@ class CreateKitchencarsTable extends Migration
     {
         Schema::create('kitchencars', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('user_id')->default(0);
+            $table->unsignedBigInteger('user_id');
             $table->unsignedInteger('car_id');
             $table->unsignedInteger('shop_id');
             $table->unsignedInteger('vendor_id');
@@ -23,6 +23,7 @@ class CreateKitchencarsTable extends Migration
             $table->timestamps();
 
             $table->index(['car_id', 'shop_id']);
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('car_id')->references('id')->on('cars');
             $table->foreign('shop_id')->references('id')->on('shops');
             $table->foreign('vendor_id')->references('id')->on('vendors');

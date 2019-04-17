@@ -20,6 +20,7 @@ class ShopsTableSeeder extends Seeder
             0 =>
             array (
                 'id' => 1,
+                'user_id' => 1,
                 'vendor_id' => 1,
                 'name' => '東京堂',
                 'status' => 0,
@@ -29,6 +30,7 @@ class ShopsTableSeeder extends Seeder
             1 =>
             array (
                 'id' => 2,
+                'user_id' => 1,
                 'vendor_id' => 1,
                 'name' => '塩だれ本舗',
                 'status' => 0,
@@ -38,6 +40,7 @@ class ShopsTableSeeder extends Seeder
             2 =>
             array (
                 'id' => 3,
+                'user_id' => 1,
                 'vendor_id' => 4,
                 'name' => 'ボナペティ',
                 'status' => 0,

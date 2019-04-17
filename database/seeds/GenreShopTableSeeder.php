@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class BrandGenreTableSeeder extends Seeder
+class GenreShopTableSeeder extends Seeder
 {
 
     /**
@@ -12,33 +12,33 @@ class BrandGenreTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('brand_genre')->delete();
-        
-        \DB::table('brand_genre')->insert(array (
-            0 => 
+
+        \DB::table('genre_shop')->delete();
+
+        \DB::table('genre_shop')->insert(array (
+            0 =>
             array (
-                'brand_id' => 1,
+                'shop_id' => 1,
                 'genre_id' => 1,
             ),
-            1 => 
+            1 =>
             array (
-                'brand_id' => 1,
+                'shop_id' => 1,
                 'genre_id' => 2,
             ),
-            2 => 
+            2 =>
             array (
-                'brand_id' => 2,
+                'shop_id' => 2,
                 'genre_id' => 8,
             ),
-            3 => 
+            3 =>
             array (
-                'brand_id' => 3,
+                'shop_id' => 3,
                 'genre_id' => 9,
             ),
         ));
-        
-        
+
+
     }
 }
