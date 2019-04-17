@@ -2,16 +2,16 @@
 
 namespace App;
 
-use App\Brand;
+use App\Shop;
 use App\Car;
 use App\Values\Vendor\Status;
 use Illuminate\Database\Eloquent\Model;
 
 class Vendor extends Model
 {
-    public function brands()
+    public function shops()
     {
-        return $this->hasMany(Brand::class);
+        return $this->hasMany(Shop::class);
     }
 
     public function cars()

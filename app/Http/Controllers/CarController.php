@@ -8,6 +8,7 @@ use App\Values\Car\Status;
 use App\Http\Requests\CreateCar;
 use App\Http\Requests\EditCar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CarController extends Controller
 {
@@ -58,6 +59,8 @@ class CarController extends Controller
     public function store(CreateCar $request)
     {
         $car = new Car();
+
+        $car->user_id = Auth::user()->id;
         $car->vendor_id = $request->vendor_id;
         $car->name = $request->name;
         $car->vin = $request->vin;

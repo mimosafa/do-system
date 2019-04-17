@@ -20,6 +20,7 @@ class VendorsTableSeeder extends Seeder
             0 =>
             array (
                 'id' => 1,
+                'user_id' => 1,
                 'name' => 'トウキョウドゥ',
                 'status' => 3,
                 'created_at' => '2019-04-02 10:51:57',
@@ -28,6 +29,7 @@ class VendorsTableSeeder extends Seeder
             1 =>
             array (
                 'id' => 2,
+                'user_id' => 1,
                 'name' => 'elephant box',
                 'status' => 7,
                 'created_at' => '2019-04-02 10:51:57',
@@ -36,6 +38,7 @@ class VendorsTableSeeder extends Seeder
             2 =>
             array (
                 'id' => 3,
+                'user_id' => 1,
                 'name' => 'HANAカレー',
                 'status' => 8,
                 'created_at' => '2019-04-02 10:51:57',
@@ -44,6 +47,7 @@ class VendorsTableSeeder extends Seeder
             3 =>
             array (
                 'id' => 4,
+                'user_id' => 1,
                 'name' => 'ボナペティ',
                 'status' => 3,
                 'created_at' => '2019-04-02 10:51:57',
@@ -52,6 +56,7 @@ class VendorsTableSeeder extends Seeder
             4 =>
             array (
                 'id' => 5,
+                'user_id' => 1,
                 'name' => '朔（ｓａｋｕ）',
                 'status' => 8,
                 'created_at' => '2019-04-03 03:14:15',
@@ -60,6 +65,7 @@ class VendorsTableSeeder extends Seeder
             5 =>
             array (
                 'id' => 6,
+                'user_id' => 1,
                 'name' => 'ランチ・ランチ',
                 'status' => 8,
                 'created_at' => '2019-04-03 03:35:15',
@@ -68,6 +74,7 @@ class VendorsTableSeeder extends Seeder
             6 =>
             array (
                 'id' => 7,
+                'user_id' => 1,
                 'name' => 'イーストダイナー',
                 'status' => 8,
                 'created_at' => '2019-04-03 06:22:59',
@@ -76,6 +83,7 @@ class VendorsTableSeeder extends Seeder
             7 =>
             array (
                 'id' => 8,
+                'user_id' => 1,
                 'name' => 'タコデリオ',
                 'status' => 7,
                 'created_at' => '2019-04-03 06:30:26',
@@ -84,6 +92,7 @@ class VendorsTableSeeder extends Seeder
             8 =>
             array (
                 'id' => 9,
+                'user_id' => 1,
                 'name' => 'M\'s com',
                 'status' => 8,
                 'created_at' => '2019-04-03 06:42:56',
@@ -92,6 +101,7 @@ class VendorsTableSeeder extends Seeder
             9 =>
             array (
                 'id' => 10,
+                'user_id' => 1,
                 'name' => 'スブラキハウス',
                 'status' => 8,
                 'created_at' => '2019-04-03 06:58:37',
@@ -100,6 +110,7 @@ class VendorsTableSeeder extends Seeder
             10 =>
             array (
                 'id' => 11,
+                'user_id' => 1,
                 'name' => 'アジアンランチ',
                 'status' => 3,
                 'created_at' => '2019-04-03 07:01:13',
@@ -108,6 +119,7 @@ class VendorsTableSeeder extends Seeder
             11 =>
             array (
                 'id' => 12,
+                'user_id' => 1,
                 'name' => 'YammY',
                 'status' => 8,
                 'created_at' => '2019-04-03 07:32:05',
@@ -116,6 +128,7 @@ class VendorsTableSeeder extends Seeder
             12 =>
             array (
                 'id' => 13,
+                'user_id' => 1,
                 'name' => 'スープ ファクトリー',
                 'status' => 8,
                 'created_at' => '2019-04-04 04:19:36',
@@ -124,6 +137,7 @@ class VendorsTableSeeder extends Seeder
             13 =>
             array (
                 'id' => 14,
+                'user_id' => 1,
                 'name' => 'パラダイス',
                 'status' => 3,
                 'created_at' => '2019-04-04 04:19:59',
@@ -132,6 +146,7 @@ class VendorsTableSeeder extends Seeder
             14 =>
             array (
                 'id' => 15,
+                'user_id' => 1,
                 'name' => 'ＴＲＡＦＦＩＣ　ＣＡＦＥ',
                 'status' => 8,
                 'created_at' => '2019-04-08 19:10:29',
@@ -140,6 +155,7 @@ class VendorsTableSeeder extends Seeder
             15 =>
             array (
                 'id' => 16,
+                'user_id' => 1,
                 'name' => 'アレックスコーヒー',
                 'status' => 8,
                 'created_at' => '2019-04-09 10:32:44',
@@ -148,6 +164,7 @@ class VendorsTableSeeder extends Seeder
             16 =>
             array (
                 'id' => 17,
+                'user_id' => 1,
                 'name' => 'ビーンズカート',
                 'status' => 8,
                 'created_at' => '2019-04-09 10:33:14',
@@ -156,6 +173,7 @@ class VendorsTableSeeder extends Seeder
             17 =>
             array (
                 'id' => 18,
+                'user_id' => 1,
                 'name' => 'マハッタ',
                 'status' => 8,
                 'created_at' => '2019-04-09 10:33:29',
@@ -164,6 +182,7 @@ class VendorsTableSeeder extends Seeder
             18 =>
             array (
                 'id' => 19,
+                'user_id' => 1,
                 'name' => '大上海',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:04:46',
@@ -172,6 +191,7 @@ class VendorsTableSeeder extends Seeder
             19 =>
             array (
                 'id' => 20,
+                'user_id' => 1,
                 'name' => 'メーアン',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:04:58',
@@ -180,6 +200,7 @@ class VendorsTableSeeder extends Seeder
             20 =>
             array (
                 'id' => 21,
+                'user_id' => 1,
                 'name' => 'Ｔｏｎｇｕｅ　Ｔａｂｌｅ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:05:13',
@@ -188,6 +209,7 @@ class VendorsTableSeeder extends Seeder
             21 =>
             array (
                 'id' => 22,
+                'user_id' => 1,
                 'name' => 'クレイジータコス',
                 'status' => 7,
                 'created_at' => '2019-04-16 11:05:22',
@@ -196,6 +218,7 @@ class VendorsTableSeeder extends Seeder
             22 =>
             array (
                 'id' => 23,
+                'user_id' => 1,
                 'name' => 'デリデミーナ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:05:33',
@@ -204,6 +227,7 @@ class VendorsTableSeeder extends Seeder
             23 =>
             array (
                 'id' => 24,
+                'user_id' => 1,
                 'name' => 'Ｅｇｇ　Ｒａｉｎｂｏｗ',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:05:43',
@@ -212,6 +236,7 @@ class VendorsTableSeeder extends Seeder
             24 =>
             array (
                 'id' => 25,
+                'user_id' => 1,
                 'name' => '給食当番6号車',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:05:51',
@@ -220,6 +245,7 @@ class VendorsTableSeeder extends Seeder
             25 =>
             array (
                 'id' => 26,
+                'user_id' => 1,
                 'name' => 'サウスパーク',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:06:00',
@@ -228,6 +254,7 @@ class VendorsTableSeeder extends Seeder
             26 =>
             array (
                 'id' => 27,
+                'user_id' => 1,
                 'name' => 'パパガヤデリ',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:06:08',
@@ -236,6 +263,7 @@ class VendorsTableSeeder extends Seeder
             27 =>
             array (
                 'id' => 28,
+                'user_id' => 1,
                 'name' => 'ＡＦＲＯ－ＢＵＲＧＥＲ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:06:18',
@@ -244,6 +272,7 @@ class VendorsTableSeeder extends Seeder
             28 =>
             array (
                 'id' => 29,
+                'user_id' => 1,
                 'name' => 'Ｒｙｕｋｙｕ　Ｗａｖｅ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:06:27',
@@ -252,6 +281,7 @@ class VendorsTableSeeder extends Seeder
             29 =>
             array (
                 'id' => 30,
+                'user_id' => 1,
                 'name' => 'ＲＵＮＴＡ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:06:36',
@@ -260,6 +290,7 @@ class VendorsTableSeeder extends Seeder
             30 =>
             array (
                 'id' => 31,
+                'user_id' => 1,
                 'name' => 'ｒｕｅ　ＣｈａｔｏｎＳ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:06:46',
@@ -268,6 +299,7 @@ class VendorsTableSeeder extends Seeder
             31 =>
             array (
                 'id' => 32,
+                'user_id' => 1,
                 'name' => '元祖　横浜カレーパン',
                 'status' => 7,
                 'created_at' => '2019-04-16 11:06:54',
@@ -276,6 +308,7 @@ class VendorsTableSeeder extends Seeder
             32 =>
             array (
                 'id' => 33,
+                'user_id' => 1,
                 'name' => 'あいうえお',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:07:02',
@@ -284,6 +317,7 @@ class VendorsTableSeeder extends Seeder
             33 =>
             array (
                 'id' => 34,
+                'user_id' => 1,
                 'name' => 'カリー・カリー',
                 'status' => 7,
                 'created_at' => '2019-04-16 11:07:12',
@@ -292,6 +326,7 @@ class VendorsTableSeeder extends Seeder
             34 =>
             array (
                 'id' => 35,
+                'user_id' => 1,
                 'name' => 'インディ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:07:23',
@@ -300,6 +335,7 @@ class VendorsTableSeeder extends Seeder
             35 =>
             array (
                 'id' => 36,
+                'user_id' => 1,
                 'name' => 'ロコロール',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:07:32',
@@ -308,6 +344,7 @@ class VendorsTableSeeder extends Seeder
             36 =>
             array (
                 'id' => 37,
+                'user_id' => 1,
                 'name' => 'ヴァジアーナ・セブン',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:07:40',
@@ -316,6 +353,7 @@ class VendorsTableSeeder extends Seeder
             37 =>
             array (
                 'id' => 38,
+                'user_id' => 1,
                 'name' => 'アカシヤ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:07:50',
@@ -324,6 +362,7 @@ class VendorsTableSeeder extends Seeder
             38 =>
             array (
                 'id' => 39,
+                'user_id' => 1,
                 'name' => 'クアトロおじさん',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:08:00',
@@ -332,6 +371,7 @@ class VendorsTableSeeder extends Seeder
             39 =>
             array (
                 'id' => 40,
+                'user_id' => 1,
                 'name' => 'ニューヨークパスタ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:08:10',
@@ -340,6 +380,7 @@ class VendorsTableSeeder extends Seeder
             40 =>
             array (
                 'id' => 41,
+                'user_id' => 1,
                 'name' => 'バン・ギャオ',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:08:19',
@@ -348,6 +389,7 @@ class VendorsTableSeeder extends Seeder
             41 =>
             array (
                 'id' => 42,
+                'user_id' => 1,
                 'name' => 'yummy-E',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:08:35',
@@ -356,6 +398,7 @@ class VendorsTableSeeder extends Seeder
             42 =>
             array (
                 'id' => 43,
+                'user_id' => 1,
                 'name' => '煌（ファン）',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:08:45',
@@ -364,6 +407,7 @@ class VendorsTableSeeder extends Seeder
             43 =>
             array (
                 'id' => 44,
+                'user_id' => 1,
                 'name' => 'モトヤエクスプレス',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:08:54',
@@ -372,6 +416,7 @@ class VendorsTableSeeder extends Seeder
             44 =>
             array (
                 'id' => 45,
+                'user_id' => 1,
                 'name' => 'クッキーメロンパン',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:09:03',
@@ -380,6 +425,7 @@ class VendorsTableSeeder extends Seeder
             45 =>
             array (
                 'id' => 46,
+                'user_id' => 1,
                 'name' => 'VEGE TIME',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:09:13',
@@ -388,6 +434,7 @@ class VendorsTableSeeder extends Seeder
             46 =>
             array (
                 'id' => 47,
+                'user_id' => 1,
                 'name' => '和食 しの',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:10:36',
@@ -396,6 +443,7 @@ class VendorsTableSeeder extends Seeder
             47 =>
             array (
                 'id' => 48,
+                'user_id' => 1,
                 'name' => 'ＭＡＤＯ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:10:47',
@@ -404,6 +452,7 @@ class VendorsTableSeeder extends Seeder
             48 =>
             array (
                 'id' => 49,
+                'user_id' => 1,
                 'name' => 'jungle Foods',
                 'status' => 7,
                 'created_at' => '2019-04-16 11:10:57',
@@ -412,6 +461,7 @@ class VendorsTableSeeder extends Seeder
             49 =>
             array (
                 'id' => 50,
+                'user_id' => 1,
                 'name' => 'アフラテッロ　アレックス',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:11:06',
@@ -420,6 +470,7 @@ class VendorsTableSeeder extends Seeder
             50 =>
             array (
                 'id' => 51,
+                'user_id' => 1,
                 'name' => 'LUCIE BUS',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:11:15',
@@ -428,6 +479,7 @@ class VendorsTableSeeder extends Seeder
             51 =>
             array (
                 'id' => 52,
+                'user_id' => 1,
                 'name' => 'OmtRak',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:11:23',
@@ -436,6 +488,7 @@ class VendorsTableSeeder extends Seeder
             52 =>
             array (
                 'id' => 53,
+                'user_id' => 1,
                 'name' => 'デリキムチ',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:11:33',
@@ -444,6 +497,7 @@ class VendorsTableSeeder extends Seeder
             53 =>
             array (
                 'id' => 54,
+                'user_id' => 1,
                 'name' => 'ソフラカ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:12:42',
@@ -452,6 +506,7 @@ class VendorsTableSeeder extends Seeder
             54 =>
             array (
                 'id' => 55,
+                'user_id' => 1,
                 'name' => 'FLOW CAFÉ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:12:51',
@@ -460,6 +515,7 @@ class VendorsTableSeeder extends Seeder
             55 =>
             array (
                 'id' => 56,
+                'user_id' => 1,
                 'name' => '08 Café',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:13:00',
@@ -468,6 +524,7 @@ class VendorsTableSeeder extends Seeder
             56 =>
             array (
                 'id' => 57,
+                'user_id' => 1,
                 'name' => 'ambulante café',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:13:10',
@@ -476,6 +533,7 @@ class VendorsTableSeeder extends Seeder
             57 =>
             array (
                 'id' => 58,
+                'user_id' => 1,
                 'name' => 'SWEET VENOM',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:13:19',
@@ -484,6 +542,7 @@ class VendorsTableSeeder extends Seeder
             58 =>
             array (
                 'id' => 59,
+                'user_id' => 1,
                 'name' => 'たこさん',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:13:27',
@@ -492,6 +551,7 @@ class VendorsTableSeeder extends Seeder
             59 =>
             array (
                 'id' => 60,
+                'user_id' => 1,
                 'name' => 'TSUGUMI',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:13:35',
@@ -500,6 +560,7 @@ class VendorsTableSeeder extends Seeder
             60 =>
             array (
                 'id' => 61,
+                'user_id' => 1,
                 'name' => '象の耳',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:13:44',
@@ -508,6 +569,7 @@ class VendorsTableSeeder extends Seeder
             61 =>
             array (
                 'id' => 62,
+                'user_id' => 1,
                 'name' => 'KUNA（空海）',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:13:52',
@@ -516,6 +578,7 @@ class VendorsTableSeeder extends Seeder
             62 =>
             array (
                 'id' => 63,
+                'user_id' => 1,
                 'name' => 'バブス',
                 'status' => 7,
                 'created_at' => '2019-04-16 11:14:01',
@@ -524,6 +587,7 @@ class VendorsTableSeeder extends Seeder
             63 =>
             array (
                 'id' => 64,
+                'user_id' => 1,
                 'name' => 'ランチQ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:14:10',
@@ -532,6 +596,7 @@ class VendorsTableSeeder extends Seeder
             64 =>
             array (
                 'id' => 65,
+                'user_id' => 1,
                 'name' => '大月珈琲店',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:14:18',
@@ -540,6 +605,7 @@ class VendorsTableSeeder extends Seeder
             65 =>
             array (
                 'id' => 66,
+                'user_id' => 1,
                 'name' => 'スターケバブ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:14:28',
@@ -548,6 +614,7 @@ class VendorsTableSeeder extends Seeder
             66 =>
             array (
                 'id' => 67,
+                'user_id' => 1,
                 'name' => 'ギズモカフェ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:14:36',
@@ -556,6 +623,7 @@ class VendorsTableSeeder extends Seeder
             67 =>
             array (
                 'id' => 68,
+                'user_id' => 1,
                 'name' => 'ワンダーデッシュ',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:14:44',
@@ -564,6 +632,7 @@ class VendorsTableSeeder extends Seeder
             68 =>
             array (
                 'id' => 69,
+                'user_id' => 1,
                 'name' => 'ラクシュミー',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:14:52',
@@ -572,6 +641,7 @@ class VendorsTableSeeder extends Seeder
             69 =>
             array (
                 'id' => 70,
+                'user_id' => 1,
                 'name' => 'ゴーゴーカレー',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:15:03',
@@ -580,6 +650,7 @@ class VendorsTableSeeder extends Seeder
             70 =>
             array (
                 'id' => 71,
+                'user_id' => 1,
                 'name' => 'Yummy Yummy',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:15:12',
@@ -588,6 +659,7 @@ class VendorsTableSeeder extends Seeder
             71 =>
             array (
                 'id' => 72,
+                'user_id' => 1,
                 'name' => 'サンシャインカフェ',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:15:20',
@@ -596,6 +668,7 @@ class VendorsTableSeeder extends Seeder
             72 =>
             array (
                 'id' => 73,
+                'user_id' => 1,
                 'name' => 'ミラーン',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:15:29',
@@ -604,6 +677,7 @@ class VendorsTableSeeder extends Seeder
             73 =>
             array (
                 'id' => 74,
+                'user_id' => 1,
                 'name' => 'カシミールカレー',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:15:38',
@@ -612,6 +686,7 @@ class VendorsTableSeeder extends Seeder
             74 =>
             array (
                 'id' => 75,
+                'user_id' => 1,
                 'name' => 'またたび屋',
                 'status' => 8,
                 'created_at' => '2019-04-16 11:15:46',
@@ -620,6 +695,7 @@ class VendorsTableSeeder extends Seeder
             75 =>
             array (
                 'id' => 76,
+                'user_id' => 1,
                 'name' => 'マルシェ',
                 'status' => 3,
                 'created_at' => '2019-04-16 11:15:54',
@@ -628,6 +704,7 @@ class VendorsTableSeeder extends Seeder
             76 =>
             array (
                 'id' => 77,
+                'user_id' => 1,
                 'name' => 'Assorti(アソルティ）',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:16:03',
@@ -636,6 +713,7 @@ class VendorsTableSeeder extends Seeder
                 77 =>
                 array (
                     'id' => 78,
+                    'user_id' => 1,
                     'name' => 'メロンちゃんのメロンパン',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:16:13',
@@ -644,6 +722,7 @@ class VendorsTableSeeder extends Seeder
                 78 =>
                 array (
                     'id' => 79,
+                    'user_id' => 1,
                     'name' => '給食当番123号',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:16:21',
@@ -652,6 +731,7 @@ class VendorsTableSeeder extends Seeder
                 79 =>
                 array (
                     'id' => 80,
+                    'user_id' => 1,
                     'name' => 'Ｒ511',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:16:31',
@@ -660,6 +740,7 @@ class VendorsTableSeeder extends Seeder
                 80 =>
                 array (
                     'id' => 81,
+                    'user_id' => 1,
                     'name' => 'TUB CAT',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:16:39',
@@ -668,6 +749,7 @@ class VendorsTableSeeder extends Seeder
                 81 =>
                 array (
                     'id' => 82,
+                    'user_id' => 1,
                     'name' => 'HappyOrange',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:16:48',
@@ -676,6 +758,7 @@ class VendorsTableSeeder extends Seeder
                 82 =>
                 array (
                     'id' => 83,
+                    'user_id' => 1,
                     'name' => 'マツゲン',
                     'status' => 7,
                     'created_at' => '2019-04-16 11:16:57',
@@ -684,6 +767,7 @@ class VendorsTableSeeder extends Seeder
                 83 =>
                 array (
                     'id' => 84,
+                    'user_id' => 1,
                     'name' => 'Dudes',
                     'status' => 3,
                     'created_at' => '2019-04-16 11:17:08',
@@ -692,6 +776,7 @@ class VendorsTableSeeder extends Seeder
                 84 =>
                 array (
                     'id' => 85,
+                    'user_id' => 1,
                     'name' => 'Retoro\'n Box',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:17:17',
@@ -700,6 +785,7 @@ class VendorsTableSeeder extends Seeder
                 85 =>
                 array (
                     'id' => 86,
+                    'user_id' => 1,
                     'name' => 'Kitchen Curry香房',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:17:25',
@@ -708,6 +794,7 @@ class VendorsTableSeeder extends Seeder
                 86 =>
                 array (
                     'id' => 87,
+                    'user_id' => 1,
                     'name' => 'SPIRAL DRIFTER CAFÉ',
                     'status' => 3,
                     'created_at' => '2019-04-16 11:17:37',
@@ -716,6 +803,7 @@ class VendorsTableSeeder extends Seeder
                 87 =>
                 array (
                     'id' => 88,
+                    'user_id' => 1,
                     'name' => 'ジャランジャラン',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:17:46',
@@ -724,6 +812,7 @@ class VendorsTableSeeder extends Seeder
                 88 =>
                 array (
                     'id' => 89,
+                    'user_id' => 1,
                     'name' => 'グレンツェン',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:17:54',
@@ -732,6 +821,7 @@ class VendorsTableSeeder extends Seeder
                 89 =>
                 array (
                     'id' => 90,
+                    'user_id' => 1,
                     'name' => 'GRIFFIN',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:18:03',
@@ -740,6 +830,7 @@ class VendorsTableSeeder extends Seeder
                 90 =>
                 array (
                     'id' => 91,
+                    'user_id' => 1,
                     'name' => '白猫堂',
                     'status' => 3,
                     'created_at' => '2019-04-16 11:18:12',
@@ -748,6 +839,7 @@ class VendorsTableSeeder extends Seeder
                 91 =>
                 array (
                     'id' => 92,
+                    'user_id' => 1,
                     'name' => 'ジャミング',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:18:22',
@@ -756,6 +848,7 @@ class VendorsTableSeeder extends Seeder
                 92 =>
                 array (
                     'id' => 93,
+                    'user_id' => 1,
                     'name' => 'micro-café',
                     'status' => 7,
                     'created_at' => '2019-04-16 11:18:36',
@@ -764,6 +857,7 @@ class VendorsTableSeeder extends Seeder
                 93 =>
                 array (
                     'id' => 94,
+                    'user_id' => 1,
                     'name' => 'おこクレ亭',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:18:44',
@@ -772,6 +866,7 @@ class VendorsTableSeeder extends Seeder
                 94 =>
                 array (
                     'id' => 95,
+                    'user_id' => 1,
                     'name' => 'たんぽや',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:18:53',
@@ -780,6 +875,7 @@ class VendorsTableSeeder extends Seeder
                 95 =>
                 array (
                     'id' => 96,
+                    'user_id' => 1,
                     'name' => 'ミート屋本舗',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:19:02',
@@ -788,6 +884,7 @@ class VendorsTableSeeder extends Seeder
                 96 =>
                 array (
                     'id' => 97,
+                    'user_id' => 1,
                     'name' => 'NAP JAPAN',
                     'status' => 3,
                     'created_at' => '2019-04-16 11:19:12',
@@ -796,6 +893,7 @@ class VendorsTableSeeder extends Seeder
                 97 =>
                 array (
                     'id' => 98,
+                    'user_id' => 1,
                     'name' => 'カフェ　アローマ',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:19:20',
@@ -804,6 +902,7 @@ class VendorsTableSeeder extends Seeder
                 98 =>
                 array (
                     'id' => 99,
+                    'user_id' => 1,
                     'name' => 'MANMA隊',
                     'status' => 8,
                     'created_at' => '2019-04-16 11:19:29',
@@ -812,6 +911,7 @@ class VendorsTableSeeder extends Seeder
                 99 =>
                 array (
                     'id' => 100,
+                    'user_id' => 1,
                     'name' => 'Julie\'s spices',
                     'status' => 3,
                     'created_at' => '2019-04-16 11:19:37',
@@ -820,6 +920,7 @@ class VendorsTableSeeder extends Seeder
                 100 =>
                 array (
                     'id' => 101,
+                    'user_id' => 1,
                     'name' => 'ボーノボーノ',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:33:56',
@@ -828,6 +929,7 @@ class VendorsTableSeeder extends Seeder
                 101 =>
                 array (
                     'id' => 102,
+                    'user_id' => 1,
                     'name' => 'アヌエアネ',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:34:06',
@@ -836,6 +938,7 @@ class VendorsTableSeeder extends Seeder
                 102 =>
                 array (
                     'id' => 103,
+                    'user_id' => 1,
                     'name' => '粥屋',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:34:15',
@@ -844,6 +947,7 @@ class VendorsTableSeeder extends Seeder
                 103 =>
                 array (
                     'id' => 104,
+                    'user_id' => 1,
                 'name' => '蓮(ＲＥＮ)',
                     'status' => 3,
                     'created_at' => '2019-04-16 15:34:25',
@@ -852,6 +956,7 @@ class VendorsTableSeeder extends Seeder
                 104 =>
                 array (
                     'id' => 105,
+                    'user_id' => 1,
                     'name' => 'ハッピーハニークレープ',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:34:34',
@@ -860,6 +965,7 @@ class VendorsTableSeeder extends Seeder
                 105 =>
                 array (
                     'id' => 106,
+                    'user_id' => 1,
                     'name' => '給食当番104号車',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:34:45',
@@ -868,6 +974,7 @@ class VendorsTableSeeder extends Seeder
                 106 =>
                 array (
                     'id' => 107,
+                    'user_id' => 1,
                     'name' => 'mix\'n mixream',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:34:57',
@@ -876,6 +983,7 @@ class VendorsTableSeeder extends Seeder
                 107 =>
                 array (
                     'id' => 108,
+                    'user_id' => 1,
                     'name' => 'チャーシューメンドッグ',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:35:10',
@@ -884,6 +992,7 @@ class VendorsTableSeeder extends Seeder
                 108 =>
                 array (
                     'id' => 109,
+                    'user_id' => 1,
                     'name' => 'Magical',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:35:18',
@@ -892,6 +1001,7 @@ class VendorsTableSeeder extends Seeder
                 109 =>
                 array (
                     'id' => 110,
+                    'user_id' => 1,
                     'name' => '弁天流',
                     'status' => 3,
                     'created_at' => '2019-04-16 15:35:28',
@@ -900,7 +1010,8 @@ class VendorsTableSeeder extends Seeder
                 110 =>
                 array (
                     'id' => 111,
-                'name' => 'aile(エル)',
+                    'user_id' => 1,
+                    'name' => 'aile(エル)',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:35:37',
                     'updated_at' => '2019-04-16 18:56:31',
@@ -908,6 +1019,7 @@ class VendorsTableSeeder extends Seeder
                 111 =>
                 array (
                     'id' => 112,
+                    'user_id' => 1,
                     'name' => 'パリスキャバブ',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:35:46',
@@ -916,6 +1028,7 @@ class VendorsTableSeeder extends Seeder
                 112 =>
                 array (
                     'id' => 113,
+                    'user_id' => 1,
                     'name' => 'クレープパンケーキ',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:35:55',
@@ -924,6 +1037,7 @@ class VendorsTableSeeder extends Seeder
                 113 =>
                 array (
                     'id' => 114,
+                    'user_id' => 1,
                     'name' => 'RANCHIKI',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:36:04',
@@ -932,6 +1046,7 @@ class VendorsTableSeeder extends Seeder
                 114 =>
                 array (
                     'id' => 115,
+                    'user_id' => 1,
                     'name' => 'Maruma yakiimo',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:36:14',
@@ -940,6 +1055,7 @@ class VendorsTableSeeder extends Seeder
                 115 =>
                 array (
                     'id' => 116,
+                    'user_id' => 1,
                     'name' => 'ドネル・タイム',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:36:25',
@@ -948,6 +1064,7 @@ class VendorsTableSeeder extends Seeder
                 116 =>
                 array (
                     'id' => 117,
+                    'user_id' => 1,
                     'name' => 'サワディー',
                     'status' => 3,
                     'created_at' => '2019-04-16 15:36:34',
@@ -956,6 +1073,7 @@ class VendorsTableSeeder extends Seeder
                 117 =>
                 array (
                     'id' => 118,
+                    'user_id' => 1,
                     'name' => 'タイカレーPAOPAO',
                     'status' => 7,
                     'created_at' => '2019-04-16 15:36:43',
@@ -964,6 +1082,7 @@ class VendorsTableSeeder extends Seeder
                 118 =>
                 array (
                     'id' => 119,
+                    'user_id' => 1,
                     'name' => 'biji（ビジ）',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:36:53',
@@ -972,6 +1091,7 @@ class VendorsTableSeeder extends Seeder
                 119 =>
                 array (
                     'id' => 120,
+                    'user_id' => 1,
                     'name' => 'ドネルハウス',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:37:03',
@@ -980,6 +1100,7 @@ class VendorsTableSeeder extends Seeder
                 120 =>
                 array (
                     'id' => 121,
+                    'user_id' => 1,
                     'name' => 'ALLA’S HOUSE',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:37:41',
@@ -988,6 +1109,7 @@ class VendorsTableSeeder extends Seeder
                 121 =>
                 array (
                     'id' => 122,
+                    'user_id' => 1,
                     'name' => 'ファンキーズ',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:37:52',
@@ -996,6 +1118,7 @@ class VendorsTableSeeder extends Seeder
                 122 =>
                 array (
                     'id' => 123,
+                    'user_id' => 1,
                     'name' => 'Jing Jing Thai SHOKUDO',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:38:01',
@@ -1004,6 +1127,7 @@ class VendorsTableSeeder extends Seeder
                 123 =>
                 array (
                     'id' => 124,
+                    'user_id' => 1,
                     'name' => 'POPOPEKU',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:38:12',
@@ -1012,6 +1136,7 @@ class VendorsTableSeeder extends Seeder
                 124 =>
                 array (
                     'id' => 125,
+                    'user_id' => 1,
                     'name' => 'なぁ～じゅ',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:38:21',
@@ -1020,6 +1145,7 @@ class VendorsTableSeeder extends Seeder
                 125 =>
                 array (
                     'id' => 126,
+                    'user_id' => 1,
                     'name' => 'SANTY',
                     'status' => 7,
                     'created_at' => '2019-04-16 15:38:31',
@@ -1028,6 +1154,7 @@ class VendorsTableSeeder extends Seeder
                 126 =>
                 array (
                     'id' => 127,
+                    'user_id' => 1,
                     'name' => 'ON THE DISH',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:38:40',
@@ -1036,6 +1163,7 @@ class VendorsTableSeeder extends Seeder
                 127 =>
                 array (
                     'id' => 128,
+                    'user_id' => 1,
                     'name' => 'むランチ',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:38:50',
@@ -1044,6 +1172,7 @@ class VendorsTableSeeder extends Seeder
                 128 =>
                 array (
                     'id' => 129,
+                    'user_id' => 1,
                     'name' => 'らくだキッチン',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:39:00',
@@ -1052,6 +1181,7 @@ class VendorsTableSeeder extends Seeder
                 129 =>
                 array (
                     'id' => 130,
+                    'user_id' => 1,
                     'name' => 'タコムラ屋',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:39:10',
@@ -1060,6 +1190,7 @@ class VendorsTableSeeder extends Seeder
                 130 =>
                 array (
                     'id' => 131,
+                    'user_id' => 1,
                     'name' => 'ペルシアダマバンド',
                     'status' => 8,
                     'created_at' => '2019-04-16 15:39:20',
@@ -1068,6 +1199,7 @@ class VendorsTableSeeder extends Seeder
                 131 =>
                 array (
                     'id' => 132,
+                    'user_id' => 1,
                     'name' => '一誠堂',
                     'status' => 3,
                     'created_at' => '2019-04-16 15:39:29',
@@ -1076,6 +1208,7 @@ class VendorsTableSeeder extends Seeder
                 132 =>
                 array (
                     'id' => 133,
+                    'user_id' => 1,
                     'name' => 'Balducci',
                     'status' => 8,
                     'created_at' => '2019-04-16 17:06:25',
@@ -1084,6 +1217,7 @@ class VendorsTableSeeder extends Seeder
                 133 =>
                 array (
                     'id' => 134,
+                    'user_id' => 1,
                     'name' => 'マレーチャン',
                     'status' => 8,
                     'created_at' => '2019-04-16 17:06:34',
@@ -1092,6 +1226,7 @@ class VendorsTableSeeder extends Seeder
                 134 =>
                 array (
                     'id' => 135,
+                    'user_id' => 1,
                     'name' => 'kitchen eno',
                     'status' => 8,
                     'created_at' => '2019-04-16 17:06:44',
@@ -1100,6 +1235,7 @@ class VendorsTableSeeder extends Seeder
                 135 =>
                 array (
                     'id' => 136,
+                    'user_id' => 1,
                     'name' => 'ネイサンズ',
                     'status' => 8,
                     'created_at' => '2019-04-16 17:06:54',
@@ -1108,6 +1244,7 @@ class VendorsTableSeeder extends Seeder
                 136 =>
                 array (
                     'id' => 137,
+                    'user_id' => 1,
                     'name' => 'スパゲティ・ぺこりーの',
                     'status' => 8,
                     'created_at' => '2019-04-16 17:07:05',
@@ -1116,6 +1253,7 @@ class VendorsTableSeeder extends Seeder
                 137 =>
                 array (
                     'id' => 138,
+                    'user_id' => 1,
                     'name' => '塚越ラーメン',
                     'status' => 8,
                     'created_at' => '2019-04-16 17:07:19',
@@ -1124,6 +1262,7 @@ class VendorsTableSeeder extends Seeder
                 138 =>
                 array (
                     'id' => 139,
+                    'user_id' => 1,
                     'name' => 'ナルモンタイ',
                     'status' => 3,
                     'created_at' => '2019-04-16 17:07:29',
@@ -1132,6 +1271,7 @@ class VendorsTableSeeder extends Seeder
                 139 =>
                 array (
                     'id' => 140,
+                    'user_id' => 1,
                     'name' => 'NAZ',
                     'status' => 8,
                     'created_at' => '2019-04-16 17:07:40',
@@ -1140,6 +1280,7 @@ class VendorsTableSeeder extends Seeder
                 140 =>
                 array (
                     'id' => 141,
+                    'user_id' => 1,
                     'name' => 'deliwagon roman-tei',
                     'status' => 8,
                     'created_at' => '2019-04-16 17:07:50',
@@ -1148,6 +1289,7 @@ class VendorsTableSeeder extends Seeder
                 141 =>
                 array (
                     'id' => 142,
+                    'user_id' => 1,
                     'name' => 'ばくだん亭',
                     'status' => 8,
                     'created_at' => '2019-04-16 17:08:01',
@@ -1156,6 +1298,7 @@ class VendorsTableSeeder extends Seeder
                 142 =>
                 array (
                     'id' => 143,
+                    'user_id' => 1,
                     'name' => 'カハラハウス',
                     'status' => 3,
                     'created_at' => '2019-04-16 17:08:10',
@@ -1164,6 +1307,7 @@ class VendorsTableSeeder extends Seeder
                 143 =>
                 array (
                     'id' => 144,
+                    'user_id' => 1,
                     'name' => 'SPOON',
                     'status' => 8,
                     'created_at' => '2019-04-16 17:08:21',
@@ -1172,6 +1316,7 @@ class VendorsTableSeeder extends Seeder
                 144 =>
                 array (
                     'id' => 145,
+                    'user_id' => 1,
                     'name' => 'TACO★CHOICE（ル・キャミオン）',
                     'status' => 3,
                     'created_at' => '2019-04-16 17:08:53',
@@ -1180,6 +1325,7 @@ class VendorsTableSeeder extends Seeder
                 145 =>
                 array (
                     'id' => 146,
+                    'user_id' => 1,
                     'name' => 'Ｓｗｅｅｔ　Ｐｉｎｏｃｃｈｉｏ',
                     'status' => 8,
                     'created_at' => '2019-04-16 18:29:28',

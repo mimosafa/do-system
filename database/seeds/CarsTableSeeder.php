@@ -20,6 +20,7 @@ class CarsTableSeeder extends Seeder
             0 =>
             array (
                 'id' => 1,
+                'user_id' => 1,
                 'vendor_id' => 1,
                 'name' => 'ベンツ',
                 'vin' => '品川88つ555',
@@ -30,6 +31,7 @@ class CarsTableSeeder extends Seeder
             1 =>
             array (
                 'id' => 2,
+                'user_id' => 1,
                 'vendor_id' => 1,
                 'name' => 'トウキョウドゥグラマン',
                 'vin' => '品川88そ7246',
@@ -40,6 +42,7 @@ class CarsTableSeeder extends Seeder
             2 =>
             array (
                 'id' => 3,
+                'user_id' => 1,
                 'vendor_id' => 1,
                 'name' => 'グラマン搬入車',
                 'vin' => '品川100す251',
@@ -50,6 +53,7 @@ class CarsTableSeeder extends Seeder
             3 =>
             array (
                 'id' => 4,
+                'user_id' => 1,
                 'vendor_id' => 1,
                 'name' => 'ドック車',
                 'vin' => '品川800さ3127',
@@ -60,6 +64,7 @@ class CarsTableSeeder extends Seeder
             4 =>
             array (
                 'id' => 5,
+                'user_id' => 1,
                 'vendor_id' => 4,
                 'name' => 'ボナペティ',
                 'vin' => '練馬800す2669',
@@ -70,6 +75,7 @@ class CarsTableSeeder extends Seeder
             5 =>
             array (
                 'id' => 6,
+                'user_id' => 1,
                 'vendor_id' => 2,
                 'name' => 'elephant box',
                 'vin' => '練馬800す2388',
@@ -80,6 +86,7 @@ class CarsTableSeeder extends Seeder
             6 =>
             array (
                 'id' => 7,
+                'user_id' => 1,
                 'vendor_id' => 1,
                 'name' => 'ネオ2号',
                 'vin' => '品川880あ740',
@@ -90,6 +97,7 @@ class CarsTableSeeder extends Seeder
             7 =>
             array (
                 'id' => 8,
+                'user_id' => 1,
                 'vendor_id' => 14,
                 'name' => 'パラダイス',
                 'vin' => '品川830さ1966',
@@ -100,6 +108,7 @@ class CarsTableSeeder extends Seeder
             8 =>
             array (
                 'id' => 9,
+                'user_id' => 1,
                 'vendor_id' => 3,
                 'name' => 'HANA',
                 'vin' => '品川41き329',
@@ -110,6 +119,7 @@ class CarsTableSeeder extends Seeder
             9 =>
             array (
                 'id' => 10,
+                'user_id' => 1,
                 'vendor_id' => 8,
                 'name' => 'タコデリオ３号車',
                 'vin' => '品川800す5439',
@@ -120,6 +130,7 @@ class CarsTableSeeder extends Seeder
             10 =>
             array (
                 'id' => 11,
+                'user_id' => 1,
                 'vendor_id' => 9,
                 'name' => 'M\'s com上野号',
                 'vin' => '春日部40さ9588',
@@ -130,6 +141,7 @@ class CarsTableSeeder extends Seeder
             11 =>
             array (
                 'id' => 12,
+                'user_id' => 1,
                 'vendor_id' => 10,
                 'name' => 'スブラキハウス１号車',
                 'vin' => '山梨800さ7184',
@@ -140,6 +152,7 @@ class CarsTableSeeder extends Seeder
             12 =>
             array (
                 'id' => 13,
+                'user_id' => 1,
                 'vendor_id' => 17,
                 'name' => 'ビーンズカート',
                 'vin' => '練馬880あ34',
@@ -150,6 +163,7 @@ class CarsTableSeeder extends Seeder
             13 =>
             array (
                 'id' => 14,
+                'user_id' => 1,
                 'vendor_id' => 18,
                 'name' => 'マハッタ',
                 'vin' => '山梨800さ6556',
