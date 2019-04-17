@@ -35,7 +35,7 @@
         <div class="card-header">状態</div>
         <div class="card-body">
             <select name="status" id="status" class="form-control">
-                @foreach($car->status::all() as $status)
+                @foreach($car->status::values() as $status)
                 <option value="{{ $status->getValue() }}" {{ $status->equals($car->status) ? 'selected' : '' }}>
                     {{ $status->getLabel() }}
                 </option>

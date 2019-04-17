@@ -18,7 +18,7 @@ class VendorController extends Controller
         return view('admin/vendors/index', [
             'vendors' => $vendors,
             'shown_statuses' => $status,
-            'all_statuses' => Status::all(),
+            'all_statuses' => Status::values(),
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Values\Brand\Status;
 use Illuminate\Validation\Rule;
 
 class EditBrand extends CreateBrand
@@ -27,10 +28,10 @@ class EditBrand extends CreateBrand
         $rules = parent::rules();
         unset($rules['vendor_id']);
 
-        # $status_rule = Rule::in(Status::values());
+        $status_rule = Rule::in(Status::values());
 
         return $rules + [
-            # 'status' => 'required|' . $status_rule,
+            'status' => 'required|' . $status_rule,
             'image' => 'file|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }

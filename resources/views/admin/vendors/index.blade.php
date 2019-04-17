@@ -67,7 +67,7 @@
                     <a href="{{ route('admin.vendors.show', ['id' => $vendor->id]) }}">
                         {{ $vendor->name }}
                     </a>
-                    @if (! $vendor->status->isActive())
+                    @if (! $vendor->status->isRegistered())
                     <small>[ {{ $vendor->status->getLabel() }} ]</small>
                     @endif
                 </td>

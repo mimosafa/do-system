@@ -50,7 +50,7 @@
             </thead>
             <tbody>
                 @foreach ($cars as $_car)
-                <tr class="{{ $_car->status->isActive() ? '' : 'table-secondary' }}">
+                <tr class="{{ $_car->status->isRegistered() ? '' : 'table-secondary' }}">
                     @if ($next === 'store')
                     <td>
                         <div class="form-check">

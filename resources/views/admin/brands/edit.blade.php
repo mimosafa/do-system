@@ -29,6 +29,19 @@
     </div>
 
     <div class="card mb-3">
+        <div class="card-header">状態</div>
+        <div class="card-body">
+            <select name="status" id="status" class="form-control">
+                @foreach($brand->status::values() as $status)
+                <option value="{{ $status->getValue() }}" {{ $status->equals($brand->status) ? 'selected' : '' }}>
+                    {{ $status->getLabel() }}
+                </option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="card mb-3">
         <div class="card-header">ジャンル</div>
         <div class="card-body">
             @forelse ($all_genres as $genre)
