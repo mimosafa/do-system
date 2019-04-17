@@ -104,7 +104,6 @@ class ShopController extends Controller
 
         $ad->title_secondary = $request->ad_copy;
         $ad->description_primary = $request->ad_text;
-        $ad->description_secondary = '';
         $ad->content_primary = $request->description;
 
         $ad->save();
