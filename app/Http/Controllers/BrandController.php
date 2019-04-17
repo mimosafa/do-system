@@ -13,7 +13,7 @@ class BrandController extends Controller
 {
     public function index()
     {
-        $brands = Brand::all();
+        $brands = Brand::orderBy('vendor_id')->get();
 
         return view('admin.brands.index', [
             'brands' => $brands,
