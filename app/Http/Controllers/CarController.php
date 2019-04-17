@@ -14,12 +14,12 @@ class CarController extends Controller
     public function index(Request $request)
     {
         $status = $request->status ?? Status::getIndexableValues();
-        $cars = Car::inStatus($status)->get();
+        $cars = Car::inStatus($status)->orderBy('vendor_id', 'asc')->get();
 
         return view('admin.cars.index', [
             'cars' => $cars,
             'shown_statuses' => $status,
-            'all_statuses' => Status::all(),
+            'all_statuses' => Status::values(),
         ]);
     }
 
@@ -45,7 +45,7 @@ class CarController extends Controller
             ];
         } else {
             $args = [
-                'vendors' => Vendor::all(),
+                'vendors' => Vendor::expandable()->get(),
                 'ref' => [
                     'url' => route('admin.cars.index'),
                     'text' => '車両一覧',

@@ -15,6 +15,12 @@ class Brand extends Model
 {
     use FileHolderTrait;
 
+    /*
+    protected $attributes = [
+        'status' => Values\Status::REGISTERED,
+    ];
+    //*/
+
     public function genres()
     {
         return $this->belongsToMany(Genre::class);
@@ -33,6 +39,11 @@ class Brand extends Model
     public function advertisement()
     {
         return $this->morphOne(Advertisement::class, 'advertisable');
+    }
+
+    public function getStatusAttribute(): Values\Status
+    {
+        return new Values\Status($this->attributes['status']);
     }
 
     public function getRawNameAttribute()
@@ -56,5 +67,10 @@ class Brand extends Model
         $images = new Values\Image($this);
         $images->store($file);
         return $this;
+    }
+
+    public function scopeInStatus($query, array $status)
+    {
+        return $query->whereIn('status', $status);
     }
 }

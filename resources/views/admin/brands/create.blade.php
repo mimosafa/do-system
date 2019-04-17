@@ -57,7 +57,9 @@
                 </dd>
                 <dt class="col-lg-2 col-md-3">制限なし</dt>
                 <dd class="col-lg-10 col-md-9">
-                    <input type="text" class="form-control" name="description" id="description" value="{{ old('description') }}">
+                    <textarea class="form-control"
+                        name="description" id="description"
+                    >{{ old('description') }}</textarea>
                 </dd>
             </dl>
         </div>

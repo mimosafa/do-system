@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Values\Car;
+namespace App\Values\Brand;
 
 use Wstd\Status\Status as EnumStatus;
 
@@ -9,21 +9,17 @@ class Status extends EnumStatus
     protected static $enabled = [
         self::PROSPECTIVE,
         self::REGISTERED,
-        self::SUSPENDED,
         self::DEREGISTERED,
-        self::UNRELATED,
     ];
 
     protected static $indexables = [
         self::PROSPECTIVE,
         self::REGISTERED,
-        self::SUSPENDED,
     ];
 
     protected $labels = [
-        'UNREGISTERED' => '未登録',
-        'REGISTERED'   => '登録済',
-        'SUSPENDED'    => '休止中',
-        'DEREGISTERED' => '廃車/売却',
+        'PROSPECTIVE'  => '提案',
+        'REGISTERED'   => '承認済',
+        'DEREGISTERED' => '終了',
     ];
 }

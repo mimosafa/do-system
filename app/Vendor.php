@@ -28,4 +28,15 @@ class Vendor extends Model
     {
         return $query->whereIn('status', $status);
     }
+
+    public function scopeExpandable($query)
+    {
+        $expandableStatuses = Status::getExpandableStatusValues();
+        return $this->scopeInStatus($query, $expandableStatuses);
+    }
+
+    public function isExpandable(): bool
+    {
+        return in_array($this->status->getValue(), Status::getExpandableStatusValues(), true);
+    }
 }

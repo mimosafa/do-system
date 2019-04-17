@@ -66,15 +66,27 @@
                 background-color: #ddd;
             }
         }
-        .table-status-unregistered, .table-status-unregistered>td, .table-status-unregistered>th {
+        .table-status-prospective, .table-status-prospective>td, .table-status-prospective>th,
+        .table-status-unregistered, .table-status-unregistered>td, .table-status-unregistered>th,
+        .table-status-pending, .table-status-pending>td, .table-status-pending>th {
             background-color: #c3e6cb;
         }
-        .table-status-inactive, .table-status-inactive>td, .table-status-inactive>th,
-        .table-status-deregistered, .table-status-deregistered>td, .table-status-deregistered>th {
+        .table-status-prospective, .table-status-prospective>td, .table-status-prospective>th {
+            opacity: .65;
+        }
+        .table-status-unregistered, .table-status-unregistered>td, .table-status-unregistered>th {
+            opacity: .85;
+        }
+        .table-status-suspended, .table-status-suspended>td, .table-status-suspended>th,
+        .table-status-deregistered, .table-status-deregistered>td, .table-status-deregistered>th,
+        .table-status-unrelated, .table-status-unrelated>td, .table-status-unrelated>th {
             background-color: #d6d8db;
         }
         .table-status-deregistered, .table-status-deregistered>td, .table-status-deregistered>th {
             opacity: .85;
+        }
+        .table-status-unrelated, .table-status-unrelated>td, .table-status-unrelated>th {
+            opacity: .65;
         }
     </style>
 </head>
