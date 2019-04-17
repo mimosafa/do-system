@@ -32,7 +32,7 @@ class ShopController extends Controller
         $next = 'disabled';
 
         if (! $models) {
-            $params['vendors'] = Vendor::active()->get();
+            $params['vendors'] = Vendor::expandable()->get();
             $next = 'continue';
         } else if ($models === 'vendors') {
             $params['vendor'] = $vendor = Vendor::findOrFail($id);
