@@ -27,7 +27,7 @@
         </thead>
         <tbody>
             @foreach ($vendor->cars as $car)
-            <tr class="{{ $car->status->isActive() ? '' : 'table-secondary' }}">
+            <tr class="table-status-{{ $car->status->getSlug() }}">
                 <td>
                     @if ($car->images->isNotEmpty())
                     <a href="#" style="background-image:url({{ $car->images->first()->url }})" class="thumbImage rounded"></a>
@@ -42,9 +42,7 @@
                 </td>
                 <td>{{ $car->vin }}</td>
                 <td>
-                    <span class="badge badge-{{ $car->status_attr['class'] }}">
-                        {{ $car->status_attr['label'] }}
-                    </span>
+                    {{ $car->status->getLabel() }}
                 </td>
             </tr>
             @endforeach

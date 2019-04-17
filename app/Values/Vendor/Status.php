@@ -6,14 +6,17 @@ use Wstd\Status\Status as EnumStatus;
 
 class Status extends EnumStatus
 {
-    protected static $disabled = [
-        self::ACTIVE,
-        self::INACTIVE,
-    ];
-    
-    protected static $indexables = [
-        self::UNREGISTERED,
+    protected static $enabled = [
+        self::PROSPECTIVE,
         self::REGISTERED,
+        self::SUSPENDED,
+        self::DEREGISTERED,
+    ];
+
+    protected static $indexables = [
+        self::PROSPECTIVE,
+        self::REGISTERED,
+        self::SUSPENDED,
     ];
 
     protected $labels = [

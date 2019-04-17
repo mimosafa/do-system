@@ -19,7 +19,7 @@ class CarController extends Controller
         return view('admin.cars.index', [
             'cars' => $cars,
             'shown_statuses' => $status,
-            'all_statuses' => Status::all(),
+            'all_statuses' => Status::values(),
         ]);
     }
 
