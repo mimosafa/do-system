@@ -49,9 +49,11 @@
         </tbody>
     </table>
     @endif
+    @if ($vendor->isExpandable())
     <div class="card-footer text-right">
         <a href="{{ route('admin.cars.createWith', ['id' => $vendor->id]) }}">車両を追加する</a>
     </div>
+    @endif
 </div>
 
 <div class="card mb-3">
@@ -95,9 +97,11 @@
         </tbody>
     </table>
     @endif
+    @if ($vendor->isExpandable())
     <div class="card-footer text-right">
         <a href="{{ route('admin.brands.createWith', ['id' => $vendor->id]) }}">ブランドを追加する</a>
     </div>
+    @endif
 </div>
 
 <div class="text-right">
@@ -132,8 +136,10 @@
     <a class="nav-link" href="{{ route('admin.vendors.index') }}">
         事業者一覧に戻る
     </a>
+    @if ($vendor->isExpandable())
     <a class="nav-link" href="{{ route('admin.shops.createWith', ['models' => 'vendors', 'id' => $vendor->id]) }}">
         この事業者を出店者リスト追加
     </a>
+    @endif
 </nav>
 @endsection

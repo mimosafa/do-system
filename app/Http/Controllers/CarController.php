@@ -45,7 +45,7 @@ class CarController extends Controller
             ];
         } else {
             $args = [
-                'vendors' => Vendor::all(),
+                'vendors' => Vendor::expandable()->get(),
                 'ref' => [
                     'url' => route('admin.cars.index'),
                     'text' => '車両一覧',

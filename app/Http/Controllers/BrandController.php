@@ -6,17 +6,22 @@ use App\Advertisement;
 use App\Brand;
 use App\Genre;
 use App\Vendor;
+use App\Values\Brand\Status;
 use App\Http\Requests\CreateBrand;
 use App\Http\Requests\EditBrand;
+use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $brands = Brand::orderBy('vendor_id')->get();
+        $status = $request->status ?? Status::getIndexableValues();
+        $cars = Brand::inStatus($status)->orderBy('vendor_id', 'asc')->get();
 
         return view('admin.brands.index', [
-            'brands' => $brands,
+            'brands' => $cars,
+            'shown_statuses' => $status,
+            'all_statuses' => Status::values(),
         ]);
     }
 
@@ -42,7 +47,7 @@ class BrandController extends Controller
             ];
         } else {
             $args = [
-                'vendors' => Vendor::all(),
+                'vendors' => Vendor::expandable()->get(),
                 'ref' => [
                     'url' => route('admin.brands.index'),
                     'text' => 'ブランド一覧',
@@ -109,6 +114,7 @@ class BrandController extends Controller
             $brand->genres()->detach();
             $brand->genres()->attach($request->genres);
         }
+        $brand->status = $request->status;
         $brand->save();
 
         return redirect()->route('admin.brands.show', [

@@ -90,7 +90,7 @@
             <tr>
                 <th>状態</th>
                 <td>
-                    <!-- -->
+                    {{ $brand->status->getLabel() }}
                 </td>
             </tr>
         </tbody>

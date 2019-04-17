@@ -50,6 +50,18 @@ abstract class Status extends Enum
         // self::INACTIVE,
     ];
 
+    protected static $expandableStatusRange = [
+        'min' => self::REGISTERED,
+        'max' => self::LEAVING,
+    ];
+
+    /**
+     * Some cache
+     *
+     * @var array
+     */
+    protected static $statusCache = [];
+
     /**
      * 一覧表示可能なステイタス定数の配列
      *
@@ -86,6 +98,35 @@ abstract class Status extends Enum
     public static function getIndexableValues(): array
     {
         return empty(static::$indexables) ? static::toArray() : static::$indexables;
+    }
+
+    public static function getExpandableStatusValues()
+    {
+        $class = \get_called_class();
+        if (! isset(static::$statusCache['expandable'])) {
+            static::$statusCache['expandable'] = [];
+        }
+        if (! isset(static::$statusCache['expandable'][$class])) {
+            $statuses = [];
+            if (! empty(static::$expandableStatusRange)) {
+                foreach (static::toArray() as $value) {
+                    if (isset(static::$expandableStatusRange['min']) && is_integer(static::$expandableStatusRange['min'])) {
+                        if ($value < static::$expandableStatusRange['min']) {
+                            continue;
+                        }
+                    }
+                    if (isset(static::$expandableStatusRange['max']) && is_integer(static::$expandableStatusRange['max'])) {
+                        if ($value > static::$expandableStatusRange['max']) {
+                            continue;
+                        }
+                    }
+                    $statuses[] = $value;
+                }
+            }
+            static::$statusCache['expandable'][$class] = $statuses;
+        }
+
+        return static::$statusCache['expandable'][$class];
     }
 
     public function getSlug(): string
