@@ -2,7 +2,7 @@
 
 @section('main')
 
-<div class="h3">ブランド編集</div>
+<div class="h3">店舗編集</div>
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -14,16 +14,16 @@
 </div>
 @endif
 
-<form action="{{ route('admin.brands.edit', ['id' => $brand->id]) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('admin.shops.edit', ['id' => $shop->id]) }}" method="post" enctype="multipart/form-data">
     @csrf
 
     <div class="card mb-3">
-        <div class="card-header">ブランド名</div>
+        <div class="card-header">店舗名</div>
         <div class="card-body">
             <input type="text" class="form-control"
                 name="name" id="name"
-                value="{{ old('name') ?? $brand->raw_name }}"
-                {{ $brand->raw_name ? '' : 'placeholder=' . $brand->vendor->name }}
+                value="{{ old('name') ?? $shop->raw_name }}"
+                {{ $shop->raw_name ? '' : 'placeholder=' . $shop->vendor->name }}
             >
         </div>
     </div>
@@ -32,8 +32,8 @@
         <div class="card-header">状態</div>
         <div class="card-body">
             <select name="status" id="status" class="form-control">
-                @foreach($brand->status::values() as $status)
-                <option value="{{ $status->getValue() }}" {{ $status->equals($brand->status) ? 'selected' : '' }}>
+                @foreach($shop->status::values() as $status)
+                <option value="{{ $status->getValue() }}" {{ $status->equals($shop->status) ? 'selected' : '' }}>
                     {{ $status->getLabel() }}
                 </option>
                 @endforeach
@@ -66,7 +66,7 @@
                 <dd class="col-lg-10 col-md-9">
                     <input type="text" class="form-control"
                         name="ad_copy" id="ad_copy"
-                        value="{{ old('ad_copy') ?? $brand->advertisement->title_secondary }}"
+                        value="{{ old('ad_copy') ?? $shop->advertisement->title_secondary }}"
                         maxlength="20"
                     >
                 </dd>
@@ -74,7 +74,7 @@
                 <dd class="col-lg-10 col-md-9">
                     <input type="text" class="form-control"
                         name="ad_text" id="ad_text"
-                        value="{{ old('ad_text') ?? $brand->advertisement->description_primary }}"
+                        value="{{ old('ad_text') ?? $shop->advertisement->description_primary }}"
                         maxlength="40"
                     >
                 </dd>
@@ -82,14 +82,14 @@
                 <dd class="col-lg-10 col-md-9">
                     <textarea class="form-control"
                         name="description" id="description"
-                    >{{ old('description') ?? $brand->advertisement->content_primary }}</textarea>
+                    >{{ old('description') ?? $shop->advertisement->content_primary }}</textarea>
                 </dd>
             </dl>
         </div>
     </div>
 
     <div class="card mb-3">
-        <div class="card-header">ブランド写真</div>
+        <div class="card-header">店舗写真</div>
         <div class="card-body">
             <input type="file" name="image" id="image">
         </div>
@@ -97,7 +97,7 @@
 
     <div class="text-right">
         <div class="btn-group">
-            <a href="{{ route('admin.brands.show', ['id' => $brand->id]) }}" class="btn btn-light">キャンセル</a>
+            <a href="{{ route('admin.shops.show', ['id' => $shop->id]) }}" class="btn btn-light">キャンセル</a>
             <button type="submit" class="btn btn-primary">送信</button>
         </div>
     </div>
@@ -108,8 +108,8 @@
 
 @section('sidebar')
 <nav class="nav flex-column">
-    <a class="nav-link" href="{{ route('admin.brands.index') }}">
-        ブランド一覧に戻る
+    <a class="nav-link" href="{{ route('admin.shops.index') }}">
+        店舗一覧に戻る
     </a>
 </nav>
 @endsection
