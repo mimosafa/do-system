@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShopsTable extends Migration
+class CreateKitchencarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,19 @@ class CreateShopsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shops', function (Blueprint $table) {
+        Schema::create('kitchencars', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('brand_id');
+            $table->unsignedBigInteger('user_id')->default(0);
             $table->unsignedInteger('car_id');
+            $table->unsignedInteger('shop_id');
+            $table->unsignedInteger('vendor_id');
             $table->unsignedTinyInteger('status')->default(0);
             $table->timestamps();
 
-            $table->index(['brand_id', 'car_id']);
-            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->index(['car_id', 'shop_id']);
             $table->foreign('car_id')->references('id')->on('cars');
+            $table->foreign('shop_id')->references('id')->on('shops');
+            $table->foreign('vendor_id')->references('id')->on('vendors');
         });
     }
 
@@ -33,6 +36,6 @@ class CreateShopsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shops');
+        Schema::dropIfExists('kitchencars');
     }
 }
