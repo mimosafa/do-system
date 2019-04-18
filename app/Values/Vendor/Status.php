@@ -16,7 +16,6 @@ class Status extends EnumStatus
     protected static $indexables = [
         self::PROSPECTIVE,
         self::REGISTERED,
-        self::SUSPENDED,
     ];
 
     protected $labels = [
