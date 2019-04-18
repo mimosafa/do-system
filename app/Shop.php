@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Advertisement;
 use App\Genre;
 use App\Kitchencar;
 use App\Vendor;
@@ -11,8 +10,12 @@ use App\FileApp\File;
 use App\FileApp\FileHolderTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Shop extends Model
+use Wstd\Advertisement\AdvertisableTrait;
+use Wstd\Advertisement\AdvertisableInterface;
+
+class Shop extends Model implements AdvertisableInterface
 {
+    use AdvertisableTrait;
     use FileHolderTrait;
 
     /*
@@ -34,11 +37,6 @@ class Shop extends Model
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
-    }
-
-    public function advertisement()
-    {
-        return $this->morphOne(Advertisement::class, 'advertisable');
     }
 
     public function getStatusAttribute(): Values\Status

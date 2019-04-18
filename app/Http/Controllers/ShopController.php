@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Advertisement;
 use App\Shop;
 use App\Genre;
 use App\Vendor;
 use App\Values\Shop\Status;
 use App\Http\Requests\CreateShop;
 use App\Http\Requests\EditShop;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use Wstd\Advertisement\Models\Advertisement;
 
 class ShopController extends Controller
 {
@@ -28,8 +30,11 @@ class ShopController extends Controller
 
     public function show(int $id)
     {
+        $shop = Shop::findOrFail($id);
+
         return view('admin/shops/show', [
-            'shop' => Shop::findOrFail($id),
+            'shop' => $shop,
+            'advertisement' => $shop->advertisement,
         ]);
     }
 
@@ -80,7 +85,7 @@ class ShopController extends Controller
 
     public function edit(int $id)
     {
-        $shop = Shop::find($id);
+        $shop = Shop::findOrFail($id);
         $genre_ids = [];
         $genres = $shop->genres;
         if ($genres->isNotEmpty()) {
@@ -93,20 +98,21 @@ class ShopController extends Controller
             'shop' => $shop,
             'genre_ids' => $genre_ids,
             'all_genres' => Genre::all(),
+            'advertisement' => $shop->advertisement,
         ]);
     }
 
     public function update(int $id, EditShop $request)
     {
-        $shop = Shop::find($id);
+        $shop = Shop::findOrFail($id);
 
-        $ad = $shop->advertisement;
+        $ad = $shop->advertisement ?: new Advertisement();
 
         $ad->title_secondary = $request->ad_copy;
         $ad->description_primary = $request->ad_text;
         $ad->content_primary = $request->description;
 
-        $ad->save();
+        $shop->advertisement()->save($ad);
 
         $shop->name = $request->name;
         if ($image = $request->image) {

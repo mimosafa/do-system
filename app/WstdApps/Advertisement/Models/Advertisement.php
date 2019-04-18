@@ -3,16 +3,15 @@
 namespace Wstd\Advertisement\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+
+use Wstd\Advertisement\AdvertisableInterface;
 
 class Advertisement extends Model
 {
-    protected $fillable = [
-        'title_primary', 'title_secondary',
-        'description_primary', 'description_secondary',
-        'content_primary', 'content_secondary',
-    ];
+    protected $guarded = ['id'];
 
-    public function advertisable()
+    public function advertisable(): MorphTo
     {
         return $this->morphTo();
     }

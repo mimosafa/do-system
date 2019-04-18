@@ -66,7 +66,7 @@
                 <dd class="col-lg-10 col-md-9">
                     <input type="text" class="form-control"
                         name="ad_copy" id="ad_copy"
-                        value="{{ old('ad_copy') ?? $shop->advertisement->title_secondary }}"
+                        value="{{ old('ad_copy') ?? ($advertisement ? $advertisement->title_secondary : '') }}"
                         maxlength="20"
                     >
                 </dd>
@@ -74,7 +74,7 @@
                 <dd class="col-lg-10 col-md-9">
                     <input type="text" class="form-control"
                         name="ad_text" id="ad_text"
-                        value="{{ old('ad_text') ?? $shop->advertisement->description_primary }}"
+                        value="{{ old('ad_text') ?? ($advertisement ? $advertisement->description_primary : '') }}"
                         maxlength="40"
                     >
                 </dd>
@@ -82,7 +82,7 @@
                 <dd class="col-lg-10 col-md-9">
                     <textarea class="form-control"
                         name="description" id="description"
-                    >{{ old('description') ?? $shop->advertisement->content_primary }}</textarea>
+                    >{{ old('description') ?? ($advertisement ? $advertisement->content_primary : '') }}</textarea>
                 </dd>
             </dl>
         </div>

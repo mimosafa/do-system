@@ -2,13 +2,17 @@
 
 namespace App;
 
-use App\Advertisement;
 use App\Car;
 use App\Shop;
 use Illuminate\Database\Eloquent\Model;
 
-class Kitchencar extends Model
+use Wstd\Advertisement\AdvertisableTrait;
+use Wstd\Advertisement\AdvertisableInterface;
+
+class Kitchencar extends Model implements AdvertisableInterface
 {
+    use AdvertisableTrait;
+
     public function shop()
     {
         return $this->belongsTo(Shop::class);
@@ -17,10 +21,5 @@ class Kitchencar extends Model
     public function car()
     {
         return $this->belongsTo(Car::class);
-    }
-
-    public function advertisement()
-    {
-        return $this->morphOne(Advertisement::class, 'advertisable');
     }
 }
