@@ -2,6 +2,8 @@
 
 namespace Wstd\Advertisement\Values;
 
+use Illuminate\Contracts\Support\Arrayable;
+
 final class Advertisement
 {
     /**
@@ -45,6 +47,17 @@ final class Advertisement
      * @var array|null
      */
     private $other_values;
+
+    public static function instance(Arrayable $arrayable)
+    {
+        extract($arrayable->toArray());
+        return new self(
+            $title_primary ?? null, $title_secondary ?? null,
+            $description_primary ?? null, $description_secondary ?? null,
+            $content_primary ?? null, $content_secondary ?? null,
+            $other_values ?? null
+        );
+    }
 
     /**
      * Constructor
@@ -183,6 +196,6 @@ final class Advertisement
      */
     public static function equals(self $a, self $b): bool
     {
-        return $a->equals($b);
+        return $a->isEquals($b);
     }
 }
