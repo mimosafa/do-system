@@ -7,6 +7,7 @@ use App\Car;
 use App\Kitchencar;
 use App\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KitchencarController extends Controller
 {
@@ -77,6 +78,12 @@ class KitchencarController extends Controller
 
         if (isset($shop) && isset($car)) {
             $kitchencar = new Kitchencar();
+
+            $kitchencar->user_id = Auth::user()->id;
+            if ($shop->vendor_id === $car->vendor_id) {
+                $kitchencar->vendor_id = $shop->vendor_id;
+            }
+
             $kitchencar->car_id = $car->id;
             $kitchencar->shop_id = $shop->id;
             $kitchencar->save();
