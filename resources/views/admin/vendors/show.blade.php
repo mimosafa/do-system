@@ -137,7 +137,7 @@
         事業者一覧に戻る
     </a>
     @if ($vendor->isExpandable())
-    <a class="nav-link" href="{{ route('admin.shops.createWith', ['models' => 'vendors', 'id' => $vendor->id]) }}">
+    <a class="nav-link" href="{{ route('admin.kitchencars.createWith', ['models' => 'vendors', 'id' => $vendor->id]) }}">
         この事業者を出店者リスト追加
     </a>
     @endif

@@ -31,11 +31,11 @@
     <div class="card-body">
         <dl class="row mb-0">
             <dt class="col-lg-2 col-md-3">20文字以内</dt>
-            <dd class="col-lg-10 col-md-9">{{ $shop->advertisement->title_secondary }}</dd>
+            <dd class="col-lg-10 col-md-9">{{ $shop->copy }}</dd>
             <dt class="col-lg-2 col-md-3">40文字以内</dt>
-            <dd class="col-lg-10 col-md-9">{{ $shop->advertisement->description_primary }}</dd>
+            <dd class="col-lg-10 col-md-9">{{ $shop->short_text }}</dd>
             <dt class="col-lg-2 col-md-3">制限なし</dt>
-            <dd class="col-lg-10 col-md-9">{{ $shop->advertisement->content_primary }}</dd>
+            <dd class="col-lg-10 col-md-9">{{ $shop->text }}</dd>
         </dl>
     </div>
 </div>

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Advertisement;
 use App\Shop;
 use App\Genre;
 use App\Vendor;
 use App\Values\Shop\Status;
 use App\Http\Requests\CreateShop;
 use App\Http\Requests\EditShop;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use Wstd\Advertisement\Models\Advertisement;
 
 class ShopController extends Controller
 {
@@ -28,8 +30,10 @@ class ShopController extends Controller
 
     public function show(int $id)
     {
+        $shop = Shop::findOrFail($id);
+
         return view('admin/shops/show', [
-            'shop' => Shop::findOrFail($id),
+            'shop' => $shop,
         ]);
     }
 
@@ -65,22 +69,17 @@ class ShopController extends Controller
         $shop->user_id = Auth::user()->id;
         $shop->vendor_id = $request->vendor_id;
         $shop->name = $request->name ?? Vendor::find($shop->vendor_id)->name;
+        $shop->copy = $request->copy;
+        $shop->short_text = $request->short_text;
+        $shop->text = $request->text;
         $shop->save();
-
-        $ad = new Advertisement([
-            'title_secondary' => $request->ad_copy,
-            'description_primary' => $request->ad_text,
-            'content_primary' => $request->description,
-        ]);
-
-        $shop->advertisement()->save($ad);
 
         return redirect()->route('admin.shops.show', ['shop' => $shop]);
     }
 
     public function edit(int $id)
     {
-        $shop = Shop::find($id);
+        $shop = Shop::findOrFail($id);
         $genre_ids = [];
         $genres = $shop->genres;
         if ($genres->isNotEmpty()) {
@@ -98,17 +97,16 @@ class ShopController extends Controller
 
     public function update(int $id, EditShop $request)
     {
-        $shop = Shop::find($id);
-
-        $ad = $shop->advertisement;
-
-        $ad->title_secondary = $request->ad_copy;
-        $ad->description_primary = $request->ad_text;
-        $ad->content_primary = $request->description;
-
-        $ad->save();
+        $shop = Shop::findOrFail($id);
 
         $shop->name = $request->name;
+        $shop->status = $request->status;
+        $shop->copy = $request->copy;
+        $shop->short_text = $request->short_text;
+        $shop->text = $request->text;
+
+        $shop->save();
+
         if ($image = $request->image) {
             $shop->uploaded_file = $image;
         }
@@ -116,8 +114,6 @@ class ShopController extends Controller
             $shop->genres()->detach();
             $shop->genres()->attach($request->genres);
         }
-        $shop->status = $request->status;
-        $shop->save();
 
         return redirect()->route('admin.shops.show', [
             'shop' => $shop,
