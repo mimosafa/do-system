@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Values\Brand\Status;
-use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
-class EditBrand extends CreateBrand
+class CreateShop extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +24,13 @@ class EditBrand extends CreateBrand
      */
     public function rules()
     {
-        $rules = parent::rules();
-        unset($rules['vendor_id']);
-
-        $status_rule = Rule::in(Status::values());
-
-        return $rules + [
-            'status' => 'required|' . $status_rule,
-            'image' => 'file|image|mimes:jpeg,png,jpg,gif|max:2048',
+        return [
+            'vendor_id' => 'required|integer',
+            'name' => 'max:100|nullable',
+            'copy' => 'max:30|nullable',
+            'short_text' => 'max:80|nullable',
+            'text' => 'nullable',
+            'genres' => 'array',
         ];
     }
 }

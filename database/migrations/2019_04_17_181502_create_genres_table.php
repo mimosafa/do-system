@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FixBrandTable extends Migration
+class CreateGenresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class FixBrandTable extends Migration
      */
     public function up()
     {
-        Schema::table('brands', function (Blueprint $table) {
-            $table->foreign('vendor_id')->references('id')->on('vendors');
+        Schema::create('genres', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 50)->unique();
+            $table->unsignedInteger('parent_id')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class FixBrandTable extends Migration
      */
     public function down()
     {
-        Schema::table('brands', function (Blueprint $table) {
-            $table->dropForeign('brands_vendor_id_foreign');
-        });
+        Schema::dropIfExists('genres');
     }
 }

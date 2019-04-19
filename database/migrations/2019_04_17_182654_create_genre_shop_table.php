@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBrandGenreTable extends Migration
+class CreateGenreShopTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateBrandGenreTable extends Migration
      */
     public function up()
     {
-        Schema::create('brand_genre', function (Blueprint $table) {
-            $table->unsignedInteger('brand_id');
+        Schema::create('genre_shop', function (Blueprint $table) {
             $table->unsignedInteger('genre_id');
-            $table->primary(['brand_id', 'genre_id']);
+            $table->unsignedInteger('shop_id');
+            $table->unsignedInteger('order')->default(0);
+            $table->primary(['genre_id', 'shop_id']);
 
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelite('cascade');
             $table->foreign('genre_id')->references('id')->on('genres')->onDelite('cascade');
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelite('cascade');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateBrandGenreTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brand_genre');
+        Schema::dropIfExists('genre_shop');
     }
 }

@@ -2,100 +2,121 @@
 
 namespace App\Http\Controllers;
 
-use App\Brand;
-use App\Car;
 use App\Shop;
+use App\Genre;
 use App\Vendor;
+use App\Values\Shop\Status;
+use App\Http\Requests\CreateShop;
+use App\Http\Requests\EditShop;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use Wstd\Advertisement\Models\Advertisement;
 
 class ShopController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $shops = Shop::all();
-        return view('admin/shops/index', [
+        $status = $request->status ?? Status::getIndexableValues();
+        $shops = Shop::inStatus($status)->orderBy('vendor_id', 'asc')->get();
+
+        return view('admin.shops.index', [
             'shops' => $shops,
+            'shown_statuses' => $status,
+            'all_statuses' => Status::values(),
         ]);
     }
 
     public function show(int $id)
     {
         $shop = Shop::findOrFail($id);
+
         return view('admin/shops/show', [
             'shop' => $shop,
         ]);
     }
 
-    public function create(string $models = '', int $id = 0)
+    public function create(int $id = 0)
     {
-        $params = [];
-        $next = 'disabled';
-
-        if (! $models) {
-            $params['vendors'] = Vendor::expandable()->get();
-            $next = 'continue';
-        } else if ($models === 'vendors') {
-            $params['vendor'] = $vendor = Vendor::findOrFail($id);
-            $params['cars']   = $cars   = $vendor->cars;
-            $params['brands'] = $brands = $vendor->brands;
-            if ($cars->isNotEmpty() && $brands->isNotEmpty()) {
-                $next = 'store';
+        if ($id) {
+            if (!$vendor = Vendor::find($id)) {
+                abort(404);
             }
-        } else if ($models === 'cars') {
-            $params['car']    = $car    = Car::findOrFail($id);
-            $params['vendor'] = $vendor = $car->vendor;
-            $params['brands'] = $brands = $vendor->brands;
-            if ($brands->isNotEmpty()) {
-                $next = 'store';
-            }
-        } else if ($models === 'brands') {
-            $params['brand']   = $brand  = Brand::findOrFail($id);
-            $paramas['vendor'] = $vendor = $brand->vendor;
-            $params['cars']    = $cars   = $vendor->cars;
-            if ($cars->isNotEmpty()) {
-                $next = 'store';
-            }
+            $args = [
+                'vendor' => $vendor,
+                'ref' => [
+                    'url' => route('admin.vendors.show', ['id' => $id]),
+                    'text' => $vendor->name . 'の事業者詳細',
+                ],
+            ];
+        } else {
+            $args = [
+                'vendors' => Vendor::expandable()->get(),
+                'ref' => [
+                    'url' => route('admin.shops.index'),
+                    'text' => '店舗一覧',
+                ],
+            ];
         }
-        $params['next'] = $next;
-
-        return view('admin/shops/create', $params);
+        return view('admin/shops/create', $args);
     }
 
-    public function store(Request $request)
+    public function store(CreateShop $request)
     {
-        $validated_1 = $request->validate([
-            'car_id' => 'integer',
-            'brand_id' => 'integer',
+        $shop = new Shop();
+
+        $shop->user_id = Auth::user()->id;
+        $shop->vendor_id = $request->vendor_id;
+        $shop->name = $request->name ?? Vendor::find($shop->vendor_id)->name;
+        $shop->copy = $request->copy;
+        $shop->short_text = $request->short_text;
+        $shop->text = $request->text;
+        $shop->save();
+
+        return redirect()->route('admin.shops.show', ['shop' => $shop]);
+    }
+
+    public function edit(int $id)
+    {
+        $shop = Shop::findOrFail($id);
+        $genre_ids = [];
+        $genres = $shop->genres;
+        if ($genres->isNotEmpty()) {
+            foreach ($genres as $genre) {
+                $genre_ids[] = $genre->id;
+            }
+        }
+
+        return view('admin/shops/edit', [
+            'shop' => $shop,
+            'genre_ids' => $genre_ids,
+            'all_genres' => Genre::all(),
         ]);
+    }
 
-        if (isset($validated_1['brand_id'])) {
-            $brand = Brand::findOrFail($validated_1['brand_id']);
+    public function update(int $id, EditShop $request)
+    {
+        $shop = Shop::findOrFail($id);
+
+        $shop->name = $request->name;
+        $shop->status = $request->status;
+        $shop->copy = $request->copy;
+        $shop->short_text = $request->short_text;
+        $shop->text = $request->text;
+
+        $shop->save();
+
+        if ($image = $request->image) {
+            $shop->uploaded_file = $image;
         }
-        if (isset($validated_1['car_id'])) {
-            $car = Car::findOrFail($validated_1['car_id']);
-        }
-
-        if (isset($brand) && isset($car)) {
-            $shop = new Shop();
-            $shop->car_id = $car->id;
-            $shop->brand_id = $brand->id;
-            $shop->save();
-
-            return redirect()->route('admin.shops.show', [
-                'id' => $shop->id,
-            ]);
-        }
-
-        if (isset($brand)) {
-            return $this->create('brands', $brand->id);
-        } else if (isset($car)) {
-            return $this->create('cars', $car->id);
+        if ($request->genres) {
+            $shop->genres()->detach();
+            $shop->genres()->attach($request->genres);
         }
 
-        $validated_2 = $request->validate([
-            'vendor_id' => 'required|integer',
+        return redirect()->route('admin.shops.show', [
+            'shop' => $shop,
         ]);
-
-        return $this->create('vendors', $validated_2['vendor_id']);
     }
 }

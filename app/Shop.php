@@ -2,25 +2,69 @@
 
 namespace App;
 
-use App\Advertisement;
-use App\Brand;
-use App\Car;
+use App\Genre;
+use App\Kitchencar;
+use App\Vendor;
+use App\Values\Shop as Values;
+use App\FileApp\File;
+use App\FileApp\FileHolderTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Shop extends Model
+use Wstd\Advertisement\AdvertisableInterface;
+use App\Traits\Kitchencar\Shop\AdvertisableTrait;
+
+class Shop extends Model implements AdvertisableInterface
 {
-    public function brand()
+    use AdvertisableTrait;
+    use FileHolderTrait;
+
+    protected $guarded = ['id'];
+
+    public function genres()
     {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsToMany(Genre::class);
     }
 
-    public function car()
+    public function kitchencars()
     {
-        return $this->belongsTo(Car::class);
+        return $this->hasMany(Kitchencar::class);
     }
 
-    public function advertisement()
+    public function vendor()
     {
-        return $this->morphOne(Advertisement::class, 'advertisable');
+        return $this->belongsTo(Vendor::class);
+    }
+
+    public function getStatusAttribute(): Values\Status
+    {
+        return new Values\Status($this->attributes['status']);
+    }
+
+    public function getRawNameAttribute()
+    {
+        return $this->attributes['name'];
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->getRawNameAttribute() ?: $this->vendor->name;
+    }
+
+    public function getImagesAttribute()
+    {
+        $images = new Values\Image($this);
+        return $images->findAll();
+    }
+
+    public function setUploadedFileAttribute($file)
+    {
+        $images = new Values\Image($this);
+        $images->store($file);
+        return $this;
+    }
+
+    public function scopeInStatus($query, array $status)
+    {
+        return $query->whereIn('status', $status);
     }
 }

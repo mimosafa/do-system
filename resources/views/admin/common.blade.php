@@ -118,7 +118,7 @@
                         @else
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.shops.index') }}">出店者リスト</a>
+                                <a class="nav-link" href="{{ route('admin.kitchencars.index') }}">出店者リスト</a>
                             </li>
 
                             <li class="nav-item dropdown">
@@ -129,7 +129,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownLists">
                                     <a class="dropdown-item" href="{{ route('admin.vendors.index') }}">事業者</a>
                                     <a class="dropdown-item" href="{{ route('admin.cars.index') }}">車両</a>
-                                    <a class="dropdown-item" href="{{ route('admin.brands.index') }}">ブランド</a>
+                                    <a class="dropdown-item" href="{{ route('admin.shops.index') }}">店舗</a>
                                     <a class="dropdown-item" href="{{ route('admin.genres.index') }}">ジャンル</a>
                                 </div>
                             </li>

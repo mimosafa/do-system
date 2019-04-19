@@ -2,13 +2,13 @@
 
 namespace App;
 
-use App\Brand;
+use App\Shop;
 use Illuminate\Database\Eloquent\Model;
 
 class Genre extends Model
 {
-    public function brands()
+    public function shops()
     {
-        return $this->belongsToMany(Brand::class);
+        return $this->belongsToMany(Shop::class);
     }
 }

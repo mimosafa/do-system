@@ -2,39 +2,50 @@
 
 @section('main')
 
-<div class="h3">出店者詳細</div>
+<div class="h3">店舗詳細</div>
 
 <div class="card mb-3">
-    <div class="card-header">名前</div>
-    <div class="card-body">{{ $shop->brand->name }}</div>
+    <div class="card-header">店舗名</div>
+    <div class="card-body">{{ $shop->name }}</div>
 </div>
 
 <div class="card mb-3">
-    <div class="card-header">車両写真</div>
+    <div class="card-header">ジャンル</div>
     <div class="card-body">
-        @if ($shop->car->images->isNotEmpty())
-        <ul class="list-unstyled mb-0">
-            @foreach ($shop->car->images as $image)
-            <li>
-                <figure class="figure">
-                  <img src="{{ $image->url }}" class="figure-img img-fluid rounded" alt="">
-                  <figcaption class="figure-caption">{{ $image->client_name }}</figcaption>
-                </figure>
-            </li>
+        @if ($shop->genres->isNotEmpty())
+        <div>
+            @foreach ($shop->genres as $genre)
+            <a href="#" class="btn btn-link">
+                {{ $genre->name }}
+            </a>
             @endforeach
-        </ul>
+        </div>
         @else
-        写真はありません
+        ジャンルは登録されていません。
         @endif
     </div>
 </div>
 
 <div class="card mb-3">
-    <div class="card-header">商品写真</div>
+    <div class="card-header">紹介文</div>
     <div class="card-body">
-        @if ($shop->brand->images->isNotEmpty())
+        <dl class="row mb-0">
+            <dt class="col-lg-2 col-md-3">20文字以内</dt>
+            <dd class="col-lg-10 col-md-9">{{ $shop->copy }}</dd>
+            <dt class="col-lg-2 col-md-3">40文字以内</dt>
+            <dd class="col-lg-10 col-md-9">{{ $shop->short_text }}</dd>
+            <dt class="col-lg-2 col-md-3">制限なし</dt>
+            <dd class="col-lg-10 col-md-9">{{ $shop->text }}</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">店舗写真</div>
+    <div class="card-body">
+        @if ($shop->images->isNotEmpty())
         <ul class="list-unstyled mb-0">
-            @foreach ($shop->brand->images as $image)
+            @foreach ($shop->images as $image)
             <li>
                 <figure class="figure">
                   <img src="{{ $image->url }}" class="figure-img img-fluid rounded" alt="">
@@ -51,7 +62,7 @@
 
 <div class="text-right">
     <div class="btn-group">
-        <a href="#" class="btn btn-primary">編集</a>
+        <a href="{{ route('admin.shops.edit', ['id' => $shop->id]) }}" class="btn btn-primary">編集</a>
     </div>
 </div>
 
@@ -63,27 +74,23 @@
     <table class="table mb-0">
         <tbody>
             <tr>
+                <th>店舗ID</th>
+                <td>
+                    {{ $shop->id }}
+                </td>
+            </tr>
+            <tr>
                 <th>事業者</th>
                 <td>
-                    <a href="{{ route('admin.vendors.show', ['id' => $shop->car->vendor->id]) }}">
-                        {{ $shop->car->vendor->name }}
+                    <a href="{{ route('admin.vendors.show', ['id' => $shop->vendor->id]) }}">
+                        {{ $shop->vendor->name }}
                     </a>
                 </td>
             </tr>
             <tr>
-                <th>車両</th>
+                <th>状態</th>
                 <td>
-                    <a href="{{ route('admin.cars.show', ['id' => $shop->car->id]) }}">
-                        {{ $shop->car->name }}
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <th>ブランド</th>
-                <td>
-                    <a href="{{ route('admin.brands.show', ['id' => $shop->brand->id]) }}">
-                        {{ $shop->brand->name }}
-                    </a>
+                    {{ $shop->status->getLabel() }}
                 </td>
             </tr>
         </tbody>
@@ -91,7 +98,10 @@
 </div>
 <nav class="nav flex-column">
     <a class="nav-link" href="{{ route('admin.shops.index') }}">
-        出店者リスト一覧に戻る
+        店舗一覧に戻る
+    </a>
+    <a class="nav-link" href="{{ route('admin.kitchencars.createWith', ['models' => 'shops', 'id' => $shop->id]) }}">
+        この店舗を出店者リスト追加
     </a>
 </nav>
 @endsection

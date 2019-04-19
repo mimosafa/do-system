@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Values\Brand;
+namespace App\Values\Shop;
 
 use App\FileApp\File;
 

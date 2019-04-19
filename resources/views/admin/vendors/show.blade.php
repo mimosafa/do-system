@@ -57,39 +57,39 @@
 </div>
 
 <div class="card mb-3">
-    <div class="card-header">ブランド</div>
-    @if ($vendor->brands->isEmpty())
+    <div class="card-header">店舗</div>
+    @if ($vendor->shops->isEmpty())
     <div class="card-body">
-        ブランドの登録はありません。
+        店舗の登録はありません。
     </div>
     @else
     <table class="table mb-0">
         <thead>
             <tr>
                 <th class="imagesTh">写真</th>
-                <th>ブランド名</th>
+                <th>店舗名</th>
                 <th>ジャンル</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($vendor->brands as $brand)
+            @foreach ($vendor->shops as $shop)
             <tr class="">
                 <td>
-                    @if ($brand->images->isNotEmpty())
-                    <a href="#" style="background-image:url({{ $brand->images->first()->url }})" class="thumbImage rounded"></a>
+                    @if ($shop->images->isNotEmpty())
+                    <a href="#" style="background-image:url({{ $shop->images->first()->url }})" class="thumbImage rounded"></a>
                     @else
                     <span class="noImage rounded">No Image</span>
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('admin.brands.show', ['id' => $brand->id]) }}">
-                        {{ $brand->name }}
+                    <a href="{{ route('admin.shops.show', ['id' => $shop->id]) }}">
+                        {{ $shop->name }}
                     </a>
                 </td>
                 <td>
-                    @for ($i = 0; $i < count($brand->genres); $i++)
-                    {{ $brand->genres[$i]->name }}
-                    {{ $i !== count($brand->genres) - 1 ? ', ' : '' }}
+                    @for ($i = 0; $i < count($shop->genres); $i++)
+                    {{ $shop->genres[$i]->name }}
+                    {{ $i !== count($shop->genres) - 1 ? ', ' : '' }}
                     @endfor
                 </td>
             </tr>
@@ -99,7 +99,7 @@
     @endif
     @if ($vendor->isExpandable())
     <div class="card-footer text-right">
-        <a href="{{ route('admin.brands.createWith', ['id' => $vendor->id]) }}">ブランドを追加する</a>
+        <a href="{{ route('admin.shops.createWith', ['id' => $vendor->id]) }}">店舗を追加する</a>
     </div>
     @endif
 </div>
@@ -137,7 +137,7 @@
         事業者一覧に戻る
     </a>
     @if ($vendor->isExpandable())
-    <a class="nav-link" href="{{ route('admin.shops.createWith', ['models' => 'vendors', 'id' => $vendor->id]) }}">
+    <a class="nav-link" href="{{ route('admin.kitchencars.createWith', ['models' => 'vendors', 'id' => $vendor->id]) }}">
         この事業者を出店者リスト追加
     </a>
     @endif
