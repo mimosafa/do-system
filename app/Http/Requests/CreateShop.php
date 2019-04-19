@@ -26,10 +26,10 @@ class CreateShop extends FormRequest
     {
         return [
             'vendor_id' => 'required|integer',
-            'name' => 'max:100',
-            'ad_copy' => 'max:20',
-            'ad_copy' => 'max:20',
-            'description' => 'max:255',
+            'name' => 'max:100|nullable',
+            'copy' => 'max:30|nullable',
+            'short_text' => 'max:80|nullable',
+            'text' => 'nullable',
             'genres' => 'array',
         ];
     }

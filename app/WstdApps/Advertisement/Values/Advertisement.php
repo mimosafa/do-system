@@ -48,9 +48,28 @@ final class Advertisement
      */
     private $other_values;
 
+    /**
+     * @static
+     * @access public
+     *
+     * @param Arrayable $arrayable
+     * @return self
+     */
     public static function instance(Arrayable $arrayable)
     {
-        extract($arrayable->toArray());
+        return self::instanceByArray($arrayable->toArray());
+    }
+
+    /**
+     * @static
+     * @access public
+     *
+     * @param array $array
+     * @return self
+     */
+    public static function instanceByArray(array $array)
+    {
+        extract($array);
         return new self(
             $title_primary ?? null, $title_secondary ?? null,
             $description_primary ?? null, $description_secondary ?? null,
@@ -70,20 +89,35 @@ final class Advertisement
      * @param string|null $content_secondary
      * @param array|null $other_values
      */
-    public function __construct(
+    private function __construct(
         ?string $title_primary       = null, ?string $title_secondary       = null,
         ?string $description_primary = null, ?string $description_secondary = null,
         ?string $content_primary     = null, ?string $content_secondary     = null,
         ?array $other_values = null
     )
     {
-        $this->title_primary = isset($title_primary) ? static::titleFilter($title_primary) : null;
-        $this->title_secondary = isset($title_secondary) ? static::titleFilter($title_secondary) : null;
-        $this->description_primary = isset($description_primary) ? static::descriptionFilter($description_primary) : null;
-        $this->description_secondary = isset($description_secondary) ? static::descriptionFilter($description_secondary) : null;
-        $this->content_primary = isset($content_primary) ? static::contentFilter($content_primary) : null;
-        $this->content_secondary = isset($content_secondary) ? static::contentFilter($content_secondary) : null;
+        $this->title_primary = isset($title_primary) ? static::strFilter($title_primary, (int) self::$titleLength) : null;
+        $this->title_secondary = isset($title_secondary) ? static::strFilter($title_secondary, (int) self::$titleLength) : null;
+        $this->description_primary = isset($description_primary) ? static::strFilter($description_primary, (int) self::$descriptionLength) : null;
+        $this->description_secondary = isset($description_secondary) ? static::strFilter($description_secondary, (int) self::$descriptionLength) : null;
+        $this->content_primary = isset($content_primary) ? static::strFilter($content_primary, (int) self::$contentLength) : null;
+        $this->content_secondary = isset($content_secondary) ? static::strFilter($content_secondary, (int) self::$contentLength) : null;
         $this->other_values = isset($other_values) ? static::otherValuesFilter($other_values) : null;
+    }
+
+    /**
+     * @access private
+     *
+     * @param string $string
+     * @param integer $len
+     * @return string|null
+     */
+    private static function strFilter(string $string, int $len): ?string
+    {
+        if ($len) {
+            return mb_strlen($string) <= $len ? $string : null;
+        }
+        return $string;
     }
 
     /**
@@ -131,6 +165,11 @@ final class Advertisement
     private static function otherValuesFilter(array $other_values): array
     {
         return $other_values;
+    }
+
+    public function __get($key)
+    {
+        return $this->$key;
     }
 
     /**

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 interface AdvertisableInterface
 {
-    public function advertisement(): MorphOne;
+    public function advertisementMorphOne(): MorphOne;
 }

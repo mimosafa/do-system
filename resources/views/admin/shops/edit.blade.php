@@ -65,24 +65,24 @@
                 <dt class="col-lg-2 col-md-3">20文字以内</dt>
                 <dd class="col-lg-10 col-md-9">
                     <input type="text" class="form-control"
-                        name="ad_copy" id="ad_copy"
-                        value="{{ old('ad_copy') ?? ($advertisement ? $advertisement->title_secondary : '') }}"
+                        name="copy" id="copy"
+                        value="{{ old('copy') ?? $shop->copy }}"
                         maxlength="20"
                     >
                 </dd>
                 <dt class="col-lg-2 col-md-3">40文字以内</dt>
                 <dd class="col-lg-10 col-md-9">
                     <input type="text" class="form-control"
-                        name="ad_text" id="ad_text"
-                        value="{{ old('ad_text') ?? ($advertisement ? $advertisement->description_primary : '') }}"
+                        name="short_text" id="short_text"
+                        value="{{ old('short_text') ?? $shop->short_text }}"
                         maxlength="40"
                     >
                 </dd>
                 <dt class="col-lg-2 col-md-3">制限なし</dt>
                 <dd class="col-lg-10 col-md-9">
                     <textarea class="form-control"
-                        name="description" id="description"
-                    >{{ old('description') ?? ($advertisement ? $advertisement->content_primary : '') }}</textarea>
+                        name="text" id="text"
+                    >{{ old('text') ?? $shop->text }}</textarea>
                 </dd>
             </dl>
         </div>

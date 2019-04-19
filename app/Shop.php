@@ -10,19 +10,15 @@ use App\FileApp\File;
 use App\FileApp\FileHolderTrait;
 use Illuminate\Database\Eloquent\Model;
 
-use Wstd\Advertisement\AdvertisableTrait;
 use Wstd\Advertisement\AdvertisableInterface;
+use App\Traits\Kitchencar\Shop\AdvertisableTrait;
 
 class Shop extends Model implements AdvertisableInterface
 {
     use AdvertisableTrait;
     use FileHolderTrait;
 
-    /*
-    protected $attributes = [
-        'status' => Values\Status::REGISTERED,
-    ];
-    //*/
+    protected $guarded = ['id'];
 
     public function genres()
     {
