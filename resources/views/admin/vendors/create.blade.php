@@ -4,16 +4,6 @@
 
 <div class="h3">事業者作成</div>
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul class="list-unstyled mb-0">
-        @foreach ($errors->all() as $message)
-        <li>{{ $message }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
 <form action="{{ route('admin.vendors.create') }}" method="post">
     @csrf
 

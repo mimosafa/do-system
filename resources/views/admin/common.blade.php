@@ -160,7 +160,11 @@
         @yield('hidden_content')
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @include('admin.includes.errors')
+
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>
