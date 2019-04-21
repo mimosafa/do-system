@@ -8,8 +8,14 @@ use Wstd\Advertisement\Values\Advertisement as Values;
 
 class Advertisement
 {
+    /**
+     * @var AdvertisableInterface
+     */
     protected $advertisable;
 
+    /**
+     * @var Wstd\Advertisement\Models\Advertisement
+     */
     protected $eloquent;
 
     /**
@@ -22,7 +28,11 @@ class Advertisement
      */
     protected $newValues = [];
 
-    protected static $valueObjectKeys = [
+    /**
+     * @var array
+     * @see Wstd\Advertisement\Values\Advertisement
+     */
+    protected static $defaultKeys = [
         'title_primary',
         'title_secondary',
         'description_primary',
@@ -40,7 +50,7 @@ class Advertisement
 
     public function __get($key)
     {
-        if (in_array($key, self::$valueObjectKeys, true)) {
+        if (in_array($key, self::$defaultKeys, true)) {
             return $this->values->$key ?? null;
         }
         if (is_array($this->values->other_values)) {
@@ -50,7 +60,7 @@ class Advertisement
 
     public function __set($key, $value)
     {
-        if (in_array($key, self::$valueObjectKeys, true)) {
+        if (in_array($key, self::$defaultKeys, true)) {
             $this->newValues[$key] = $value;
         } else {
             if (! isset($this->newValues['other_values'])) {
