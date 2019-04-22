@@ -16,10 +16,12 @@ class CreateFileHoldersTable extends Migration
         Schema::create('file_holders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('file_id');
-            $table->foreign('file_id')->references('id')->on('files');
             $table->morphs('holder');
-            $table->unsignedInteger('order')->nullable();
+            $table->string('collection', 100)->nullable();
+            $table->unsignedInteger('order')->default(0);
             $table->timestamps();
+
+            $table->foreign('file_id')->references('id')->on('files')->onDelite('cascade');
         });
     }
 
