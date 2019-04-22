@@ -3,10 +3,13 @@
 namespace Wstd\File\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FileHolder extends Model
 {
-    public function file()
+    protected $guarded = ['id'];
+
+    public function fileBelongsTo(): BelongsTo
     {
         return $this->belongsTo(File::class);
     }
