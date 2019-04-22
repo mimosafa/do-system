@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 interface HolderInterface
 {
-    public function filesMorphMany(): MorphMany;
+    public function fileHoldersMorphMany(): MorphMany;
 }

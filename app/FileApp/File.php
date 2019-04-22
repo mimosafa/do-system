@@ -2,10 +2,12 @@
 
 namespace App\FileApp;
 
-use App\FileApp\Models\File as FileModel;
-use App\FileApp\Models\FileHolder;
+# use App\FileApp\Models\File as FileModel;
+# use App\FileApp\Models\FileHolder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+
+use Wstd\File\Models\File as FileModel;
 
 class File
 {

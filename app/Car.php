@@ -5,13 +5,15 @@ namespace App;
 use App\Shop;
 use App\Vendor;
 use App\Values\Car as Values;
-use App\FileApp\File;
 use App\FileApp\FileHolderTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Car extends Model
+use Wstd\File\HolderInterface;
+use Wstd\File\HolderTrait;
+
+class Car extends Model implements HolderInterface
 {
-    use FileHolderTrait;
+    use HolderTrait;
 
     public function shops()
     {
@@ -30,8 +32,7 @@ class Car extends Model
 
     public function getImagesAttribute()
     {
-        $images = new Values\Image($this);
-        return $images->findAll();
+        return $this->filesInstance->get('car');
     }
 
     public function setUploadedFileAttribute($file)

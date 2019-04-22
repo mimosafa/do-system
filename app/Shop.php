@@ -6,17 +6,17 @@ use App\Genre;
 use App\Kitchencar;
 use App\Vendor;
 use App\Values\Shop as Values;
-use App\FileApp\File;
-use App\FileApp\FileHolderTrait;
 use Illuminate\Database\Eloquent\Model;
 
+use Wstd\File\HolderInterface;
+use Wstd\File\HolderTrait;
 use Wstd\Advertisement\AdvertisableInterface;
 use App\Traits\Kitchencar\Shop\AdvertisableTrait;
 
-class Shop extends Model implements AdvertisableInterface
+class Shop extends Model implements AdvertisableInterface, HolderInterface
 {
     use AdvertisableTrait;
-    use FileHolderTrait;
+    use HolderTrait;
 
     protected $guarded = ['id'];
 
@@ -52,8 +52,11 @@ class Shop extends Model implements AdvertisableInterface
 
     public function getImagesAttribute()
     {
+        /*
         $images = new Values\Image($this);
         return $images->findAll();
+        */
+        return $this->filesInstance->get();
     }
 
     public function setUploadedFileAttribute($file)
