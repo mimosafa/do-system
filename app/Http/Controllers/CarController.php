@@ -10,6 +10,8 @@ use App\Http\Requests\EditCar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Usecases\Car\SaveUsecase;
+
 class CarController extends Controller
 {
     public function index(Request $request)
@@ -33,65 +35,33 @@ class CarController extends Controller
 
     public function create(int $id = 0)
     {
+        $arguments = [];
         if ($id) {
-            if (!$vendor = Vendor::find($id)) {
-                abort(404);
-            }
-            $args = [
-                'vendor' => $vendor,
-                'ref' => [
-                    'url' => route('admin.vendors.show', ['id' => $id]),
-                    'text' => $vendor->name . 'の事業者詳細',
-                ],
-            ];
+            $arguments['vendor'] = Vendor::findOrFail($id);
         } else {
-            $args = [
-                'vendors' => Vendor::expandable()->get(),
-                'ref' => [
-                    'url' => route('admin.cars.index'),
-                    'text' => '車両一覧',
-                ],
-            ];
+            $arguments['vendors'] = Vendor::expandable()->get();
         }
-        return view('admin/cars/create', $args);
+        return view('admin/cars/create', $arguments);
     }
 
-    public function store(CreateCar $request)
+    public function store(CreateCar $request, SaveUsecase $usecase)
     {
-        $car = new Car();
-
-        $car->user_id = Auth::user()->id;
-        $car->vendor_id = $request->vendor_id;
-        $car->name = $request->name;
-        $car->vin = $request->vin;
-        $car->save();
-
-        return redirect()->route('admin.cars.show', ['car' => $car]);
+        return redirect()->route('admin.cars.show', [
+            'car' => $usecase($request, 0),
+        ]);
     }
 
     public function edit(int $id)
     {
-        $car = Car::find($id);
-
         return view('admin/cars/edit', [
-            'car' => $car,
+            'car' => Car::findOrFail($id),
         ]);
     }
 
-    public function update(int $id, EditCar $request)
+    public function update(int $id, EditCar $request, SaveUsecase $usecase)
     {
-        $car = Car::find($id);
-
-        $car->name = $request->name;
-        $car->vin = $request->vin;
-        $car->status = (int) $request->status;
-        if ($image = $request->image) {
-            $car->uploaded_file = $image;
-        }
-        $car->save();
-
         return redirect()->route('admin.cars.show', [
-            'car' => $car,
+            'car' => $usecase($request, $id),
         ]);
     }
 }
