@@ -10,6 +10,6 @@ class BelongsToVendorScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('vendor_id')->orderBy('order')->orderBy('status');
+        $builder->orderBy('vendor_id')->orderBy('order')->orderBy('status')->orderBy('id');
     }
 }
