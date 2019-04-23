@@ -2,16 +2,14 @@
 
 namespace App;
 
-use App\Shop, App\Vendor,
-    App\Values\Car as Values;
 use Illuminate\Database\Eloquent\Model;
-
-use Wstd\File\HolderTrait;
+use App\Shop, App\Vendor, App\Values\Car\Status;
+use App\Traits\Kitchencar\Car\HasCarImagesTrait;
 use Wstd\File\HolderInterface;
 
 class Car extends Model implements HolderInterface
 {
-    use HolderTrait;
+    use HasCarImagesTrait;
 
     public function shops()
     {
@@ -23,19 +21,9 @@ class Car extends Model implements HolderInterface
         return $this->belongsTo(Vendor::class);
     }
 
-    public function getStatusAttribute(): Values\Status
+    public function getStatusAttribute(): Status
     {
-        return new Values\Status($this->attributes['status']);
-    }
-
-    public function getImagesAttribute()
-    {
-        return $this->getFiles('car');
-    }
-
-    public function setUploadedFileAttribute($file)
-    {
-        $this->addFile($file, 'car', 'public');
+        return new Status($this->attributes['status']);
     }
 
     public function scopeInStatus($query, array $status)

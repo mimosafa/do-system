@@ -2,19 +2,17 @@
 
 namespace App;
 
-use App\Genre, App\Kitchencar,
-    App\Vendor, App\Values\Shop as Values;
 use Illuminate\Database\Eloquent\Model;
-
-use Wstd\File\HolderInterface;
-use Wstd\File\HolderTrait;
-use Wstd\Advertisement\AdvertisableInterface;
+use App\Genre, App\Kitchencar, App\Vendor, App\Values\Shop\Status;
+use App\Traits\Kitchencar\Item\HasItemImagesTrait;
 use App\Traits\Kitchencar\Shop\AdvertisableTrait;
+use Wstd\File\HolderInterface;
+use Wstd\Advertisement\AdvertisableInterface;
 
 class Shop extends Model implements AdvertisableInterface, HolderInterface
 {
     use AdvertisableTrait;
-    use HolderTrait;
+    use HasItemImagesTrait;
 
     protected $guarded = ['id'];
 
@@ -33,9 +31,9 @@ class Shop extends Model implements AdvertisableInterface, HolderInterface
         return $this->belongsTo(Vendor::class);
     }
 
-    public function getStatusAttribute(): Values\Status
+    public function getStatusAttribute(): Status
     {
-        return new Values\Status($this->attributes['status']);
+        return new Status($this->attributes['status']);
     }
 
     public function getRawNameAttribute()
@@ -46,16 +44,6 @@ class Shop extends Model implements AdvertisableInterface, HolderInterface
     public function getNameAttribute()
     {
         return $this->getRawNameAttribute() ?: $this->vendor->name;
-    }
-
-    public function getImagesAttribute()
-    {
-        return $this->getFiles('shop');
-    }
-
-    public function setUploadedFileAttribute($file)
-    {
-        $this->addFile($file, 'shop', 'public');
     }
 
     public function scopeInStatus($query, array $status)
