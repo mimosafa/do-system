@@ -2,10 +2,8 @@
 
 namespace App;
 
-use App\Genre;
-use App\Kitchencar;
-use App\Vendor;
-use App\Values\Shop as Values;
+use App\Genre, App\Kitchencar,
+    App\Vendor, App\Values\Shop as Values;
 use Illuminate\Database\Eloquent\Model;
 
 use Wstd\File\HolderInterface;
@@ -52,18 +50,12 @@ class Shop extends Model implements AdvertisableInterface, HolderInterface
 
     public function getImagesAttribute()
     {
-        /*
-        $images = new Values\Image($this);
-        return $images->findAll();
-        */
-        return $this->filesInstance->get();
+        return $this->getFiles('shop');
     }
 
     public function setUploadedFileAttribute($file)
     {
-        $images = new Values\Image($this);
-        $images->store($file);
-        return $this;
+        $this->addFile($file, 'shop', 'public');
     }
 
     public function scopeInStatus($query, array $status)

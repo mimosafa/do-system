@@ -2,14 +2,12 @@
 
 namespace App;
 
-use App\Shop;
-use App\Vendor;
-use App\Values\Car as Values;
-use App\FileApp\FileHolderTrait;
+use App\Shop, App\Vendor,
+    App\Values\Car as Values;
 use Illuminate\Database\Eloquent\Model;
 
-use Wstd\File\HolderInterface;
 use Wstd\File\HolderTrait;
+use Wstd\File\HolderInterface;
 
 class Car extends Model implements HolderInterface
 {
@@ -32,14 +30,12 @@ class Car extends Model implements HolderInterface
 
     public function getImagesAttribute()
     {
-        return $this->filesInstance->get('car');
+        return $this->getFiles('car');
     }
 
     public function setUploadedFileAttribute($file)
     {
-        $images = new Values\Image($this);
-        $images->store($file);
-        return $this;
+        $this->addFile($file, 'car', 'public');
     }
 
     public function scopeInStatus($query, array $status)

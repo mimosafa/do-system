@@ -11,21 +11,6 @@ use Wstd\File\Models\FileHolder;
 trait HolderTrait
 {
     /**
-     * @var string
-     */
-    # protected $disk = 'public';
-
-    /**
-     * @var string
-     */
-    # protected $dir = 'files';
-
-    /**
-     * @var string
-     */
-    # protected $collection = '';
-
-    /**
      * @var File
      */
     protected $filesInstance;
@@ -38,18 +23,17 @@ trait HolderTrait
     protected static function bootHolderTrait()
     {
         static::retrieved(function($model) {
-            $collection = $model->collection ?? '';
-            $dir = $model->dir ?? '';
-            $disk = $model->disk ?? '';
-            $model->filesInstance = new File($model, $collection, $dir, $disk);
+            $model->filesInstance = new File($model);
         });
     }
 
-    /**
-     * Property `files`
-     */
-    public function getFilesAttribute()
+    public function getFiles(string $collection = '')
     {
-        return $this->filesInstance->get();
+        return $this->filesInstance->get($collection);
+    }
+
+    public function addFile(UploadedFile $file, string $collection = '', string $disk = '')
+    {
+        $this->filesInstance->add($file, $collection, $disk);
     }
 }
