@@ -2,11 +2,9 @@
 
 @section('main')
 
-<div class="h3">事業者詳細</div>
-
-<div class="card mb-3">
-    <div class="card-header">事業者名</div>
-    <div class="card-body">{{ $vendor->name }}</div>
+<div class="h3">
+    事業者詳細
+    <small>[ {{ $vendor->name }} ]</small>
 </div>
 
 <div class="card mb-3">
@@ -113,21 +111,26 @@
 @endsection
 
 @section('sidebar')
-<div class="h3">管理情報</div>
+<div class="h3">
+    管理情報
+    <small class="h6">
+        <a href="#">編集</a>
+    </small>
+</div>
 <div class="card bg-light mb-3">
     <table class="table mb-0">
         <tbody>
             <tr>
                 <th>事業者ID</th>
-                <td>
-                    {{ $vendor->id }}
-                </td>
+                <td>{{ $vendor->id }}</td>
+            </tr>
+            <tr>
+                <th>事業者名</th>
+                <td>{{ $vendor->name }}</td>
             </tr>
             <tr>
                 <th>状態</th>
-                <td>
-                    {{ $vendor->status->getLabel() }}
-                </td>
+                <td>{{ $vendor->status->getLabel() }}</td>
             </tr>
         </tbody>
     </table>
