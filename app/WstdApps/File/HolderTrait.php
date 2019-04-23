@@ -5,7 +5,7 @@ namespace Wstd\File;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use Wstd\File\File;
+use Wstd\File\Files;
 use Wstd\File\Models\FileHolder;
 
 trait HolderTrait
@@ -23,7 +23,7 @@ trait HolderTrait
     protected static function bootHolderTrait()
     {
         static::retrieved(function($model) {
-            $model->filesInstance = new File($model);
+            $model->filesInstance = new Files($model);
         });
     }
 

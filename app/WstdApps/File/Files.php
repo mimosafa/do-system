@@ -4,10 +4,10 @@ namespace Wstd\File;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Wstd\File\HolderInterface;
-use Wstd\File\Models\File as FileModel;
+use Wstd\File\Models\File;
 use Wstd\File\Models\FileHolder;
 
-class File
+class Files
 {
     /**
      * @var HolderInterface
@@ -53,7 +53,7 @@ class File
 
     protected function storeUploadedFile(UploadedFile $uploaded_file, string $collection, string $disk)
     {
-        $file = new FileModel();
+        $file = new File();
         $file->disk = $disk;
         $file->dir = $collection;
         $file->uploaded_file = $uploaded_file;
