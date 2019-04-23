@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Genre, App\Kitchencar, App\Vendor, App\Values\Shop\Status;
+use App\Genre, App\Kitchencar, App\Values\Shop\Status;
+use App\Traits\BelongsToVendorTrait;
 use App\Traits\Kitchencar\Item\HasItemImagesTrait;
 use App\Traits\Kitchencar\Shop\AdvertisableTrait;
 use Wstd\File\HolderInterface;
@@ -11,8 +12,9 @@ use Wstd\Advertisement\AdvertisableInterface;
 
 class Shop extends Model implements AdvertisableInterface, HolderInterface
 {
-    use AdvertisableTrait;
-    use HasItemImagesTrait;
+    use BelongsToVendorTrait,
+        AdvertisableTrait,
+        HasItemImagesTrait;
 
     protected $guarded = ['id'];
 
@@ -24,11 +26,6 @@ class Shop extends Model implements AdvertisableInterface, HolderInterface
     public function kitchencars()
     {
         return $this->hasMany(Kitchencar::class);
-    }
-
-    public function vendor()
-    {
-        return $this->belongsTo(Vendor::class);
     }
 
     public function getStatusAttribute(): Status

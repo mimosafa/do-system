@@ -15,7 +15,7 @@ class CarController extends Controller
     public function index(Request $request)
     {
         $status = $request->status ?? Status::getIndexableValues();
-        $cars = Car::inStatus($status)->orderBy('vendor_id', 'asc')->get();
+        $cars = Car::inStatus($status)->get();
 
         return view('admin.cars.index', [
             'cars' => $cars,

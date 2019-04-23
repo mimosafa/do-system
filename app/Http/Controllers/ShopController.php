@@ -19,7 +19,7 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         $status = $request->status ?? Status::getIndexableValues();
-        $shops = Shop::inStatus($status)->orderBy('vendor_id', 'asc')->get();
+        $shops = Shop::inStatus($status)->get();
 
         return view('admin.shops.index', [
             'shops' => $shops,

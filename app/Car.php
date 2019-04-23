@@ -3,22 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Shop, App\Vendor, App\Values\Car\Status;
+use App\Shop, App\Values\Car\Status;
+use App\Traits\BelongsToVendorTrait;
 use App\Traits\Kitchencar\Car\HasCarImagesTrait;
 use Wstd\File\HolderInterface;
 
 class Car extends Model implements HolderInterface
 {
-    use HasCarImagesTrait;
+    use BelongsToVendorTrait,
+        HasCarImagesTrait;
 
     public function shops()
     {
         return $this->hasMany(Shop::class);
-    }
-
-    public function vendor()
-    {
-        return $this->belongsTo(Vendor::class);
     }
 
     public function getStatusAttribute(): Status
