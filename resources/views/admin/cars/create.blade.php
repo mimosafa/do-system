@@ -42,7 +42,7 @@
 
     <div class="text-right">
         <div class="btn-group">
-            <a href="{{ $ref['url'] }}" class="btn btn-light">キャンセル</a>
+            <a href="{{ url()->previous() }}" class="btn btn-light">キャンセル</a>
             <button type="submit" class="btn btn-primary">作成</button>
         </div>
     </div>
@@ -53,8 +53,8 @@
 
 @section('sidebar')
 <nav class="nav flex-column">
-    <a class="nav-link" href="{{ $ref['url'] }}">
-        {{ $ref['text'] }}に戻る
+    <a class="nav-link" href="{{ url()->previous() }}">
+        戻る
     </a>
 </nav>
 @endsection

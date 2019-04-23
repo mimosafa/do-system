@@ -94,6 +94,39 @@ class ShopsTableSeeder extends Seeder
                 'created_at' => '2019-04-18 20:45:00',
                 'updated_at' => '2019-04-18 20:45:13',
             ),
+            7 => 
+            array (
+                'id' => 8,
+                'user_id' => 1,
+                'vendor_id' => 42,
+                'name' => 'yummy-E',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-19 21:05:33',
+                'updated_at' => '2019-04-22 10:27:44',
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'user_id' => 1,
+                'vendor_id' => 132,
+                'name' => '一誠堂',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-19 21:07:06',
+                'updated_at' => '2019-04-19 21:16:28',
+            ),
+            9 => 
+            array (
+                'id' => 10,
+                'user_id' => 1,
+                'vendor_id' => 100,
+                'name' => 'Julie\'s spices',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-19 21:08:01',
+                'updated_at' => '2019-04-19 21:16:08',
+            ),
         ));
         
         

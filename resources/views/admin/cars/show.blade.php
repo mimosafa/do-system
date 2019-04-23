@@ -18,9 +18,9 @@
     <div class="card-header">車両写真</div>
     <div class="card-body">
         @if ($car->images->isNotEmpty())
-        <ul class="list-unstyled mb-0">
+        <ul class="list-unstyled mb-0 row">
             @foreach ($car->images as $image)
-            <li>
+            <li class="col-md-4">
                 <figure class="figure">
                   <img src="{{ $image->url }}" class="figure-img img-fluid rounded" alt="">
                   <figcaption class="figure-caption">{{ $image->client_name }}</figcaption>
