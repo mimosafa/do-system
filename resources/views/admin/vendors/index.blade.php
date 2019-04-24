@@ -15,7 +15,7 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="list-advenced-filter">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="" method="get" class="py-3">
+                <form action="" method="get">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">フィルター</h4>

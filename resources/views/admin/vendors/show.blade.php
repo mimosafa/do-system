@@ -7,6 +7,43 @@
 @stop
 
 @section('content')
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit-vendor">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('admin.vendors.edit', ['id' => $vendor->id]) }}" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">事業者情報を編集</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">事業者名</label>
+                            <input type="text" class="form-control"
+                                name="name" id="name"
+                                value="{{ old('name') ?? $vendor->name }}"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="status">状態</label>
+                            <select name="status" id="status" class="form-control">
+                                @foreach($vendor->status::values() as $status)
+                                <option value="{{ $status->getValue() }}" {{ $status->equals($vendor->status) ? 'selected' : '' }}>
+                                    {{ $status->getLabel() }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                        <button type="submit" class="btn btn-primary">更新</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div class="row">
         <div class="col-md-3">
 
@@ -29,7 +66,7 @@
                             <span class="pull-right">{{ $vendor->status->getLabel() }}</span>
                         </li>
                     </ul>
-                    <a href="{{ route('admin.vendors.edit', ['id' => $vendor->id]) }}"
+                    <a href="#" data-toggle="modal" data-target="#edit-vendor"
                         class="btn btn-primary btn-block btn-sm">
                         <b>編集する</b>
                     </a>
