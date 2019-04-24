@@ -108,51 +108,39 @@ return [
     */
 
     'menu' => [
-        '出店者情報',
+        '管理情報',
         [
-            'text' => '事業者',
-            'icon' => 'users',
+            'text' => '出店リスト',
+            'url'  => 'admin/kitchencars',
+            'icon' => 'truck',
+        ],
+        [
+            'text' => '出店者情報',
+            'icon' => 'database',
             'submenu' => [
                 [
                     'text' => '事業者一覧',
                     'url'  => 'admin/vendors',
-                    'icon' => 'list',
+                    'icon' => 'users',
+                ],
+                [
+                    'text' => '車両一覧',
+                    'url'  => 'admin/cars',
+                    'icon' => 'car',
+                ],
+                [
+                    'text' => '店舗一覧',
+                    'url'  => 'admin/shops',
+                    'icon' => 'coffee',
+                ],
+                [
+                    'text' => '商品一覧',
+                    'url'  => '#',
+                    'icon' => 'cutlery',
                 ],
                 [
                     'text' => '新規追加',
                     'url'  => 'admin/vendors/create',
-                    'icon' => 'plus',
-                ],
-            ],
-        ],
-        [
-            'text' => '車両',
-            'icon' => 'truck',
-            'submenu' => [
-                [
-                    'text' => '車両一覧',
-                    'url'  => 'admin/cars',
-                    'icon' => 'list',
-                ],
-                [
-                    'text' => '新規追加',
-                    'url'  => 'admin/cars/create',
-                    'icon' => 'plus',
-                ],
-            ],
-        ],
-        [
-            'text' => '店舗',
-            'icon' => 'coffee',
-            'submenu' => [
-                [
-                    'text' => '店舗一覧',
-                    'url'  => 'admin/shops',
-                    'icon' => 'list',
-                ],
-                [
-                    'text' => '新規追加',
-                    'url'  => 'admin/shops/create',
                     'icon' => 'plus',
                 ],
             ],

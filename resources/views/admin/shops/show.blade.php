@@ -16,10 +16,12 @@
                         style="width: 100px; height: 100px; margin: 0 auto; line-height: 100px;"
                     >No Image</span>
                     <h3 class="text-center">
+                        <i class="fa fa-coffee"></i>
                         {{ $shop->name }}
                     </h3>
                     <p class="text-muted text-center">
                         <a href="{{ route('admin.vendors.show', ['id' => $shop->vendor->id]) }}">
+                            <i class="fa fa-user"></i>
                             {{ $shop->vendor->name }}
                         </a>
                     </p>
@@ -67,10 +69,10 @@
 
             <div class="nav-tabs-custom" id="shop-contents">
 
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs nav-justified">
                     <li>
                         <a href="#shop-kitchencars" data-toggle="tab">
-                            <i class="fa fa-list"></i> 出店リスト
+                            <i class="fa fa-truck"></i> 出店リスト
                         </a>
                     </li>
                     <li>

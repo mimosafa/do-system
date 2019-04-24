@@ -16,6 +16,7 @@
                         style="width: 100px; height: 100px; margin: 0 auto; line-height: 100px;"
                     >No Image</span>
                     <h3 class="text-center">
+                        <i class="fa fa-user"></i>
                         {{ $vendor->name }}
                     </h3>
                     <ul class="list-group list-group-unbordered">
@@ -41,15 +42,20 @@
 
             <div class="nav-tabs-custom" id="vendor-contents">
 
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs nav-justified">
                     <li>
                         <a href="#vendor-cars" data-toggle="tab">
-                            <i class="fa fa-truck"></i> 車両
+                            <i class="fa fa-car"></i> 車両
                         </a>
                     </li>
                     <li>
                         <a href="#vendor-shops" data-toggle="tab">
                             <i class="fa fa-coffee"></i> 店舗
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#vendor-items" data-toggle="tab">
+                            <i class="fa fa-cutlery"></i> 商品
                         </a>
                     </li>
                 </ul>
@@ -141,6 +147,10 @@
                             href="{{ route('admin.shops.createWith', ['id' => $vendor->id]) }}"
                         >店舗を追加する</a>
                         @endif
+                    </div>
+
+                    <div class="tab-pane" id="vendor-items">
+                        <p class="text-center">商品の登録はありません。</p>
                     </div>
 
                 </div>
