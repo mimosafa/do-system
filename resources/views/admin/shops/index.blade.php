@@ -64,9 +64,9 @@
                     <tr class="table-status-{{ $shop->status->getSlug() }}">
                         <td>
                             @if ($shop->images->isNotEmpty())
-                            <a href="#" style="background-image:url({{ $shop->images->first()->url }})" class="thumbImage rounded"></a>
+                            <a href="#" style="background-image:url({{ $shop->images->first()->url }})" class="thumbImage"></a>
                             @else
-                            <span class="noImage rounded">No Image</span>
+                            <span class="noImage">No Image</span>
                             @endif
                         </td>
                         <td>
