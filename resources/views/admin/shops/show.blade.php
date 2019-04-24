@@ -16,7 +16,7 @@
                         style="width: 100px; height: 100px; margin: 0 auto; line-height: 100px;"
                     >No Image</span>
                     <h3 class="text-center">
-                        <i class="fa fa-coffee"></i>
+                        <i class="fa fa-coffee text-muted"></i>
                         {{ $shop->name }}
                     </h3>
                     <p class="text-muted text-center">

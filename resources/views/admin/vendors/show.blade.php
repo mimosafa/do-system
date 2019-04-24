@@ -16,7 +16,7 @@
                         style="width: 100px; height: 100px; margin: 0 auto; line-height: 100px;"
                     >No Image</span>
                     <h3 class="text-center">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-user text-muted"></i>
                         {{ $vendor->name }}
                     </h3>
                     <ul class="list-group list-group-unbordered">
