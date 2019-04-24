@@ -13,11 +13,11 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'Do System',
 
     'title_prefix' => '',
 
-    'title_postfix' => '',
+    'title_postfix' => ' | Do System',
 
     /*
     |--------------------------------------------------------------------------
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Do</b>System',
 
-    'logo_mini' => '<b>A</b>LT',
+    'logo_mini' => '<b>Do</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +58,7 @@ return [
     |
     */
 
-    'layout' => null,
+    'layout' => 'fixed',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'logout',
 
@@ -108,80 +108,54 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        '出店者情報',
         [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'url'  => 'admin/settings',
-            'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
-        [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
+            'text' => '事業者',
+            'icon' => 'users',
             'submenu' => [
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => '事業者一覧',
+                    'url'  => 'admin/vendors',
+                    'icon' => 'list',
                 ],
                 [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => '新規追加',
+                    'url'  => 'admin/vendors/create',
+                    'icon' => 'plus',
                 ],
             ],
         ],
-        'LABELS',
         [
-            'text'       => 'Important',
-            'icon_color' => 'red',
+            'text' => '車両',
+            'icon' => 'truck',
+            'submenu' => [
+                [
+                    'text' => '車両一覧',
+                    'url'  => 'admin/cars',
+                    'icon' => 'list',
+                ],
+                [
+                    'text' => '新規追加',
+                    'url'  => 'admin/cars/create',
+                    'icon' => 'plus',
+                ],
+            ],
         ],
         [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
+            'text' => '店舗',
+            'icon' => 'coffee',
+            'submenu' => [
+                [
+                    'text' => '店舗一覧',
+                    'url'  => 'admin/shops',
+                    'icon' => 'list',
+                ],
+                [
+                    'text' => '新規追加',
+                    'url'  => 'admin/shops/create',
+                    'icon' => 'plus',
+                ],
+            ],
         ],
     ],
 
@@ -219,6 +193,6 @@ return [
     'plugins' => [
         'datatables' => true,
         'select2'    => true,
-        'chartjs'    => true,
+        'chartjs'    => false,
     ],
 ];
