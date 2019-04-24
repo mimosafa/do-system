@@ -97,6 +97,8 @@
 
 @section('js')
     <script>
-        $('#shopsTable').DataTable();
+        $('#shopsTable').DataTable({
+            ordering: false,
+        });
     </script>
 @stop
