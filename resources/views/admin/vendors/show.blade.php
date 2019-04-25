@@ -17,6 +17,16 @@
                         <h4 class="modal-title">事業者情報を編集</h4>
                     </div>
                     <div class="modal-body">
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <ul class="list-unstyled">
+                                @foreach ($errors->all() as $message)
+                                <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         <div class="form-group">
                             <label for="name">事業者名</label>
                             <input type="text" class="form-control"
@@ -201,5 +211,13 @@
 @section('js')
     <script>
         $('#vendor-contents a:first').tab('show');
+        if (location.hash) {
+            switch (location.hash) {
+                case '#edit-vendor':
+                    $('#edit-vendor').modal('show');
+                    break;
+            }
+            history.replaceState('', document.title, window.location.pathname);
+        }
     </script>
 @stop
