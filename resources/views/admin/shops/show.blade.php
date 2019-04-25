@@ -66,6 +66,54 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit-advertisements">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('admin.shops.edit', ['id' => $shop->id]) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="name" value="{{ $shop->name }}">
+                    <input type="hidden" name="status" value="{{ $shop->status }}">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">店舗紹介文を編集</h4>
+                    </div>
+                    <div class="modal-body">
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <ul class="list-unstyled">
+                                @foreach ($errors->all() as $message)
+                                <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <div class="form-group">
+                            <label for="name">20文字以内</label>
+                            <input type="text" class="form-control" name="copy" id="copy"
+                                value="{{ old('copy') ?? $shop->copy }}" maxlength="20">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">40文字以内</label>
+                            <input type="text" class="form-control" name="short_text" id="short_text"
+                                value="{{ old('short_text') ?? $shop->short_text }}" maxlength="40">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">文字数制限なし</label>
+                            <textarea class="form-control"
+                                name="text" id="text"
+                            >{{ old('text') ?? $shop->text }}</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                        <button type="submit" class="btn btn-primary">更新</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div class="row">
         <div class="col-md-3">
 
@@ -130,17 +178,75 @@
 
         <div class="col-md-9">
 
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-comment"></i> 説明文
+                    </h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="box-group" id="shop-texts">
+                        <div class="panel box">
+                            <div class="box-header">
+                                <h4 class="box-title">
+                                    <a data-toggle="collapse" data-parent="#shop-texts" href="#collapseOne" aria-expanded="true" class="">
+                                        20文字以内
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                <div class="box-body">
+                                    {{ $shop->copy }}
+                                    <a href="#" data-toggle="modal" data-target="#edit-advertisements">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel box">
+                            <div class="box-header">
+                                <h4 class="box-title">
+                                    <a data-toggle="collapse" data-parent="#shop-texts" href="#collapseTwo" class="collapsed" aria-expanded="false">
+                                        40文字以内
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                <div class="box-body">
+                                    {{ $shop->short_text }}
+                                    <a href="#" data-toggle="modal" data-target="#edit-advertisements">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel box">
+                            <div class="box-header">
+                                <h4 class="box-title">
+                                    <a data-toggle="collapse" data-parent="#shop-texts" href="#collapseThree" class="collapsed" aria-expanded="false">
+                                        制限なし
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                <div class="box-body">
+                                    {{ $shop->text }}
+                                    <a href="#" data-toggle="modal" data-target="#edit-advertisements">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.box-body -->
+            </div>
+
             <div class="nav-tabs-custom" id="shop-contents">
 
                 <ul class="nav nav-tabs nav-justified">
                     <li>
                         <a href="#shop-kitchencars" data-toggle="tab">
                             <i class="fa fa-truck"></i> 出店リスト
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#shop-advertisements" data-toggle="tab">
-                            <i class="fa fa-comment-o"></i> 説明文
                         </a>
                     </li>
                     <li>
@@ -158,17 +264,6 @@
                             class="btn btn-primary btn-sm pull-right">
                             <b>出店リスト作成</b>
                         </a>
-                    </div>
-
-                    <div class="tab-pane" id="shop-advertisements">
-                        <dl class="">
-                            <dt class="">20文字以内</dt>
-                            <dd class="">{{ $shop->copy }}</dd>
-                            <dt class="">40文字以内</dt>
-                            <dd class="">{{ $shop->short_text }}</dd>
-                            <dt class="">制限なし</dt>
-                            <dd class="">{{ $shop->text }}</dd>
-                        </dl>
                     </div>
 
                     <div class="tab-pane" id="shop-photos">
