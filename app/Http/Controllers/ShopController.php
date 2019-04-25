@@ -29,8 +29,20 @@ class ShopController extends Controller
 
     public function show(int $id)
     {
+        $shop = Shop::findOrFail($id);
+
+        $genre_ids = [];
+        $genres = $shop->genres;
+        if ($genres->isNotEmpty()) {
+            foreach ($genres as $genre) {
+                $genre_ids[] = $genre->id;
+            }
+        }
+
         return view('admin/shops/show', [
-            'shop' => Shop::findOrFail($id),
+            'shop' => $shop,
+            'genre_ids' => $genre_ids,
+            'all_genres' => Genre::all(),
         ]);
     }
 

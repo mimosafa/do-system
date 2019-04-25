@@ -110,11 +110,11 @@ class ShopsTableSeeder extends Seeder
                 'id' => 9,
                 'user_id' => 1,
                 'vendor_id' => 132,
-                'name' => '一誠堂',
+                'name' => '東京バランスランチ',
                 'status' => 3,
                 'order' => 0,
                 'created_at' => '2019-04-19 21:07:06',
-                'updated_at' => '2019-04-19 21:16:28',
+                'updated_at' => '2019-04-23 15:30:49',
             ),
             9 => 
             array (
@@ -126,6 +126,50 @@ class ShopsTableSeeder extends Seeder
                 'order' => 0,
                 'created_at' => '2019-04-19 21:08:01',
                 'updated_at' => '2019-04-19 21:16:08',
+            ),
+            10 => 
+            array (
+                'id' => 11,
+                'user_id' => 1,
+                'vendor_id' => 156,
+                'name' => '栄屋',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 15:50:45',
+                'updated_at' => '2019-04-23 15:51:16',
+            ),
+            11 => 
+            array (
+                'id' => 12,
+                'user_id' => 1,
+                'vendor_id' => 214,
+                'name' => 'ビストロカルロス',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 18:27:48',
+                'updated_at' => '2019-04-23 18:28:07',
+            ),
+            12 => 
+            array (
+                'id' => 13,
+                'user_id' => 1,
+                'vendor_id' => 355,
+                'name' => 'Vegetable Kitchen 野いえ',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 18:32:22',
+                'updated_at' => '2019-04-23 18:32:33',
+            ),
+            13 => 
+            array (
+                'id' => 14,
+                'user_id' => 1,
+                'vendor_id' => 11,
+                'name' => 'アジアンランチ',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 18:33:56',
+                'updated_at' => '2019-04-23 18:34:09',
             ),
         ));
         

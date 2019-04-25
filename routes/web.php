@@ -22,6 +22,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 // 管理者専用ページ
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
 
+    Route::get('/', function() {
+        return view('admin/home');
+    });
+
     // 事業者|車両|店舗 から出店者リスト追加
     Route::get('{models}/{id}/kitchencars/create', 'KitchencarController@create')->name('kitchencars.createWith');
 
@@ -94,3 +98,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
     Route::post('vendors/{id}/cars/create', 'CarController@store');
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
