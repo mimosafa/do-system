@@ -7,6 +7,65 @@
 @stop
 
 @section('content')
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit-shop">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('admin.shops.edit', ['id' => $shop->id]) }}" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">店舗情報を編集</h4>
+                    </div>
+                    <div class="modal-body">
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <ul class="list-unstyled">
+                                @foreach ($errors->all() as $message)
+                                <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <div class="form-group">
+                            <label for="name">店舗名</label>
+                            <input type="text" class="form-control"
+                                name="name" id="name"
+                                value="{{ old('name') ?? $shop->name }}"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="status">状態</label>
+                            <select name="status" id="status" class="form-control">
+                                @foreach($shop->status::values() as $status)
+                                <option value="{{ $status->getValue() }}" {{ $status->equals($shop->status) ? 'selected' : '' }}>
+                                    {{ $status->getLabel() }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="status" style="display: block;">ジャンル</label>
+                            @forelse ($all_genres as $genre)
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="genres[]" value="{{ $genre->id }}"
+                                    {{ in_array($genre->id, $genre_ids) ? 'checked' : '' }}
+                                > {{ $genre->name }}
+                            </label>
+                            @empty
+                            まだジャンルは作成されていません。<a href="{{ route('admin.genres.index') }}">作成しますか？</a>
+                            @endforelse
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                        <button type="submit" class="btn btn-primary">更新</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div class="row">
         <div class="col-md-3">
 
@@ -25,41 +84,45 @@
                             {{ $shop->vendor->name }}
                         </a>
                     </p>
-                    <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>ID</b>
-                            <span class="pull-right">{{ $shop->id }}</span>
-                        </li>
-                        <li class="list-group-item">
-                            <b>状態</b>
-                            <span class="pull-right">{{ $shop->status->getLabel() }}</span>
-                        </li>
-                    </ul>
-                    <a href="{{ route('admin.shops.edit', ['id' => $shop->id]) }}"
+                    <table class="table" style="margin-bottom: 20px; border-bottom: 1px solid #ddd;">
+                        <tbody>
+                            <tr>
+                                <th style="border-color: #ddd; white-space: nowrap;">
+                                    ID
+                                </th>
+                                <td style="border-color: #ddd; text-align: right;">
+                                    {{ $shop->id }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="border-color: #ddd; white-space: nowrap;">
+                                    状態
+                                </th>
+                                <td style="border-color: #ddd; text-align: right;">
+                                    {{ $shop->status->getLabel() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="border-color: #ddd; white-space: nowrap;">
+                                    ジャンル
+                                </th>
+                                <td style="border-color: #ddd; text-align: right;">
+                                    @if ($shop->genres->isNotEmpty())
+                                        @foreach ($shop->genres as $genre)
+                                        <a href="#" class="">{{ $genre->name }}</a>
+                                        @if (! $loop->last)
+                                        <span>, </span>
+                                        @endif
+                                        @endforeach
+                                    @endif
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" data-toggle="modal" data-target="#edit-shop"
                         class="btn btn-primary btn-block btn-sm">
                         <b>編集する</b>
                     </a>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="box-body">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">ジャンル</h3>
-                    </div>
-                    <div class="box-body">
-                        @if ($shop->genres->isNotEmpty())
-                        <div>
-                            @foreach ($shop->genres as $genre)
-                            <a href="#" class="btn btn-link">
-                                {{ $genre->name }}
-                            </a>
-                            @endforeach
-                        </div>
-                        @else
-                        ジャンルは登録されていません。
-                        @endif
-                    </div>
                 </div>
             </div>
 
@@ -130,5 +193,13 @@
 @section('js')
     <script>
         $('#shop-contents a:first').tab('show');
+        if (location.hash) {
+            switch (location.hash) {
+                case '#edit-shop':
+                    $('#edit-shop').modal('show');
+                    break;
+            }
+            history.replaceState('', document.title, window.location.pathname);
+        }
     </script>
 @stop

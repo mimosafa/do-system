@@ -35,4 +35,9 @@ class EditShop extends CreateShop
             'image' => 'file|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
+
+    protected function getRedirectUrl()
+    {
+        return parent::getRedirectUrl() . '#edit-shop';
+    }
 }

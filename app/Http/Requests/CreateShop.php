@@ -26,7 +26,7 @@ class CreateShop extends FormRequest
     {
         return [
             'vendor_id' => 'required|integer',
-            'name' => 'max:100|nullable',
+            'name' => 'required|max:100|nullable',
             'copy' => 'max:30|nullable',
             'short_text' => 'max:80|nullable',
             'text' => 'nullable',
