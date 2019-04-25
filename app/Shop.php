@@ -2,21 +2,19 @@
 
 namespace App;
 
-use App\Genre;
-use App\Kitchencar;
-use App\Vendor;
-use App\Values\Shop as Values;
-use App\FileApp\File;
-use App\FileApp\FileHolderTrait;
 use Illuminate\Database\Eloquent\Model;
-
-use Wstd\Advertisement\AdvertisableInterface;
+use App\Genre, App\Kitchencar, App\Values\Shop\Status;
+use App\Traits\BelongsToVendorTrait;
+use App\Traits\Kitchencar\Item\HasItemImagesTrait;
 use App\Traits\Kitchencar\Shop\AdvertisableTrait;
+use Wstd\File\HolderInterface;
+use Wstd\Advertisement\AdvertisableInterface;
 
-class Shop extends Model implements AdvertisableInterface
+class Shop extends Model implements AdvertisableInterface, HolderInterface
 {
-    use AdvertisableTrait;
-    use FileHolderTrait;
+    use BelongsToVendorTrait,
+        AdvertisableTrait,
+        HasItemImagesTrait;
 
     protected $guarded = ['id'];
 
@@ -30,14 +28,9 @@ class Shop extends Model implements AdvertisableInterface
         return $this->hasMany(Kitchencar::class);
     }
 
-    public function vendor()
+    public function getStatusAttribute(): Status
     {
-        return $this->belongsTo(Vendor::class);
-    }
-
-    public function getStatusAttribute(): Values\Status
-    {
-        return new Values\Status($this->attributes['status']);
+        return new Status($this->attributes['status']);
     }
 
     public function getRawNameAttribute()
@@ -48,19 +41,6 @@ class Shop extends Model implements AdvertisableInterface
     public function getNameAttribute()
     {
         return $this->getRawNameAttribute() ?: $this->vendor->name;
-    }
-
-    public function getImagesAttribute()
-    {
-        $images = new Values\Image($this);
-        return $images->findAll();
-    }
-
-    public function setUploadedFileAttribute($file)
-    {
-        $images = new Values\Image($this);
-        $images->store($file);
-        return $this;
     }
 
     public function scopeInStatus($query, array $status)

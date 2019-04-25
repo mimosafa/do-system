@@ -90,9 +90,9 @@
         }
     </style>
 </head>
-<body>
+<body class="pt-5">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -160,7 +160,11 @@
         @yield('hidden_content')
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @include('admin.includes.errors')
+
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>

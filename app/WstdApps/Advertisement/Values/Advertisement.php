@@ -96,13 +96,20 @@ final class Advertisement
         ?array $other_values = null
     )
     {
-        $this->title_primary = isset($title_primary) ? static::strFilter($title_primary, (int) self::$titleLength) : null;
-        $this->title_secondary = isset($title_secondary) ? static::strFilter($title_secondary, (int) self::$titleLength) : null;
-        $this->description_primary = isset($description_primary) ? static::strFilter($description_primary, (int) self::$descriptionLength) : null;
-        $this->description_secondary = isset($description_secondary) ? static::strFilter($description_secondary, (int) self::$descriptionLength) : null;
-        $this->content_primary = isset($content_primary) ? static::strFilter($content_primary, (int) self::$contentLength) : null;
-        $this->content_secondary = isset($content_secondary) ? static::strFilter($content_secondary, (int) self::$contentLength) : null;
-        $this->other_values = isset($other_values) ? static::otherValuesFilter($other_values) : null;
+        $this->title_primary = isset($title_primary)
+            ? static::strFilter($title_primary, (int) self::$titleLength) : null;
+        $this->title_secondary = isset($title_secondary)
+            ? static::strFilter($title_secondary, (int) self::$titleLength) : null;
+        $this->description_primary = isset($description_primary)
+            ? static::strFilter($description_primary, (int) self::$descriptionLength) : null;
+        $this->description_secondary = isset($description_secondary)
+            ? static::strFilter($description_secondary, (int) self::$descriptionLength) : null;
+        $this->content_primary = isset($content_primary)
+            ? static::strFilter($content_primary, (int) self::$contentLength) : null;
+        $this->content_secondary = isset($content_secondary)
+            ? static::strFilter($content_secondary, (int) self::$contentLength) : null;
+        $this->other_values = isset($other_values)
+            ? static::otherValuesFilter($other_values) : null;
     }
 
     /**
@@ -118,42 +125,6 @@ final class Advertisement
             return mb_strlen($string) <= $len ? $string : null;
         }
         return $string;
-    }
-
-    /**
-     * @access private
-     *
-     * @param string $title
-     * @return string|null
-     */
-    private static function titleFilter(string $title): ?string
-    {
-        $len = (int) static::$titleLength;
-        return mb_strlen($title) <= $len ? $title : null;
-    }
-
-    /**
-     * @access private
-     *
-     * @param string $description
-     * @return string|null
-     */
-    private static function descriptionFilter(string $description): ?string
-    {
-        $len = (int) static::$descriptionLength;
-        return mb_strlen($description) <= $len ? $description : null;
-    }
-
-    /**
-     * @access private
-     *
-     * @param string $content
-     * @return string|null
-     */
-    private static function contentFilter(string $content): ?string
-    {
-        $len = (int) static::$contentLength;
-        return mb_strlen($content) <= $len ? $content : null;
     }
 
     /**

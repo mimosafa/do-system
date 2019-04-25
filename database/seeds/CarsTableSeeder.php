@@ -27,7 +27,7 @@ class CarsTableSeeder extends Seeder
                 'status' => 3,
                 'order' => 0,
                 'created_at' => '2019-04-03 08:42:36',
-                'updated_at' => '2019-04-16 18:33:55',
+                'updated_at' => '2019-04-23 15:22:46',
             ),
             1 => 
             array (
@@ -99,7 +99,7 @@ class CarsTableSeeder extends Seeder
                 'status' => 3,
                 'order' => 0,
                 'created_at' => '2019-04-04 03:58:24',
-                'updated_at' => '2019-04-09 18:57:59',
+                'updated_at' => '2019-04-23 14:42:37',
             ),
             7 => 
             array (
@@ -208,6 +208,126 @@ class CarsTableSeeder extends Seeder
                 'order' => 0,
                 'created_at' => '2019-04-18 19:56:51',
                 'updated_at' => '2019-04-18 19:57:15',
+            ),
+            16 => 
+            array (
+                'id' => 17,
+                'user_id' => 1,
+                'vendor_id' => 73,
+                'name' => 'BIG号',
+                'vin' => '足立800せ6320',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 13:55:27',
+                'updated_at' => '2019-04-23 13:55:36',
+            ),
+            17 => 
+            array (
+                'id' => 18,
+                'user_id' => 1,
+                'vendor_id' => 26,
+                'name' => 'サウスパーク',
+                'vin' => '多摩880あ980',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 14:03:02',
+                'updated_at' => '2019-04-23 14:03:22',
+            ),
+            18 => 
+            array (
+                'id' => 19,
+                'user_id' => 1,
+                'vendor_id' => 53,
+                'name' => '軽',
+                'vin' => '八王子480え7968',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 14:16:04',
+                'updated_at' => '2019-04-23 14:16:13',
+            ),
+            19 => 
+            array (
+                'id' => 20,
+                'user_id' => 1,
+                'vendor_id' => 156,
+                'name' => 'クイックデリバリー',
+                'vin' => '練馬800す7245',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 14:19:59',
+                'updated_at' => '2019-04-23 14:20:06',
+            ),
+            20 => 
+            array (
+                'id' => 21,
+                'user_id' => 1,
+                'vendor_id' => 100,
+                'name' => 'ジュリー号',
+                'vin' => '品川880あ252',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 14:58:48',
+                'updated_at' => '2019-04-23 14:59:14',
+            ),
+            21 => 
+            array (
+                'id' => 22,
+                'user_id' => 1,
+                'vendor_id' => 259,
+                'name' => 'Comida 沖縄',
+                'vin' => '川崎480い8755',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 15:12:06',
+                'updated_at' => '2019-04-23 15:12:17',
+            ),
+            22 => 
+            array (
+                'id' => 23,
+                'user_id' => 1,
+                'vendor_id' => 42,
+                'name' => 'キャリー',
+                'vin' => '品川480く8795',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 15:15:49',
+                'updated_at' => '2019-04-23 15:16:07',
+            ),
+            23 => 
+            array (
+                'id' => 24,
+                'user_id' => 1,
+                'vendor_id' => 47,
+                'name' => '和食 しの',
+                'vin' => '足立480こ7269',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 15:52:38',
+                'updated_at' => '2019-04-23 15:53:02',
+            ),
+            24 => 
+            array (
+                'id' => 25,
+                'user_id' => 1,
+                'vendor_id' => 294,
+                'name' => 'キャラバン',
+                'vin' => '足立800そ331',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 17:51:26',
+                'updated_at' => '2019-04-23 17:51:33',
+            ),
+            25 => 
+            array (
+                'id' => 26,
+                'user_id' => 1,
+                'vendor_id' => 346,
+                'name' => 'オリーブ亭',
+                'vin' => '千葉800せ7069',
+                'status' => 3,
+                'order' => 0,
+                'created_at' => '2019-04-23 18:25:36',
+                'updated_at' => '2019-04-23 18:25:42',
             ),
         ));
         

@@ -8,18 +8,17 @@ use App\Vendor;
 use App\Values\Shop\Status;
 use App\Http\Requests\CreateShop;
 use App\Http\Requests\EditShop;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use Wstd\Advertisement\Models\Advertisement;
+use App\Usecases\Shop\SaveUsecase;
 
 class ShopController extends Controller
 {
     public function index(Request $request)
     {
         $status = $request->status ?? Status::getIndexableValues();
-        $shops = Shop::inStatus($status)->orderBy('vendor_id', 'asc')->get();
+        $shops = Shop::inStatus($status)->get();
 
         return view('admin.shops.index', [
             'shops' => $shops,
@@ -32,49 +31,37 @@ class ShopController extends Controller
     {
         $shop = Shop::findOrFail($id);
 
+        $genre_ids = [];
+        $genres = $shop->genres;
+        if ($genres->isNotEmpty()) {
+            foreach ($genres as $genre) {
+                $genre_ids[] = $genre->id;
+            }
+        }
+
         return view('admin/shops/show', [
             'shop' => $shop,
+            'genre_ids' => $genre_ids,
+            'all_genres' => Genre::all(),
         ]);
     }
 
     public function create(int $id = 0)
     {
+        $arguments = [];
         if ($id) {
-            if (!$vendor = Vendor::find($id)) {
-                abort(404);
-            }
-            $args = [
-                'vendor' => $vendor,
-                'ref' => [
-                    'url' => route('admin.vendors.show', ['id' => $id]),
-                    'text' => $vendor->name . 'の事業者詳細',
-                ],
-            ];
+            $arguments['vendor'] = Vendor::findOrFail($id);
         } else {
-            $args = [
-                'vendors' => Vendor::expandable()->get(),
-                'ref' => [
-                    'url' => route('admin.shops.index'),
-                    'text' => '店舗一覧',
-                ],
-            ];
+            $arguments['vendors'] = Vendor::expandable()->get();
         }
-        return view('admin/shops/create', $args);
+        return view('admin/shops/create', $arguments);
     }
 
-    public function store(CreateShop $request)
+    public function store(CreateShop $request, SaveUsecase $usecase)
     {
-        $shop = new Shop();
-
-        $shop->user_id = Auth::user()->id;
-        $shop->vendor_id = $request->vendor_id;
-        $shop->name = $request->name ?? Vendor::find($shop->vendor_id)->name;
-        $shop->copy = $request->copy;
-        $shop->short_text = $request->short_text;
-        $shop->text = $request->text;
-        $shop->save();
-
-        return redirect()->route('admin.shops.show', ['shop' => $shop]);
+        return redirect()->route('admin.shops.show', [
+            'shop' => $usecase($request, 0),
+        ]);
     }
 
     public function edit(int $id)
@@ -95,28 +82,10 @@ class ShopController extends Controller
         ]);
     }
 
-    public function update(int $id, EditShop $request)
+    public function update(int $id, EditShop $request, SaveUsecase $usecase)
     {
-        $shop = Shop::findOrFail($id);
-
-        $shop->name = $request->name;
-        $shop->status = $request->status;
-        $shop->copy = $request->copy;
-        $shop->short_text = $request->short_text;
-        $shop->text = $request->text;
-
-        $shop->save();
-
-        if ($image = $request->image) {
-            $shop->uploaded_file = $image;
-        }
-        if ($request->genres) {
-            $shop->genres()->detach();
-            $shop->genres()->attach($request->genres);
-        }
-
         return redirect()->route('admin.shops.show', [
-            'shop' => $shop,
+            'shop' => $usecase($request, $id),
         ]);
     }
 }

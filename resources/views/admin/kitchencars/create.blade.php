@@ -4,16 +4,6 @@
 
 <div class="h3">出店者リストに新規追加</div>
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul class="list-unstyled mb-0">
-        @foreach ($errors->all() as $message)
-        <li>{{ $message }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
 <form action="{{ route('admin.kitchencars.create') }}" method="post">
     @csrf
 

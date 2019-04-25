@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 use Wstd\Advertisement\Advertisement;
 use Wstd\Advertisement\Models\Advertisement as Model;
-use Wstd\Advertisement\Values\Advertisement as Value;
 
 trait AdvertisableTrait
 {

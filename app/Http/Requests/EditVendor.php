@@ -32,6 +32,10 @@ class EditVendor extends CreateVendor
         return $rule + [
             'status' => 'required|' . $status_rule,
         ];
+    }
 
+    protected function getRedirectUrl()
+    {
+        return parent::getRedirectUrl() . '#edit-vendor';
     }
 }

@@ -2,43 +2,25 @@
 
 namespace App;
 
-use App\Shop;
-use App\Vendor;
-use App\Values\Car as Values;
-use App\FileApp\File;
-use App\FileApp\FileHolderTrait;
 use Illuminate\Database\Eloquent\Model;
+use App\Shop, App\Values\Car\Status;
+use App\Traits\BelongsToVendorTrait;
+use App\Traits\Kitchencar\Car\HasCarImagesTrait;
+use Wstd\File\HolderInterface;
 
-class Car extends Model
+class Car extends Model implements HolderInterface
 {
-    use FileHolderTrait;
+    use BelongsToVendorTrait,
+        HasCarImagesTrait;
 
     public function shops()
     {
         return $this->hasMany(Shop::class);
     }
 
-    public function vendor()
+    public function getStatusAttribute(): Status
     {
-        return $this->belongsTo(Vendor::class);
-    }
-
-    public function getStatusAttribute(): Values\Status
-    {
-        return new Values\Status($this->attributes['status']);
-    }
-
-    public function getImagesAttribute()
-    {
-        $images = new Values\Image($this);
-        return $images->findAll();
-    }
-
-    public function setUploadedFileAttribute($file)
-    {
-        $images = new Values\Image($this);
-        $images->store($file);
-        return $this;
+        return new Status($this->attributes['status']);
     }
 
     public function scopeInStatus($query, array $status)
