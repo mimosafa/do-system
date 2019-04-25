@@ -7,6 +7,60 @@
 @stop
 
 @section('content')
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit-car">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('admin.cars.edit', ['id' => $car->id]) }}" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">車両情報を編集</h4>
+                    </div>
+                    <div class="modal-body">
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <ul class="list-unstyled">
+                                @foreach ($errors->all() as $message)
+                                <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <div class="form-group">
+                            <label for="name">車両名</label>
+                            <input type="text" class="form-control"
+                                name="name" id="name"
+                                value="{{ old('name') ?? $car->name }}"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="vin">車両No.</label>
+                            <input type="text" class="form-control"
+                                name="vin" id="vin"
+                                value="{{ old('vin') ?? $car->vin }}"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="status">状態</label>
+                            <select name="status" id="status" class="form-control">
+                                @foreach($car->status::values() as $status)
+                                <option value="{{ $status->getValue() }}" {{ $status->equals($car->status) ? 'selected' : '' }}>
+                                    {{ $status->getLabel() }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                        <button type="submit" class="btn btn-primary">更新</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div class="row">
         <div class="col-md-3">
 
@@ -39,7 +93,7 @@
                             <span class="pull-right">{{ $car->status->getLabel() }}</span>
                         </li>
                     </ul>
-                    <a href="{{ route('admin.cars.edit', ['id' => $car->id]) }}"
+                    <a href="#" data-toggle="modal" data-target="#edit-car"
                         class="btn btn-primary btn-block btn-sm">
                         <b>編集する</b>
                     </a>
@@ -105,5 +159,13 @@
 @section('js')
     <script>
         $('#car-contents a:first').tab('show');
+        if (location.hash) {
+            switch (location.hash) {
+                case '#edit-car':
+                    $('#edit-car').modal('show');
+                    break;
+            }
+            history.replaceState('', document.title, window.location.pathname);
+        }
     </script>
 @stop
