@@ -50,7 +50,7 @@ final class VendorValueStatus extends Status
     ];
 
     protected $labels = [
-        'UNREGISTERED' => '未登録',
+        'PROSPECTIVE'  => '未登録',
         'REGISTERED'   => '登録済',
         'SUSPENDED'    => '休止中',
         'DEREGISTERED' => '退会済',
