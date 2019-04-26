@@ -17,4 +17,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Hide '/home' (, for now...)
+Route::redirect('/home', '/admin');
+
+Route::namespace('Admin')->prefix('admin')->name('admin.')
+    ->middleware('auth')->group(function () {
+
+    /*
+    |----------------------------------------------------------------------
+    | Wstd Administrator Routes
+    |----------------------------------------------------------------------
+    */
+
+    Route::get('/', function () {
+        return view('home');
+    });
+
+});
