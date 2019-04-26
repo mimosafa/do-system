@@ -12,8 +12,8 @@ class VendorFactory
     {
         return new VendorModel(
             isset($params['id']) ? $params['id'] : null,
-            $params['name'],
-            isset($params['id']) ? VendorValueStatus::of($params['id']) : null
+            isset($params['name']) ? $params['name'] : null,
+            isset($params['status']) ? VendorValueStatus::of($params['status']) : null
         );
     }
 

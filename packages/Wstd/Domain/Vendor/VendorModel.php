@@ -17,7 +17,6 @@ final class VendorModel implements VendorInterface
     /**
      * @var VendorValueStatus
      */
-
     private $status;
 
     public function __construct(int $id = null, string $name, VendorValueStatus $status = null)
