@@ -33,13 +33,13 @@ class VendorRepository implements VendorRepositoryInterface
         return VendorFactory::make($params);
     }
 
-    public function store(VendorInterface $vendor): VendorInterface
+    public function store(VendorInterface &$vendor): void
     {
         $params = VendorFactory::break($vendor);
         $eloquent = $this->initEloquent($params);
         $eloquent->save();
 
-        return $this->find($eloquent->id);
+        $vendor = $this->find($eloquent->id);
     }
 
     protected function initEloquent(array $params): Vendor

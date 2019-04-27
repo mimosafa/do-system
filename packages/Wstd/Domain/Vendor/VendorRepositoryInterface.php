@@ -33,7 +33,7 @@ interface VendorRepositoryInterface
      * 事業者を永続化
      *
      * @param VendorInterface $vendor
-     * @return VendorInterface
+     * @return void
      */
-    public function store(VendorInterface $vendor): VendorInterface;
+    public function store(VendorInterface &$vendor): void;
 }
