@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Wstd\Application\Usecases\Admin\Vendors\UsecaseIndex;
+use Wstd\View\Models\Admin\Pages\Vendors\IndexViewModel;
 
 class VendorController extends Controller
 {
     /**
      * @param VendorRepository $repository
      */
-    public function index(UsecaseIndex $usecase)
+    public function index(IndexViewModel $viewModel)
     {
-        return view('admin/vendors/index', $usecase());
+        return view('admin/vendors/index', $viewModel);
     }
 }

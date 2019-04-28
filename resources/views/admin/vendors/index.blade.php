@@ -10,7 +10,7 @@
     <div class="box">
         @if ($list->isEmpty())
         <div class="box-body">
-            事業者の登録はありません。
+            {{ $model_label }}の登録はありません。
         </div>
         @else
         <div class="box-body">
