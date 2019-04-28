@@ -3,20 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Wstd\Infrastructure\Repositories\VendorRepository;
+use Wstd\Application\Usecases\Admin\Vendors\UsecaseIndex;
 
 class VendorController extends Controller
 {
     /**
      * @param VendorRepository $repository
      */
-    public function index(VendorRepository $repository)
+    public function index(UsecaseIndex $usecase)
     {
-        return view('admin/vendors/index', [
-            'list' => $repository->list(),
-            'model_name' => 'vendor',
-            'model_label' => '事業者',
-            'datatable' => true,
-        ]);
+        return view('admin/vendors/index', $usecase());
     }
 }
