@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Domain\Vendor;
+namespace Wstd\Domain\Models\Vendor;
 
 use Wstd\Equipment\Enums\Status;
 use Wstd\Equipment\Traits\ValueObjectTrait;

@@ -2,8 +2,8 @@
 
 namespace Wstd\Infrastructure\Factories;
 
-use Wstd\Domain\Vendor\VendorModel;
-use Wstd\Domain\Vendor\VendorValueStatus;
+use Wstd\Domain\Models\Vendor\VendorModel;
+use Wstd\Domain\Models\Vendor\VendorValueStatus;
 use Wstd\Infrastructure\Eloquents\Vendor;
 
 class VendorFactory

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Domain\Vendor;
+namespace Wstd\Domain\Models\Vendor;
 
 final class VendorModel implements VendorInterface
 {
