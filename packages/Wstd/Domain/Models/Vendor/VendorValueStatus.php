@@ -2,8 +2,8 @@
 
 namespace Wstd\Domain\Models\Vendor;
 
-use Wstd\Equipment\Enums\Status;
-use Wstd\Equipment\Traits\ValueObjectTrait;
+use Wstd\Equipment\Domain\Enums\Status;
+use Wstd\Equipment\Domain\Traits\ValueObjectTrait;
 
 /**
  * @see MyCLabs\Enum\Enum

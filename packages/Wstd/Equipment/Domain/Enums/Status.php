@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Equipment\Enums;
+namespace Wstd\Equipment\Domain\Enums;
 
 use MyCLabs\Enum\Enum;
 use Illuminate\Support\Str;

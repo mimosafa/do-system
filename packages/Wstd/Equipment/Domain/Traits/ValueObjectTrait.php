@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Equipment\Traits;
+namespace Wstd\Equipment\Domain\Traits;
 
 trait ValueObjectTrait
 {
