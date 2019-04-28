@@ -2,7 +2,7 @@
 
 namespace Wstd\Domain\Models\Vendor;
 
-final class VendorModel implements VendorInterface
+final class Vendor implements VendorInterface
 {
     /**
      * @var int|null

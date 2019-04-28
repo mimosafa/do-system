@@ -4,9 +4,7 @@ namespace Wstd\Infrastructure\Repositories;
 
 use Illuminate\Support\Collection;
 use Wstd\Domain\Models\Vendor\VendorInterface;
-use Wstd\Domain\Models\Vendor\VendorModel;
 use Wstd\Domain\Models\Vendor\VendorRepositoryInterface;
-use Wstd\Domain\Models\Vendor\VendorValueStatus;
 use Wstd\Infrastructure\Eloquents\Vendor;
 use Wstd\Infrastructure\Factories\VendorFactory;
 
