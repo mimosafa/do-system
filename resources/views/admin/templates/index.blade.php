@@ -1,3 +1,11 @@
+{{--
+
+    @see Wstd\Equipment\View\Models\Admin\AbstractIndexViewModel
+
+    @var string $labelOfIndexed
+    @var Illuminate\Support\Collection $list
+
+ --}}
 @extends('admin.base')
 
 @section('title', $labelOfIndexed . '一覧')

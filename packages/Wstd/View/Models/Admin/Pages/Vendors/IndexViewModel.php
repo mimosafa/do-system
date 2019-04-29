@@ -10,9 +10,11 @@ class IndexViewModel extends AbstractIndexViewModel
 {
     protected $repository;
 
-    public $nameOfIndexed  = 'vendor';
+    public $nameOfIndexed  = 'vendors';
     public $labelOfIndexed = '事業者';
+
     public $isDataTable = true;
+
     public $itemsOfIndexed = [
         'id',
         'name',
@@ -46,10 +48,24 @@ class IndexViewModel extends AbstractIndexViewModel
         return '<a href="' . $link . '">' . $name . '</a>' . $prepend;
     }
 
-    public function trClassesCallback($model): array
+    protected function thClassesCallback(string $item): array
     {
         return [
-            'status-' . $model->getStatus()->getSlug(),
+            'th-' . $item,
+        ];
+    }
+
+    protected function trClassesCallback($model): array
+    {
+        return [
+            'tr-status-' . $model->getStatus()->getSlug(),
+        ];
+    }
+
+    protected function tdClassesCallback(string $item, $model): array
+    {
+        return [
+            'td-' . $item,
         ];
     }
 }
