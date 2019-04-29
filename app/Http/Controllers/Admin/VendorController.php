@@ -12,6 +12,6 @@ class VendorController extends Controller
      */
     public function index(IndexViewModel $viewModel)
     {
-        return view('admin/vendors/index', $viewModel);
+        return view('admin/templates/index', $viewModel);
     }
 }
