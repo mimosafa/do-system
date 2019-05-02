@@ -2,13 +2,13 @@
 
 namespace Wstd\View\Models\Admin\Pages\Vendors;
 
-use Illuminate\Support\Collection;
+use Wstd\Domain\Models\Vendor\VendorsCollection;
 use Wstd\Equipment\View\Models\Admin\AbstractIndexViewModel;
 use Wstd\Infrastructure\Repositories\VendorRepository;
 
 class IndexViewModel extends AbstractIndexViewModel
 {
-    protected $repository;
+    protected $items;
 
     public $nameOfIndexed  = 'vendors';
     public $labelOfIndexed = '事業者';
@@ -24,14 +24,14 @@ class IndexViewModel extends AbstractIndexViewModel
         'name' => '事業者名',
     ];
 
-    public function __construct(VendorRepository $repository)
+    public function __construct(VendorsCollection $collection)
     {
-        $this->repository = $repository;
+        $this->items = $collection;
     }
 
-    public function list(): Collection
+    public function list()
     {
-        return $this->repository->list();
+        return $this->items;
     }
 
     public function idItemCallback($model)

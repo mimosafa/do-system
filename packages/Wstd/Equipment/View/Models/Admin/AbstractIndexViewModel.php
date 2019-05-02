@@ -53,12 +53,8 @@ abstract class AbstractIndexViewModel extends ViewModel
 
     /**
      * インデックス表示するアイテムを取得する関数、必須
-     * 普通はRepository をコンストラクト時にインジェクトして
-     * そこから取得したものを返せば良いと思う。
-     *
-     * @return Collection
      */
-    abstract public function list(): Collection;
+    abstract public function list();
 
     /**
      * Thタグ (テーブルの見出し)の Attributes を返す

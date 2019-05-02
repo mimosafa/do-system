@@ -12,14 +12,7 @@ interface VendorRepositoryInterface
      * @param int $id
      * @return VendorInterface|null
      */
-    public function find(int $id): ?VendorInterface;
-
-    /**
-     * 事業者のリストを取得
-     *
-     * @return Collection
-     */
-    public function list(): Collection;
+    public function getById(int $id): ?VendorInterface;
 
     /**
      * 事業者をパラメーター (配列) から初期化

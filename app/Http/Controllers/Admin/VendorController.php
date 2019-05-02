@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Wstd\View\Models\Admin\Pages\Vendors\IndexViewModel;
+use Wstd\Application\Requests\Admin\VendorsListRequest;
+use Wstd\Application\Usecases\Admin\VendorsIndexUsecase;
 
 class VendorController extends Controller
 {
-    /**
-     * @param VendorRepository $repository
-     */
-    public function index(IndexViewModel $viewModel)
+    public function index(VendorsListRequest $request, VendorsIndexUsecase $usecase)
     {
-        return view('admin/templates/index', $viewModel);
+        return $usecase($request);
     }
 }

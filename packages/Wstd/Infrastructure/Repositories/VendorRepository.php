@@ -2,7 +2,6 @@
 
 namespace Wstd\Infrastructure\Repositories;
 
-use Illuminate\Support\Collection;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 use Wstd\Domain\Models\Vendor\VendorRepositoryInterface;
 use Wstd\Infrastructure\Eloquents\Vendor;
@@ -10,20 +9,10 @@ use Wstd\Infrastructure\Factories\VendorFactory;
 
 class VendorRepository implements VendorRepositoryInterface
 {
-    public function find(int $id): ?VendorInterface
+    public function getById(int $id): ?VendorInterface
     {
         $eloquent = Vendor::find($id);
         return $eloquent ? VendorFactory::makeFromEloquent($eloquent) : null;
-    }
-
-    public function list(): Collection
-    {
-        $eloquents = Vendor::all();
-        $vendors = [];
-        foreach ($eloquents as $eloquent) {
-            $vendors[] = VendorFactory::makeFromEloquent($eloquent);
-        }
-        return Collection::make($vendors);
     }
 
     public function init(array $params): VendorInterface
