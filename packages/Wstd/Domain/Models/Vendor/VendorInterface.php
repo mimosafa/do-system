@@ -24,4 +24,12 @@ interface VendorInterface
      * @return VendorValueStatus|null
      */
     public function getStatus(): ?VendorValueStatus;
+
+    /**
+     * 事業者が編集可能か否か
+     *
+     * @param string|null $property
+     * @return bool
+     */
+    public function isEditable(?string $property): bool;
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Wstd\Domain\Models\Vendor\VendorsCollection;
 use Wstd\Infrastructure\Factories\VendorFactory;
 use Wstd\Infrastructure\Services\VendorQueryService;
-use Wstd\View\Models\Admin\Pages\Vendors\IndexViewModel;
+use Wstd\View\Models\Admin\Pages\VendorsIndexViewModel;
 
 class VendorsIndexUsecase
 {
@@ -25,6 +25,6 @@ class VendorsIndexUsecase
         foreach ($eloquents as $eloquent) {
             $collection[] = VendorFactory::makeFromEloquent($eloquent);
         }
-        return view('admin/templates/index', new IndexViewModel($collection));
+        return view('admin/templates/index', new VendorsIndexViewModel($collection));
     }
 }

@@ -15,10 +15,16 @@ final class Vendor implements VendorInterface
     private $name;
 
     /**
-     * @var VendorValueStatus
+     * @var Wstd\Domain\Models\Vendor\VendorValueStatus
      */
     private $status;
 
+    /**
+     * @param int|null $id
+     * @param string $name
+     * @param Wstd\Domain\Models\Vendor\VendorValueStatus|null $status
+     * @return void
+     */
     public function __construct(int $id = null, string $name, VendorValueStatus $status = null)
     {
         $this->id = $id;
@@ -54,5 +60,18 @@ final class Vendor implements VendorInterface
     public function getStatus(): ?VendorValueStatus
     {
         return $this->status;
+    }
+
+    /**
+     * 事業者が編集可能か否か
+     *
+     * @todo
+     *
+     * @param string|null $property
+     * @return bool
+     */
+    public function isEditable(?string $property = null): bool
+    {
+        return true;
     }
 }

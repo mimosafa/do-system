@@ -1,12 +1,12 @@
 <?php
 
-namespace Wstd\View\Models\Admin\Pages\Vendors;
+namespace Wstd\View\Models\Admin\Pages;
 
 use Wstd\Domain\Models\Vendor\VendorsCollection;
 use Wstd\Equipment\View\Models\Admin\AbstractIndexViewModel;
 use Wstd\Infrastructure\Repositories\VendorRepository;
 
-class IndexViewModel extends AbstractIndexViewModel
+class VendorsIndexViewModel extends AbstractIndexViewModel
 {
     protected $items;
 
@@ -42,7 +42,7 @@ class IndexViewModel extends AbstractIndexViewModel
     public function nameItemCallback($model)
     {
         $name = $model->getName();
-        $link = '#';
+        $link = route('admin.vendors.show', ['id' => $model->getId()]);
         $status = $model->getStatus();
         $prepend = $status->isRegistered() ? '' : ' <small>[ ' . $status->getLabel() . ' ]</small>';
         return '<a href="' . $link . '">' . $name . '</a>' . $prepend;

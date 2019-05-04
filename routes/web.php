@@ -33,6 +33,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
         return view('home');
     });
 
-    Route::get('/vendors', 'VendorController@index');
+    Route::get('vendors', 'VendorController@index')->name('vendors.index');
+    Route::get('vendors/{id}', 'VendorController@show')->name('vendors.show');
 
 });

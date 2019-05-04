@@ -8,6 +8,10 @@ use Wstd\Infrastructure\Eloquents\Vendor as Eloquent;
 
 class VendorFactory
 {
+    /**
+     * @param array{id:?int,name:string,status:?int}
+     * @return Wstd\Domain\Models\Vendor\Vendor
+     */
     public static function make(array $params): Vendor
     {
         return new Vendor(
@@ -17,6 +21,10 @@ class VendorFactory
         );
     }
 
+    /**
+     * @param Wstd\Infrastructure\Eloquents\Vendor $eloquent
+     * @return Wstd\Domain\Models\Vendor\Vendor
+     */
     public static function makeFromEloquent(Eloquent $eloquent): Vendor
     {
         return new Vendor(
@@ -26,6 +34,10 @@ class VendorFactory
         );
     }
 
+    /**
+     * @param Wstd\Domain\Models\Vendor\Vendor $vendor
+     * @return array{id:?int,name:string,status:?int}
+     */
     public static function break(Vendor $vendor): array
     {
         $id = $vendor->getId();
@@ -36,9 +48,7 @@ class VendorFactory
         if (isset($id)) {
             $array['id'] = $id;
         }
-        if (isset($name)) {
-            $array['name'] = $name;
-        }
+        $array['name'] = $name;
         if (isset($status)) {
             $array['status'] = $status->getValue();
         }

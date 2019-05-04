@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Wstd\Domain\Models\Vendor\VendorValueStatus;
 
-class VendorsListRequest extends FormRequest
+class VendorsIndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
