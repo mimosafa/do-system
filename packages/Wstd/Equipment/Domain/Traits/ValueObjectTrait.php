@@ -12,6 +12,9 @@ trait ValueObjectTrait
      */
     public static function of($value)
     {
+        if ($value instanceof static) {
+            return $value;
+        }
         return new static($value);
     }
 }
