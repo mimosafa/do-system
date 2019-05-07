@@ -44,8 +44,8 @@ class VendorsIndexViewModel extends AbstractIndexViewModel
         $name = $model->getName();
         $link = route('admin.vendors.show', ['id' => $model->getId()]);
         $status = $model->getStatus();
-        $prepend = $status->isRegistered() ? '' : ' <small>[ ' . $status->getLabel() . ' ]</small>';
-        return '<a href="' . $link . '">' . $name . '</a>' . $prepend;
+        $append = $status->isRegistered() ? '' : ' <small>[ ' . $status->getLabel() . ' ]</small>';
+        return '<a href="' . $link . '">' . $name . '</a>' . $append;
     }
 
     protected function thClassesCallback(string $item): array
