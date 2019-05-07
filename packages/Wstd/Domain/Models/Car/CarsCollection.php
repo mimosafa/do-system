@@ -1,13 +1,13 @@
 <?php
 
-namespace Wstd\Domain\Models\Vendor;
+namespace Wstd\Domain\Models\Car;
 
-use Wstd\Domain\Models\Vendor\VendorInterface;
+use Wstd\Domain\Models\Car\CarInterface;
 use Wstd\Equipment\Domain\Models\AbstractCollection;
 
-final class VendorsCollection extends AbstractCollection
+final class CarsCollection extends AbstractCollection
 {
-    protected function addItem(VendorInterface $value, $key)
+    protected function addItem(CarInterface $value, $key)
     {
         if (is_null($key)) {
             $this->items[] = $value;
