@@ -15,12 +15,7 @@ class CarFactory
     /**
      * @var Wstd\Infrastructure\Repositories\VendorRepository
      */
-    private $vendorRepository;
-
-    public function __construct()
-    {
-        $this->vendorRepository = new VendorRepository();
-    }
+    private static $vendorRepository;
 
     /**
      * @param array{id:?int,vendor:mixed,name:string,vin:mixed,status:?mixed} $param
@@ -40,12 +35,14 @@ class CarFactory
             if (! is_int($vendorId)) {
                 throw new \Exception('\'vendor_id\' parameter must be int.');
             }
-            if (! $vendor = $this->vendorRepository->getById($vendorId)) {
+            /** Singleton property */
+            $vendorRepo = self::$vendorRepository ?? self::$vendorRepository = new VendorRepository();
+            if (! $vendor = $vendorRepo->getById($vendorId)) {
                 throw new \Exception('Invalid \'vendor_id\' value.');
             }
         }
         $name = $params['name'];
-        $vin = CaeValueVin::of($params['vin']);
+        $vin = CarValueVin::of($params['vin']);
         $status = isset($params['status']) ? CarValueStatus::of($params['status']) : null;
 
         return new Car($id, $vendor, $name, $vin, $status);

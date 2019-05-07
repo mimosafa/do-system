@@ -24,7 +24,7 @@ final class Car implements CarInterface
     /**
      * @var Wstd\Domain\Models\Car\CarValueVin
      */
-    private $status;
+    private $vin;
 
     /**
      * @var Wstd\Domain\Models\Car\CarValueStatus
