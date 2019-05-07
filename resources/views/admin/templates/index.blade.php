@@ -3,7 +3,7 @@
     @see Wstd\Equipment\View\Models\Admin\AbstractIndexViewModel
 
     @var string $labelOfIndexed
-    @var Illuminate\Support\Collection $list
+    @var Wstd\Domain\Models\AbstractCollection $list
 
  --}}
 @extends('admin.base')

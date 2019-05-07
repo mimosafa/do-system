@@ -2,8 +2,8 @@
 
 namespace Wstd\Domain\Models\Car;
 
+use Wstd\Domain\Models\AbstractCollection;
 use Wstd\Domain\Models\Car\CarInterface;
-use Wstd\Equipment\Domain\Models\AbstractCollection;
 
 final class CarsCollection extends AbstractCollection
 {

@@ -2,8 +2,6 @@
 
 namespace Wstd\Equipment\View\Models\Admin;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Spatie\ViewModels\ViewModel;
 
 /**
@@ -146,16 +144,5 @@ abstract class AbstractIndexViewModel extends ViewModel
     protected function tdClassesCallback(string $item, $model): array
     {
         return [];
-    }
-
-    /**
-     * ヘルパー関数 Str::camel のラッパー
-     *
-     * @param string $string
-     * @return string
-     */
-    public function strCamelCase(string $string)
-    {
-        return Str::camel($string);
     }
 }

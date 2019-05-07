@@ -2,8 +2,8 @@
 
 namespace Wstd\Domain\Models\Vendor;
 
+use Wstd\Domain\Models\AbstractCollection;
 use Wstd\Domain\Models\Vendor\VendorInterface;
-use Wstd\Equipment\Domain\Models\AbstractCollection;
 
 final class VendorsCollection extends AbstractCollection
 {

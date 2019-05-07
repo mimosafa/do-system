@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Equipment\Domain\Models;
+namespace Wstd\Domain\Models;
 
 use Illuminate\Support\Collection;
 

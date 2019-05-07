@@ -4,10 +4,13 @@ namespace Wstd\View\Models\Admin\Pages;
 
 use Wstd\Domain\Models\Vendor\VendorsCollection;
 use Wstd\Equipment\View\Models\Admin\AbstractIndexViewModel;
+use Wstd\Equipment\View\Models\Traits\UtilityTrait;
 use Wstd\Infrastructure\Repositories\VendorRepository;
 
 class VendorsIndexViewModel extends AbstractIndexViewModel
 {
+    use UtilityTrait;
+
     protected $items;
 
     public $nameOfIndexed  = 'vendors';
