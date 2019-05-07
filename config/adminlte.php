@@ -108,80 +108,42 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        '管理情報',
         [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => '出店リスト',
+            'url'  => 'admin/kitchencars',
+            'icon' => 'truck',
         ],
         [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'url'  => 'admin/settings',
-            'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
-        [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
+            'text' => '出店者情報',
+            'icon' => 'database',
             'submenu' => [
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => '事業者一覧',
+                    'url'  => 'admin/vendors',
+                    'icon' => 'users',
                 ],
                 [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => '車両一覧',
+                    'url'  => 'admin/cars',
+                    'icon' => 'car',
                 ],
                 [
-                    'text' => 'Level One',
+                    'text' => '店舗一覧',
+                    'url'  => 'admin/shops',
+                    'icon' => 'coffee',
+                ],
+                [
+                    'text' => '商品一覧',
                     'url'  => '#',
+                    'icon' => 'cutlery',
+                ],
+                [
+                    'text' => '新規追加',
+                    'url'  => 'admin/vendors/create',
+                    'icon' => 'plus',
                 ],
             ],
-        ],
-        'LABELS',
-        [
-            'text'       => 'Important',
-            'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
         ],
     ],
 
