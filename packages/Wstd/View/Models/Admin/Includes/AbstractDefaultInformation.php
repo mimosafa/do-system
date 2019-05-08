@@ -5,12 +5,12 @@ namespace Wstd\View\Models\Admin\Includes;
 use Illuminate\Support\Str;
 use Spatie\ViewModels\ViewModel;
 use Wstd\Domain\Models\EntityInterface;
-use Wstd\Equipment\View\Models\Traits\UtilityTrait;
+use Wstd\View\Models\Admin\Traits\UtilityTrait;
 use Wstd\View\Models\Admin\Components\Forms\FormInterface;
 use Wstd\View\Models\Admin\Components\Forms\InputText;
 
 /**
- * @see
+ * @see resources/views/admin/includes/defaultInformation.blade.php
  *
  * @property Wstd\Domain\Models\EntityInterface $entity
  * @property array $items
@@ -21,6 +21,9 @@ use Wstd\View\Models\Admin\Components\Forms\InputText;
  * @method bool isEditable(?string $property)
  * @method string idCallback()
  * @method string nameCallback()
+ * @method string {camelCaseProperty}Callback()
+ * @method Wstd\View\Models\Admin\Components\Forms\FormInterface nameFormCallback()
+ * @method Wstd\View\Models\Admin\Components\Forms\FormInterface {camelCaseProperty}FormCallback()
  *
  * @see Wstd\Equipment\View\Traits\UtilityTrait
  * @method string strCamelCase(string $string)
@@ -65,6 +68,11 @@ abstract class AbstractDefaultInformation extends ViewModel
         'name',
     ];
 
+    /**
+     * Constructor
+     *
+     * @var Wstd\Domain\Models\EntityInterface $entity
+     */
     public function __construct(EntityInterface $entity)
     {
         $this->entity = $entity;
@@ -97,6 +105,9 @@ abstract class AbstractDefaultInformation extends ViewModel
     }
 
     /**
+     * ヘッダー部分に表示する内容
+     * 空文字の場合はヘッダーなし
+     *
      * @return string
      */
     public function headerCallback(): string
@@ -121,6 +132,9 @@ abstract class AbstractDefaultInformation extends ViewModel
     }
 
     /**
+     * 編集用のフォームを司るオブジェクトを返却
+     * 編集可能なプロパティについては要・定義
+     *
      * @return Wstd\View\Models\Admin\Components\Forms\FormInterface
      */
     public function nameFormCallback(): FormInterface

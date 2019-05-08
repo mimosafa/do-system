@@ -1,8 +1,9 @@
 <?php
 
-namespace Wstd\Equipment\View\Models\Admin;
+namespace Wstd\View\Models\Admin;
 
 use Spatie\ViewModels\ViewModel;
+use Wstd\View\Models\Admin\Traits\UtilityTrait;
 
 /**
  * @see resources/views/admin/templates/index.blade.php
@@ -10,6 +11,8 @@ use Spatie\ViewModels\ViewModel;
  */
 abstract class AbstractIndexViewModel extends ViewModel
 {
+    use UtilityTrait;
+
     /**
      * Table タグのID などに使用、必須
      * 例) users

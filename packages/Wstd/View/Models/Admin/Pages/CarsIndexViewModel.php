@@ -3,14 +3,11 @@
 namespace Wstd\View\Models\Admin\Pages;
 
 use Wstd\Domain\Models\Car\CarsCollection;
-use Wstd\Equipment\View\Models\Admin\AbstractIndexViewModel;
-use Wstd\Equipment\View\Models\Traits\UtilityTrait;
+use Wstd\View\Models\Admin\AbstractIndexViewModel;
 use Wstd\Infrastructure\Repositories\CarRepository;
 
 class CarsIndexViewModel extends AbstractIndexViewModel
 {
-    use UtilityTrait;
-    
     protected $items;
 
     public $nameOfIndexed  = 'cars';

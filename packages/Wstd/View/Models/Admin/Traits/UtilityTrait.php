@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Equipment\View\Models\Traits;
+namespace Wstd\View\Models\Admin\Traits;
 
 use Illuminate\Support\Str;
 

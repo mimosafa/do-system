@@ -2,24 +2,11 @@
 
 namespace Wstd\View\Models\Admin\Pages\Vendors;
 
-use Spatie\ViewModels\ViewModel;
 use Wstd\Domain\Models\EntityInterface;
-use Wstd\Equipment\View\Models\Traits\UtilityTrait;
+use Wstd\View\Models\Admin\AbstractShowViewModel;
 
-class ShowViewModel extends ViewModel
+class ShowViewModel extends AbstractShowViewModel
 {
-    use UtilityTrait;
-
-    /**
-     * @var Wstd\Domain\Models\EntityInterface
-     */
-    public $entity;
-
-    /**
-     * @var Wstd\View\Models\Admin\Vendors\DefaultInformation
-     */
-    public $defaultInformation;
-
     public $nameOfEntity = 'vendor';
     public $labelOfEntity = '事業者';
 
@@ -31,15 +18,7 @@ class ShowViewModel extends ViewModel
      */
     public function __construct(EntityInterface $entity)
     {
-        $this->entity = $entity;
+        parent::__construct($entity);
         $this->defaultInformation = new DefaultInformation($entity);
-    }
-
-    /**
-     * @todo
-     */
-    public function isEditable()
-    {
-        return true;
     }
 }
