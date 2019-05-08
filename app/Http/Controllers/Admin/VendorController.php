@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Wstd\Application\Requests\Admin\VendorUpdateRequest;
 use Wstd\Application\Requests\Admin\VendorsIndexRequest;
 use Wstd\Application\Usecases\Admin\VendorShowUsecase;
+use Wstd\Application\Usecases\Admin\VendorUpdateUsecase;
 use Wstd\Application\Usecases\Admin\VendorsIndexUsecase;
 
 class VendorController extends Controller
@@ -19,8 +21,8 @@ class VendorController extends Controller
         return $usecase($id);
     }
 
-    public function update(int $id)
+    public function update(int $id, VendorUpdateRequest $request, VendorUpdateUsecase $usecase)
     {
-        //
+        return $usecase($id, $request);
     }
 }

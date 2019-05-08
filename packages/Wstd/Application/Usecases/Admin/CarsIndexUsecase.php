@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Wstd\Domain\Models\Car\CarsCollection;
 use Wstd\Infrastructure\Factories\CarFactory;
 use Wstd\Infrastructure\Services\CarQueryService;
-use Wstd\View\Models\Admin\Pages\CarsIndexViewModel;
+use Wstd\View\Models\Admin\Pages\Cars\IndexViewModel;
 
 class CarsIndexUsecase
 {
@@ -25,6 +25,6 @@ class CarsIndexUsecase
         foreach ($eloquents as $eloquent) {
             $collection[] = CarFactory::makeFromEloquent($eloquent);
         }
-        return view('admin/templates/index', new CarsIndexViewModel($collection));
+        return view('admin/templates/index', new IndexViewModel($collection));
     }
 }

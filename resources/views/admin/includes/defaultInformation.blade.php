@@ -47,20 +47,48 @@
 </div>
 
 @if ($isEditable)
-@push('hidden')
+
+@push('hiddenForm')
     @component('admin.components.modal', [
         'id' => $modalId,
         'title' => '基本情報を編集',
         'submittable' => true,
     ])
 
+    @php
+        $editNow = [];
+    @endphp
+
     @foreach ($editableItems as $editableItem)
         @php
             $form = ${$strCamelCase($editableItem) . 'FormCallback'};
+            $editNow[] = $editableItem;
         @endphp
         @include('admin.components.forms.' . $form->template, $form)
     @endforeach
 
+    @foreach ($editNow as $editItem)
+        <input class="{{ $modalId }}-hidden" type="hidden"
+            name="edit-{{ $editItem }}-now" id="edit-{{ $editItem }}-now"
+            value="1" disabled="disabled"
+        >
+    @endforeach
+
     @endcomponent
 @endpush
+
+@push('js')
+    <script>
+        var $editNow = $('.{{ $modalId }}-hidden');
+        $('#{{ $modalId }}')
+            .on('show.bs.modal', function (e) {
+                $editNow.removeAttr('disabled');
+            })
+            .on('hide.bs.modal', function (e) {
+                $editNow.attr('disabled', 'disabled');
+            })
+        ;
+    </script>
+@endpush
+
 @endif

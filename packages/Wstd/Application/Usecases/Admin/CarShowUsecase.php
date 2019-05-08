@@ -17,6 +17,6 @@ class CarShowUsecase
     public function __invoke(int $id)
     {
         $car = $this->repository->getById($id);
-        return view('admin/pages/vendors/show', new ShowViewModel($car));
+        return view('admin/templates/show', new ShowViewModel($car));
     }
 }

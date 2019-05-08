@@ -1,10 +1,10 @@
 {{--
 
-    @see Wstd\View\Models\Admin\Pages\Vendors\ShowViewModel
+    @see Wstd\View\Models\Admin\AbstractShowViewModel
 
     @var string $labelOfEntity
     @var bool $isEditable
-    @var Wstd\View\Models\Admin\Pages\Vendors\DefaultInformation $defaultInformation
+    @var Wstd\View\Models\Admin\Includes\DefaultInformation $defaultInformation
 
 --}}
 
@@ -33,6 +33,7 @@
     </div>
 
     @if ($isEditable)
+        @stack('hiddenForm')
     </form>
     @endif
 @endsection

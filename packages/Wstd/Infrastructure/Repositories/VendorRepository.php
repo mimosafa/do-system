@@ -11,7 +11,7 @@ class VendorRepository implements VendorRepositoryInterface
 {
     public function getById(int $id): ?VendorInterface
     {
-        $eloquent = Vendor::find($id);
+        $eloquent = Vendor::findOrFail($id);
         return $eloquent ? VendorFactory::makeFromEloquent($eloquent) : null;
     }
 
@@ -26,7 +26,7 @@ class VendorRepository implements VendorRepositoryInterface
         $eloquent = $this->initEloquent($params);
         $eloquent->save();
 
-        $vendor = $this->find($eloquent->id);
+        $vendor = $this->getById($eloquent->id);
     }
 
     protected function initEloquent(array $params): Vendor

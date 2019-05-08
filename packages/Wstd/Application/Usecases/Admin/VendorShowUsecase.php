@@ -17,6 +17,6 @@ class VendorShowUsecase
     public function __invoke(int $id)
     {
         $vendor = $this->repository->getById($id);
-        return view('admin/pages/vendors/show', new ShowViewModel($vendor));
+        return view('admin/templates/show', new ShowViewModel($vendor));
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Wstd\View\Models\Admin\Pages;
+namespace Wstd\View\Models\Admin\Pages\Cars;
 
 use Wstd\Domain\Models\Car\CarsCollection;
 use Wstd\View\Models\Admin\AbstractIndexViewModel;
 use Wstd\Infrastructure\Repositories\CarRepository;
 
-class CarsIndexViewModel extends AbstractIndexViewModel
+class IndexViewModel extends AbstractIndexViewModel
 {
     protected $items;
 

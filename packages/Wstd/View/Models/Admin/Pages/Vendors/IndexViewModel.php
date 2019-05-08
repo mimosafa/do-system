@@ -1,12 +1,12 @@
 <?php
 
-namespace Wstd\View\Models\Admin\Pages;
+namespace Wstd\View\Models\Admin\Pages\Vendors;
 
 use Wstd\Domain\Models\Vendor\VendorsCollection;
 use Wstd\View\Models\Admin\AbstractIndexViewModel;
 use Wstd\Infrastructure\Repositories\VendorRepository;
 
-class VendorsIndexViewModel extends AbstractIndexViewModel
+class IndexViewModel extends AbstractIndexViewModel
 {
     protected $items;
 
