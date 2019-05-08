@@ -10,7 +10,7 @@ use Wstd\Infrastructure\Factories\CarFactory;
 
 class CarQueryService implements CarQueryServiceInterface
 {
-    public function __invoke(?int $vendor_id, ?string $name, ?array $status): CarsCollection
+    public function __invoke(?int $vendor_id = null, ?string $name = null, ?array $status = null): CarsCollection
     {
         $car = new Car();
         $eloquents = $car->when(isset($vendor_id), function($query) use ($vendor_id) {

@@ -84,7 +84,7 @@ final class Vendor implements VendorInterface
      */
     public function getCars(): CarsCollection
     {
-        return ($this->carQueryService)($this->getId(), null, null);
+        return ($this->carQueryService)($this->getId());
     }
 
     /**
