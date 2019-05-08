@@ -44,7 +44,7 @@ class CarsIndexViewModel extends AbstractIndexViewModel
     public function nameItemCallback($model)
     {
         $name = $model->getName();
-        $link = "#"/* route('admin.vendors.show', ['id' => $model->getId()]) */;
+        $link = route('admin.cars.show', ['id' => $model->getId()]);
         $status = $model->getStatus();
         $append = $status->isRegistered() ? '' : ' <small>[ ' . $status->getLabel() . ' ]</small>';
         return '<a href="' . $link . '">' . $name . '</a>' . $append;
