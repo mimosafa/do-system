@@ -23,8 +23,8 @@ class CarUpdateUsecase
         if ($vin = $request->vin) {
             $params['vin'] = $vin;
         }
-        if ($status = $request->status) {
-            $params['status'] = (int) $status;
+        if (isset($request->status)) {
+            $params['status'] = (int) $request->status;
         }
         $entity = $this->repository->init($params);
         $this->repository->store($entity);

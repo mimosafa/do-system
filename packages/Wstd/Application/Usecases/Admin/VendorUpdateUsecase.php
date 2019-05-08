@@ -20,8 +20,8 @@ class VendorUpdateUsecase
         if ($name = $request->name) {
             $params['name'] = $name;
         }
-        if ($status = $request->status) {
-            $params['status'] = (int) $status;
+        if (isset($request->status)) {
+            $params['status'] = (int) $request->status;
         }
         $entity = $this->repository->init($params);
         $this->repository->store($entity);
