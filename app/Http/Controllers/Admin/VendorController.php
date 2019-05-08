@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Wstd\Application\Requests\Admin\VendorsIndexRequest;
+use Wstd\Application\Usecases\Admin\VendorShowUsecase;
 use Wstd\Application\Usecases\Admin\VendorsIndexUsecase;
-use Wstd\Infrastructure\Repositories\VendorRepository;
 
 class VendorController extends Controller
 {
@@ -14,11 +14,13 @@ class VendorController extends Controller
         return $usecase($request);
     }
 
-    public function show(int $id, VendorRepository $repository)
+    public function show(int $id, VendorShowUsecase $usecase)
     {
-        $vendor = $repository->getById($id);
-        return view('admin/pages/vendors/show', [
-            'model' => $vendor,
-        ]);
+        return $usecase($id);
+    }
+
+    public function update(int $id)
+    {
+        //
     }
 }
