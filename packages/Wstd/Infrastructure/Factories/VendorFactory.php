@@ -5,6 +5,7 @@ namespace Wstd\Infrastructure\Factories;
 use Wstd\Domain\Models\Vendor\Vendor;
 use Wstd\Domain\Models\Vendor\VendorValueStatus;
 use Wstd\Infrastructure\Eloquents\Vendor as Eloquent;
+use Wstd\Infrastructure\Services\CarQueryService;
 
 class VendorFactory
 {
@@ -14,10 +15,14 @@ class VendorFactory
      */
     public static function make(array $params): Vendor
     {
+        static $carQueryService;
+        $carQueryService = $carQueryService ?? new CarQueryService();
+
         return new Vendor(
             isset($params['id']) ? $params['id'] : null,
             isset($params['name']) ? $params['name'] : null,
-            isset($params['status']) ? VendorValueStatus::of($params['status']) : null
+            isset($params['status']) ? VendorValueStatus::of($params['status']) : null,
+            $carQueryService
         );
     }
 
@@ -27,11 +32,11 @@ class VendorFactory
      */
     public static function makeFromEloquent(Eloquent $eloquent): Vendor
     {
-        return new Vendor(
-            $eloquent->id,
-            $eloquent->name,
-            VendorValueStatus::of($eloquent->status)
-        );
+        return self::make([
+            'id' => $eloquent->id,
+            'name' => $eloquent->name,
+            'status' => VendorValueStatus::of($eloquent->status)
+        ]);
     }
 
     /**

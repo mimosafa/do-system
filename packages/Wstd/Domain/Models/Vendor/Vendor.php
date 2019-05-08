@@ -2,6 +2,9 @@
 
 namespace Wstd\Domain\Models\Vendor;
 
+use Wstd\Domain\Models\Car\CarsCollection;
+use Wstd\Domain\Services\CarQueryServiceInterface;
+
 final class Vendor implements VendorInterface
 {
     /**
@@ -20,16 +23,23 @@ final class Vendor implements VendorInterface
     private $status;
 
     /**
+     * @var Wstd\Domain\Services\CarQueryServiceInterface
+     */
+    private $carQueryService;
+
+    /**
      * @param int|null $id
      * @param string $name
      * @param Wstd\Domain\Models\Vendor\VendorValueStatus|null $status
      * @return void
      */
-    public function __construct(int $id = null, string $name, VendorValueStatus $status = null)
+    public function __construct(?int $id, string $name, ?VendorValueStatus $status, CarQueryServiceInterface $service)
     {
         $this->id = $id;
         $this->name = $name;
         $this->status = $status;
+
+        $this->carQueryService = $service;
     }
 
     /**
@@ -60,6 +70,16 @@ final class Vendor implements VendorInterface
     public function getStatus(): ?VendorValueStatus
     {
         return $this->status;
+    }
+
+    /**
+     * 所属している車両を取得
+     *
+     * @return Wstd\Domain\Models\Car\CarsCollection
+     */
+    public function getCars(): CarsCollection
+    {
+        return ($this->carQueryService)($this->getId(), null, null);
     }
 
     /**
