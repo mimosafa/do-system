@@ -10,14 +10,14 @@ final class CarValueStatus extends Status
     use ValueObjectTrait;
 
     protected static $enabled = [
-        self::PROSPECTIVE,
+        self::UNREGISTERED,
         self::REGISTERED,
         self::SUSPENDED,
         self::DEREGISTERED,
     ];
 
     protected static $indexables = [
-        self::PROSPECTIVE,
+        self::UNREGISTERED,
         self::REGISTERED,
         self::SUSPENDED,
     ];

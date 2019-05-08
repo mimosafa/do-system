@@ -41,6 +41,9 @@ class CarFactory
                 throw new \Exception('Invalid \'vendor_id\' value.');
             }
         }
+        else {
+            /** @todo */
+        }
         $name = $params['name'];
         $vin = CarValueVin::of($params['vin']);
         $status = isset($params['status']) ? CarValueStatus::of($params['status']) : null;

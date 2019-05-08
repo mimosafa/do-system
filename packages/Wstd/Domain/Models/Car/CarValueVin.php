@@ -4,6 +4,9 @@ namespace Wstd\Domain\Models\Car;
 
 use Wstd\Equipment\Domain\Traits\ValueObjectTrait;
 
+/**
+ * @todo 内容なし
+ */
 final class CarValueVin
 {
     use ValueObjectTrait;

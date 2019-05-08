@@ -29,6 +29,14 @@ class CarRepository implements CarRepositoryInterface
      */
     public function init(array $params): CarInterface
     {
+        if (! isset($params['vendor']) && ! isset($params['vendor_id'])) {
+            if (isset($params['id'])) {
+                $params['vendor'] = $this->getById($params['id'])->getVendor();
+            }
+            else {
+                /** @todo */
+            }
+        }
         return CarFactory::make($params);
     }
 
@@ -44,7 +52,7 @@ class CarRepository implements CarRepositoryInterface
         $eloquent = $this->initEloquent($params);
         $eloquent->save();
 
-        $car = $this->find($eloquent->id);
+        $car = $this->getById($eloquent->id);
     }
 
     protected function initEloquent(array $params): Car

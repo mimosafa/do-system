@@ -35,6 +35,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
 
     Route::get('cars', 'CarController@index')->name('cars.index');
     Route::get('cars/{id}', 'CarController@show')->name('cars.show');
+    Route::post('cars/{id}', 'CarController@update');
 
     Route::get('vendors', 'VendorController@index')->name('vendors.index');
     Route::get('vendors/{id}', 'VendorController@show')->name('vendors.show');
