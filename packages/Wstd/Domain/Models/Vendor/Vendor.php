@@ -33,13 +33,18 @@ final class Vendor implements VendorInterface
      * @param Wstd\Domain\Models\Vendor\VendorValueStatus|null $status
      * @return void
      */
-    public function __construct(?int $id, string $name, ?VendorValueStatus $status, CarQueryServiceInterface $service)
+    public function __construct(
+        ?int $id,
+        string $name,
+        ?VendorValueStatus $status,
+        CarQueryServiceInterface $carQuery
+    )
     {
         $this->id = $id;
         $this->name = $name;
         $this->status = $status;
 
-        $this->carQueryService = $service;
+        $this->carQueryService = $carQuery;
     }
 
     /**

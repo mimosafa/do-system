@@ -2,7 +2,7 @@
 
 namespace Wstd\Application\Usecases\Admin;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Wstd\Infrastructure\Repositories\VendorRepository;
 
 class VendorUpdateUsecase
@@ -14,7 +14,7 @@ class VendorUpdateUsecase
         $this->repository = $repository;
     }
 
-    public function __invoke(int $id, $request)
+    public function __invoke(int $id, Request $request)
     {
         $params = ['id' => $id,];
         if ($name = $request->name) {

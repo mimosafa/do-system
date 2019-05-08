@@ -39,7 +39,13 @@ final class Car implements CarInterface
      * @param Wstd\Domain\Models\Car\CarValueStatus|null $status
      * @return void
      */
-    public function __construct(?int $id, VendorInterface $vendor, string $name, CarValueVin $vin, ?CarValueStatus $status)
+    public function __construct(
+        ?int $id,
+        VendorInterface $vendor,
+        string $name,
+        CarValueVin $vin,
+        ?CarValueStatus $status
+    )
     {
         $this->id = $id;
         $this->vendor = $vendor;
