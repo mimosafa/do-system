@@ -34,7 +34,7 @@ final class VendorValueStatus extends Status
      * @see Wstd\Equipment\Enums\Status
      */
     protected static $enabled = [
-        self::PROSPECTIVE,
+        self::UNREGISTERED,
         self::REGISTERED,
         self::SUSPENDED,
         self::DEREGISTERED,
@@ -45,12 +45,13 @@ final class VendorValueStatus extends Status
      * @see Wstd\Equipment\Enums\Status
      */
     protected static $indexables = [
-        self::PROSPECTIVE,
+        self::UNREGISTERED,
         self::REGISTERED,
+        self::SUSPENDED,
     ];
 
     protected $labels = [
-        'PROSPECTIVE'  => '未登録',
+        'UNREGISTERED' => '未登録',
         'REGISTERED'   => '登録済',
         'SUSPENDED'    => '休止中',
         'DEREGISTERED' => '退会済',
