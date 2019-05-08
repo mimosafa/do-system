@@ -2,9 +2,9 @@
 
 namespace Wstd\View\Models\Admin\Includes;
 
-use Illuminate\Support\Str;
 use Spatie\ViewModels\ViewModel;
 use Wstd\Domain\Models\EntityInterface;
+use Wstd\View\Models\Admin\Traits\EntityInformationTrait;
 use Wstd\View\Models\Admin\Traits\UtilityTrait;
 use Wstd\View\Models\Admin\Components\Forms\FormInterface;
 use Wstd\View\Models\Admin\Components\Forms\InputText;
@@ -12,12 +12,14 @@ use Wstd\View\Models\Admin\Components\Forms\InputText;
 /**
  * @see resources/views/admin/includes/defaultInformation.blade.php
  *
- * @property Wstd\Domain\Models\EntityInterface $entity
+ * @see Wstd\View\Models\Admin\Traits\EntityInformationTrait
+ * @property protected Wstd\Domain\Models\EntityInterface $entity
+ * @method string nameOfEntity()
+ *
  * @property array $items
  * @property array $itemLabels
  * @property array $editableItems
  *
- * @method string nameOfEntity()
  * @method bool isEditable(?string $property)
  * @method string idCallback()
  * @method string nameCallback()
@@ -31,11 +33,7 @@ use Wstd\View\Models\Admin\Components\Forms\InputText;
 abstract class AbstractDefaultInformation extends ViewModel
 {
     use UtilityTrait;
-
-    /**
-     * @var Wstd\Domain\Models\EntityInterface
-     */
-    protected $entity;
+    use EntityInformationTrait;
 
     /**
      * 表示する項目
@@ -67,28 +65,6 @@ abstract class AbstractDefaultInformation extends ViewModel
     public $editableItems = [
         'name',
     ];
-
-    /**
-     * Constructor
-     *
-     * @var Wstd\Domain\Models\EntityInterface $entity
-     */
-    public function __construct(EntityInterface $entity)
-    {
-        $this->entity = $entity;
-    }
-
-    /**
-     * html タグの attribute などに使用する文字列
-     *
-     * @return string
-     */
-    public function nameOfEntity(): string
-    {
-        return Str::slug(
-            \class_basename(\get_class($this->entity))
-        );
-    }
 
     /**
      * 引数のプロパティ、あるいは編集可能な

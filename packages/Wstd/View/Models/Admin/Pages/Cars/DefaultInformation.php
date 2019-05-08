@@ -74,7 +74,8 @@ HEADER;
             $optionGetValue,
             $optionIsSelected,
             $optionGetLabel,
-            $this->itemLabels['status']);
+            $this->itemLabels['status']
+        );
     }
 
     public function statusGetValue(CarValueStatus $status)

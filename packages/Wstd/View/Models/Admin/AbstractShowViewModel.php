@@ -35,7 +35,7 @@ abstract class AbstractShowViewModel extends ViewModel
      * 基本情報ボックスの ViewModel
      * 表示するのであれば、Constructor を上書きして然るべきオブジェクトを代入すること
      *
-     * @var Wstd\View\Models\Admin\Vendors\DefaultInformation
+     * @var Wstd\View\Models\Admin\Includes\AbstractDefaultInformation
      */
     public $defaultInformation;
 
