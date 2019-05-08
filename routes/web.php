@@ -37,5 +37,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
 
     Route::get('vendors', 'VendorController@index')->name('vendors.index');
     Route::get('vendors/{id}', 'VendorController@show')->name('vendors.show');
+    Route::post('vendors/{id}', 'VendorController@update');
 
 });

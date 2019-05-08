@@ -1,41 +1,38 @@
+{{--
+
+    @see Wstd\View\Models\Admin\Pages\Vendors\ShowViewModel
+
+    @var string $labelOfEntity
+    @var bool $isEditable
+    @var Wstd\View\Models\Admin\Pages\Vendors\DefaultInformation $defaultInformation
+
+--}}
+
 @extends('admin.base')
 
-@section('title', '事業者詳細')
+@section('title', $labelOfEntity . '詳細')
 
 @section('content_header')
-    <h1>事業者詳細</h1>
+    <h1>{{ $labelOfEntity }}詳細</h1>
 @endsection
 
 @section('content')
+    @if ($isEditable)
+    <form action="" method="post">
+        @csrf
+    @endif
+
     <div class="row">
         <div class="col-md-3">
-            <div class="box">
-                <div class="box-body">
-                    <h3 class="text-center">
-                        <small class="muted">事業者名</small>
-                        <br>
-                        {{ $model->getName() }}
-                    </h3>
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <th>ID</th>
-                                <td>{{ $model->getId() }}</td>
-                            </tr>
-                            <tr>
-                                <th>状態</th>
-                                <td>{{ $model->getStatus()->getLabel() }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    @if ($model->isEditable())
-                    <a href="#" data-toggle="modal" data-target="#edit-vendor"
-                        class="btn btn-primary btn-block btn-sm">
-                        <b>編集する</b>
-                    </a>
-                    @endif
-                </div>
-            </div>
+            @includeWhen(
+                $defaultInformation,
+                'admin.includes.defaultInformation',
+                $defaultInformation
+            )
         </div>
     </div>
+
+    @if ($isEditable)
+    </form>
+    @endif
 @endsection

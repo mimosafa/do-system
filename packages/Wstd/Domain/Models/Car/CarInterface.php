@@ -2,11 +2,12 @@
 
 namespace Wstd\Domain\Models\Car;
 
+use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\Car\CarValueStatus;
 use Wstd\Domain\Models\Car\CarValueVin;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 
-interface CarInterface
+interface CarInterface extends EntityInterface
 {
     /**
      * 車両ID を取得

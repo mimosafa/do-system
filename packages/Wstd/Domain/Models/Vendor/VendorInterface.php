@@ -2,7 +2,9 @@
 
 namespace Wstd\Domain\Models\Vendor;
 
-interface VendorInterface
+use Wstd\Domain\Models\EntityInterface;
+
+interface VendorInterface extends EntityInterface
 {
     /**
      * 事業者ID を取得

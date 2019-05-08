@@ -5,12 +5,12 @@
     @var bool $isDataTable
     @var string $nameOfIndexed
     @var array $itemsOfIndexed
-    @var callable $thAttributesCallback
+    @var string $thAttributesCallback
     @var array $itemLabelsOfIndexed
     @var Illuminate\Support\Collection $list
-    @var callable $trAttributesCallback
-    @var callable $tdAttributesCallback
-    @var callable ${camelCaseOfProp}ItemCallback
+    @var string $trAttributesCallback
+    @var string $tdAttributesCallback
+    @var string ${camelCaseOfProp}ItemCallback
 
  --}}
 
