@@ -13,6 +13,7 @@
 @section('title', $labelOfEntity . '詳細')
 
 @section('content_header')
+    @includeWhen($errors->any(), 'admin.includes.alertError')
     <h1>{{ $labelOfEntity }}詳細</h1>
 @endsection
 
