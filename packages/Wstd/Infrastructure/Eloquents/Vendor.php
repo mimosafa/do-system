@@ -4,6 +4,7 @@ namespace Wstd\Infrastructure\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Wstd\Domain\Models\Vendor\VendorValueStatus;
 
 /**
  * @property int|null $id
@@ -25,6 +26,6 @@ class Vendor extends Model
      * @var array
      */
     protected $attributes = [
-        'status' => 0,
+        'status' => VendorValueStatus::UNREGISTERED,
     ];
 }
