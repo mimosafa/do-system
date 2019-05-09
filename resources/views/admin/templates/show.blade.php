@@ -13,7 +13,7 @@
 @section('title', $labelOfEntity . '詳細')
 
 @section('content_header')
-    @includeWhen($errors->any(), 'admin.includes.alertError')
+    @includeWhen($errors->any(), 'admin.components.alertError')
     <h1>{{ $labelOfEntity }}詳細</h1>
 @endsection
 
@@ -29,6 +29,13 @@
                 $defaultInformation,
                 'admin.includes.defaultInformation',
                 $defaultInformation
+            )
+        </div>
+        <div class="col-md-9">
+            @includeWhen(
+                $belongsInformation,
+                'admin.includes.belongsInformation',
+                $belongsInformation
             )
         </div>
     </div>

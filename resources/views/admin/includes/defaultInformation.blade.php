@@ -6,7 +6,7 @@
     @var string $headerCallback
     @var array $items
     @var array $itemLabels
-    @var callable $strCamelCase
+    @var callable $strCamel
     @var callable ${camelCaseItem}Callback
     @var bool $isEditable
     @var array $editableItems
@@ -31,7 +31,7 @@
                         {!! $itemLabels[$item] !!}
                     </th>
                     <td class="text-right">
-                        {!! ${$strCamelCase($item) . 'Callback'} !!}
+                        {!! ${$strCamel($item) . 'Callback'} !!}
                     </td>
                 </tr>
                 @endforeach
@@ -61,7 +61,7 @@
 
     @foreach ($editableItems as $editableItem)
         @php
-            $form = ${$strCamelCase($editableItem) . 'FormCallback'};
+            $form = ${$strCamel($editableItem) . 'FormCallback'};
             $editNow[] = $editableItem;
         @endphp
         @include('admin.components.forms.' . $form->template, $form)

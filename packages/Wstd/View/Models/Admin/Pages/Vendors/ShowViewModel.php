@@ -4,6 +4,7 @@ namespace Wstd\View\Models\Admin\Pages\Vendors;
 
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\View\Models\Admin\AbstractShowViewModel;
+use Wstd\View\Models\Admin\Includes\BelongsInformation;
 
 class ShowViewModel extends AbstractShowViewModel
 {
@@ -20,5 +21,7 @@ class ShowViewModel extends AbstractShowViewModel
     {
         parent::__construct($entity);
         $this->defaultInformation = new DefaultInformation($entity);
+        $this->belongsInformation = new BelongsInformation($entity);
+        $this->belongsInformation->set(new CarsDataTable($entity->getCars()));
     }
 }
