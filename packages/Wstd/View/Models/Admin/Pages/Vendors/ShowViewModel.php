@@ -22,6 +22,6 @@ class ShowViewModel extends AbstractShowViewModel
         parent::__construct($entity);
         $this->defaultInformation = new DefaultInformation($entity);
         $this->belongsInformation = new BelongsInformation($entity);
-        $this->belongsInformation->set(new CarsDataTable($entity->getCars()));
+        $this->belongsInformation->set(new CarsDataTable($entity));
     }
 }

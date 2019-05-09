@@ -19,8 +19,8 @@
 --}}
 
 @if ($collection->isEmpty())
-    <p class="text-center text-warning h5">
-        {{ $emptyText }}
+    <p class="text-center h5">
+        {!! $emptyText !!}
     </p>
 @else
 

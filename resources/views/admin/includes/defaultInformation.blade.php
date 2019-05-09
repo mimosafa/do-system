@@ -55,37 +55,29 @@
         'submittable' => true,
     ])
 
-    @php
-        $editNow = [];
-    @endphp
+        @foreach ($editableItems as $editableItem)
+            @php
+                $form = ${$strCamel($editableItem) . 'FormCallback'};
+                $editNow[] = $editableItem;
+            @endphp
+            @include('admin.components.forms.' . $form->template, $form)
+        @endforeach
 
-    @foreach ($editableItems as $editableItem)
-        @php
-            $form = ${$strCamel($editableItem) . 'FormCallback'};
-            $editNow[] = $editableItem;
-        @endphp
-        @include('admin.components.forms.' . $form->template, $form)
-    @endforeach
-
-    @foreach ($editNow as $editItem)
-        <input class="{{ $modalId }}-hidden" type="hidden"
-            name="edit-{{ $editItem }}-now" id="edit-{{ $editItem }}-now"
-            value="1" disabled="disabled"
+        <input type="hidden" value="1" disabled="disabled"
+            name="editDefaultInformationNow" id="editDefaultInformationNow"
         >
-    @endforeach
 
     @endcomponent
 @endpush
 
 @push('js')
     <script>
-        var $editNow = $('.{{ $modalId }}-hidden');
         $('#{{ $modalId }}')
             .on('show.bs.modal', function (e) {
-                $editNow.removeAttr('disabled');
+                $('#editDefaultInformationNow').removeAttr('disabled');
             })
             .on('hide.bs.modal', function (e) {
-                $editNow.attr('disabled', 'disabled');
+                $('#editDefaultInformationNow').attr('disabled', 'disabled');
             })
         ;
     </script>

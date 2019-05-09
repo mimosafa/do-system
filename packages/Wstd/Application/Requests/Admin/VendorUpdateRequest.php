@@ -26,10 +26,15 @@ class VendorUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'edit-name-now' => 'accepted',
-            'name' => 'required_with:edit-name-now|string|max:100',
-            'edit-status-now' => 'accepted',
-            'status' => 'required_with:edit-status-now|integer|' . Rule::in(VendorValueStatus::values()),
+            // 基本情報
+            'editDefaultInformationNow' => 'sometimes|accepted',
+            'name' => 'required_with:editDefaultInformationNow|string|max:100',
+            'status' => 'required_with:editDefaultInformationNow|integer|' . Rule::in(VendorValueStatus::values()),
+
+            // 車両追加
+            'addCarToVendorNow' => 'sometimes|accepted',
+            'car.name' => 'required_with:addCarToVendorNow|string|max:100',
+            'car.vin' => 'required_with:addCarToVendorNow|string|max:20',
         ];
     }
 }

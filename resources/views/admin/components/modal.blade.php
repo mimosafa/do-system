@@ -23,8 +23,8 @@ $dismissText = $dismissText ?? '閉じる';
 $submitText = $submitText ?? '送信';
 @endphp
 
-<div class="modal{{ $modalSizeClass }} fade" tabindex="-1" role="dialog" id="{{ $id }}">
-    <div class="modal-dialog">
+<div class="modal fade" tabindex="-1" role="dialog" id="{{ $id }}">
+    <div class="modal-dialog{{ $modalSizeClass }}">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

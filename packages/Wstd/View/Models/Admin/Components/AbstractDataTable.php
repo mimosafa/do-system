@@ -77,12 +77,15 @@ abstract class AbstractDataTable extends ViewModel
     /**
      * データがないときの表示を返す
      *
+     * ** Note **
+     * エスケープせずに出力します。必ずreturn する前に適切な処理をすること
+     *
      * @return string
      */
     public function emptyText(): string
     {
         $label = $this->label ?? $this->name;
-        return $label . 'の登録がありません。';
+        return e($label) . 'の登録がありません。';
     }
 
     /**
