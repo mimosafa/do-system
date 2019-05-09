@@ -33,7 +33,7 @@
         <tr {!! $trAttributesCallback($model) !!}>
             @foreach ($itemsOfIndexed as $item)
             <td {!! $tdAttributeCallback($item, $model) !!}>
-                {!! ${$strCamelCase($item) . 'ItemCallback'}($model) !!}
+                {!! ${$strCamel($item) . 'ItemCallback'}($model) !!}
             </td>
             @endforeach
         </tr>

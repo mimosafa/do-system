@@ -40,6 +40,14 @@ abstract class AbstractShowViewModel extends ViewModel
     public $defaultInformation;
 
     /**
+     * このEntity に属するモデル群の ViewModel
+     * 表示するのであれば、Constructor を上書きして然るべきオブジェクトを代入すること
+     *
+     * @var Wstd\View\Models\Admin\Includes\BelongsInformation
+     */
+    public $belongsInformation;
+
+    /**
      * Constructor
      *
      * @param Wstd\Domain\Models\EntityInterface
