@@ -30,7 +30,7 @@ class CarUpdateRequest extends FormRequest
             'editDefaultInformationNow' => 'sometimes|accepted',
             'name' => 'required_with:editDefaultInformationNow|string|max:100',
             'vin' => 'required_with:editDefaultInformationNow|string|max:20',
-            'status' => 'required_with:editDefaultInformationNow|integer|' . Rule::in(CarValueStatus::values()),
+            'status' => 'required_with:editDefaultInformationNow|integer|' . Rule::in(CarValueStatus::toArray()),
         ];
     }
 }

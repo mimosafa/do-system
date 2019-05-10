@@ -2,8 +2,9 @@
 
 namespace Wstd\Domain\Models\Vendor;
 
-use Wstd\Equipment\Domain\Enums\Status;
-use Wstd\Equipment\Domain\Traits\ValueObjectTrait;
+use Wstd\Domain\Models\ValueObjectInterface;
+use Wstd\Domain\Modules\Models\AbstractValueStatus;
+use Wstd\Domain\Modules\Models\ValueObjectTrait;
 
 /**
  * @see MyCLabs\Enum\Enum
@@ -25,7 +26,7 @@ use Wstd\Equipment\Domain\Traits\ValueObjectTrait;
  * @see Wstd\Equipment\Traits\ValueObjectTrait
  * @method static self of($value)
  */
-final class VendorValueStatus extends Status
+final class VendorValueStatus extends AbstractValueStatus implements ValueObjectInterface
 {
     use ValueObjectTrait;
 

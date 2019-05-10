@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Equipment\Domain\Enums;
+namespace Wstd\Domain\Modules\Models;
 
 use MyCLabs\Enum\Enum;
 use Illuminate\Support\Str;
@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
  * @method void __constract($value)
  * @method int jsonSerialize()
  */
-abstract class Status extends Enum
+abstract class AbstractValueStatus extends Enum
 {
     /**
      * 定義済み状態定数
@@ -221,5 +221,15 @@ abstract class Status extends Enum
             return in_array($value, static::$disabled, true);
         }
         return empty(static::$enabled) ? false : ! static::isEnabledStatus($value);
+    }
+
+    /**
+     * Overwrite MyCLabs\Enum\Enum::__toString
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getLabel();
     }
 }

@@ -2,10 +2,11 @@
 
 namespace Wstd\Domain\Models\Car;
 
-use Wstd\Equipment\Domain\Enums\Status;
-use Wstd\Equipment\Domain\Traits\ValueObjectTrait;
+use Wstd\Domain\Models\ValueObjectInterface;
+use Wstd\Domain\Modules\Models\AbstractValueStatus;
+use Wstd\Domain\Modules\Models\ValueObjectTrait;
 
-final class CarValueStatus extends Status
+final class CarValueStatus extends AbstractValueStatus implements ValueObjectInterface
 {
     use ValueObjectTrait;
 

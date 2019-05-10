@@ -29,7 +29,7 @@ class VendorUpdateRequest extends FormRequest
             // 基本情報
             'editDefaultInformationNow' => 'sometimes|accepted',
             'name' => 'required_with:editDefaultInformationNow|string|max:100',
-            'status' => 'required_with:editDefaultInformationNow|integer|' . Rule::in(VendorValueStatus::values()),
+            'status' => 'required_with:editDefaultInformationNow|integer|' . Rule::in(VendorValueStatus::toArray()),
 
             // 車両追加
             'addCarToVendorNow' => 'sometimes|accepted',

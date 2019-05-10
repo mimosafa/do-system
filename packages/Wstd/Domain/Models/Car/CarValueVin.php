@@ -2,12 +2,13 @@
 
 namespace Wstd\Domain\Models\Car;
 
-use Wstd\Equipment\Domain\Traits\ValueObjectTrait;
+use Wstd\Domain\Models\ValueObjectInterface;
+use Wstd\Domain\Modules\Models\ValueObjectTrait;
 
 /**
  * @todo 内容なし
  */
-final class CarValueVin
+final class CarValueVin implements ValueObjectInterface
 {
     use ValueObjectTrait;
 
@@ -24,5 +25,13 @@ final class CarValueVin
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getValue();
     }
 }

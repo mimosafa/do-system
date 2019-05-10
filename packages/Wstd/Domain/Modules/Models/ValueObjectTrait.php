@@ -1,6 +1,8 @@
 <?php
 
-namespace Wstd\Equipment\Domain\Traits;
+namespace Wstd\Domain\Modules\Models;
+
+use Wstd\Domain\Models\ValueObjectInterface;
 
 trait ValueObjectTrait
 {
@@ -8,9 +10,9 @@ trait ValueObjectTrait
      * @static
      *
      * @param mixed $value
-     * @return static
+     * @return Wstd\Domain\Models\ValueObjectInterface
      */
-    public static function of($value)
+    public static function of($value): ValueObjectInterface
     {
         if ($value instanceof static) {
             return $value;
