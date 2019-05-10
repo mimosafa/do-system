@@ -77,11 +77,11 @@ class CarsDataTable extends AbstractDataTable implements BelongsInterface
 
     public function tdStatus($value)
     {
-        return e($value->getStatus()->getLabel());
+        return e($value->getStatus());
     }
 
     public function tdVin($value)
     {
-        return e($value->getVin()->getValue());
+        return e($value->getVin());
     }
 }

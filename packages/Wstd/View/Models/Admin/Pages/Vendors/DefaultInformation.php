@@ -37,7 +37,7 @@ HEADER;
 
     public function statusCallback()
     {
-        return $this->entity->getStatus()->getLabel();
+        return $this->entity->getStatus();
     }
 
     public function statusFormCallback()
@@ -69,6 +69,6 @@ HEADER;
 
     public function statusGetLabel(VendorValueStatus $status)
     {
-        return $status->getLabel();
+        return $status;
     }
 }

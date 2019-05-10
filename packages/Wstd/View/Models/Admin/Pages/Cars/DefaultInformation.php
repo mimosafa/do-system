@@ -47,17 +47,17 @@ HEADER;
 
     public function vinCallback()
     {
-        return $this->entity->getVin()->getValue();
+        return $this->entity->getVin();
     }
 
     public function statusCallback()
     {
-        return $this->entity->getStatus()->getLabel();
+        return $this->entity->getStatus();
     }
 
     public function vinFormCallback()
     {
-        return new InputText('vin', $this->entity->getVin()->getValue(), $this->itemLabels['vin']);
+        return new InputText('vin', $this->entity->getVin(), $this->itemLabels['vin']);
     }
 
     public function statusFormCallback()
@@ -90,6 +90,6 @@ HEADER;
 
     public function statusGetLabel(CarValueStatus $status)
     {
-        return $status->getLabel();
+        return $status;
     }
 }

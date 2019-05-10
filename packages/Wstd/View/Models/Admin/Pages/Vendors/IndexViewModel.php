@@ -44,7 +44,7 @@ class IndexViewModel extends AbstractIndexViewModel
         $name = $model->getName();
         $link = route('admin.vendors.show', ['id' => $model->getId()]);
         $status = $model->getStatus();
-        $append = $status->isRegistered() ? '' : ' <small>[ ' . $status->getLabel() . ' ]</small>';
+        $append = $status->isRegistered() ? '' : ' <small>[ ' . $status . ' ]</small>';
         return '<a href="' . $link . '">' . $name . '</a>' . $append;
     }
 
