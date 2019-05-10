@@ -55,6 +55,10 @@
         'submittable' => true,
     ])
 
+        @php
+            $jsVar = $strCamel($modalId) . 'Items';
+        @endphp
+
         @foreach ($editableItems as $editableItem)
             @php
                 $form = ${$strCamel($editableItem) . 'FormCallback'};
@@ -63,7 +67,7 @@
             @include('admin.components.forms.' . $form->template, $form)
         @endforeach
 
-        <input type="hidden" value="1" disabled="disabled"
+        <input type="hidden" value="1"
             name="editDefaultInformationNow" id="editDefaultInformationNow"
         >
 
@@ -72,12 +76,14 @@
 
 @push('js')
     <script>
+        var ${{ $jsVar }} = $('#{{ $modalId }}').find('input, select');
+        ${{ $jsVar }}.attr('disabled', 'disabled');
         $('#{{ $modalId }}')
             .on('show.bs.modal', function (e) {
-                $('#editDefaultInformationNow').removeAttr('disabled');
+                ${{ $jsVar }}.removeAttr('disabled');
             })
             .on('hide.bs.modal', function (e) {
-                $('#editDefaultInformationNow').attr('disabled', 'disabled');
+                ${{ $jsVar }}.attr('disabled', 'disabled');
             })
         ;
     </script>

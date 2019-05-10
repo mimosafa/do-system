@@ -22,6 +22,10 @@
             'submittable' => true,
         ])
 
+            @php
+                $jsVar = $strCamel($modalId) . 'Items';
+            @endphp
+
             @include('admin.components.forms.inputText', [
                 'label' => '車両名',
                 'name'  => 'car[name]',
@@ -43,13 +47,14 @@
 
     @push('js')
         <script>
-            var $editNow = $('#addCarToVendorNow');
+            var ${{ $jsVar }} = $('#{{ $modalId }}').find('input, select');
+            ${{ $jsVar }}.attr('disabled', 'disabled');
             $('#{{ $modalId }}')
                 .on('show.bs.modal', function (e) {
-                    $editNow.removeAttr('disabled');
+                    ${{ $jsVar }}.removeAttr('disabled');
                 })
                 .on('hide.bs.modal', function (e) {
-                    $editNow.attr('disabled', 'disabled');
+                    ${{ $jsVar }}.attr('disabled', 'disabled');
                 })
             ;
         </script>

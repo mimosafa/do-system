@@ -26,12 +26,11 @@ class CarUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'edit-name-now' => 'accepted',
-            'name' => 'required_with:edit-name-now|string|max:100',
-            'edit-vin-now' => 'accepted',
-            'vin' => 'required_with:edit-vin-now|string|max:20',
-            'edit-status-now' => 'accepted',
-            'status' => 'required_with:edit-status-now|integer|' . Rule::in(CarValueStatus::values()),
+            // 基本情報
+            'editDefaultInformationNow' => 'sometimes|accepted',
+            'name' => 'required_with:editDefaultInformationNow|string|max:100',
+            'vin' => 'required_with:editDefaultInformationNow|string|max:20',
+            'status' => 'required_with:editDefaultInformationNow|integer|' . Rule::in(CarValueStatus::values()),
         ];
     }
 }
