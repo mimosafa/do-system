@@ -3,48 +3,31 @@
 namespace Wstd\Domain\Models\Vendor;
 
 use Wstd\Domain\Models\Car\CarsCollection;
-use Wstd\Domain\Services\CarQueryServiceInterface;
+use Wstd\Infrastructure\Services\CarQueryService;
+use Wstd\Infrastructure\Eloquents\Vendor as Eloquent;
 
 final class Vendor implements VendorInterface
 {
     /**
-     * @var int|null
+     * @var Wstd\Infrastructure\Eloquents\Vendor
      */
-    private $id;
+    private $eloquent;
 
     /**
-     * @var string
+     * @static
+     * @var Wstd\Infrastructure\Services\CarQueryService
      */
-    private $name;
+    private static $carQuery;
 
     /**
-     * @var Wstd\Domain\Models\Vendor\VendorValueStatus
+     * @param int $id
      */
-    private $status;
-
-    /**
-     * @var Wstd\Domain\Services\CarQueryServiceInterface
-     */
-    private $carQueryService;
-
-    /**
-     * @param int|null $id
-     * @param string $name
-     * @param Wstd\Domain\Models\Vendor\VendorValueStatus|null $status
-     * @return void
-     */
-    public function __construct(
-        ?int $id,
-        string $name,
-        ?VendorValueStatus $status,
-        CarQueryServiceInterface $carQuery
-    )
+    public function __construct(int $id)
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->status = $status;
-
-        $this->carQueryService = $carQuery;
+        $this->eloquent = Eloquent::findOrFail($id);
+        if (! isset(self::$carQuery)) {
+            self::$carQuery = new CarQueryService();
+        }
     }
 
     /**
@@ -54,7 +37,7 @@ final class Vendor implements VendorInterface
      */
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->eloquent->id;
     }
 
     /**
@@ -64,7 +47,7 @@ final class Vendor implements VendorInterface
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->eloquent->name;
     }
 
     /**
@@ -74,7 +57,7 @@ final class Vendor implements VendorInterface
      */
     public function getStatus(): ?VendorValueStatus
     {
-        return $this->status;
+        return VendorValueStatus::of($this->eloquent->status);
     }
 
     /**
@@ -84,7 +67,7 @@ final class Vendor implements VendorInterface
      */
     public function getCars(): CarsCollection
     {
-        return ($this->carQueryService)($this->getId());
+        return (self::$carQuery)($this->getId());
     }
 
     /**
