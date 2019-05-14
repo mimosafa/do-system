@@ -6,7 +6,7 @@ use Spatie\ViewModels\ViewModel;
 use Wstd\Domain\Models\Car\Car;
 use Wstd\View\Admin\ViewModelInterface;
 
-final class ShowViewModel extends ViewModel implements ViewModelInterface
+final class Show extends ViewModel implements ViewModelInterface
 {
     /**
      * @var string

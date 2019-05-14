@@ -3,8 +3,7 @@
 namespace Wstd\Application\Usecases\Admin;
 
 use Wstd\Infrastructure\Repositories\CarRepository;
-# use Wstd\View\Models\Admin\Pages\Cars\ShowViewModel;
-use Wstd\View\Admin\Pages\Cars\ShowViewModel;
+use Wstd\View\Admin\Pages\Cars\Show;
 
 class CarShowUsecase
 {
@@ -18,7 +17,7 @@ class CarShowUsecase
     public function __invoke(int $id)
     {
         $car = $this->repository->getById($id);
-        $view = new ShowViewModel($car);
+        $view = new Show($car);
         return view($view->template(), $view);
     }
 }

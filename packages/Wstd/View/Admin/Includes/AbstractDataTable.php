@@ -76,7 +76,7 @@ abstract class AbstractDataTable extends ViewModel
     /**
      * @var array
      */
-    protected $ignore = ['__construct', 'template', 'id', 'title',];
+    protected $ignore = ['__construct', 'template',];
 
     /**
      * データがないときの表示を返す
@@ -178,7 +178,7 @@ abstract class AbstractDataTable extends ViewModel
     /**
      * td タグの内容を表示
      * ** 継承先クラスで上書き推奨 **
-     * ** または、td{StudyCaseItem} method を定義する **
+     * ** または、td{StudyCaseItem}(mixed $value) method を定義する **
      *
      * ** Note **
      * エスケープせずに出力します。必ずreturn する前に適切な処理をすること
@@ -192,8 +192,8 @@ abstract class AbstractDataTable extends ViewModel
     public function td(string $item, $value): string
     {
         $method = 'get' . $this->strCamel($item);
-        if (method_exists($value, $method)) {
-            return e((string) $value->$get());
+        if (\method_exists($value, $method)) {
+            return e((string) $value->$method());
         }
         if (isset($value->$item)) {
             return e($value->$item);

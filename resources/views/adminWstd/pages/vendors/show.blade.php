@@ -24,7 +24,3 @@
         @stack('hidden_form')
     </form>
 @endsection
-
-@push('js')
-    <script src="{{ asset('wstd/js/do-system.js') }}"></script>
-@endpush

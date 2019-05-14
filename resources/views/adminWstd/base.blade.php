@@ -11,3 +11,7 @@
         @yield('post_page_title')
     </h1>
 @endsection
+
+@push('js')
+    <script src="{{ asset('wstd/js/do-system.js') }}"></script>
+@endpush

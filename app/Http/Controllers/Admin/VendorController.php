@@ -25,7 +25,7 @@ class VendorController extends Controller
 
     public function create()
     {
-        return view('admin.pages.vendors.create');
+        return view('adminWstd.pages.vendors.create');
     }
 
     public function store(VendorStoreRequest $request, VendorStoreUsecase $usecase)

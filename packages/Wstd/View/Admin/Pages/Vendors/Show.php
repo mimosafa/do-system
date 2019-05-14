@@ -7,7 +7,7 @@ use Wstd\Domain\Models\Vendor\Vendor;
 use Wstd\View\Admin\ViewModelInterface;
 use Wstd\View\Admin\Modules\TabContents;
 
-final class ShowViewModel extends ViewModel implements ViewModelInterface
+final class Show extends ViewModel implements ViewModelInterface
 {
     /**
      * @var Wstd\Domain\Models\Vendor\Vendor

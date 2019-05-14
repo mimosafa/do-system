@@ -3,7 +3,7 @@
 namespace Wstd\Application\Usecases\Admin;
 
 use Wstd\Infrastructure\Repositories\VendorRepository;
-use Wstd\View\Admin\Pages\Vendors\ShowViewModel;
+use Wstd\View\Admin\Pages\Vendors\Show;
 
 class VendorShowUsecase
 {
@@ -17,7 +17,7 @@ class VendorShowUsecase
     public function __invoke(int $id)
     {
         $vendor = $this->repository->getById($id);
-        $view = new ShowViewModel($vendor);
+        $view = new Show($vendor);
         return view($view->template(), $view);
     }
 }
