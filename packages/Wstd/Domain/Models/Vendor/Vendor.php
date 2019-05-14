@@ -35,7 +35,7 @@ final class Vendor implements VendorInterface
      *
      * @return int
      */
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->eloquent->id;
     }
