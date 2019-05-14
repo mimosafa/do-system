@@ -17,7 +17,7 @@ return [
 
     'title_prefix' => '',
 
-    'title_postfix' => ' | Do System',
+    'title_postfix' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -181,6 +181,6 @@ return [
     'plugins' => [
         'datatables' => true,
         'select2'    => true,
-        'chartjs'    => false,
+        'chartjs'    => true,
     ],
 ];
