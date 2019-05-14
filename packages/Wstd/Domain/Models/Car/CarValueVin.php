@@ -2,15 +2,19 @@
 
 namespace Wstd\Domain\Models\Car;
 
-use Wstd\Domain\Models\ValueObjectInterface;
+use Wstd\Domain\Models\ValueObjectText;
 use Wstd\Domain\Modules\Models\ValueObjectTrait;
 
 /**
  * @todo 内容なし
  */
-final class CarValueVin implements ValueObjectInterface
+final class CarValueVin implements ValueObjectText
 {
     use ValueObjectTrait;
+
+    private $name = 'vin';
+
+    private $label = '車両No';
 
     /**
      * @var string

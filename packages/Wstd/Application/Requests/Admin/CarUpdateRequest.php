@@ -25,12 +25,20 @@ class CarUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        $statusRule = Rule::in(CarValueStatus::toArray());
+
         return [
-            // 基本情報
-            'editDefaultInformationNow' => 'sometimes|accepted',
-            'name' => 'required_with:editDefaultInformationNow|string|max:100',
-            'vin' => 'required_with:editDefaultInformationNow|string|max:20',
-            'status' => 'required_with:editDefaultInformationNow|integer|' . Rule::in(CarValueStatus::toArray()),
+            /**
+             * 基本情報
+             *
+             * @see Wstd\View\Admin\Pages\Cars\DefaultInformation
+             * @see Wstd\View\Admin\Includes\AbstractDefaultInformation
+             * @see resources/views/adminWstd/includes/defaultInformation.blade.php
+             */
+            'edit_car_default_information' => 'sometimes|accepted',
+            'name' => 'required_with:edit_car_default_information|string|max:100',
+            'vin' => 'required_with:edit_car_default_information|string|max:20',
+            'status' => 'required_with:edit_car_default_information|integer|' . $statusRule,
         ];
     }
 }

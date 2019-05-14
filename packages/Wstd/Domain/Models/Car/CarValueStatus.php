@@ -2,13 +2,17 @@
 
 namespace Wstd\Domain\Models\Car;
 
-use Wstd\Domain\Models\ValueObjectInterface;
+use Wstd\Domain\Models\ValueObjectEnum;
 use Wstd\Domain\Modules\Models\AbstractValueStatus;
 use Wstd\Domain\Modules\Models\ValueObjectTrait;
 
-final class CarValueStatus extends AbstractValueStatus implements ValueObjectInterface
+final class CarValueStatus extends AbstractValueStatus implements ValueObjectEnum
 {
     use ValueObjectTrait;
+
+    const NAME = 'status';
+
+    const LABEL = '状態';
 
     protected static $enabled = [
         self::UNREGISTERED,

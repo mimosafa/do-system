@@ -25,16 +25,29 @@ class VendorUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            // 基本情報
-            'editDefaultInformationNow' => 'sometimes|accepted',
-            'name' => 'required_with:editDefaultInformationNow|string|max:100',
-            'status' => 'required_with:editDefaultInformationNow|integer|' . Rule::in(VendorValueStatus::toArray()),
+        $statusRule = Rule::in(VendorValueStatus::toArray());
 
-            // 車両追加
-            'addCarToVendorNow' => 'sometimes|accepted',
-            'car.name' => 'required_with:addCarToVendorNow|string|max:100',
-            'car.vin' => 'required_with:addCarToVendorNow|string|max:20',
+        return [
+            /**
+             * 基本情報
+             *
+             * @see Wstd\View\Admin\Pages\Vendors\DefaultInformation
+             * @see Wstd\View\Admin\Includes\AbstractDefaultInformation
+             * @see resources/views/adminWstd/includes/defaultInformation.blade.php
+             */
+            'edit_vendor_default_information' => 'sometimes|accepted',
+            'name' => 'required_with:edit_vendor_default_information|string|max:100',
+            'status' => 'required_with:edit_vendor_default_information|integer|' . $statusRule,
+
+            /**
+             * 車両追加
+             *
+             * @see Wstd\View\Admin\Pages\Vendors\CarTable
+             * @see resources/views/adminWstd/pages/vendors/carTable.blade.php
+             */
+            'add_car_to_vendor' => 'sometimes|accepted',
+            'car.name' => 'required_with:add_car_to_vendor|string|max:100',
+            'car.vin' => 'required_with:add_car_to_vendor|string|max:20',
         ];
     }
 }

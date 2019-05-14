@@ -100,6 +100,11 @@ abstract class AbstractValueStatus extends Enum
         // 'DEREGISTERED' => 'Deregistered',
     ];
 
+    protected static $excludedConstants = [
+        'NAME',
+        'LABEL',
+    ];
+
     /**
      * 一覧表示可能なステイタスの値を全て取得
      *
@@ -198,9 +203,9 @@ abstract class AbstractValueStatus extends Enum
     {
         $class = \get_called_class();
         if (! isset(static::$cache[$class])) {
-            $array = array_filter(parent::toArray(), function($value) {
-                return static::isEnabledStatus($value);
-            });
+            $array = array_filter(parent::toArray(), function($value, $key) {
+                return ! in_array($key, static::$excludedConstants, true) && static::isEnabledStatus($value);
+            }, \ARRAY_FILTER_USE_BOTH);
             static::$cache[$class] = $array;
         }
 

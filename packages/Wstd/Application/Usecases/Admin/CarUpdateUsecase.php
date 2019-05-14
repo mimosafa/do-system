@@ -16,17 +16,19 @@ class CarUpdateUsecase
 
     public function __invoke(int $id, Request $request)
     {
-        $params = ['id' => $id,];
-        if ($name = $request->name) {
-            $params['name'] = $name;
+        if ($request->edit_car_default_information) {
+            return $this->editCarDefaultInformation($id, $request);
         }
-        if ($vin = $request->vin) {
-            $params['vin'] = $vin;
-        }
-        if (isset($request->status)) {
-            $params['status'] = (int) $request->status;
-        }
-        $entity = $this->repository->init($params);
+    }
+
+    protected function editCarDefaultInformation(int $id, Request $request)
+    {
+        $entity = $this->repository->init([
+            'id' => $id,
+            'name' => $request->name,
+            'vin' => $request->vin,
+            'status' => (int) $request->status,
+        ]);
         $this->repository->store($entity);
 
         return redirect()->route('admin.cars.show', [

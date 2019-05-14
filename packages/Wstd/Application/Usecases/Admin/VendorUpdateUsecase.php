@@ -19,10 +19,10 @@ class VendorUpdateUsecase
 
     public function __invoke(int $id, Request $request)
     {
-        if ($request->editDefaultInformationNow) {
+        if ($request->edit_vendor_default_information) {
             return $this->editDefaultInformation($id, $request);
         }
-        if ($request->addCarToVendorNow) {
+        if ($request->add_car_to_vendor) {
             return $this->addCarToVendor($id, $request);
         }
     }
