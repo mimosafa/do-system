@@ -16,7 +16,7 @@ final class Index extends AbstractDataTable implements ContentInterface
 
     public $items = [
         'id',
-        'vendor',
+        'thumb',
         'name',
         'vin',
         'status',
@@ -24,8 +24,8 @@ final class Index extends AbstractDataTable implements ContentInterface
 
     public $itemLabels = [
         'id' => '事業者ID',
-        'vendor' => '事業者',
-        'name' => '車両名',
+        'thumb' => '車両写真',
+        'name' => '事業者名 / 車両名',
         'status' => '状態',
     ];
 
@@ -44,15 +44,30 @@ final class Index extends AbstractDataTable implements ContentInterface
         $this->collection = $collection;
     }
 
+    public function tdThumb($entity)
+    {
+        $images = $entity->getImages();
+        if (empty($images)) {
+            return '<span class="noImage thumbImage">No Image</span>';
+        }
+        //
+    }
+
     public function tdId($entity)
     {
         return $entity->getVendor()->getId();
     }
 
-    public function tdVendor($entity)
+    protected function vendor($entity)
     {
         $vendor = $entity->getVendor();
-        return $vendor->getName();
+        $link = \route('admin.vendors.show', ['id' => $vendor->getId(),]);
+        $status = $vendor->getStatus();
+        $string = sprintf('<a href="%s">%s</a>', e($link), e($vendor->getName()));
+        if (! $status->isRegistered()) {
+            $string = sprintf('<small class="muted">[ %s ]</small> ', $status) . $string;
+        }
+        return $string;
     }
 
     public function tdName($entity)
@@ -63,7 +78,7 @@ final class Index extends AbstractDataTable implements ContentInterface
         if (! $status->isRegistered()) {
             $string = sprintf('<small class="muted">[ %s ]</small> ', $status) . $string;
         }
-        return $string;
+        return $this->vendor($entity) . ' / ' . $string;
     }
 
     public function tdStatus($entity)

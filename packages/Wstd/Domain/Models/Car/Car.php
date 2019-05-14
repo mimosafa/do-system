@@ -116,4 +116,14 @@ final class Car implements CarInterface
     {
         return true;
     }
+
+    /**
+     * 車両写真の配列を取得
+     *
+     * @return array
+     */
+    public function getImages(): array
+    {
+        return [];
+    }
 }

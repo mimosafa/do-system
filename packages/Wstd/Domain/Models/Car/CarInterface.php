@@ -43,4 +43,11 @@ interface CarInterface extends EntityInterface
      * @return Wstd\Domain\Models\Car\CarValueStatus|null
      */
     public function getStatus(): ?CarValueStatus;
+
+    /**
+     * 車両写真の配列を取得
+     *
+     * @return array
+     */
+    public function getImages(): array;
 }
