@@ -4,9 +4,10 @@ namespace Wstd\View\Admin\Pages\Vendors;
 
 use Spatie\ViewModels\ViewModel;
 use Wstd\Domain\Models\Vendor\Vendor;
+use Wstd\View\Admin\ViewModelInterface;
 use Wstd\View\Admin\Modules\TabContents;
 
-class ShowViewModel extends ViewModel
+final class ShowViewModel extends ViewModel implements ViewModelInterface
 {
     /**
      * @var Wstd\Domain\Models\Vendor\Vendor
@@ -21,7 +22,7 @@ class ShowViewModel extends ViewModel
     /**
      * @var string Blade template
      */
-    public $template = 'adminWstd.pages.vendors.show';
+    private $template = 'adminWstd.pages.vendors.show';
 
     /**
      * @var Wstd\View\Admin\Pages\Vendors\DefaultInformation
@@ -49,5 +50,10 @@ class ShowViewModel extends ViewModel
     {
         $this->objectsBelonged = new TabContents('belongs_to_vendor');
         $this->objectsBelonged->add(new CarsTable($this->entity));
+    }
+
+    public function template(): string
+    {
+        return $this->template;
     }
 }

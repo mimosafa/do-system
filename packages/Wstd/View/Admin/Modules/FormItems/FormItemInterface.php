@@ -2,7 +2,9 @@
 
 namespace Wstd\View\Admin\Modules\FormItems;
 
-interface FormItemInterface
+use Wstd\View\Admin\ViewModelInterface;
+
+interface FormItemInterface extends ViewModelInterface
 {
     //
 }

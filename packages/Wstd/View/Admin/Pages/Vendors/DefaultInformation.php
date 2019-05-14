@@ -3,9 +3,10 @@
 namespace Wstd\View\Admin\Pages\Vendors;
 
 use Wstd\Domain\Models\Vendor\VendorValueStatus;
+use Wstd\View\Admin\ViewModelInterface;
 use Wstd\View\Admin\Includes\AbstractDefaultInformation;
 
-class DefaultInformation extends AbstractDefaultInformation
+final class DefaultInformation extends AbstractDefaultInformation implements ViewModelInterface
 {
     public $items = [
         'id',

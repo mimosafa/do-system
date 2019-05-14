@@ -8,7 +8,7 @@ use Wstd\View\Admin\Includes\AbstractDataTable;
 use Wstd\View\Admin\Includes\FormItemContainer;
 use Wstd\View\Admin\Modules\FormItems\InputText;
 
-class CarsTable extends AbstractDataTable implements ContentInterface
+final class CarsTable extends AbstractDataTable implements ContentInterface
 {
     /**
      * @var Wstd\Domain\Models\Vendor\Vendor

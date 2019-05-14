@@ -46,7 +46,7 @@ class InputText extends ViewModel implements FormItemInterface
         $this->label = $args['label'] ?? $this->strTitle($this->name);
     }
 
-    public function template()
+    public function template(): string
     {
         return $this->template;
     }

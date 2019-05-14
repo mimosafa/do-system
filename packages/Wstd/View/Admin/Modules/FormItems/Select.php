@@ -64,7 +64,7 @@ class Select extends ViewModel implements FormItemInterface
         return $this->options = $options;
     }
 
-    public function template()
+    public function template(): string
     {
         return $this->template;
     }

@@ -18,6 +18,6 @@ class VendorShowUsecase
     {
         $vendor = $this->repository->getById($id);
         $view = new ShowViewModel($vendor);
-        return view($view->template, $view);
+        return view($view->template(), $view);
     }
 }

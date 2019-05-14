@@ -6,7 +6,6 @@ use Spatie\ViewModels\ViewModel;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\ValueObjectInterface;
 use Wstd\View\Admin\FormItemFactory;
-use Wstd\View\Admin\ViewModelInterface;
 use Wstd\View\Admin\Includes\FormItemContainer;
 use Wstd\View\Admin\Modules\FormItems\FormItemInterface;
 use Wstd\View\Admin\Traits\UtilityTrait;
@@ -14,7 +13,7 @@ use Wstd\View\Admin\Traits\UtilityTrait;
 /**
  * @see resources/view/adminWstd/includes/defaultInformation.blade.php
  */
-abstract class AbstractDefaultInformation extends ViewModel implements ViewModelInterface
+abstract class AbstractDefaultInformation extends ViewModel
 {
     use UtilityTrait;
 

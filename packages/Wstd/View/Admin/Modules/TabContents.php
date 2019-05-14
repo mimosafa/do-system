@@ -4,8 +4,9 @@ namespace Wstd\View\Admin\Modules;
 
 use Spatie\ViewModels\ViewModel;
 use Wstd\View\Admin\ContentInterface;
+use Wstd\View\Admin\ViewModelInterface;
 
-class TabContents extends ViewModel
+class TabContents extends ViewModel implements ViewModelInterface
 {
     /**
      * @var string html element id string
@@ -19,7 +20,7 @@ class TabContents extends ViewModel
     /**
      * @var string Blade template
      */
-    public $template = 'adminWstd.modules.tabContents';
+    protected $template = 'adminWstd.modules.tabContents';
 
     public function __construct(string $id, array $contents = [])
     {
@@ -37,7 +38,7 @@ class TabContents extends ViewModel
         $this->tabs[$content->id()] = $content->title();
     }
 
-    public function template()
+    public function template(): string
     {
         return $this->template;
     }

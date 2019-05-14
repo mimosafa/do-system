@@ -3,9 +3,10 @@
 namespace Wstd\View\Admin\Includes;
 
 use Spatie\ViewModels\ViewModel;
+use Wstd\View\Admin\ViewModelInterface;
 use Wstd\View\Admin\Modules\FormItems\FormItemInterface;
 
-class FormItemContainer extends ViewModel
+class FormItemContainer extends ViewModel implements ViewModelInterface
 {
     /**
      * @var array
@@ -25,7 +26,7 @@ class FormItemContainer extends ViewModel
         $this->items[] = $item;
     }
 
-    public function template()
+    public function template(): string
     {
         return $this->template;
     }

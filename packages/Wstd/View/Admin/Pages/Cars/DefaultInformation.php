@@ -7,7 +7,7 @@ use Wstd\View\Admin\ViewModelInterface;
 use Wstd\View\Admin\Includes\AbstractDefaultInformation;
 use Wstd\View\Admin\Modules\FormItems\Select;
 
-class DefaultInformation extends AbstractDefaultInformation implements ViewModelInterface
+final class DefaultInformation extends AbstractDefaultInformation implements ViewModelInterface
 {
     public $items = [
         'vendor',
