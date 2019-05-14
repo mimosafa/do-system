@@ -19,6 +19,9 @@ class CarUpdateUsecase
         if ($request->edit_car_default_information) {
             return $this->editCarDefaultInformation($id, $request);
         }
+        else if ($request->add_image_to_car) {
+            return $this->addImageToCar($id, $request);
+        }
     }
 
     protected function editCarDefaultInformation(int $id, Request $request)
@@ -33,6 +36,16 @@ class CarUpdateUsecase
 
         return redirect()->route('admin.cars.show', [
             'id' => $entity->getId(),
+        ]);
+    }
+
+    protected function addImageToCar(int $id, Request $request)
+    {
+        $eloquent = \Wstd\Infrastructure\Eloquents\Car::find($id);
+        $eloquent->addMediaFromRequest('image')->toMediaCollection('cars');
+
+        return redirect()->route('admin.cars.show', [
+            'id' => $id,
         ]);
     }
 }
