@@ -16,10 +16,9 @@ class VendorStoreUsecase
 
     public function __invoke(Request $request)
     {
-        $vendor = $this->repository->init([
+        $vendor = $this->repository->store([
             'name' => $request->name,
         ]);
-        $this->repository->store($vendor);
 
         return redirect()->route('admin.vendors.show', [
             'id' => $vendor->getId(),

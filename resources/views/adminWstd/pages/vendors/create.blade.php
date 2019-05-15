@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('adminWstd.base')
 
 @section('title', '新規事業者作成')
 
