@@ -13,18 +13,10 @@ interface CarRepositoryInterface
     public function getById(int $id): ?CarInterface;
 
     /**
-     * 事業者をパラメーター (配列) から初期化
-     *
-     * @param array{id:?int,vendor:Wstd\Domain\Models\Vendor\VendorInterface,name:string,vin:string,status:?int} $param
-     * @return Wstd\Domain\Models\Car\CarInterface
-     */
-    public function init(array $params): CarInterface;
-
-    /**
      * 事業者を永続化
      *
-     * @param Wstd\Domain\Models\Car\CarInterface $vendor
-     * @return void
+     * @param  array $params
+     * @return Wstd\Domain\Models\Car\CarInterface
      */
-    public function store(CarInterface &$vendor): void;
+    public function store(array $params): CarInterface;
 }

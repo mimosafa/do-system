@@ -13,18 +13,10 @@ interface VendorRepositoryInterface
     public function getById(int $id): ?VendorInterface;
 
     /**
-     * 事業者をパラメーター (配列) から初期化
-     *
-     * @param array{id:?int,name:string,status:?int} $param
-     * @return Wstd\Domain\Models\Vendor\VendorInterface
-     */
-    public function init(array $params): VendorInterface;
-
-    /**
      * 事業者を永続化
      *
-     * @param Wstd\Domain\Models\Vendor\VendorInterface $vendor
-     * @return void
+     * @param array $params
+     * @return Wstd\Domain\Models\Vendor\VendorInterface
      */
-    public function store(VendorInterface &$vendor): void;
+    public function store(array $params): VendorInterface;
 }

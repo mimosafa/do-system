@@ -5,6 +5,7 @@ namespace Wstd\Infrastructure\Eloquents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Vendor\VendorValueStatus;
+use Wstd\Infrastructure\Eloquents\Car;
 
 /**
  * @property int|null $id
@@ -28,4 +29,9 @@ class Vendor extends Model
     protected $attributes = [
         'status' => VendorValueStatus::UNREGISTERED,
     ];
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
+    }
 }

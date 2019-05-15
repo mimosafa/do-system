@@ -2,66 +2,35 @@
 
 namespace Wstd\Domain\Models\Car;
 
+use Wstd\Domain\Models\Car\CarValueVin;
+use Wstd\Domain\Models\Car\CarValueStatus;
+use Wstd\Domain\Models\Vendor\Vendor;
 use Wstd\Domain\Models\Vendor\VendorInterface;
+use Wstd\Infrastructure\Eloquents\Car as Eloquent;
 
 final class Car implements CarInterface
 {
     /**
-     * @var int|null
+     * @var Wstd\Infrastructure\Eloquents\Car
      */
-    private $id;
+    private $eloquent;
 
     /**
-     * @var Wstd\Domain\Models\Vendor\VendorInterface
+     * @param int $id
      */
-    private $vendor;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var Wstd\Domain\Models\Car\CarValueVin
-     */
-    private $vin;
-
-    /**
-     * @var Wstd\Domain\Models\Car\CarValueStatus
-     */
-    private $status;
-
-    /**
-     * @param int|null $id
-     * @param Wstd\Domain\Models\Vendor\VendorInterface $vendor
-     * @param string $name
-     * @param Wstd\Domain\Models\Car\CarValueVin $vin
-     * @param Wstd\Domain\Models\Car\CarValueStatus|null $status
-     * @return void
-     */
-    public function __construct(
-        ?int $id,
-        VendorInterface $vendor,
-        string $name,
-        CarValueVin $vin,
-        ?CarValueStatus $status
-    )
+    public function __construct(int $id)
     {
-        $this->id = $id;
-        $this->vendor = $vendor;
-        $this->name = $name;
-        $this->vin = $vin;
-        $this->status = $status;
+        $this->eloquent = Eloquent::findOrFail($id);
     }
 
     /**
      * 車両ID を取得
      *
-     * @return int|null
+     * @return int
      */
-    public function getId(): ?int
+    public function getId(): int
     {
-        return $this->id;
+        return $this->eloquent->id;
     }
 
     /**
@@ -71,7 +40,8 @@ final class Car implements CarInterface
      */
     public function getVendor(): VendorInterface
     {
-        return $this->vendor;
+        $eloquent = $this->eloquent->vendor;
+        return new Vendor($eloquent->id);
     }
 
     /**
@@ -81,7 +51,7 @@ final class Car implements CarInterface
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->eloquent->name;
     }
 
     /**
@@ -91,7 +61,7 @@ final class Car implements CarInterface
      */
     public function getVin(): CarValueVin
     {
-        return $this->vin;
+        return CarValueVin::of($this->eloquent->vin);
     }
 
     /**
@@ -101,7 +71,7 @@ final class Car implements CarInterface
      */
     public function getStatus(): ?CarValueStatus
     {
-        return $this->status;
+        return CarValueStatus::of($this->eloquent->status);
     }
 
     /**

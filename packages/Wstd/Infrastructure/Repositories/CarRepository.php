@@ -22,50 +22,13 @@ class CarRepository implements CarRepositoryInterface
     }
 
     /**
-     * 車両をパラメーター (配列) から初期化
-     *
-     * @param array{id:?int,vendor_id|vendor:mixed,name:string,vin:mixed,status:?mixed} $param
-     * @return Wstd\Domain\Models\Car\CarInterface
-     */
-    public function init(array $params): CarInterface
-    {
-        if (! isset($params['vendor']) && ! isset($params['vendor_id'])) {
-            if (isset($params['id'])) {
-                $params['vendor'] = $this->getById($params['id'])->getVendor();
-            }
-            else {
-                /** @todo */
-            }
-        }
-        return CarFactory::make($params);
-    }
-
-    /**
      * 車両を永続化
      *
-     * @param Wstd\Domain\Models\Car\CarInterface $car
-     * @return void
+     * @param array $params
+     * @return Wstd\Domain\Models\Car\CarInterface
      */
-    public function store(CarInterface &$car): void
+    public function store(array $params): CarInterface
     {
-        $params = CarFactory::break($car);
-        $eloquent = $this->initEloquent($params);
-        $eloquent->save();
-
-        $car = $this->getById($eloquent->id);
-    }
-
-    protected function initEloquent(array $params): Car
-    {
-        if (isset($params['id'])) {
-            $eloquent = Car::findOrFail($params['id']);
-            unset($params['id']);
-        }
-        else {
-            $eloquent = new Car();
-        }
-        $eloquent->fill($params);
-
-        return $eloquent;
+        return CarFactory::make($params);
     }
 }
