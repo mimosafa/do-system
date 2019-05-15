@@ -15,8 +15,8 @@ interface VendorRepositoryInterface
     /**
      * 事業者を永続化
      *
-     * @param Wstd\Domain\Models\Vendor\VendorInterface $vendor
-     * @return void
+     * @param array $params
+     * @return Wstd\Domain\Models\Vendor\VendorInterface
      */
     public function store(array $params): VendorInterface;
 }

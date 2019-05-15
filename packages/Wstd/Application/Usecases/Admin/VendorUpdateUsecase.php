@@ -39,12 +39,11 @@ class VendorUpdateUsecase
 
     protected function addCarToVendor(int $id, Request $request)
     {
-        $entity = $this->carRepository->init([
+        $entity = $this->carRepository->store([
             'vendor_id' => $id,
             'name' => $request->car['name'],
             'vin' => $request->car['vin'],
         ]);
-        $this->carRepository->store($entity);
 
         return redirect()->route('admin.cars.show', [
             'id' => $entity->getId(),

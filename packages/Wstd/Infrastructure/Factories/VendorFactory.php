@@ -3,17 +3,16 @@
 namespace Wstd\Infrastructure\Factories;
 
 use Wstd\Domain\Models\Vendor\Vendor;
-use Wstd\Domain\Models\Vendor\VendorValueStatus;
+use Wstd\Domain\Models\Vendor\VendorInterface;
 use Wstd\Infrastructure\Eloquents\Vendor as Eloquent;
-use Wstd\Infrastructure\Services\CarQueryService;
 
 class VendorFactory
 {
     /**
      * @param array{id:?int,name:string,status:?int}
-     * @return Wstd\Domain\Models\Vendor\Vendor
+     * @return Wstd\Domain\Models\Vendor\VendorInterface
      */
-    public static function make(array $params): Vendor
+    public static function make(array $params): VendorInterface
     {
         if (isset($params['id'])) {
             $eloquent = Eloquent::find($params['id']);
@@ -30,9 +29,9 @@ class VendorFactory
 
     /**
      * @param Wstd\Infrastructure\Eloquents\Vendor $eloquent
-     * @return Wstd\Domain\Models\Vendor\Vendor
+     * @return Wstd\Domain\Models\Vendor\VendorInterface
      */
-    public static function makeFromEloquent(Eloquent $eloquent): Vendor
+    public static function makeFromEloquent(Eloquent $eloquent): VendorInterface
     {
         return new Vendor($eloquent->id);
     }
