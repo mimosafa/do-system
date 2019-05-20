@@ -14,13 +14,7 @@ class VendorFactory
      */
     public static function make(array $params): VendorInterface
     {
-        if (isset($params['id'])) {
-            $eloquent = Eloquent::find($params['id']);
-            unset($params['id']);
-        }
-        else {
-            $eloquent = new Eloquent();
-        }
+        $eloquent = isset($params['id']) ? Eloquent::find($params['id']) : new Eloquent();
         $eloquent->fill($params);
         $eloquent->save();
 
