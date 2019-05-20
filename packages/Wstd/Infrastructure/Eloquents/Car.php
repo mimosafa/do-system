@@ -54,4 +54,9 @@ class Car extends Model implements HasMedia
     {
         return $this->belongsTo(Vendor::class);
     }
+
+    public function getPhotosAttribute()
+    {
+        return $this->getMedia('cars');
+    }
 }

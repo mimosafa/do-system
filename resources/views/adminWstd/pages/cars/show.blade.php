@@ -20,12 +20,14 @@
                 @component('adminWstd.modules.contentBox', [
                     'title' => '画像',
                 ])
-                画像がここに入ります。
+                @php
+                    dump($photos);
+                @endphp
                 <a href="#" data-toggle="modal" data-target="#add_image_to_car" class="btn btn-primary btn-sm">
                     <b>追加</b>
                 </a>
                 @endcomponent
-                
+
             </div>
         </div>
         @stack('hidden_form')

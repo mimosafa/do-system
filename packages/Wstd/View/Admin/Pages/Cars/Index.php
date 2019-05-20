@@ -46,7 +46,7 @@ final class Index extends AbstractDataTable implements ContentInterface
 
     public function tdThumb($entity)
     {
-        $images = $entity->getImages();
+        $images = $entity->getPhotos();
         if (empty($images)) {
             return '<span class="noImage thumbImage">No Image</span>';
         }
