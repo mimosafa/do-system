@@ -20,24 +20,12 @@
                 @component('adminWstd.modules.contentBox', [
                     'title' => '画像',
                 ])
-                画像がここに入ります。
-                <a href="#" data-toggle="modal" data-target="#add_image_to_car" class="btn btn-primary btn-sm">
-                    <b>追加</b>
-                </a>
+                @include('adminWstd.includes.gallery')
                 @endcomponent
-                
+
             </div>
         </div>
         @stack('hidden_form')
-
-        @component('adminWstd.modules.modal', [
-            'id' => 'add_image_to_car',
-            'title' => '画像を追加する',
-            'submittable' => true,
-        ])
-        <input type="file" name="image">
-        <input type="hidden" name="add_image_to_car" value="1">
-        @endcomponent
 
     </form>
 @endsection
