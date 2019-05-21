@@ -34,6 +34,7 @@ final class CarsTable extends AbstractDataTable implements ContentInterface
      * @var array
      */
     public $items = [
+        'thumb',
         'name',
         'vin',
         'status',
@@ -43,6 +44,7 @@ final class CarsTable extends AbstractDataTable implements ContentInterface
      * @var array
      */
     public $itemLabels = [
+        'thumb' => '車両写真',
         'name' => '車両名',
         'vin' => '車両No',
         'status' => '状態',
@@ -79,6 +81,18 @@ final class CarsTable extends AbstractDataTable implements ContentInterface
             'label' => '車両No',
         ]));
         $this->addCarForm = $container;
+    }
+
+    public function tdThumb($entity)
+    {
+        $photos = $entity->getPhotos();
+        if ($photos->isEmpty()) {
+            return '<span class="noImage thumbImage">No Image</span>';
+        }
+        return sprintf(
+            '<a href="#" style="background-image:url(%s)" class="thumbImage"></a>',
+            $photos->first()->getUrl('thumb')
+        );
     }
 
     public function tdName($value)
