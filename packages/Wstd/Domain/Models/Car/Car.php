@@ -92,8 +92,8 @@ final class Car implements CarInterface
      *
      * @return array
      */
-    public function getImages(): array
+    public function getPhotos()
     {
-        return [];
+        return $this->eloquent->images;
     }
 }

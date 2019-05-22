@@ -16,6 +16,10 @@ class CarUpdateUsecase
 
     public function __invoke(int $id, Request $request)
     {
+        if ($request->add_image_to_car) {
+            return $this->addImageToCar($id, $request);
+        }
+
         $params = ['id' => $id];
         if (isset($request->name)) {
             $params['name'] = $request->name;
@@ -30,6 +34,16 @@ class CarUpdateUsecase
 
         return redirect()->route('admin.cars.show', [
             'id' => $entity->getId(),
+        ]);
+    }
+
+    protected function addImageToCar(int $id, Request $request)
+    {
+        $eloquent = \Wstd\Infrastructure\Eloquents\Car::find($id);
+        $eloquent->addMediaFromRequest('image')->toMediaCollection('cars');
+
+        return redirect()->route('admin.cars.show', [
+            'id' => $id,
         ]);
     }
 }

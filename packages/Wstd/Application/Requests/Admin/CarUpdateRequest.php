@@ -39,6 +39,12 @@ class CarUpdateRequest extends FormRequest
             'name' => 'required_with:edit_car_default_information|string|max:100',
             'vin' => 'required_with:edit_car_default_information|string|max:20',
             'status' => 'required_with:edit_car_default_information|integer|' . $statusRule,
+
+            /**
+             * 画像追加
+             */
+            'add_image_to_car' => 'sometimes|accepted',
+            'image' => 'required_with:add_image_to_car|file|image|mimes:jpeg,png,jpg',
         ];
     }
 }

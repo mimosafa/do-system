@@ -58,4 +58,9 @@ final class Show extends ViewModel implements ViewModelInterface
     {
         return $this->template;
     }
+
+    public function photos()
+    {
+        return $this->entity->getPhotos();
+    }
 }

@@ -49,5 +49,5 @@ interface CarInterface extends EntityInterface
      *
      * @return array
      */
-    public function getImages(): array;
+    public function getPhotos();
 }
