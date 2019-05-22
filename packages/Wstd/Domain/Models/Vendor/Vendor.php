@@ -69,17 +69,4 @@ final class Vendor implements VendorInterface
     {
         return (self::$carQuery)($this->getId());
     }
-
-    /**
-     * 事業者が編集可能か否か
-     *
-     * @todo
-     *
-     * @param string|null $property
-     * @return bool
-     */
-    public function isEditable(?string $property = null): bool
-    {
-        return true;
-    }
 }

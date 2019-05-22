@@ -17,12 +17,4 @@ interface EntityInterface
      * @return string
      */
     public function getName(): string;
-
-    /**
-     * エンティティーが編集可能か否か
-     *
-     * @param string|null $property
-     * @return bool
-     */
-    public function isEditable(?string $property): bool;
 }

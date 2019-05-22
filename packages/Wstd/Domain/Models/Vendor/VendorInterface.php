@@ -34,12 +34,4 @@ interface VendorInterface extends EntityInterface
      * @return Wstd\Domain\Models\Car\CarsCollection
      */
     public function getCars(): CarsCollection;
-
-    /**
-     * 事業者が編集可能か否か
-     *
-     * @param string|null $property
-     * @return bool
-     */
-    public function isEditable(?string $property): bool;
 }

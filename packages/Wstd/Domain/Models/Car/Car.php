@@ -75,19 +75,6 @@ final class Car implements CarInterface
     }
 
     /**
-     * 車両が編集可能か否か
-     *
-     * @todo
-     *
-     * @param string|null $property
-     * @return bool
-     */
-    public function isEditable(?string $property = null): bool
-    {
-        return true;
-    }
-
-    /**
      * 車両写真の配列を取得
      *
      * @return array
