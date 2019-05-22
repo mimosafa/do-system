@@ -3,7 +3,9 @@
 namespace Wstd\Domain\Models\Vendor;
 
 use Wstd\Domain\Models\Car\CarsCollection;
+use Wstd\Domain\Models\Shop\ShopsCollection;
 use Wstd\Infrastructure\Services\CarQueryService;
+use Wstd\Infrastructure\Services\ShopQueryService;
 use Wstd\Infrastructure\Eloquents\Vendor as Eloquent;
 
 final class Vendor implements VendorInterface
@@ -19,6 +21,8 @@ final class Vendor implements VendorInterface
      */
     private static $carQuery;
 
+    private static $shopQuery;
+
     /**
      * @param int $id
      */
@@ -27,6 +31,9 @@ final class Vendor implements VendorInterface
         $this->eloquent = Eloquent::findOrFail($id);
         if (! isset(self::$carQuery)) {
             self::$carQuery = new CarQueryService();
+        }
+        if (! isset(self::$shopQuery)) {
+            self::$shopQuery = new ShopQueryService();
         }
     }
 
@@ -68,5 +75,15 @@ final class Vendor implements VendorInterface
     public function getCars(): CarsCollection
     {
         return (self::$carQuery)($this->getId());
+    }
+
+    /**
+     * 所属している店舗を取得
+     *
+     * @return Wstd\Domain\Models\Shop\ShopsCollection
+     */
+    public function getShops(): ShopsCollection
+    {
+        return (self::$shopQuery)($this->getId());
     }
 }

@@ -7,9 +7,9 @@ interface EntityInterface
     /**
      * エンティティーのID を取得
      *
-     * @return int|null
+     * @return int
      */
-    public function getId(): ?int;
+    public function getId(): int;
 
     /**
      * エンティティーの名前を取得

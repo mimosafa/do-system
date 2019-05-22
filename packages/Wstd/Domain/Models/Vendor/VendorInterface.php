@@ -4,23 +4,10 @@ namespace Wstd\Domain\Models\Vendor;
 
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\Car\CarsCollection;
+use Wstd\Domain\Models\Shop\ShopsCollection;
 
 interface VendorInterface extends EntityInterface
 {
-    /**
-     * 事業者ID を取得
-     *
-     * @return int|null
-     */
-    public function getId(): ?int;
-
-    /**
-     * 事業者名を取得
-     *
-     * @return string
-     */
-    public function getName(): string;
-
     /**
      * 事業者の状態を取得
      *
@@ -34,4 +21,11 @@ interface VendorInterface extends EntityInterface
      * @return Wstd\Domain\Models\Car\CarsCollection
      */
     public function getCars(): CarsCollection;
+
+    /**
+     * 所属している店舗を取得
+     *
+     * @return Wstd\Domain\Models\Shop\ShopsCollection
+     */
+    public function getShops(): ShopsCollection;
 }

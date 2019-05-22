@@ -10,25 +10,11 @@ use Wstd\Domain\Models\Vendor\VendorInterface;
 interface CarInterface extends EntityInterface
 {
     /**
-     * 車両ID を取得
-     *
-     * @return int|null
-     */
-    public function getId(): ?int;
-
-    /**
      * 車両が属する事業者を取得
      *
      * @return Wstd\Domain\Models\Vendor\VendorInterface
      */
     public function getVendor(): VendorInterface;
-
-    /**
-     * 車両名を取得
-     *
-     * @return string
-     */
-    public function getName(): string;
 
     /**
      * 車両Noを取得
