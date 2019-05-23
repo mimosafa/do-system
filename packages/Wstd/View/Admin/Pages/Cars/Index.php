@@ -2,7 +2,7 @@
 
 namespace Wstd\View\Admin\Pages\Cars;
 
-use Wstd\Domain\Models\Car\CarsCollection;
+use Wstd\Domain\Models\Car\CarCollectionInterface;
 use Wstd\View\Admin\ContentInterface;
 use Wstd\View\Admin\Includes\AbstractDataTable;
 
@@ -16,7 +16,7 @@ final class Index extends AbstractDataTable implements ContentInterface
 
     public $items = [
         'id',
-        'vendor',
+        'thumb',
         'name',
         'vin',
         'status',
@@ -24,13 +24,13 @@ final class Index extends AbstractDataTable implements ContentInterface
 
     public $itemLabels = [
         'id' => '事業者ID',
-        'vendor' => '事業者',
-        'name' => '車両名',
+        'thumb' => '車両写真',
+        'name' => '事業者名 / 車両名',
         'status' => '状態',
     ];
 
     /**
-     * @var Wstd\Domain\Models\Car\CarsCollection
+     * @var Wstd\Domain\Models\Car\CarCollectionInterface
      */
     public $collection;
 
@@ -39,9 +39,21 @@ final class Index extends AbstractDataTable implements ContentInterface
      */
     protected $template = 'adminWstd.pages.index';
 
-    public function __construct(CarsCollection $collection)
+    public function __construct(CarCollectionInterface $collection)
     {
         $this->collection = $collection;
+    }
+
+    public function tdThumb($entity)
+    {
+        $photos = $entity->getPhotos();
+        if ($photos->isEmpty()) {
+            return '<span class="noImage thumbImage">No Image</span>';
+        }
+        return sprintf(
+            '<a href="#" style="background-image:url(%s)" class="thumbImage"></a>',
+            $photos->first()->getUrl('thumb')
+        );
     }
 
     public function tdId($entity)
@@ -49,10 +61,16 @@ final class Index extends AbstractDataTable implements ContentInterface
         return $entity->getVendor()->getId();
     }
 
-    public function tdVendor($entity)
+    protected function vendor($entity)
     {
         $vendor = $entity->getVendor();
-        return $vendor->getName();
+        $link = \route('admin.vendors.show', ['id' => $vendor->getId(),]);
+        $status = $vendor->getStatus();
+        $string = sprintf('<a href="%s">%s</a>', e($link), e($vendor->getName()));
+        if (! $status->isRegistered()) {
+            $string = sprintf('<small class="muted">[ %s ]</small> ', $status) . $string;
+        }
+        return $string;
     }
 
     public function tdName($entity)
@@ -63,7 +81,7 @@ final class Index extends AbstractDataTable implements ContentInterface
         if (! $status->isRegistered()) {
             $string = sprintf('<small class="muted">[ %s ]</small> ', $status) . $string;
         }
-        return $string;
+        return $this->vendor($entity) . ' / ' . $string;
     }
 
     public function tdStatus($entity)

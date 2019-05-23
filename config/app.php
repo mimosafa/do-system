@@ -175,6 +175,13 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Wstd Application Service Providers...
+         */
+        Wstd\Application\Providers\CollectionServiceProvider::class,
+        Wstd\Application\Providers\RelationServiceProvider::class,
+        Wstd\Application\Providers\RepositoryServiceProvider::class,
+
     ],
 
     /*

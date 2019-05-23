@@ -5,26 +5,26 @@ namespace Wstd\Domain\Models\Vendor;
 interface VendorRepositoryInterface
 {
     /**
-     * 事業者を取得
+     * 条件により複数件を取得
+     *
+     * @param array $params
+     * @return Wstd\Domain\Models\Vendor\VendorCollectionInterface
+     */
+    public function find(array $params): VendorCollectionInterface;
+
+    /**
+     * ID により1件取得
      *
      * @param int $id
      * @return Wstd\Domain\Models\Vendor\VendorInterface|null
      */
-    public function getById(int $id): ?VendorInterface;
+    public function findById(int $id): ?VendorInterface;
 
     /**
-     * 事業者をパラメーター (配列) から初期化
+     * 永続化
      *
-     * @param array{id:?int,name:string,status:?int} $param
+     * @param array $params
      * @return Wstd\Domain\Models\Vendor\VendorInterface
      */
-    public function init(array $params): VendorInterface;
-
-    /**
-     * 事業者を永続化
-     *
-     * @param Wstd\Domain\Models\Vendor\VendorInterface $vendor
-     * @return void
-     */
-    public function store(VendorInterface &$vendor): void;
+    public function store(array $params): VendorInterface;
 }

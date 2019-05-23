@@ -2,49 +2,25 @@
 
 namespace Wstd\Domain\Models\Vendor;
 
-use Wstd\Domain\Models\Car\CarsCollection;
-use Wstd\Domain\Services\CarQueryServiceInterface;
+use Wstd\Domain\Models\Car\CarCollectionInterface;
+use Wstd\Domain\Models\Shop\ShopCollectionInterface;
+use Wstd\Infrastructure\Eloquents\Vendor as Eloquent;
+use Wstd\Infrastructure\Repositories\CarRepository;
+use Wstd\Infrastructure\Repositories\ShopRepository;
 
 final class Vendor implements VendorInterface
 {
     /**
-     * @var int|null
+     * @var Wstd\Infrastructure\Eloquents\Vendor
      */
-    private $id;
+    private $eloquent;
 
     /**
-     * @var string
+     * @param int $id
      */
-    private $name;
-
-    /**
-     * @var Wstd\Domain\Models\Vendor\VendorValueStatus
-     */
-    private $status;
-
-    /**
-     * @var Wstd\Domain\Services\CarQueryServiceInterface
-     */
-    private $carQueryService;
-
-    /**
-     * @param int|null $id
-     * @param string $name
-     * @param Wstd\Domain\Models\Vendor\VendorValueStatus|null $status
-     * @return void
-     */
-    public function __construct(
-        ?int $id,
-        string $name,
-        ?VendorValueStatus $status,
-        CarQueryServiceInterface $carQuery
-    )
+    public function __construct(int $id)
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->status = $status;
-
-        $this->carQueryService = $carQuery;
+        $this->eloquent = Eloquent::findOrFail($id);
     }
 
     /**
@@ -52,9 +28,9 @@ final class Vendor implements VendorInterface
      *
      * @return int
      */
-    public function getId(): ?int
+    public function getId(): int
     {
-        return $this->id;
+        return $this->eloquent->id;
     }
 
     /**
@@ -64,7 +40,7 @@ final class Vendor implements VendorInterface
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->eloquent->name;
     }
 
     /**
@@ -74,29 +50,28 @@ final class Vendor implements VendorInterface
      */
     public function getStatus(): ?VendorValueStatus
     {
-        return $this->status;
+        return VendorValueStatus::of($this->eloquent->status);
     }
 
     /**
      * 所属している車両を取得
      *
-     * @return Wstd\Domain\Models\Car\CarsCollection
+     * @return Wstd\Domain\Models\Car\CarCollectionInterface
      */
-    public function getCars(): CarsCollection
+    public function getCars(): CarCollectionInterface
     {
-        return ($this->carQueryService)($this->getId());
+        $repository = resolve(CarRepository::class);
+        return $repository->makeCollectionFromEloquents($this->eloquent->cars);
     }
 
     /**
-     * 事業者が編集可能か否か
+     * 所属している店舗を取得
      *
-     * @todo
-     *
-     * @param string|null $property
-     * @return bool
+     * @return Wstd\Domain\Models\Shop\ShopCollectionInterface
      */
-    public function isEditable(?string $property = null): bool
+    public function getShops(): ShopCollectionInterface
     {
-        return true;
+        $repository = resolve(ShopRepository::class);
+        return $repository->makeCollectionFromEloquents($this->eloquent->shops);
     }
 }

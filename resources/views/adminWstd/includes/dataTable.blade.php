@@ -18,7 +18,7 @@
 
 --}}
 
-@yield('beforeTable')
+@yield('before_' . $name . '_table')
 
 @if ($collection->isNotEmpty())
 
@@ -78,4 +78,4 @@
     </p>
 @endif
 
-@yield('afterTable')
+@yield('after_' . $name . '_table')

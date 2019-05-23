@@ -3,20 +3,12 @@
 namespace Wstd\Domain\Models\Vendor;
 
 use Wstd\Domain\Models\EntityInterface;
-use Wstd\Domain\Models\Car\CarsCollection;
+use Wstd\Domain\Models\Car\CarCollectionInterface;
+use Wstd\Domain\Models\Shop\ShopCollectionInterface;
 
 interface VendorInterface extends EntityInterface
 {
     /**
-     * 事業者ID を取得
-     *
-     * @return int|null
-     */
-    public function getId(): ?int;
-
-    /**
-     * 事業者名を取得
-     *
      * @return string
      */
     public function getName(): string;
@@ -31,15 +23,14 @@ interface VendorInterface extends EntityInterface
     /**
      * 所属している車両を取得
      *
-     * @return Wstd\Domain\Models\Car\CarsCollection
+     * @return Wstd\Domain\Models\Car\CarCollectionInterface
      */
-    public function getCars(): CarsCollection;
+    public function getCars(): CarCollectionInterface;
 
     /**
-     * 事業者が編集可能か否か
+     * 所属している店舗を取得
      *
-     * @param string|null $property
-     * @return bool
+     * @return Wstd\Domain\Models\Shop\ShopCollectionInterface
      */
-    public function isEditable(?string $property): bool;
+    public function getShops(): ShopCollectionInterface;
 }

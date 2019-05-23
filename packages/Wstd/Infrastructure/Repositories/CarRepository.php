@@ -2,70 +2,120 @@
 
 namespace Wstd\Infrastructure\Repositories;
 
+use Illuminate\Database\Eloquent\Collection;
 use Wstd\Domain\Models\Car\CarInterface;
+use Wstd\Domain\Models\Car\CarCollectionInterface;
 use Wstd\Domain\Models\Car\CarRepositoryInterface;
 use Wstd\Infrastructure\Eloquents\Car;
 use Wstd\Infrastructure\Factories\CarFactory;
 
-class CarRepository implements CarRepositoryInterface
+final class CarRepository implements CarRepositoryInterface
 {
     /**
-     * 車両を取得
+     * 条件により複数件を取得
+     *
+     * @param array $params
+     * @return Wstd\Domain\Models\Car\CarCollectionInterface
+     */
+    public function find(array $params): CarCollectionInterface
+    {
+        $eloquents = $this->query($params);
+        return $this->makeCollectionFromEloquents($eloquents);
+    }
+
+    /**
+     * ID により1件取得
      *
      * @param int $id
      * @return Wstd\Domain\Models\Car\CarInterface|null
      */
-    public function getById(int $id): ?CarInterface
+    public function findById(int $id): ?CarInterface
     {
         $eloquent = Car::find($id);
         return $eloquent ? CarFactory::makeFromEloquent($eloquent) : null;
     }
 
     /**
-     * 車両をパラメーター (配列) から初期化
+     * 永続化
      *
-     * @param array{id:?int,vendor_id|vendor:mixed,name:string,vin:mixed,status:?mixed} $param
+     * @param array $params
      * @return Wstd\Domain\Models\Car\CarInterface
      */
-    public function init(array $params): CarInterface
+    public function store(array $params): CarInterface
     {
-        if (! isset($params['vendor']) && ! isset($params['vendor_id'])) {
-            if (isset($params['id'])) {
-                $params['vendor'] = $this->getById($params['id'])->getVendor();
-            }
-            else {
-                /** @todo */
-            }
-        }
         return CarFactory::make($params);
     }
 
     /**
-     * 車両を永続化
+     * Eloquent collection を変換
      *
-     * @param Wstd\Domain\Models\Car\CarInterface $car
-     * @return void
+     * @todo やむを得ず public access にしている
+     * @see Wstd\Domain\Models\Vendor\Vendor::getCars()
+     *
+     * @param Illuminate\Database\Eloquent\Collection
+     * @return Wstd\Domain\Models\Car\CarCollectionInterface
      */
-    public function store(CarInterface &$car): void
+    public function makeCollectionFromEloquents(Collection $eloquents): CarCollectionInterface
     {
-        $params = CarFactory::break($car);
-        $eloquent = $this->initEloquent($params);
-        $eloquent->save();
+        $collection = resolve(CarCollectionInterface::class);
 
-        $car = $this->getById($eloquent->id);
+        if ($eloquents->isNotEmpty()) {
+            foreach ($eloquents as $eloquent) {
+                $collection[] = CarFactory::makeFromEloquent($eloquent);
+            }
+        }
+
+        return $collection;
     }
 
-    protected function initEloquent(array $params): Car
+    /**
+     * Query Builder
+     *
+     * @access private
+     *
+     * @param array $params
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    private function query(array $params)
     {
-        if (isset($params['id'])) {
-            $eloquent = Car::findOrFail($params['id']);
-            unset($params['id']);
-        }
-        else {
-            $eloquent = new Car();
-        }
-        $eloquent->fill($params);
+        extract($params);
 
-        return $eloquent;
+        return (new Car())->when(isset($vendor_id), function($query) use (&$vendor_id) {
+
+            /**
+             * vendor_id で親事業者検索
+             *
+             * @param int|null $vendor_id
+             */
+            return $query->where('cars.vendor_id', '=', $vendor_id);
+
+        })->when(isset($name), function($query) use (&$name) {
+
+            /**
+             * name を文字列で LIKE 検索
+             *
+             * @param string|null $name
+             */
+            return $query->where('cars.name', 'like', "%{$name}%");
+
+        })->when(isset($vin), function($query) use (&$vin) {
+
+            /**
+             * vin を文字列で LIKE 検索
+             *
+             * @param string|null $vin
+             */
+            return $query->where('cars.vin', 'like', "%{$vin}%");
+
+        })->when(isset($status), function($query) use (&$status) {
+
+            /**
+             * status を配列で where in 検索
+             *
+             * @param array|null $status
+             */
+            return $query->whereIn('cars.status', $status);
+
+        })->get();
     }
 }

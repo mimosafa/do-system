@@ -48,6 +48,15 @@ class VendorUpdateRequest extends FormRequest
             'add_car_to_vendor' => 'sometimes|accepted',
             'car.name' => 'required_with:add_car_to_vendor|string|max:100',
             'car.vin' => 'required_with:add_car_to_vendor|string|max:20',
+
+            /**
+             * 店舗追加
+             *
+             * @see Wstd\View\Admin\Pages\Vendors\ShopTable
+             * @see resources/views/adminWstd/pages/vendors/shopTable.blade.php
+             */
+            'add_shop_to_vendor' => 'sometimes|accepted',
+            'shop.name' => 'required_with:add_shop_to_vendor|string|max:100',
         ];
     }
 }

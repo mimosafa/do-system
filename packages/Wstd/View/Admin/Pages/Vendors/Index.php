@@ -2,7 +2,7 @@
 
 namespace Wstd\View\Admin\Pages\Vendors;
 
-use Wstd\Domain\Models\Vendor\VendorsCollection;
+use Wstd\Domain\Models\Vendor\VendorCollectionInterface;
 use Wstd\View\Admin\ContentInterface;
 use Wstd\View\Admin\Includes\AbstractDataTable;
 
@@ -36,7 +36,7 @@ final class Index extends AbstractDataTable implements ContentInterface
      */
     protected $template = 'adminWstd.pages.index';
 
-    public function __construct(VendorsCollection $collection)
+    public function __construct(VendorCollectionInterface $collection)
     {
         $this->collection = $collection;
     }

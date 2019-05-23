@@ -5,26 +5,26 @@ namespace Wstd\Domain\Models\Car;
 interface CarRepositoryInterface
 {
     /**
-     * 事業者を取得
+     * 条件により複数件を取得
+     *
+     * @param array $params
+     * @return Wstd\Domain\Models\Car\CarCollectionInterface
+     */
+    public function find(array $params): CarCollectionInterface;
+
+    /**
+     * ID により1件取得
      *
      * @param int $id
      * @return Wstd\Domain\Models\Car\CarInterface|null
      */
-    public function getById(int $id): ?CarInterface;
+    public function findById(int $id): ?CarInterface;
 
     /**
-     * 事業者をパラメーター (配列) から初期化
+     * 永続化
      *
-     * @param array{id:?int,vendor:Wstd\Domain\Models\Vendor\VendorInterface,name:string,vin:string,status:?int} $param
+     * @param  array $params
      * @return Wstd\Domain\Models\Car\CarInterface
      */
-    public function init(array $params): CarInterface;
-
-    /**
-     * 事業者を永続化
-     *
-     * @param Wstd\Domain\Models\Car\CarInterface $vendor
-     * @return void
-     */
-    public function store(CarInterface &$vendor): void;
+    public function store(array $params): CarInterface;
 }

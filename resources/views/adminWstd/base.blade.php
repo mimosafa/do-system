@@ -12,6 +12,10 @@
     </h1>
 @endsection
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('wstd/css/do-system.css') }}">
+@endpush
+
 @push('js')
     <script src="{{ asset('wstd/js/do-system.js') }}"></script>
 @endpush

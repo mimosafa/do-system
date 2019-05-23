@@ -13,7 +13,7 @@
     $editModalId = 'add_car_to_vendor';
 @endphp
 
-@section('afterTable')
+@section('after_' . $name . '_table')
 <a href="#" data-toggle="modal" data-target="#{{ $editModalId }}" class="btn btn-primary btn-block btn-sm">
     <b>車両を追加する</b>
 </a>

@@ -50,6 +50,7 @@ final class Show extends ViewModel implements ViewModelInterface
     {
         $this->objectsBelonged = new TabContents('belongs_to_vendor');
         $this->objectsBelonged->add(new CarsTable($this->entity));
+        $this->objectsBelonged->add(new ShopsTable($this->entity));
     }
 
     public function template(): string
