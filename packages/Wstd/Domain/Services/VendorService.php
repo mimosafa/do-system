@@ -17,6 +17,6 @@ class VendorService
 
     public function find(Request $request): VendorCollectionInterface
     {
-        return $this->repository->find($request->name, $request->status);
+        return $this->repository->find($request->all());
     }
 }

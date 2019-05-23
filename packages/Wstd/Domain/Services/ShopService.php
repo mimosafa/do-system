@@ -17,6 +17,6 @@ class ShopService
 
     public function find(Request $request): ShopCollectionInterface
     {
-        return $this->repository->find($request->vendor_id, $request->name, $request->status);
+        return $this->repository->find($request->all());
     }
 }

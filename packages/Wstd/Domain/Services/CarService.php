@@ -17,6 +17,6 @@ class CarService
 
     public function find(Request $request): CarCollectionInterface
     {
-        return $this->repository->find($request->vendor_id, $request->name, $request->vin, $request->status);
+        return $this->repository->find($request->all());
     }
 }

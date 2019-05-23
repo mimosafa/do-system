@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
 use Wstd\Application\Requests\Admin\VendorsIndexRequest;
-use Wstd\Application\Usecases\Admin\VendorShowUsecase;
 use Wstd\Application\Requests\Admin\VendorUpdateRequest;
 use Wstd\Application\Usecases\Admin\VendorUpdateUsecase;
 use Wstd\Application\Requests\Admin\VendorStoreRequest;
 use Wstd\Application\Usecases\Admin\VendorStoreUsecase;
 
+use Wstd\Domain\Models\Vendor\VendorRepositoryInterface;
 use Wstd\Domain\Services\VendorService;
 use Wstd\View\Admin\Pages\Vendors\Index;
+use Wstd\View\Admin\Pages\Vendors\Show;
 
 class VendorController extends Controller
 {
@@ -21,9 +23,11 @@ class VendorController extends Controller
         return view($view->template(), $view);
     }
 
-    public function show(int $id, VendorShowUsecase $usecase)
+    public function show(int $id, VendorRepositoryInterface $repository)
     {
-        return $usecase($id);
+        $entity = $repository->findById($id);
+        $view = new Show($entity);
+        return view($view->template(), $view);
     }
 
     public function create()
