@@ -9,6 +9,11 @@ use Wstd\Domain\Models\Shop\ShopsCollection;
 interface VendorInterface extends EntityInterface
 {
     /**
+     * @return string
+     */
+    public function getName(): string;
+
+    /**
      * 事業者の状態を取得
      *
      * @return Wstd\Domain\Models\Vendor\VendorValueStatus|null

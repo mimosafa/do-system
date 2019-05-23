@@ -178,7 +178,9 @@ return [
         /*
          * Wstd Application Service Providers...
          */
-        Wstd\Application\Providers\RelationServiceProvider::class
+        Wstd\Application\Providers\CollectionServiceProvider::class,
+        Wstd\Application\Providers\RelationServiceProvider::class,
+        Wstd\Application\Providers\RepositoryServiceProvider::class,
 
     ],
 

@@ -4,6 +4,8 @@ namespace Wstd\Domain\Models\Vendor;
 
 interface VendorRepositoryInterface
 {
+    public function find(?string $name, ?array $status): VendorCollectionInterface;
+
     /**
      * 事業者を取得
      *

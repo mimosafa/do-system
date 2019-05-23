@@ -9,6 +9,11 @@ use Wstd\Domain\Models\Vendor\VendorInterface;
 interface ShopInterface extends EntityInterface
 {
     /**
+     * @return string
+     */
+    public function getName(): string;
+
+    /**
      * @return Wstd\Domain\Models\Vendor\VendorInterface
      */
     public function getVendor(): VendorInterface;
