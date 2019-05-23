@@ -2,11 +2,11 @@
 
 namespace Wstd\Domain\Models\Vendor;
 
-use Wstd\Domain\Models\Car\CarsCollection;
-use Wstd\Domain\Models\Shop\ShopsCollection;
-use Wstd\Infrastructure\Services\CarQueryService;
-use Wstd\Infrastructure\Services\ShopQueryService;
+use Wstd\Domain\Models\Car\CarCollectionInterface;
+use Wstd\Domain\Models\Shop\ShopCollectionInterface;
 use Wstd\Infrastructure\Eloquents\Vendor as Eloquent;
+use Wstd\Infrastructure\Repositories\CarRepository;
+use Wstd\Infrastructure\Repositories\ShopRepository;
 
 final class Vendor implements VendorInterface
 {
@@ -16,25 +16,11 @@ final class Vendor implements VendorInterface
     private $eloquent;
 
     /**
-     * @static
-     * @var Wstd\Infrastructure\Services\CarQueryService
-     */
-    private static $carQuery;
-
-    private static $shopQuery;
-
-    /**
      * @param int $id
      */
     public function __construct(int $id)
     {
         $this->eloquent = Eloquent::findOrFail($id);
-        if (! isset(self::$carQuery)) {
-            self::$carQuery = new CarQueryService();
-        }
-        if (! isset(self::$shopQuery)) {
-            self::$shopQuery = new ShopQueryService();
-        }
     }
 
     /**
@@ -70,20 +56,22 @@ final class Vendor implements VendorInterface
     /**
      * 所属している車両を取得
      *
-     * @return Wstd\Domain\Models\Car\CarsCollection
+     * @return Wstd\Domain\Models\Car\CarCollectionInterface
      */
-    public function getCars(): CarsCollection
+    public function getCars(): CarCollectionInterface
     {
-        return (self::$carQuery)($this->getId());
+        $repository = resolve(CarRepository::class);
+        return $repository->makeCollectionFromEloquents($this->eloquent->cars);
     }
 
     /**
      * 所属している店舗を取得
      *
-     * @return Wstd\Domain\Models\Shop\ShopsCollection
+     * @return Wstd\Domain\Models\Shop\ShopCollectionInterface
      */
-    public function getShops(): ShopsCollection
+    public function getShops(): ShopCollectionInterface
     {
-        return (self::$shopQuery)($this->getId());
+        $repository = resolve(ShopRepository::class);
+        return $repository->makeCollectionFromEloquents($this->eloquent->shops);
     }
 }

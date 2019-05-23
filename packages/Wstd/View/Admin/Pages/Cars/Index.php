@@ -2,7 +2,7 @@
 
 namespace Wstd\View\Admin\Pages\Cars;
 
-use Wstd\Domain\Models\Car\CarsCollection;
+use Wstd\Domain\Models\Car\CarCollectionInterface;
 use Wstd\View\Admin\ContentInterface;
 use Wstd\View\Admin\Includes\AbstractDataTable;
 
@@ -30,7 +30,7 @@ final class Index extends AbstractDataTable implements ContentInterface
     ];
 
     /**
-     * @var Wstd\Domain\Models\Car\CarsCollection
+     * @var Wstd\Domain\Models\Car\CarCollectionInterface
      */
     public $collection;
 
@@ -39,7 +39,7 @@ final class Index extends AbstractDataTable implements ContentInterface
      */
     protected $template = 'adminWstd.pages.index';
 
-    public function __construct(CarsCollection $collection)
+    public function __construct(CarCollectionInterface $collection)
     {
         $this->collection = $collection;
     }

@@ -4,8 +4,6 @@ namespace Wstd\Application\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Wstd\Infrastructure\Eloquents\Car;
-use Wstd\Infrastructure\Eloquents\Vendor;
 
 class RelationServiceProvider extends ServiceProvider
 {
@@ -27,8 +25,9 @@ class RelationServiceProvider extends ServiceProvider
     public function boot()
     {
         Relation::morphMap([
-            'car' => Car::class,
-            'vendor' => Vendor::class,
+            'car'    => \Wstd\Infrastructure\Eloquents\Car::class,
+            'shop'   => \Wstd\Infrastructure\Eloquents\Shop::class,
+            'vendor' => \Wstd\Infrastructure\Eloquents\Vendor::class,
         ]);
     }
 }

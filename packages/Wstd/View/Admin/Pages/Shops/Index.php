@@ -2,7 +2,7 @@
 
 namespace Wstd\View\Admin\Pages\Shops;
 
-use Wstd\Domain\Models\Shop\ShopsCollection;
+use Wstd\Domain\Models\Shop\ShopCollectionInterface;
 use Wstd\View\Admin\ContentInterface;
 use Wstd\View\Admin\Includes\AbstractDataTable;
 
@@ -29,7 +29,7 @@ final class Index extends AbstractDataTable implements ContentInterface
     ];
 
     /**
-     * @var Wstd\Domain\Models\Shop\ShopsCollection
+     * @var Wstd\Domain\Models\Shop\ShopCollectionInterface
      */
     public $collection;
 
@@ -38,7 +38,7 @@ final class Index extends AbstractDataTable implements ContentInterface
      */
     protected $template = 'adminWstd.pages.index';
 
-    public function __construct(ShopsCollection $collection)
+    public function __construct(ShopCollectionInterface $collection)
     {
         $this->collection = $collection;
     }

@@ -10,6 +10,11 @@ use Wstd\Domain\Models\Vendor\VendorInterface;
 interface CarInterface extends EntityInterface
 {
     /**
+     * @return string
+     */
+    public function getName(): string;
+
+    /**
      * 車両が属する事業者を取得
      *
      * @return Wstd\Domain\Models\Vendor\VendorInterface
