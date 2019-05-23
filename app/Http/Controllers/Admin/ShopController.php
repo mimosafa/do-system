@@ -7,13 +7,16 @@ use Wstd\Application\Requests\Admin\ShopUpdateRequest;
 use Wstd\Application\Requests\Admin\ShopsIndexRequest;
 use Wstd\Application\Usecases\Admin\ShopShowUsecase;
 use Wstd\Application\Usecases\Admin\ShopUpdateUsecase;
-use Wstd\Application\Usecases\Admin\ShopsIndexUsecase;
+
+use Wstd\Domain\Services\ShopService;
+use Wstd\View\Admin\Pages\Shops\Index;
 
 class ShopController extends Controller
 {
-    public function index(ShopsIndexRequest $request, ShopsIndexUsecase $usecase)
+    public function index(ShopsIndexRequest $request, ShopService $service)
     {
-        return $usecase($request);
+        $view = new Index($service->find($request));
+        return view($view->template(), $view);
     }
 
     public function show(int $id, ShopShowUsecase $usecase)

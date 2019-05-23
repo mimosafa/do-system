@@ -5,7 +5,6 @@ namespace Wstd\Domain\Services;
 use Illuminate\Http\Request;
 use Wstd\Domain\Models\Vendor\VendorCollectionInterface;
 use Wstd\Domain\Models\Vendor\VendorRepositoryInterface;
-use Wstd\View\Admin\Pages\Vendors\Index;
 
 class VendorService
 {
