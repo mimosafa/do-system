@@ -8,7 +8,6 @@ use Wstd\Application\Requests\Admin\VendorsIndexRequest;
 use Wstd\Application\Requests\Admin\VendorUpdateRequest;
 use Wstd\Application\Usecases\Admin\VendorUpdateUsecase;
 use Wstd\Application\Requests\Admin\VendorStoreRequest;
-use Wstd\Application\Usecases\Admin\VendorStoreUsecase;
 
 use Wstd\Domain\Models\Vendor\VendorRepositoryInterface;
 use Wstd\Domain\Services\VendorService;
@@ -20,6 +19,7 @@ class VendorController extends Controller
     public function index(VendorsIndexRequest $request, VendorService $service)
     {
         $view = new Index($service->find($request));
+
         return view($view->template(), $view);
     }
 
@@ -27,6 +27,7 @@ class VendorController extends Controller
     {
         $entity = $repository->findById($id);
         $view = new Show($entity);
+
         return view($view->template(), $view);
     }
 
@@ -35,9 +36,13 @@ class VendorController extends Controller
         return view('adminWstd.pages.vendors.create');
     }
 
-    public function store(VendorStoreRequest $request, VendorStoreUsecase $usecase)
+    public function store(VendorStoreRequest $request, VendorRepositoryInterface $repository)
     {
-        return $usecase($request);
+        $entity = $repository->store($request->all());
+
+        return redirect()->route('admin.vendors.show', [
+            'id' => $entity->getId(),
+        ]);
     }
 
     public function update(int $id, VendorUpdateRequest $request, VendorUpdateUsecase $usecase)
