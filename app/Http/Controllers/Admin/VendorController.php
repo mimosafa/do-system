@@ -14,13 +14,15 @@ use Wstd\Domain\Services\VendorService;
 use Wstd\View\Admin\Pages\Vendors\Index;
 use Wstd\View\Admin\Pages\Vendors\Show;
 
+use Wstd\Application\Presenters\Blidge;
+use Wstd\Application\Presenters\Admin\VendorIndex;
+
 class VendorController extends Controller
 {
     public function index(VendorsIndexRequest $request, VendorService $service)
     {
-        $view = new Index($service->find($request));
-
-        return view($view->template(), $view);
+        $collection = $service->find($request->all());
+        return Blidge::view(new VendorIndex($collection));
     }
 
     public function show(int $id, VendorRepositoryInterface $repository)
@@ -38,11 +40,9 @@ class VendorController extends Controller
 
     public function store(VendorStoreRequest $request, VendorRepositoryInterface $repository)
     {
-        $entity = $repository->store($request->all());
+        $id = $repository->store($request->all())->getId();
 
-        return redirect()->route('admin.vendors.show', [
-            'id' => $entity->getId(),
-        ]);
+        return redirect()->route('admin.vendors.show', compact('id'));
     }
 
     public function update(int $id, VendorUpdateRequest $request, VendorUpdateUsecase $usecase)

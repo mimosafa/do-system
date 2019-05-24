@@ -2,7 +2,6 @@
 
 namespace Wstd\Domain\Services;
 
-use Illuminate\Http\Request;
 use Wstd\Domain\Models\Vendor\VendorCollectionInterface;
 use Wstd\Domain\Models\Vendor\VendorRepositoryInterface;
 
@@ -15,8 +14,8 @@ class VendorService
         $this->repository = $repository;
     }
 
-    public function find(Request $request): VendorCollectionInterface
+    public function find(array $params): VendorCollectionInterface
     {
-        return $this->repository->find($request->all());
+        return $this->repository->find($params);
     }
 }
