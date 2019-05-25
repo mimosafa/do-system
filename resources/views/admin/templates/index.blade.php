@@ -17,10 +17,6 @@
 
 --}}
 
-@php
-    $id .= '_index';
-@endphp
-
 @extends('admin.templates.base')
 
 @section('page_title', $title)

@@ -1,8 +1,9 @@
 {{--
 
-    @var string $id
     @var string $beforeIndex
     @var Illuminate\Support\Collection $collection
+    @var string $tableClasses
+    @var string $id
     @var array[string] $items
     @var callable $thAttributes(string): string
     @var callable $th(string): string
@@ -17,7 +18,7 @@
     {!! $beforeTable !!}
     @if (count($collection) !== 0)
 
-    <table class="table dataTable" id="{{ $id }}_table" data-page-length='100'>
+    <table class="table{{ $tableClasses }}" id="{{ $id }}_table"{!! $tableMiscAttributes !!}>
         <thead>
             <tr>
                 @foreach ($items as $item)
@@ -53,10 +54,12 @@
     @endif
     {!! $afterTable !!}
 
-@push('js')
+@if ($isDataTable)
+    @push('js')
 
     <script>
-        $('#{{ $id }}_index_table').DataTable();
+        $('#{{ $id }}_table').DataTable();
     </script>
 
-@endpush
+    @endpush
+@endif

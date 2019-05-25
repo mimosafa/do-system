@@ -5,7 +5,7 @@ namespace Wstd\Application\Presenters\Admin\Templates;
 use Illuminate\Support\Str;
 use Wstd\Application\Presenters\Admin\Modules\Table;
 
-abstract class Index extends Table
+class Index extends Table
 {
     /**
      * e.g. 'Users List'
@@ -13,6 +13,27 @@ abstract class Index extends Table
      * @var string
      */
     public $title;
+
+    /**
+     * @var bool
+     */
+    public $isDataTable = true;
+
+    /**
+     * Default Blade template
+     *
+     * @var string
+     */
+    public $template = 'admin.templates.index';
+
+    protected function tableMiscAttributeArray()
+    {
+        $attrs = [];
+        if ($this->isDataTable) {
+            $attrs['data-page-length'] = '100';
+        }
+        return $attrs;
+    }
 
     /**
      * Overwrite Table::td()
@@ -37,6 +58,6 @@ abstract class Index extends Table
      */
     public function emptyMessage(): string
     {
-        return $this->title . ' Is Empty.';
+        return e($this->title) . ' Is Empty.';
     }
 }

@@ -3,11 +3,12 @@
 namespace Wstd\Application\Presenters;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\View;
 use Spatie\ViewModels\ViewModel;
 
 class Blidge
 {
-    const BASE_NAME_SPACE = __NAMESPACE__;
+    const BASE_NAMESPACE = __NAMESPACE__;
 
     /**
      * Render presenter instance by Blade template
@@ -17,7 +18,7 @@ class Blidge
      */
     public static function view(ViewModel $instance)
     {
-        return view(self::defineBladeName($instance), $instance);
+        return view(self::defineViewName($instance), $instance);
     }
 
     /**
@@ -26,9 +27,26 @@ class Blidge
      * @param Spatie\ViewModels\ViewModel $instance
      * @return string
      */
-    protected static function defineBladeName(ViewModel $instance)
+    protected static function defineViewName(ViewModel $instance)
     {
-        $namespace = substr(get_class($instance), strlen(self::BASE_NAME_SPACE) + 1);
-        return implode('.', array_map('Str::camel', explode('\\', $namespace)));
+        $view = $instance->template ?? '';
+
+        $className = get_class($instance);
+        if (Str::startsWith($className, self::BASE_NAMESPACE)) {
+            $namespace = substr($className, strlen(self::BASE_NAMESPACE) + 1);
+            $sameHierarchyView = implode('.', array_map('Str::camel', explode('\\', $namespace)));
+            if (View::exists($sameHierarchyView)) {
+                return $sameHierarchyView;
+            }
+        }
+
+        if (! $view) {
+            throw new \Exception($className . ' has no view.');
+        }
+        if (! View::exists($view)) {
+            throw new \Exception($view . ' dose not exist.');
+        }
+
+        return $view;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Wstd\Application\Presenters\Admin\Modules;
 
+use ArrayAccess;
 use Illuminate\Support\Str;
 use Spatie\ViewModels\ViewModel;
 
@@ -36,6 +37,18 @@ class Table extends ViewModel
     protected $itemLabels = [];
 
     /**
+     * @var bool
+     */
+    public $isDataTable = false;
+
+    /**
+     * Default Blade template
+     *
+     * @var string
+     */
+    public $template = 'admin.modules.table';
+
+    /**
      * @see self::getTdMethod(string $item)
      * @static
      * @var array
@@ -43,18 +56,67 @@ class Table extends ViewModel
     protected static $tdMethods = [];
 
     /**
+     * @see Spatie\ViewModels\ViewModel
      * @var array
      */
-    protected $ignore = [
-        '__construct',
-    ];
+    protected $ignore = ['template'];
 
     /**
      * @param array|Traversable/Countable/ArrayAccess
      */
-    public function __construct($collection)
+    public function __construct($collection, array $args = [])
     {
         $this->collection = $collection;
+        if (! empty($args)) {
+            $this->parseArguments($args);
+        }
+        if (! isset($this->id)) {
+            $this->id = e(spl_object_hash($this));
+        }
+    }
+
+    protected function parseArguments(array $args)
+    {
+        $properties = array_keys(get_object_vars($this));
+        foreach ($args as $key => $val) {
+            if (in_array($key, $properties, true)) {
+                $this->{$key} = $val;
+            }
+        }
+    }
+
+    public function tableClasses(): string
+    {
+        $classes = '';
+        if ($array = $this->tableClassArray()) {
+            $classes .= ' ' . implode(' ', $array);
+        }
+        return $classes;
+    }
+
+    protected function tableClassArray(): array
+    {
+        $classes = ['table'];
+        if ($this->isDataTable) {
+            $classes[] = 'dataTable';
+        }
+        return $classes;
+    }
+
+    public function tableMiscAttributes()
+    {
+        $attr = '';
+        if ($array = $this->tableMiscAttributeArray()) {
+            foreach ($array as $key => $value) {
+                $attr .= ' ' . sprintf('%s="%s"', e($key), e(strval($value)));
+            }
+        }
+        return $attr;
+    }
+
+    protected function tableMiscAttributeArray()
+    {
+        return [];
     }
 
     /**
@@ -145,7 +207,13 @@ class Table extends ViewModel
      */
     public function td(string $item, $value): string
     {
-        return (string) $value;
+        if (is_array($value) || (is_object($value) && $value instanceof ArrayAccess)) {
+            return isset($value[$item]) ? e($value[$item]) : '';
+        }
+        else if (is_object($value)) {
+            return isset($value->{$item}) ? e($value->{$item}) : '';
+        }
+        return '';
     }
 
     /**
@@ -154,11 +222,14 @@ class Table extends ViewModel
      */
     public function getTdMethod(string $item)
     {
-        if (! isset($this::$tdMethods[$item])) {
-            $methodStr = 'td' . Str::studly($item);
-            static::$tdMethods[$item] = method_exists($this, $methodStr) ? [$this, $methodStr] : false;
+        if (! isset($this::$tdMethods[$this->id])) {
+            $this::$tdMethods[$this->id] = [];
         }
-        return $this::$tdMethods[$item];
+        if (! isset($this::$tdMethods[$this->id][$item])) {
+            $methodStr = 'td' . Str::studly($item);
+            static::$tdMethods[$this->id][$item] = method_exists($this, $methodStr) ? [$this, $methodStr] : false;
+        }
+        return $this::$tdMethods[$this->id][$item];
     }
 
     /**
