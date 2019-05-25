@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
 use Spatie\ViewModels\ViewModel;
 
-class Blidge
+class Bridge
 {
     const BASE_NAMESPACE = __NAMESPACE__;
 

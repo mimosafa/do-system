@@ -14,7 +14,7 @@ use Wstd\Domain\Services\VendorService;
 use Wstd\View\Admin\Pages\Vendors\Index;
 use Wstd\View\Admin\Pages\Vendors\Show;
 
-use Wstd\View\Presenters\Blidge;
+use Wstd\View\Presenters\Bridge;
 use Wstd\View\Presenters\Admin\VendorIndex;
 
 class VendorController extends Controller
@@ -22,7 +22,7 @@ class VendorController extends Controller
     public function index(VendorsIndexRequest $request, VendorService $service)
     {
         $collection = $service->find($request->all());
-        return Blidge::view(new VendorIndex($collection));
+        return Bridge::view(new VendorIndex($collection));
     }
 
     public function show(int $id, VendorRepositoryInterface $repository)
