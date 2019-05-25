@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Application\Presenters;
+namespace Wstd\View\Presenters;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;

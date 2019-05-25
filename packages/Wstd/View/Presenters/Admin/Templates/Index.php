@@ -1,9 +1,9 @@
 <?php
 
-namespace Wstd\Application\Presenters\Admin\Templates;
+namespace Wstd\View\Presenters\Admin\Templates;
 
 use Illuminate\Support\Str;
-use Wstd\Application\Presenters\Admin\Modules\Table;
+use Wstd\View\Presenters\Admin\Modules\Table;
 
 class Index extends Table
 {

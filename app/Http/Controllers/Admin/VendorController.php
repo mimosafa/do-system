@@ -14,8 +14,8 @@ use Wstd\Domain\Services\VendorService;
 use Wstd\View\Admin\Pages\Vendors\Index;
 use Wstd\View\Admin\Pages\Vendors\Show;
 
-use Wstd\Application\Presenters\Blidge;
-use Wstd\Application\Presenters\Admin\VendorIndex;
+use Wstd\View\Presenters\Blidge;
+use Wstd\View\Presenters\Admin\VendorIndex;
 
 class VendorController extends Controller
 {

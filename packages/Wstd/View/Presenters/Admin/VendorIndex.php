@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Application\Presenters\Admin;
+namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
 

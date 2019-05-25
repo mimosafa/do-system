@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Application\Presenters\Admin\Modules;
+namespace Wstd\View\Presenters\Admin\Modules;
 
 use ArrayAccess;
 use Illuminate\Support\Str;
