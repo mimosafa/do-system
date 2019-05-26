@@ -27,7 +27,7 @@ class Bridge
      * @param Spatie\ViewModels\ViewModel $instance
      * @return string
      */
-    protected static function defineViewName(ViewModel $instance)
+    public static function defineViewName(ViewModel $instance)
     {
         $view = $instance->template ?? '';
 

@@ -30,6 +30,10 @@ final class VendorValueStatus extends AbstractValueStatus implements ValueObject
 {
     use ValueObjectTrait;
 
+    const NAME = 'status';
+
+    const LABEL = '登録状況';
+
     /**
      * @var array[int]
      * @see Wstd\Equipment\Enums\Status

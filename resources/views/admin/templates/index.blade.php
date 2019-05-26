@@ -1,7 +1,7 @@
 {{--
 
-    @var string $id
     @var string $title
+    @var string $id
 
     @var string $beforeIndex
     @var bool $hasCollection
@@ -22,9 +22,7 @@
 @section('page_title', $title)
 
 @section('content')
-    <div class="box" id="{{ $id }}_box">
-        <div class="box-body">
-            @include('admin.modules.table')
-        </div>
-    </div>
+    @component('admin.modules.box', compact('id'))
+        @include('admin.modules.table')
+    @endcomponent
 @endsection
