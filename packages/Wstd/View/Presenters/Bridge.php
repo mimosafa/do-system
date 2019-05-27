@@ -4,7 +4,6 @@ namespace Wstd\View\Presenters;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
-use Spatie\ViewModels\ViewModel;
 
 class Bridge
 {
@@ -13,10 +12,10 @@ class Bridge
     /**
      * Render presenter instance by Blade template
      *
-     * @param Spatie\ViewModels\ViewModel $instance
+     * @param Wstd\View\Presenters\Presenter $instance
      * @return \Illuminate\Http\Response
      */
-    public static function view(ViewModel $instance)
+    public static function view(Presenter $instance)
     {
         return view(self::defineViewName($instance), $instance);
     }
@@ -24,10 +23,10 @@ class Bridge
     /**
      * Define Blade template name by presenter instance
      *
-     * @param Spatie\ViewModels\ViewModel $instance
+     * @param Wstd\View\Presenters\Presenter $instance
      * @return string
      */
-    public static function defineViewName(ViewModel $instance)
+    public static function defineViewName(Presenter $instance)
     {
         $view = $instance->template ?? '';
 

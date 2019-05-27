@@ -3,8 +3,9 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
+use Wstd\View\Presenters\Admin\Templates\Index;
 
-class VendorIndex extends Templates\Index
+class VendorIndex extends Index
 {
     /**
      * @var string

@@ -4,9 +4,9 @@ namespace Wstd\View\Presenters\Admin\Modules;
 
 use ArrayAccess;
 use Illuminate\Support\Str;
-use Spatie\ViewModels\ViewModel;
+use Wstd\View\Presenters\Presenter;
 
-class Table extends ViewModel
+class Table extends Presenter
 {
     /**
      * e.g. 'users'
@@ -70,19 +70,6 @@ class Table extends ViewModel
         if (! empty($args)) {
             $this->parseArguments($args);
         }
-        if (! isset($this->id)) {
-            $this->id = e(spl_object_hash($this));
-        }
-    }
-
-    protected function parseArguments(array $args)
-    {
-        $properties = array_keys(get_object_vars($this));
-        foreach ($args as $key => $val) {
-            if (in_array($key, $properties, true)) {
-                $this->{$key} = $val;
-            }
-        }
     }
 
     public function tableClasses(): string
@@ -103,7 +90,7 @@ class Table extends ViewModel
         return $classes;
     }
 
-    public function tableMiscAttributes()
+    public function tableMiscAttributes(): string
     {
         $attr = '';
         if ($array = $this->tableMiscAttributeArray()) {
@@ -114,7 +101,7 @@ class Table extends ViewModel
         return $attr;
     }
 
-    protected function tableMiscAttributeArray()
+    protected function tableMiscAttributeArray():array
     {
         return [];
     }

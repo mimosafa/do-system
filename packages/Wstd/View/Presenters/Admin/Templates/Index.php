@@ -26,7 +26,7 @@ class Index extends Table
      */
     public $template = 'admin.templates.index';
 
-    protected function tableMiscAttributeArray()
+    protected function tableMiscAttributeArray(): array
     {
         $attrs = [];
         if ($this->isDataTable) {
