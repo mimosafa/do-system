@@ -7,7 +7,7 @@
 
 --}}
 
-<div class="box"{{ isset($id) ? ' id="' . $id . '_box"' : ''}}>
+<div class="box"{!! isset($id) ? ' id="' . e($id) . '_box"' : '' !!}>
     @if (isset($boxHeader) && $boxHeader)
 
     <div class="box-header with-border">

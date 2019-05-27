@@ -45,20 +45,20 @@ class VendorIndex extends Index
         return $classes;
     }
 
-    public function tdName($entity)
+    protected function getName($entity)
     {
-        $link = \route('admin.vendors.show', ['id' => $entity->getId(),]);
+        $link = route('admin.vendors.show', ['id' => $entity->getId(),]);
         $status = $entity->getStatus();
         $string = sprintf('<a href="%s">%s</a>', e($link), e($entity->getName()));
         if (! $status->isRegistered()) {
-            $string = sprintf('<small class="muted">[ %s ]</small> ', $status) . $string;
+            $string = sprintf('<small class="muted">[ %s ]</small> ', e(strval($status))) . $string;
         }
         return $string;
     }
 
-    public function tdStatus($entity)
+    protected function getStatus($entity)
     {
         $status = $entity->getStatus();
-        return $status->isRegistered() ? '' : $status;
+        return $status->isRegistered() ? '' : e(strval($status));
     }
 }

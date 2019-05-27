@@ -37,7 +37,7 @@
                 @foreach ($items as $item)
 
                 <td{!! $tdAttribute($item, $row) !!}>
-                    {!! $getTdMethod($item) ? $getTdMethod($item)($row) : $td($item, $row) !!}
+                    {!! $td($item, $row) !!}
                 </td>
 
                 @endforeach

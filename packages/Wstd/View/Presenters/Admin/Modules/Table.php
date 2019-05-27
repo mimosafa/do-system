@@ -49,13 +49,6 @@ class Table extends Presenter
     public $template = 'admin.modules.table';
 
     /**
-     * @see self::getTdMethod(string $item)
-     * @static
-     * @var array
-     */
-    protected static $tdMethods = [];
-
-    /**
      * @see Spatie\ViewModels\ViewModel
      * @var array
      */
@@ -194,11 +187,18 @@ class Table extends Presenter
      */
     public function td(string $item, $value): string
     {
+        $method = 'get' . Str::studly($item);
+        if (method_exists($this, $method)) {
+            return $this->{$method}($value); // Unescaped!
+        }
+        if (is_object($value) && method_exists($value, $method)) {
+            return e(strval($value->{$method}()));
+        }
         if (is_array($value) || (is_object($value) && $value instanceof ArrayAccess)) {
-            return isset($value[$item]) ? e($value[$item]) : '';
+            return isset($value[$item]) ? e(strval($value[$item])) : '';
         }
         else if (is_object($value)) {
-            return isset($value->{$item}) ? e($value->{$item}) : '';
+            return isset($value->{$item}) ? e(strval($value->{$item})) : '';
         }
         return '';
     }
