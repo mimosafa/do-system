@@ -6,21 +6,15 @@
 
 --}}
 
-@extends('admin.templates.base')
+@component('admin.templates.show', ['title' => $title])
 
-@section('page_title', $title)
-
-@section('content')
-    <form method="post">
-        @csrf
-        <div class="row">
-            <div class="col-md-3">
-                @presenter($propertiesInstance)
-            </div>
-            <div class="col-md-9">
-                @presenter($belongs)
-            </div>
+    <div class="row">
+        <div class="col-md-3">
+            @presenter($propertiesInstance)
         </div>
-        @stack('hidden_form')
-    </form>
-@endsection
+        <div class="col-md-9">
+            @presenter($belongs)
+        </div>
+    </div>
+    
+@endcomponent
