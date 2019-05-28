@@ -11,7 +11,7 @@ interface VendorInterface extends EntityInterface
     /**
      * @return string
      */
-    public function getName(): string;
+    public function getName(): VendorValueName;
 
     /**
      * 事業者の状態を取得

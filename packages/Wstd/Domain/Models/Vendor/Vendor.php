@@ -38,9 +38,9 @@ final class Vendor implements VendorInterface
      *
      * @return string
      */
-    public function getName(): string
+    public function getName(): VendorValueName
     {
-        return $this->eloquent->name;
+        return VendorValueName::of($this->eloquent->name);
     }
 
     /**
