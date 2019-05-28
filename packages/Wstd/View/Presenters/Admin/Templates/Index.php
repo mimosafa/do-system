@@ -5,7 +5,7 @@ namespace Wstd\View\Presenters\Admin\Templates;
 use Illuminate\Support\Str;
 use Wstd\View\Presenters\Admin\Modules\Table;
 
-class Index extends Table
+abstract class Index extends Table
 {
     /**
      * e.g. 'Users List'
@@ -13,6 +13,11 @@ class Index extends Table
      * @var string
      */
     public $title;
+
+    /**
+     * @var Wstd\Domain\Models\CollectionInterface
+     */
+    public $collection;
 
     /**
      * @var bool
@@ -25,6 +30,16 @@ class Index extends Table
      * @var string
      */
     public $template = 'admin.templates.index';
+
+    /**
+     * @param Wstd\Domain\Models\CollectionInterface
+     * @param array $args
+     */
+    public function __construct($collection, array $args = [])
+    {
+        parent::__construct($collection, $args);
+        $this->initItemLabels();
+    }
 
     protected function tableMiscAttributeArray(): array
     {
@@ -43,5 +58,35 @@ class Index extends Table
     public function emptyMessage(): string
     {
         return e($this->title) . ' Is Empty.';
+    }
+
+    protected function initItemLabels()
+    {
+        foreach ($this->items as $item) {
+            if (isset($this->itemLabels[$item]) && $this->itemLabels[$item]) {
+                continue;
+            }
+            if (! isset($prefix)) {
+                if (! $prefix = $this->maybeEntityClassString()) {
+                    break;
+                }
+            }
+            $className = $prefix . 'Value' . Str::studly($item);
+            if (! class_exists($className)) {
+                continue;
+            }
+            $callback = $className . '::valueObjectLabel';
+            if (is_callable($callback)) {
+                $this->itemLabels[$item] = $callback();
+            }
+        }
+    }
+
+    protected function maybeEntityClassString()
+    {
+        $collectionClass = get_class($this->collection);
+        $maybeEntityClass = substr($collectionClass, 0, strlen('Collection') * -1);
+
+        return class_exists($maybeEntityClass) ? $maybeEntityClass : '';
     }
 }

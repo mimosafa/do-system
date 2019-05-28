@@ -32,7 +32,7 @@ class VendorIndex extends Index
     protected $itemLabels = [
         'id' => 'ID',
         'name' => '事業者名',
-        'status' => '状態',
+        'status' => '登録状況',
     ];
 
     protected function trClasses($entity): array
