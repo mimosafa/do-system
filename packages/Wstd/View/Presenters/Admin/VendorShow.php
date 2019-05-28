@@ -49,6 +49,10 @@ class VendorShow extends Presenter
             'propertyLabels' => [
                 'id' => '登録番号',
             ],
+            'editableProperties' => [
+                'name',
+                'status',
+            ],
         ]);
     }
 }
