@@ -13,12 +13,15 @@ use Wstd\Domain\Services\CarService;
 use Wstd\View\Admin\Pages\Cars\Index;
 use Wstd\View\Admin\Pages\Cars\Show;
 
+use Wstd\View\Presenters\Bridge;
+use Wstd\View\Presenters\Admin\CarsIndex;
+
 class CarController extends Controller
 {
     public function index(CarsIndexRequest $request, CarService $service)
     {
-        $view = new Index($service->find($request));
-        return view($view->template(), $view);
+        $collection = $service->find($request->all());
+        return Bridge::view(new CarsIndex($collection));
     }
 
     public function show(int $id, CarRepositoryInterface $repository)

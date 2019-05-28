@@ -41,6 +41,8 @@ class Table extends Presenter
      */
     public $isDataTable = false;
 
+    public $dataTableOptions = [];
+
     /**
      * Default Blade template
      *
@@ -224,7 +226,7 @@ class Table extends Presenter
      */
     public function emptyMessage(): string
     {
-        return 'Empty.';
+        return 'Empty';
     }
 
     /**

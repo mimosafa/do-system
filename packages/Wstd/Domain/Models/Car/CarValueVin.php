@@ -12,9 +12,9 @@ final class CarValueVin implements ValueObjectText
 {
     use ValueObjectTrait;
 
-    private $name = 'vin';
+    const NAME = 'vin';
 
-    private $label = '車両No';
+    const LABEL = '車両No';
 
     /**
      * @var string

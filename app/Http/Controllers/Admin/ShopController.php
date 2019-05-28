@@ -13,12 +13,15 @@ use Wstd\Domain\Services\ShopService;
 use Wstd\View\Admin\Pages\Shops\Index;
 use Wstd\View\Admin\Pages\Shops\Show;
 
+use Wstd\View\Presenters\Bridge;
+use Wstd\View\Presenters\Admin\ShopsIndex;
+
 class ShopController extends Controller
 {
     public function index(ShopsIndexRequest $request, ShopService $service)
     {
-        $view = new Index($service->find($request));
-        return view($view->template(), $view);
+        $collection = $service->find($request->all());
+        return Bridge::view(new ShopsIndex($collection));
     }
 
     public function show(int $id, ShopRepositoryInterface $repository)

@@ -1,11 +1,8 @@
 {{--
 
     @var string $title
-    @var string $id
-    @var string $header
-    @var array $properties
-    @var callable $propertyLabel(string): string
-    @var callable $propertyValue(string): string
+    @var Wstd\View\Presenters\Admin\Templates\Properties $propertiesInstance
+    @var Wstd\View\Presenters\Admin\Modules\TabContents $belongs
 
 --}}
 
@@ -21,7 +18,7 @@
                 @presenter($propertiesInstance)
             </div>
             <div class="col-md-9">
-                {{-- @include($objectsBelonged->template(), $objectsBelonged) --}}
+                @presenter($belongs)
             </div>
         </div>
         @stack('hidden_form')

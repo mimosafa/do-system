@@ -15,21 +15,21 @@ use Wstd\View\Admin\Pages\Vendors\Index;
 use Wstd\View\Admin\Pages\Vendors\Show;
 
 use Wstd\View\Presenters\Bridge;
-use Wstd\View\Presenters\Admin\VendorIndex;
-use Wstd\View\Presenters\Admin\VendorShow;
+use Wstd\View\Presenters\Admin\VendorsIndex;
+use Wstd\View\Presenters\Admin\VendorsShow;
 
 class VendorController extends Controller
 {
     public function index(VendorsIndexRequest $request, VendorService $service)
     {
         $collection = $service->find($request->all());
-        return Bridge::view(new VendorIndex($collection));
+        return Bridge::view(new VendorsIndex($collection));
     }
 
     public function show(int $id, VendorRepositoryInterface $repository)
     {
         $entity = $repository->findById($id);
-        return Bridge::view(new VendorShow($entity));
+        return Bridge::view(new VendorsShow($entity));
         /*
         $entity = $repository->findById($id);
         $view = new Show($entity);

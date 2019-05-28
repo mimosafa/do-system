@@ -3,9 +3,9 @@
 namespace Wstd\View\Presenters\Admin\Templates;
 
 use Illuminate\Support\Str;
-use Wstd\View\Presenters\Admin\Modules\Table;
+use Wstd\View\Presenters\Admin\Modules\EntityTable;
 
-abstract class Index extends Table
+abstract class Index extends EntityTable
 {
     /**
      * e.g. 'Users List'
@@ -13,11 +13,6 @@ abstract class Index extends Table
      * @var string
      */
     public $title;
-
-    /**
-     * @var Wstd\Domain\Models\CollectionInterface
-     */
-    public $collection;
 
     /**
      * @var bool
@@ -38,7 +33,7 @@ abstract class Index extends Table
     public function __construct($collection, array $args = [])
     {
         parent::__construct($collection, $args);
-        $this->initItemLabels();
+        $this->initTitle();
     }
 
     protected function tableMiscAttributeArray(): array
@@ -50,43 +45,10 @@ abstract class Index extends Table
         return $attrs;
     }
 
-    /**
-     * Overwrite emptyMessage::td()
-     *
-     * @return string
-     */
-    public function emptyMessage(): string
+    protected function initTitle()
     {
-        return e($this->title) . ' Is Empty.';
-    }
-
-    protected function initItemLabels()
-    {
-        foreach ($this->items as $item) {
-            if (isset($this->itemLabels[$item]) && $this->itemLabels[$item]) {
-                continue;
-            }
-            if (! isset($prefix)) {
-                if (! $prefix = $this->maybeEntityClassString()) {
-                    break;
-                }
-            }
-            $className = $prefix . 'Value' . Str::studly($item);
-            if (! class_exists($className)) {
-                continue;
-            }
-            $callback = $className . '::valueObjectLabel';
-            if (is_callable($callback)) {
-                $this->itemLabels[$item] = $callback();
-            }
+        if (! $this->title || ! is_string($this->title)) {
+            $this->title = Str::title($this->id);
         }
-    }
-
-    protected function maybeEntityClassString()
-    {
-        $collectionClass = get_class($this->collection);
-        $maybeEntityClass = substr($collectionClass, 0, strlen('Collection') * -1);
-
-        return class_exists($maybeEntityClass) ? $maybeEntityClass : '';
     }
 }

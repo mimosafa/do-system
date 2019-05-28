@@ -1,17 +1,17 @@
 {{--
 
     @var string|null $id
-    @var string|null $boxHeader
+    @var string|null $title
     @var $slot
-    @var string|null $boxFooter
+    @var string|null $footer
 
 --}}
 
 <div class="box"{!! isset($id) ? ' id="' . e($id) . '_box"' : '' !!}>
-    @if (isset($boxHeader) && $boxHeader)
+    @if (isset($title) && $title)
 
     <div class="box-header with-border">
-        {!! $boxHeader !!}
+        <h3 class="box-title">{!! $title !!}</h3>
     </div>
 
     @endif
@@ -20,10 +20,10 @@
         {{ $slot }}
     </div>
 
-    @if (isset($boxFooter) && $boxFooter)
+    @if (isset($footer) && $footer)
 
     <div class="box-footer">
-        {!! $boxFooter !!}
+        {!! $footer !!}
     </div>
 
     @endif

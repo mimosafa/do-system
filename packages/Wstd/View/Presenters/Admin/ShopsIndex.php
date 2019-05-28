@@ -5,23 +5,24 @@ namespace Wstd\View\Presenters\Admin;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\View\Presenters\Admin\Templates\Index;
 
-class VendorIndex extends Index
+class ShopsIndex extends Index
 {
     /**
      * @var string
      */
-    public $id = 'vendors';
+    public $id = 'shops';
 
     /**
      * @var string
      */
-    public $title = '事業者一覧';
+    public $title = '店舗一覧';
 
     /**
      * @var array
      */
     public $items = [
-        'id',
+        'vendor_id',
+        'vendor',
         'name',
         'status',
     ];
@@ -30,9 +31,7 @@ class VendorIndex extends Index
      * @var array
      */
     protected $itemLabels = [
-        'id' => 'ID',
-        'name' => '事業者名',
-        'status' => '登録状況',
+        'vendor_id' => '事業者ID',
     ];
 
     protected function trClasses($entity): array
@@ -45,9 +44,26 @@ class VendorIndex extends Index
         return $classes;
     }
 
+    protected function getVendorId($entity)
+    {
+        return e($entity->getVendor()->getId());
+    }
+
+    protected function getVendor($entity)
+    {
+        $vendor = $entity->getVendor();
+        $link = route('admin.vendors.show', ['id' => $vendor->getId(),]);
+        $status = $vendor->getStatus();
+        $string = sprintf('<a href="%s">%s</a>', e($link), e($vendor->getName()));
+        if (! $status->isRegistered()) {
+            $string = sprintf('<small class="muted">[ %s ]</small> ', e(strval($status))) . $string;
+        }
+        return $string;
+    }
+
     protected function getName($entity)
     {
-        $link = route('admin.vendors.show', ['id' => $entity->getId(),]);
+        $link = route('admin.shops.show', ['id' => $entity->getId(),]);
         $status = $entity->getStatus();
         $string = sprintf('<a href="%s">%s</a>', e($link), e($entity->getName()));
         if (! $status->isRegistered()) {

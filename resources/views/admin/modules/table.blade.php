@@ -49,7 +49,7 @@
 
     @else
 
-    {!! $emptyMessage !!}
+    <p class="h4 text-center">{!! $emptyMessage !!}</p>
 
     @endif
     {!! $afterTable !!}
@@ -58,7 +58,7 @@
     @push('js')
 
     <script>
-        $('#{{ $id }}_table').DataTable();
+        $('#{{ $id }}_table').DataTable({!! json_encode($dataTableOptions) !!});
     </script>
 
     @endpush

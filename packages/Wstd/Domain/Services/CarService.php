@@ -15,8 +15,8 @@ class CarService
         $this->repository = $repository;
     }
 
-    public function find(Request $request): CarCollectionInterface
+    public function find(array $params): CarCollectionInterface
     {
-        return $this->repository->find($request->all());
+        return $this->repository->find($params);
     }
 }
