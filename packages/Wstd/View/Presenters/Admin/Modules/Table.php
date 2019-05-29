@@ -15,6 +15,8 @@ class Table extends Presenter
      */
     public $id;
 
+    public $collectionName;
+
     /**
      * List items
      *
@@ -64,6 +66,9 @@ class Table extends Presenter
         $this->collection = $collection;
         if (! empty($args)) {
             $this->parseArguments($args);
+        }
+        if (! isset($this->collectionName)) {
+            $this->collectionName = Str::title($this->id);
         }
     }
 
@@ -206,27 +211,11 @@ class Table extends Presenter
     }
 
     /**
-     * @param string $item
-     * @return callable|bool
-     */
-    public function getTdMethod(string $item)
-    {
-        if (! isset($this::$tdMethods[$this->id])) {
-            $this::$tdMethods[$this->id] = [];
-        }
-        if (! isset($this::$tdMethods[$this->id][$item])) {
-            $methodStr = 'td' . Str::studly($item);
-            static::$tdMethods[$this->id][$item] = method_exists($this, $methodStr) ? [$this, $methodStr] : false;
-        }
-        return $this::$tdMethods[$this->id][$item];
-    }
-
-    /**
      * @return string
      */
     public function emptyMessage(): string
     {
-        return 'Empty';
+        return 'No ' . $this->collectionName;
     }
 
     /**

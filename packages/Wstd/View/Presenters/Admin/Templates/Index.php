@@ -48,7 +48,7 @@ abstract class Index extends EntityTable
     protected function initTitle()
     {
         if (! $this->title || ! is_string($this->title)) {
-            $this->title = Str::title($this->id);
+            $this->title = $this->collectionName;
         }
     }
 }

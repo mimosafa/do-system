@@ -3,14 +3,20 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
+use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\Admin\Templates\Index;
+use Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs;
 
 class ShopsIndex extends Index
 {
+    use VendorsShowBelongs;
+
     /**
      * @var string
      */
     public $id = 'shops';
+
+    public $collectionName = '店舗';
 
     /**
      * @var string
@@ -33,6 +39,30 @@ class ShopsIndex extends Index
     protected $itemLabels = [
         'vendor_id' => '事業者ID',
     ];
+
+    /**
+     * @see Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs
+     */
+    public function addFormId(): string
+    {
+        return 'add_shop';
+    }
+
+    /**
+     * @see Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs
+     */
+    public function formElements()
+    {
+        $formItems = [
+            FormFactory::makeInputText([
+                'id' => 'add_shop_name',
+                'name' => 'shop.name',
+                'label' => '店舗名',
+            ]),
+        ];
+
+        return $formItems;
+    }
 
     protected function trClasses($entity): array
     {
@@ -76,5 +106,10 @@ class ShopsIndex extends Index
     {
         $status = $entity->getStatus();
         return $status->isRegistered() ? '' : e(strval($status));
+    }
+
+    public function emptyMessage(): string
+    {
+        return '店舗の登録がありません';
     }
 }

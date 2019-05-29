@@ -67,8 +67,26 @@ class VendorsShow extends Presenter
     protected function initBelongs()
     {
         $this->belongs = new TabContents([
-            new VendorsShowCars($this->entity->getCars()),
-            new VendorsShowShops($this->entity->getShops()),
+            new CarsIndex($this->entity->getCars(), [
+                'addable' => true,
+                'items' => [
+                    'thumb',
+                    'name',
+                    'vin',
+                    'status',
+                ],
+                'isDataTable' => false,
+                'title' => '<i class="fa fa-car"></i> 車両',
+            ]),
+            new ShopsIndex($this->entity->getShops(), [
+                'addable' => true,
+                'items' => [
+                    'name',
+                    'status',
+                ],
+                'isDataTable' => false,
+                'title' => '<i class="fa fa-coffee"></i> 店舗',
+            ]),
         ], [
             'id' => 'belongs_to_vendor',
         ]);

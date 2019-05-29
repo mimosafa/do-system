@@ -29,6 +29,9 @@ class Bridge
     public static function defineViewName(Presenter $instance)
     {
         $view = $instance->template ?? '';
+        if (method_exists($instance, 'overWriteTemplate') && $instance->overWriteTemplate()) {
+            $view = $instance->overWriteTemplate();
+        }
 
         $className = get_class($instance);
         if (Str::startsWith($className, self::BASE_NAMESPACE)) {

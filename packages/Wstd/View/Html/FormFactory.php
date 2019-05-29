@@ -3,6 +3,7 @@
 namespace Wstd\View\Html;
 
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Arr;
 use Spatie\Html\Elements as El;
 use Wstd\Domain\Models\ValueObjectInterface;
 use Wstd\Domain\Models\ValueObjectEnum;
@@ -44,6 +45,12 @@ class FormFactory
 
     public static function makeSelect(array $options, array $args = []): Htmlable
     {
-        return El\Select::create()->options($options)->attributes($args);
+        $value = Arr::pull($args, 'value', null);
+        return El\Select::create()->options($options)->attributes($args)->value($value);
+    }
+
+    public static function makeLabel(array $args = [])
+    {
+        return El\Label::create()->attributes($args);
     }
 }

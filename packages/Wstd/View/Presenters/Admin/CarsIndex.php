@@ -3,14 +3,20 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
+use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\Admin\Templates\Index;
+use Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs;
 
 class CarsIndex extends Index
 {
+    use VendorsShowBelongs;
+
     /**
      * @var string
      */
     public $id = 'cars';
+
+    public $collectionName = '車両';
 
     /**
      * @var string
@@ -40,6 +46,35 @@ class CarsIndex extends Index
         'vendor_id' => '事業者ID',
         'thumb' => '車両写真',
     ];
+
+    /**
+     * @see Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs
+     */
+    public function addFormId(): string
+    {
+        return 'add_car';
+    }
+
+    /**
+     * @see Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs
+     */
+    public function formElements()
+    {
+        $formItems = [
+            FormFactory::makeInputText([
+                'id' => 'add_car_name',
+                'name' => 'car.name',
+                'label' => '車両名',
+            ]),
+            FormFactory::makeInputText([
+                'id' => 'add_car_vin',
+                'name' => 'car.vin',
+                'label' => '車両No',
+            ]),
+        ];
+        
+        return $formItems;
+    }
 
     protected function trClasses($entity): array
     {
@@ -95,5 +130,10 @@ class CarsIndex extends Index
     {
         $status = $entity->getStatus();
         return $status->isRegistered() ? '' : e(strval($status));
+    }
+
+    public function emptyMessage(): string
+    {
+        return '車両の登録がありません';
     }
 }
