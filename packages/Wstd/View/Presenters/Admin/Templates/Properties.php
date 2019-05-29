@@ -9,6 +9,7 @@ use Spatie\Html\Elements\Input;
 use Spatie\Html\Elements\Label;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\ValueObjectInterface;
+use Wstd\View\Presenters\Admin\Modules\HiddenForm;
 use Wstd\View\Presenters\Presenter;
 use Wstd\View\Html\Admin\FormFactory;
 
@@ -45,9 +46,14 @@ class Properties extends Presenter
     public $editableProperties = [];
 
     /**
-     * @var array[Illuminate\Contracts\Support\Htmlable]
+     * @var Wstd\View\Presenters\Admin\Modules\HiddenForm
      */
-    public $formElements = [];
+    public $hiddenForm;
+
+    /**
+     * @var Illuminate\Contracts\Support\Htmlable
+     */
+    public $modalTrigger;
 
     /**
      * Default Blade template
@@ -68,23 +74,31 @@ class Properties extends Presenter
     {
         $this->entity = $entity;
         if (! empty($args)) {
+            if (isset($args['hiddenForm'])) {
+                unset($args['hiddenForm']);
+            }
             $this->parseArguments($args);
         }
         if (! empty($this->editableProperties) && is_array($this->editableProperties)) {
-            $this->initFormItems();
+            $this->initFormItems($args);
         }
     }
 
-    protected function initFormItems()
+    protected function initFormItems(array $args)
     {
+        $formElements = [];
         foreach ($this->editableProperties as $property) {
             $method = Str::camel($property) . 'Form';
             if (method_exists($this, $method)) {
-                $this->formElements[] = $this->{$method}(); /** @var Htmlable */
+                $formElements[] = $this->{$method}(); /** @var Htmlable */
             }
             else if ($formItem = $this->formFactory($property)) {
-                $this->formElements[] = $formItem;
+                $formElements[] = $formItem;
             }
+        }
+        if (! empty($formElements)) {
+            $args['id'] = $this->id . '_forms';
+            $this->hiddenForm = new HiddenForm($formElements, $args);
         }
     }
 

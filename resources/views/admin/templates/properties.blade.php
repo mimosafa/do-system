@@ -33,30 +33,12 @@
                 @endforeach
             </tbody>
         </table>
-        @if(! empty($formElements))
+        @if(isset($hiddenForm))
 
-        <a href="#" data-toggle="modal" data-target="#edit_{{ $id /* Modal ID */ }}" class="btn btn-primary btn-block btn-sm">
-            <b>Edit</b>
-        </a>
+        {{ $hiddenForm->modalTrigger }}
 
         @endif
 
     @endcomponent
 
-@if(! empty($formElements))
-    @push('hidden_form')
-
-    @component('admin.modules.modal', [
-        'id' => 'edit_' . $id, /* Modal ID */
-        'title' => 'Edit Properties',
-        'modalSubmittable' => true,
-    ])
-
-    @foreach ($formElements as $formElement)
-        {{ $formElement }}
-    @endforeach
-
-    @endcomponent
-
-    @endpush
-@endif
+    @presenter($hiddenForm)

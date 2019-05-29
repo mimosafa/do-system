@@ -5,13 +5,24 @@ namespace Wstd\View\Html\Admin;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Arr;
 use Spatie\Html\Elements as El;
-use Wstd\Domain\Models\ValueObjectInterface;
-use Wstd\Domain\Models\ValueObjectEnum;
-use Wstd\Domain\Models\ValueObjectText;
 use Wstd\View\Html\FormFactory as BaseFormFactory;
 
 class FormFactory extends BaseFormFactory
 {
+    public static function makeInput(array $args = []): Htmlable
+    {
+        $classes = [];
+        if (isset($args['type'])) {
+            if (in_array($args['type'], ['button', 'submit', 'reset'])) {
+                $classes[] = 'btn';
+                if ($args['type'] === 'submit') {
+                    $classes[] = 'btn-primary';
+                }
+            }
+        }
+        return parent::makeInput($args)->class($classes);
+    }
+
     public static function makeInputText(array $args = []): Htmlable
     {
         return self::makeFormGroup(
@@ -26,6 +37,17 @@ class FormFactory extends BaseFormFactory
             self::makeLabelFromArguments($args),
             parent::makeSelect($options, $args)->class('form-control')
         );
+    }
+
+    public static function makeButton(array $args = []): Htmlable
+    {
+        $classes = ['btn'];
+        if (isset($args['type'])) {
+            if ($args['type'] === 'submit') {
+                $classes[] = 'btn-primary';
+            }
+        }
+        return parent::makeButton($args)->class($classes);
     }
 
     public static function makeFormGroup(...$children): Htmlable

@@ -37,10 +37,15 @@ class FormFactory
         return static::makeInputText($args)->readonly();
     }
 
+    public static function makeInput(array $args = []): Htmlable
+    {
+        return El\Input::create()->attributes($args);
+    }
+
     public static function makeInputText(array $args = []): Htmlable
     {
         $args['type'] = 'text';
-        return El\Input::create()->attributes($args);
+        return static::makeInput($args);
     }
 
     public static function makeSelect(array $options, array $args = []): Htmlable
@@ -49,8 +54,26 @@ class FormFactory
         return El\Select::create()->options($options)->attributes($args)->value($value);
     }
 
-    public static function makeLabel(array $args = [])
+    public static function makeLabel(array $args = []): Htmlable
     {
         return El\Label::create()->attributes($args);
+    }
+
+    public static function makeButton(array $args = []): Htmlable
+    {
+        return El\Button::create()->attributes($args);
+    }
+
+    public static function makeSubmit(array $args = []): Htmlable
+    {
+        $tag = Arr::pull($args, 'tag', 'button');
+        $args['type'] = 'submit';
+        if ($tag === 'button') {
+            $text = Arr::pull($args, 'text', 'Submit');
+            return static::makeButton($args)->text($text);
+        }
+        else if ($tag === 'input') {
+            return static::makeInput($args);
+        }
     }
 }

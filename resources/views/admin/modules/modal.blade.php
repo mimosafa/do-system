@@ -52,7 +52,9 @@
                     </button>
                     @if ($modalSubmittable)
 
-                    <button type="submit" class="btn btn-primary">{{ $modalSubmit }}</button>
+                    <button type="submit" class="btn btn-primary">
+                        {{ $modalSubmit }}
+                    </button>
 
                     @endif
                 </div>

@@ -4,7 +4,6 @@ namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\View\Presenters\Presenter;
-use Wstd\View\Presenters\Admin\Modules\EntityTable;
 use Wstd\View\Presenters\Admin\Modules\TabContents;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
@@ -47,48 +46,61 @@ class VendorsShow extends Presenter
 
     protected function initProperties()
     {
-        $this->propertiesInstance = new Properties($this->entity, [
-            'id' => $this->id . '_properties',
-            'header' => '<i class="fa fa-user text-muted"></i> ' . e($this->entity->getName()),
-            'properties' => [
-                'id',
-                'status',
-            ],
-            'propertyLabels' => [
-                'id' => '登録番号',
-            ],
-            'editableProperties' => [
-                'name',
-                'status',
-            ],
-        ]);
+        $id = $this->id . '_properties';
+        $header = '<i class="fa fa-user text-muted"></i> ' . e($this->entity->getName());
+        $properties = ['id', 'status',];
+        $propertyLabels = ['id' => '登録番号',];
+        $editableProperties = ['name','status',];
+        $title = $trigger = '基本情報を編集する';
+
+        $this->propertiesInstance = new Properties($this->entity, compact(
+            'id', 'header', 'properties', 'propertyLabels', 'editableProperties', 'title', 'trigger'
+        ));
     }
 
     protected function initBelongs()
     {
-        $this->belongs = new TabContents([
-            new CarsIndex($this->entity->getCars(), [
-                'addable' => true,
-                'items' => [
-                    'thumb',
-                    'name',
-                    'vin',
-                    'status',
-                ],
-                'isDataTable' => false,
-                'title' => '<i class="fa fa-car"></i> 車両',
-            ]),
-            new ShopsIndex($this->entity->getShops(), [
-                'addable' => true,
-                'items' => [
-                    'name',
-                    'status',
-                ],
-                'isDataTable' => false,
-                'title' => '<i class="fa fa-coffee"></i> 店舗',
-            ]),
-        ], [
+        $contents = [
+            $this->initCarList(),
+            $this->initShopList(),
+        ];
+
+        $this->belongs = new TabContents($contents, [
             'id' => 'belongs_to_vendor',
         ]);
+    }
+
+    /**
+     * @return Wstd\View\Presenters\Admin\CarsIndex
+     */
+    protected function initCarList(): CarsIndex
+    {
+        $cars = $this->entity->getCars();
+
+        $addable = true;
+        $items = ['thumb', 'name', 'vin', 'status',];
+        $isDataTable = false;
+        $title = '<i class="fa fa-car"></i> 車両';
+
+        return new CarsIndex($cars, compact(
+            'addable', 'items', 'isDataTable', 'title'
+        ));
+    }
+
+    /**
+     * @return Wstd\View\Presenters\Admin\ShopsIndex
+     */
+    protected function initShopList(): ShopsIndex
+    {
+        $shops = $this->entity->getShops();
+
+        $addable = true;
+        $items = ['name', 'status',];
+        $isDataTable = false;
+        $title = '<i class="fa fa-coffee"></i> 店舗';
+
+        return new ShopsIndex($shops, compact(
+            'addable', 'items', 'isDataTable', 'title'
+        ));
     }
 }
