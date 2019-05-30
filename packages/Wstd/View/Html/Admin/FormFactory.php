@@ -52,7 +52,8 @@ class FormFactory extends BaseFormFactory
 
     public static function makeFormGroup(...$children): Htmlable
     {
-        return El\Div::create()->class('form-group')->children(Arr::wrap($children));
+        $args = ['class' => 'form-group'];
+        return parent::makeDiv($args)->children(Arr::wrap($children));
     }
 
     protected static function makeLabelFromArguments(array &$args): ?Htmlable

@@ -41,8 +41,12 @@ trait VendorsShowBelongs
     {
         $id = $this->hiddenFormId();
         $title = $trigger = $this->collectionName . 'を追加する';
+        $method = $this->method ?? null;
+        $action = $this->action ?? null;
 
-        return new HiddenForm($this->formElements(), compact('id', 'title', 'trigger'));
+        return new HiddenForm($this->formElements(), compact(
+            'id', 'title', 'trigger', 'method', 'action'
+        ));
     }
 
     /**

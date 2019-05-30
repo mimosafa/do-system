@@ -76,4 +76,9 @@ class FormFactory
             return static::makeInput($args);
         }
     }
+
+    public static function makeDiv(array $args = []): Htmlable
+    {
+        return El\Div::create()->attributes($args);
+    }
 }

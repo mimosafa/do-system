@@ -1,8 +1,6 @@
 {{--
 
-    @var array[Illuminate\Contracts\Support\Htmlable] $formElements
-    @var string $addFormId
-    @var string $collectionName
+    @var Wstd\View\Presenters\Admin\Modules\HiddenForm $hiddenForm
 
 --}}
 

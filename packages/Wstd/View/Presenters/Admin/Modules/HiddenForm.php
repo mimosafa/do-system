@@ -23,15 +23,18 @@ class HiddenForm extends Presenter
      */
     public $modalSize;
 
-    /**
-     * @var string|null
-     */
-    public $modalDismiss;
+    protected $close = 'Close';
+    protected $submit = 'Sumbit';
 
     /**
-     * @var bool
+     * @var string|null 'post' or 'get'
      */
-    public $modalSubmittable = true;
+    protected $method;
+
+    /**
+     * @var string|null Especialy submit action
+     */
+    protected $action;
 
     /**
      * @var Wstd\View\Presenters\Admin\Modules\FormContainer
@@ -60,12 +63,34 @@ class HiddenForm extends Presenter
     protected function initModalTrigger(array $args)
     {
         $trigger = $args['trigger'] ?? 'Edit';
-        
+
         $this->modalTrigger = FormFactory::makeButton([
             'type' => 'button',
             'data-toggle' => 'modal',
-            'data-target' => '#' . $this->id,
+            'data-target' => '#' . e($this->id),
             'class' => 'btn-primary btn-block btn-sm',
-        ])->html('<b>' . $trigger . '</b>');
+        ])->html('<b>' . e($trigger) . '</b>');
+    }
+
+    public function modalFooter()
+    {
+        $close = FormFactory::makeButton([
+            'class' => 'btn-default',
+            'data-dismiss' => 'modal',
+        ])->text($this->close);
+
+        $submitArgs = [];
+        if (isset($this->method)) {
+            $method = strtolower($this->method);
+            if (in_array($method, ['post', 'get'], true)) {
+                $submitArgs['formmethod'] = e($method);
+            }
+        }
+        if (isset($this->action)) {
+            $submitArgs['formaction'] = e($this->action);
+        }
+        $submit = FormFactory::makeSubmit($submitArgs)->text($this->submit);
+
+        return FormFactory::makeDiv()->children([$close, $submit]);
     }
 }

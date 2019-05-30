@@ -1,11 +1,9 @@
 {{--
 
     @var null|string $modalSize 'large'|'small'
-    @var null|string $modalDismiss
-    @var null|bool $modalSubmittable
-    @var null|string $modalSubmit
     @var string $id
     @var null|string $title
+    @var string|Illuminate\Contracts\Support\Htmlable $modalFooter
 
 --}}
 
@@ -19,11 +17,6 @@
         else if ($modalSize === 'small') {
             $modalSizeClass .= ' modal-sm';
         }
-    }
-
-    $modalDismiss = $modalDismiss ?? 'Close';
-    if ($modalSubmittable = $modalSubmittable ?? false) {
-        $modalSubmit = $modalSubmit ?? 'Submit';
     }
 
 @endphp
@@ -46,18 +39,13 @@
                     {{ $slot }}
 
                 </div>
+                @isset($modalFooter)
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        {{ $modalDismiss }}
-                    </button>
-                    @if ($modalSubmittable)
-
-                    <button type="submit" class="btn btn-primary">
-                        {{ $modalSubmit }}
-                    </button>
-
-                    @endif
+                    {!! $modalFooter !!}
                 </div>
+
+                @endisset
             </div>
         </div>
     </div>

@@ -4,9 +4,7 @@
     @var string $id
     @var string $title
     @var string $modalSize
-    @var string $modalDismiss
-    @var bool modalSubmittable
-    @var string $modalSubmit
+    @var string|Illuminate\Contracts\Support\Htmlable $modalFooter
 
 --}}
 
@@ -14,9 +12,7 @@
 
         @push('hidden_form')
 
-        @component('admin.modules.modal', compact(
-            'id', 'title', 'modalSize', 'modalDismiss', 'modalSubmittable', 'modalSubmit'
-        ))
+        @component('admin.modules.modal', compact('id', 'title', 'modalSize', 'modalFooter'))
 
         @presenter($formContainer)
 
