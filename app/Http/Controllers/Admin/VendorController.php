@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Wstd\Application\Requests\Admin\VendorRequest;
+use Wstd\Domain\Models\Vendor\VendorValueStatus;
 use Wstd\Domain\Services\VendorService;
 use Wstd\View\Presenters\Admin\VendorsIndex;
 use Wstd\View\Presenters\Admin\VendorsShow;
@@ -31,7 +33,7 @@ class VendorController extends Controller
     {
         $validated = $request->validate([
             'name' => 'string',
-            'status' => 'array',
+            'status' => 'array|' . Rule::in(VendorValueStatus::toArray()),
         ]);
 
         $collection = $this->service->find($request->all());

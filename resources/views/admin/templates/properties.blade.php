@@ -5,7 +5,7 @@
     @var array $properties
     @var callable $propertyLabel(): string
     @var callable $propertyValue(): string
-    @var array $formElements
+    @var Wstd\View\Presenters\Admin\Modules\HiddenForm $hiddenForm
 
 --}}
 

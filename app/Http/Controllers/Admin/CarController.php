@@ -4,15 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use Wstd\Application\Requests\Admin\CarUpdateRequest;
-use Wstd\Application\Requests\Admin\CarsIndexRequest;
-use Wstd\Application\Usecases\Admin\CarUpdateUsecase;
-
+use Illuminate\Validation\Rule;
+use Wstd\Application\Requests\Admin\CarRequest;
+use Wstd\Domain\Models\Car\CarValueStatus;
 use Wstd\Domain\Services\CarService;
-use Wstd\View\Admin\Pages\Cars\Show;
-
 use Wstd\View\Presenters\Admin\CarsIndex;
+use Wstd\View\Presenters\Admin\CarsShow;
 use Wstd\View\Presenters\Bridge;
 
 class CarController extends Controller
@@ -32,8 +29,15 @@ class CarController extends Controller
         $this->service = $service;
     }
 
-    public function index(CarsIndexRequest $request)
+    public function index(Request $request)
     {
+        $validated = $request->validate([
+            'vendor_id' => 'int',
+            'name' => 'string',
+            'vin' => 'string',
+            'status' => 'array|' . Rule::in(CarValueStatus::toArray()),
+        ]);
+
         $collection = $this->service->find($request->all());
         return Bridge::view(new CarsIndex($collection));
     }
@@ -41,25 +45,34 @@ class CarController extends Controller
     public function show(int $id)
     {
         $entity = $this->service->find($id);
-
-        $view = new Show($entity);
-        return view($view->template(), $view);
+        return Bridge::view(new CarsShow($entity));
     }
 
-    public function store(Request $request)
+    public function store(CarRequest $request)
     {
-        $validated = $request->validate([
-            'vendor_id' => 'required|integer',
-            'name' => 'required|string|max:100',
-            'vin' => 'required|string|max:20',
-        ]);
-
-        $id = $this->service->store($validated)->getId();
+        $id = $this->service->store($request->all())->getId();
         return redirect()->route('admin.cars.show', compact('id'));
     }
 
-    public function update(int $id, CarUpdateRequest $request, CarUpdateUsecase $usecase)
+    public function update(int $id, CarRequest $request)
     {
-        return $usecase($id, $request);
+        $id = $this->service->update($id, $request->all())->getId();
+        return redirect()->route('admin.cars.show', compact('id'));
+    }
+
+    /**
+     * @todo
+     */
+    public function storePhoto(int $id, Request $request)
+    {
+        $validated = $request->validate([
+            'image' => 'required|file|image|mimes:jpeg,png,jpg',
+        ]);
+
+        $eloquent = \Wstd\Infrastructure\Eloquents\Car::find($id);
+        $eloquent->addMediaFromRequest('image')->toMediaCollection('cars');
+        $id = $eloquent->id;
+
+        return redirect()->route('admin.cars.show', compact('id'));
     }
 }

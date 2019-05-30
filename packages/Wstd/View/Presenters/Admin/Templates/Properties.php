@@ -4,14 +4,11 @@ namespace Wstd\View\Presenters\Admin\Templates;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Str;
-use Spatie\Html\Elements\Div;
-use Spatie\Html\Elements\Input;
-use Spatie\Html\Elements\Label;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\ValueObjectInterface;
+use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\Admin\Modules\HiddenForm;
 use Wstd\View\Presenters\Presenter;
-use Wstd\View\Html\Admin\FormFactory;
 
 class Properties extends Presenter
 {
@@ -38,12 +35,17 @@ class Properties extends Presenter
     /**
      * @var array
      */
-    public $propertyLabels = [];
+    protected $propertyLabels = [];
 
     /**
      * @var array
      */
-    public $editableProperties = [];
+    protected $propertyValues = [];
+
+    /**
+     * @var array
+     */
+    protected $editableProperties = [];
 
     /**
      * @var Wstd\View\Presenters\Admin\Modules\HiddenForm
@@ -125,21 +127,17 @@ class Properties extends Presenter
      */
     public function propertyValue(string $property)
     {
-        $method = 'get' . Str::studly($property);
-        if (method_exists($this, $method)) {
-            return $this->{$method}();
+        if (isset($this->propertyValues[$property])) {
+            return $this->propertyValues[$property]; // Unescaped!
         }
+        $method = 'get' . Str::studly($property);
         if (method_exists($this->entity, $method)) {
-            return $this->entity->{$method}();
+            return e($this->entity->{$method}());
         }
         return '';
     }
 
     /**
-     * @uses Spatie\Html\Elements\Div
-     * @uses Spatie\Html\Elements\Label
-     * @uses Spatie\Html\Elements\Input
-     *
      * @param string $property
      * @return Illuminate\Contracts\Support\Htmlable
      */
@@ -152,14 +150,13 @@ class Properties extends Presenter
             ]);
         }
 
-        $label = Label::create()
-            ->for($property)
-            ->text($this->propertyLabel($property));
-        $input = Input::create()->type('text')->class('form-control')
-            ->name('property')
-            ->value($this->propertyValue($property));
+        $label = FormFactory::makeLabel()->text($this->propertyLabel($property));
+        $input = FormFactory::makeInputText([
+            'name' => $property,
+            'value' => $this->propertyValue($property),
+        ]);
 
-        return Div::create()->class('form-group')->children([$label, $input]);
+        return FormFactory::makeFormGroup($label, $input);
     }
 
     /**

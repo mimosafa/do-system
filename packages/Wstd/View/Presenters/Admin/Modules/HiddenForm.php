@@ -37,6 +37,11 @@ class HiddenForm extends Presenter
     protected $action;
 
     /**
+     * @var string|null
+     */
+    protected $enctype;
+
+    /**
      * @var Wstd\View\Presenters\Admin\Modules\FormContainer
      */
     public $formContainer;
@@ -88,6 +93,11 @@ class HiddenForm extends Presenter
         }
         if (isset($this->action)) {
             $submitArgs['formaction'] = e($this->action);
+        }
+        if (isset($this->enctype)) {
+            if (in_array($this->enctype, ['multipart/form-data', 'text/plain'], true)) {
+                $submitArgs['formenctype'] = $this->enctype;
+            }
         }
         $submit = FormFactory::makeSubmit($submitArgs)->text($this->submit);
 

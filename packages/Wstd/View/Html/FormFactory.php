@@ -48,6 +48,12 @@ class FormFactory
         return static::makeInput($args);
     }
 
+    public static function makeInputFile(array $args = []): Htmlable
+    {
+        $args['type'] = 'file';
+        return static::makeInput($args);
+    }
+
     public static function makeInputHidden(array $args = []): Htmlable
     {
         $args['type'] = 'hidden';

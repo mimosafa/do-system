@@ -1,12 +1,12 @@
 <?php
 
-namespace Wstd\Application\Requests\Admin;
+namespace Wstd\Application\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Wstd\Domain\Models\Car\CarValueStatus;
 
-class CarsIndexRequest extends FormRequest
+class CarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,9 @@ class CarsIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'vendor_id' => 'int',
-            'status' => 'array|' . Rule::in(CarValueStatus::values()),
+            'name' => 'required|string|max:100',
+            'vin' => 'required|string|max:20',
+            'status' => 'sometimes|required|integer|' . Rule::in(CarValueStatus::toArray()),
         ];
     }
 }
