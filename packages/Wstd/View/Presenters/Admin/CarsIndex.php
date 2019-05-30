@@ -4,6 +4,7 @@ namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\View\Html\Admin\FormFactory;
+use Wstd\View\Presenters\Admin\Modules\HiddenForm;
 use Wstd\View\Presenters\Admin\Templates\Index;
 use Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs;
 
@@ -23,6 +24,9 @@ class CarsIndex extends Index
      */
     public $title = '車両一覧';
 
+    /**
+     * @var array
+     */
     public $dataTableOptions = [
         'order' => [[1, 'asc']],
     ];
@@ -31,12 +35,8 @@ class CarsIndex extends Index
      * @var array
      */
     public $items = [
-        'thumb',
-        'vendor_id',
-        'vendor',
-        'name',
-        'vin',
-        'status',
+        'thumb', 'vendor_id', 'vendor',
+        'name',  'vin',       'status',
     ];
 
     /**
@@ -46,6 +46,15 @@ class CarsIndex extends Index
         'vendor_id' => '事業者ID',
         'thumb' => '車両写真',
     ];
+
+    /**
+     * @param Wstd\Domain\Models\Car\CarCollection
+     * @param array $args
+     */
+    public function __construct($collection, array $args = [])
+    {
+        parent::__construct($collection, $args);
+    }
 
     /**
      * @see Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs
@@ -62,17 +71,17 @@ class CarsIndex extends Index
     {
         $formItems = [
             FormFactory::makeInputText([
-                'id' => 'add_car_name',
+                'id' => $this->hiddenFormId() . '_name',
                 'name' => 'car.name',
                 'label' => '車両名',
             ]),
             FormFactory::makeInputText([
-                'id' => 'add_car_vin',
+                'id' => $this->hiddenFormId() . 'vin',
                 'name' => 'car.vin',
                 'label' => '車両No',
             ]),
         ];
-        
+
         return $formItems;
     }
 

@@ -49,9 +49,7 @@ class TabContents extends Presenter
     public function add(Presenter $content)
     {
         $id = $content->id;
-        if (! isset($content->title)) {
-            $content->title = Str::title($id);
-        }
+        $content->title = $content->title ?? Str::title($id);
         $this->contents[] = $content;
         $this->tabs[$id] = $content->title;
 

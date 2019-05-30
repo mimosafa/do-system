@@ -4,6 +4,7 @@ namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\View\Html\Admin\FormFactory;
+use Wstd\View\Presenters\Admin\Modules\HiddenForm;
 use Wstd\View\Presenters\Admin\Templates\Index;
 use Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs;
 
@@ -27,10 +28,7 @@ class ShopsIndex extends Index
      * @var array
      */
     public $items = [
-        'vendor_id',
-        'vendor',
-        'name',
-        'status',
+        'vendor_id', 'vendor', 'name', 'status',
     ];
 
     /**
@@ -41,11 +39,12 @@ class ShopsIndex extends Index
     ];
 
     /**
-     * @see Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs
+     * @param Wstd\Domain\Models\Shop\ShopCollection
+     * @param array $args
      */
-    public function addFormId(): string
+    public function __construct($collection, array $args = [])
     {
-        return 'add_shop';
+        parent::__construct($collection, $args);
     }
 
     /**
