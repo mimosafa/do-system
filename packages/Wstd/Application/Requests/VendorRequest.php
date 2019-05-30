@@ -1,10 +1,12 @@
 <?php
 
-namespace Wstd\Application\Requests\Admin;
+namespace Wstd\Application\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Wstd\Domain\Models\Vendor\VendorValueStatus;
 
-class VendorStoreRequest extends FormRequest
+class VendorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +27,7 @@ class VendorStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100',
+            'status' => 'sometimes|required|integer|' . Rule::in(VendorValueStatus::toArray()),
         ];
     }
 }

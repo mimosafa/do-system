@@ -4,11 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use Wstd\Application\Requests\Admin\VendorsIndexRequest;
-use Wstd\Application\Requests\Admin\VendorUpdateRequest;
-use Wstd\Application\Usecases\Admin\VendorUpdateUsecase;
-
+use Wstd\Application\Requests\Admin\VendorRequest;
 use Wstd\Domain\Services\VendorService;
 use Wstd\View\Presenters\Admin\VendorsIndex;
 use Wstd\View\Presenters\Admin\VendorsShow;
@@ -31,8 +27,13 @@ class VendorController extends Controller
         $this->service = $service;
     }
 
-    public function index(VendorsIndexRequest $request)
+    public function index(Request $request)
     {
+        $validated = $request->validate([
+            'name' => 'string',
+            'status' => 'array',
+        ]);
+
         $collection = $this->service->find($request->all());
         return Bridge::view(new VendorsIndex($collection));
     }
@@ -48,18 +49,15 @@ class VendorController extends Controller
         return view('admin.vendorsCreate');
     }
 
-    public function store(Request $request)
+    public function store(VendorRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-        ]);
-
-        $id = $this->service->store($validated)->getId();
+        $id = $this->service->store($request->all())->getId();
         return redirect()->route('admin.vendors.show', compact('id'));
     }
 
-    public function update(int $id, VendorUpdateRequest $request, VendorUpdateUsecase $usecase)
+    public function update(int $id, VendorRequest $request)
     {
-        return $usecase($id, $request);
+        $id = $this->service->update($id, $request->all())->getId();
+        return redirect()->route('admin.vendors.show', compact('id'));
     }
 }

@@ -45,4 +45,10 @@ class VendorService
     {
         return $this->repository->store($params);
     }
+
+    public function update(int $id, array $params): VendorInterface
+    {
+        $params['id'] = $id;
+        return $this->store($params);
+    }
 }

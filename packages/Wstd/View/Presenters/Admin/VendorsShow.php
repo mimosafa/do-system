@@ -12,7 +12,7 @@ class VendorsShow extends Presenter
     /**
      * @var Wstd\Domain\Models\EntityInterface
      */
-    public $entity;
+    protected $entity;
 
     /**
      * @var string
