@@ -3,37 +3,50 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 
 use Wstd\Application\Requests\Admin\CarUpdateRequest;
 use Wstd\Application\Requests\Admin\CarsIndexRequest;
 use Wstd\Application\Usecases\Admin\CarUpdateUsecase;
 
-use Wstd\Domain\Models\Car\CarRepositoryInterface;
 use Wstd\Domain\Services\CarService;
-use Wstd\View\Admin\Pages\Cars\Index;
 use Wstd\View\Admin\Pages\Cars\Show;
 
-use Wstd\View\Presenters\Bridge;
 use Wstd\View\Presenters\Admin\CarsIndex;
+use Wstd\View\Presenters\Bridge;
 
 class CarController extends Controller
 {
-    public function index(CarsIndexRequest $request, CarService $service)
+    /**
+     * @var Wstd\Domain\Services\CarService
+     */
+    private $service;
+
+    /**
+     * Constructor
+     *
+     * @param Wstd\Domain\Services\CarService $service
+     */
+    public function __construct(CarService $service)
     {
-        $collection = $service->find($request->all());
+        $this->service = $service;
+    }
+
+    public function index(CarsIndexRequest $request)
+    {
+        $collection = $this->service->find($request->all());
         return Bridge::view(new CarsIndex($collection));
     }
 
-    public function show(int $id, CarRepositoryInterface $repository)
+    public function show(int $id)
     {
-        $entity = $repository->findById($id);
+        $entity = $this->service->find($id);
+
         $view = new Show($entity);
         return view($view->template(), $view);
     }
 
-    public function store(Request $request, CarService $service)
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'vendor_id' => 'required|integer',
@@ -41,7 +54,7 @@ class CarController extends Controller
             'vin' => 'required|string|max:20',
         ]);
 
-        $id = $service->store($validated)->getId();
+        $id = $this->service->store($validated)->getId();
         return redirect()->route('admin.cars.show', compact('id'));
     }
 

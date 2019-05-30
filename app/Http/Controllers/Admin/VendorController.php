@@ -3,39 +3,44 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 use Wstd\Application\Requests\Admin\VendorsIndexRequest;
 use Wstd\Application\Requests\Admin\VendorUpdateRequest;
 use Wstd\Application\Usecases\Admin\VendorUpdateUsecase;
-use Wstd\Application\Requests\Admin\VendorStoreRequest;
 
-use Wstd\Domain\Models\Vendor\VendorRepositoryInterface;
 use Wstd\Domain\Services\VendorService;
-use Wstd\View\Admin\Pages\Vendors\Index;
-use Wstd\View\Admin\Pages\Vendors\Show;
-
-use Wstd\View\Presenters\Bridge;
 use Wstd\View\Presenters\Admin\VendorsIndex;
 use Wstd\View\Presenters\Admin\VendorsShow;
+use Wstd\View\Presenters\Bridge;
 
 class VendorController extends Controller
 {
-    public function index(VendorsIndexRequest $request, VendorService $service)
+    /**
+     * @var Wstd\Domain\Services\VendorService
+     */
+    private $service;
+
+    /**
+     * Constructor
+     *
+     * @param Wstd\Domain\Services\VendorService $service
+     */
+    public function __construct(VendorService $service)
     {
-        $collection = $service->find($request->all());
+        $this->service = $service;
+    }
+
+    public function index(VendorsIndexRequest $request)
+    {
+        $collection = $this->service->find($request->all());
         return Bridge::view(new VendorsIndex($collection));
     }
 
-    public function show(int $id, VendorRepositoryInterface $repository)
+    public function show(int $id)
     {
-        $entity = $repository->findById($id);
+        $entity = $this->service->find($id);
         return Bridge::view(new VendorsShow($entity));
-        /*
-        $entity = $repository->findById($id);
-        $view = new Show($entity);
-
-        return view($view->template(), $view);
-        */
     }
 
     public function create()
@@ -43,10 +48,13 @@ class VendorController extends Controller
         return view('admin.vendorsCreate');
     }
 
-    public function store(VendorStoreRequest $request, VendorRepositoryInterface $repository)
+    public function store(Request $request)
     {
-        $id = $repository->store($request->all())->getId();
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+        ]);
 
+        $id = $this->service->store($validated)->getId();
         return redirect()->route('admin.vendors.show', compact('id'));
     }
 
