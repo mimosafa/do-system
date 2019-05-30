@@ -39,12 +39,18 @@ class ShopsIndex extends Index
     ];
 
     /**
+     * route('admin.shops.store')
+     */
+    protected $action;
+
+    /**
      * @param Wstd\Domain\Models\Shop\ShopCollection
      * @param array $args
      */
     public function __construct($collection, array $args = [])
     {
         parent::__construct($collection, $args);
+        $this->action = route('admin.shops.store');
     }
 
     /**
@@ -54,9 +60,12 @@ class ShopsIndex extends Index
     {
         $formItems = [
             FormFactory::makeInputText([
-                'id' => 'add_shop_name',
-                'name' => 'shop.name',
+                'name' => 'name',
                 'label' => '店舗名',
+            ]),
+            FormFactory::makeInputHidden([
+                'name' => 'vendor_id',
+                'value' => $this->vendor_id,
             ]),
         ];
 

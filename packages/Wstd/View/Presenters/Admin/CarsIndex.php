@@ -48,20 +48,18 @@ class CarsIndex extends Index
     ];
 
     /**
+     * route('admin.cars.store')
+     */
+    protected $action;
+
+    /**
      * @param Wstd\Domain\Models\Car\CarCollection
      * @param array $args
      */
     public function __construct($collection, array $args = [])
     {
         parent::__construct($collection, $args);
-    }
-
-    /**
-     * @see Wstd\View\Presenters\Admin\Traits\VendorsShowBelongs
-     */
-    public function addFormId(): string
-    {
-        return 'add_car';
+        $this->action = route('admin.cars.store');
     }
 
     /**
@@ -71,14 +69,16 @@ class CarsIndex extends Index
     {
         $formItems = [
             FormFactory::makeInputText([
-                'id' => $this->hiddenFormId() . '_name',
-                'name' => 'car.name',
+                'name' => 'name',
                 'label' => '車両名',
             ]),
             FormFactory::makeInputText([
-                'id' => $this->hiddenFormId() . 'vin',
-                'name' => 'car.vin',
+                'name' => 'vin',
                 'label' => '車両No',
+            ]),
+            FormFactory::makeInputHidden([
+                'name' => 'vendor_id',
+                'value' => $this->vendor_id,
             ]),
         ];
 

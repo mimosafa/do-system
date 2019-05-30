@@ -81,9 +81,10 @@ class VendorsShow extends Presenter
         $items = ['thumb', 'name', 'vin', 'status',];
         $isDataTable = false;
         $title = '<i class="fa fa-car"></i> 車両';
+        $vendor_id = $this->entity->getId();
 
         return new CarsIndex($cars, compact(
-            'addable', 'items', 'isDataTable', 'title'
+            'addable', 'items', 'isDataTable', 'title', 'vendor_id'
         ));
     }
 
@@ -98,9 +99,10 @@ class VendorsShow extends Presenter
         $items = ['name', 'status',];
         $isDataTable = false;
         $title = '<i class="fa fa-coffee"></i> 店舗';
+        $vendor_id = $this->entity->getId();
 
         return new ShopsIndex($shops, compact(
-            'addable', 'items', 'isDataTable', 'title'
+            'addable', 'items', 'isDataTable', 'title', 'vendor_id'
         ));
     }
 }

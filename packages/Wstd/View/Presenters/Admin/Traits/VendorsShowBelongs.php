@@ -12,6 +12,11 @@ trait VendorsShowBelongs
      */
     public $addable = false;
 
+    /**
+     * @var int
+     */
+    protected $vendor_id;
+
     protected $traitTemplate = 'admin.traits.vendorsShowBelongs';
 
     /**

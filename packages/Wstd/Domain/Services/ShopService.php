@@ -4,6 +4,7 @@ namespace Wstd\Domain\Services;
 
 use Illuminate\Http\Request;
 use Wstd\Domain\Models\Shop\ShopCollectionInterface;
+use Wstd\Domain\Models\Shop\ShopInterface;
 use Wstd\Domain\Models\Shop\ShopRepositoryInterface;
 
 class ShopService
@@ -18,5 +19,10 @@ class ShopService
     public function find(array $params): ShopCollectionInterface
     {
         return $this->repository->find($params);
+    }
+
+    public function store(array $params): ShopInterface
+    {
+        return $this->repository->store($params);
     }
 }

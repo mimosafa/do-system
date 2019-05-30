@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use Illuminate\Http\Request;
+
 use Wstd\Application\Requests\Admin\CarUpdateRequest;
 use Wstd\Application\Requests\Admin\CarsIndexRequest;
 use Wstd\Application\Usecases\Admin\CarUpdateUsecase;
@@ -29,6 +31,18 @@ class CarController extends Controller
         $entity = $repository->findById($id);
         $view = new Show($entity);
         return view($view->template(), $view);
+    }
+
+    public function store(Request $request, CarService $service)
+    {
+        $validated = $request->validate([
+            'vendor_id' => 'required|integer',
+            'name' => 'required|string|max:100',
+            'vin' => 'required|string|max:20',
+        ]);
+
+        $id = $service->store($validated)->getId();
+        return redirect()->route('admin.cars.show', compact('id'));
     }
 
     public function update(int $id, CarUpdateRequest $request, CarUpdateUsecase $usecase)

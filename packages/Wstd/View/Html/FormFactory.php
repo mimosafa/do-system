@@ -48,6 +48,12 @@ class FormFactory
         return static::makeInput($args);
     }
 
+    public static function makeInputHidden(array $args = []): Htmlable
+    {
+        $args['type'] = 'hidden';
+        return static::makeInput($args);
+    }
+
     public static function makeSelect(array $options, array $args = []): Htmlable
     {
         $value = Arr::pull($args, 'value', null);
