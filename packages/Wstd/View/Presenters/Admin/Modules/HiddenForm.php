@@ -24,22 +24,6 @@ class HiddenForm extends Presenter
     public $modalSize;
 
     protected $close = 'Close';
-    protected $submit = 'Sumbit';
-
-    /**
-     * @var string|null 'post' or 'get'
-     */
-    protected $method;
-
-    /**
-     * @var string|null Especialy submit action
-     */
-    protected $action;
-
-    /**
-     * @var string|null
-     */
-    protected $enctype;
 
     /**
      * @var Wstd\View\Presenters\Admin\Modules\FormContainer
@@ -72,32 +56,5 @@ class HiddenForm extends Presenter
             'data-target' => '#' . e($this->id),
             'class' => 'btn-primary btn-block btn-sm',
         ])->html('<b>' . e($trigger) . '</b>');
-    }
-
-    public function modalFooter()
-    {
-        $close = FormFactory::makeButton([
-            'class' => 'btn-default',
-            'data-dismiss' => 'modal',
-        ])->text($this->close);
-
-        $submitArgs = [];
-        if (isset($this->method)) {
-            $method = strtolower($this->method);
-            if (in_array($method, ['post', 'get'], true)) {
-                $submitArgs['formmethod'] = e($method);
-            }
-        }
-        if (isset($this->action)) {
-            $submitArgs['formaction'] = e($this->action);
-        }
-        if (isset($this->enctype)) {
-            if (in_array($this->enctype, ['multipart/form-data', 'text/plain'], true)) {
-                $submitArgs['formenctype'] = $this->enctype;
-            }
-        }
-        $submit = FormFactory::makeSubmit($submitArgs)->text($this->submit);
-
-        return FormFactory::makeDiv()->children([$close, $submit]);
     }
 }

@@ -2,22 +2,27 @@
 
     @var Wstd\View\Presenters\Admin\Modules\FormContainer $formContainer
     @var string $id
-    @var string $title
-    @var string $modalSize
+
+    @var string|null $title
+    @var string|null $modalSize
+
     @var string|Illuminate\Contracts\Support\Htmlable $modalFooter
 
 --}}
 
-    @if ($formContainer->hasForms())
+@if ($formContainer->hasForms())
+    @push('hidden_form')
+        @adminModal(compact('id', 'title', 'modalSize'))
 
-        @push('hidden_form')
+            @foreach ($formContainer as $form)
+                {{ $form }}
+            @endforeach
 
-        @component('admin.modules.modal', compact('id', 'title', 'modalSize', 'modalFooter'))
+            @slot('footer')
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+                {!! $formContainer->submit() !!}
+            @endslot
 
-        @presenter($formContainer)
-
-        @endcomponent
-
-        @endpush
-
-    @endif
+        @endadminModal
+    @endpush
+@endif
