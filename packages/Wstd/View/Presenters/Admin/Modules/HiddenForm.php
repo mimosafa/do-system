@@ -53,15 +53,12 @@ class HiddenForm extends Presenter
 
     public $template = 'admin.modules.hiddenForm';
 
+    protected $guarded = ['formContainer'];
+
     public function __construct($formItems = [], array $args = [])
     {
-        if (! empty($args)) {
-            if (isset($args['formContainer'])) {
-                unset($args['formContainer']);
-            }
-            $this->parseArguments($args);
-        }
         $this->formContainer = new FormContainer($formItems, $args);
+        $this->parseArguments($args);
         $this->initModalTrigger($args);
     }
 

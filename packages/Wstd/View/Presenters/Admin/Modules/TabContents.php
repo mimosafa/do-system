@@ -25,6 +25,8 @@ class TabContents extends Presenter
      */
     protected $ignore = ['template', 'add'];
 
+    protected $guarded = ['tabs', 'contents'];
+
     public function __construct($contents = [], array $args = [])
     {
         if ($contents && is_array($contents)) {
@@ -32,15 +34,7 @@ class TabContents extends Presenter
                 $this->add($content);
             }
         }
-        if (! empty($args)) {
-            if (isset($args['tabs'])) {
-                unset($args['tabs']);
-            }
-            if (isset($args['contents'])) {
-                unset($args['contents']);
-            }
-            $this->parseArguments($args);
-        }
+        $this->parseArguments($args);
     }
 
     /**

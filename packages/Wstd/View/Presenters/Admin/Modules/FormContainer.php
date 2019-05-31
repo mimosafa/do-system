@@ -17,6 +17,10 @@ class FormContainer extends Presenter
      */
     public $template = 'admin.modules.formContainer';
 
+    protected $ignored = ['add', 'hasForms'];
+
+    protected $guarded = ['formItems'];
+
     /**
      * @param array[Illuminate\Contracts\Support\Htmlable] $formItems
      * @param array $args
@@ -26,12 +30,7 @@ class FormContainer extends Presenter
         foreach ($formItems as $formItem) {
             $this->add($formItem);
         }
-        if (! empty($args)) {
-            if (isset($args['formItems'])) {
-                unset($args['formItems']);
-            }
-            $this->parseArguments($args);
-        }
+        $this->parseArguments($args);
     }
 
     /**

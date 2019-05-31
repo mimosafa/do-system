@@ -30,6 +30,8 @@ class Gallery extends Presenter
 
     public $template = 'admin.modules.gallery';
 
+    protected $guarded = ['items', 'hiddenForm'];
+
     /**
      * @param Illuminate\Database\Eloquent\Collection[Spatie\MediaLibrary\Models\Media] $items
      * @param array $args
@@ -37,15 +39,7 @@ class Gallery extends Presenter
     public function __construct($items, array $args = [])
     {
         $this->items = $items;
-        if (! empty($args)) {
-            if (isset($args['items'])) {
-                unset($args['items']);
-            }
-            if (isset($args['hiddenForm'])) {
-                unset($args['hiddenForm']);
-            }
-            $this->parseArguments($args);
-        }
+        $this->parseArguments($args);
         $this->initHiddenForm($args);
     }
 

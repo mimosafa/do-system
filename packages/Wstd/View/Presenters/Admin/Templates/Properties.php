@@ -64,6 +64,8 @@ class Properties extends Presenter
      */
     public $template = 'admin.templates.properties';
 
+    protected $guarded = ['hiddenForm'];
+
     /**
      * Constructor
      *
@@ -75,12 +77,7 @@ class Properties extends Presenter
     public function __construct(EntityInterface $entity, array $args = [])
     {
         $this->entity = $entity;
-        if (! empty($args)) {
-            if (isset($args['hiddenForm'])) {
-                unset($args['hiddenForm']);
-            }
-            $this->parseArguments($args);
-        }
+        $this->parseArguments($args);
         if (! empty($this->editableProperties) && is_array($this->editableProperties)) {
             $this->initFormItems($args);
         }

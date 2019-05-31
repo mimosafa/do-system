@@ -64,7 +64,7 @@ class CarsShow extends Presenter
         $name = $vendor->getName();
         $link = route('admin.vendors.show', ['id' => $vendor->getId()]);
 
-        return sprintf('<a href="%s">%s<?a>', $link, '<i class="fa fa-user"></i> ' . e($name));
+        return sprintf('<a href="%s">%s</a>', $link, '<i class="fa fa-user"></i> ' . e($name));
     }
 
     protected function initGallery()

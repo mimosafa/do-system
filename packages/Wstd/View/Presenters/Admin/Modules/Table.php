@@ -58,15 +58,15 @@ class Table extends Presenter
      */
     protected $ignore = ['template'];
 
+    protected $guarded = ['collection'];
+
     /**
      * @param array|Traversable/Countable/ArrayAccess
      */
     public function __construct($collection, array $args = [])
     {
         $this->collection = $collection;
-        if (! empty($args)) {
-            $this->parseArguments($args);
-        }
+        $this->parseArguments($args);
         if (! isset($this->collectionName)) {
             $this->collectionName = Str::title($this->id);
         }
