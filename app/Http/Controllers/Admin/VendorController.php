@@ -3,45 +3,63 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
-use Wstd\Application\Requests\Admin\VendorsIndexRequest;
-use Wstd\Application\Requests\Admin\VendorUpdateRequest;
-use Wstd\Application\Usecases\Admin\VendorUpdateUsecase;
-use Wstd\Application\Requests\Admin\VendorStoreRequest;
-use Wstd\Application\Usecases\Admin\VendorStoreUsecase;
-
-use Wstd\Domain\Models\Vendor\VendorRepositoryInterface;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Wstd\Application\Requests\Admin\VendorRequest;
+use Wstd\Domain\Models\Vendor\VendorValueStatus;
 use Wstd\Domain\Services\VendorService;
-use Wstd\View\Admin\Pages\Vendors\Index;
-use Wstd\View\Admin\Pages\Vendors\Show;
+use Wstd\View\Presenters\Admin\VendorsIndex;
+use Wstd\View\Presenters\Admin\VendorsShow;
+use Wstd\View\Presenters\Bridge;
 
 class VendorController extends Controller
 {
-    public function index(VendorsIndexRequest $request, VendorService $service)
+    /**
+     * @var Wstd\Domain\Services\VendorService
+     */
+    private $service;
+
+    /**
+     * Constructor
+     *
+     * @param Wstd\Domain\Services\VendorService $service
+     */
+    public function __construct(VendorService $service)
     {
-        $view = new Index($service->find($request));
-        return view($view->template(), $view);
+        $this->service = $service;
     }
 
-    public function show(int $id, VendorRepositoryInterface $repository)
+    public function index(Request $request)
     {
-        $entity = $repository->findById($id);
-        $view = new Show($entity);
-        return view($view->template(), $view);
+        $validated = $request->validate([
+            'name' => 'string',
+            'status' => 'array|' . Rule::in(VendorValueStatus::toArray()),
+        ]);
+
+        $collection = $this->service->find($request->all());
+        return Bridge::view(new VendorsIndex($collection));
+    }
+
+    public function show(int $id)
+    {
+        $entity = $this->service->find($id);
+        return Bridge::view(new VendorsShow($entity));
     }
 
     public function create()
     {
-        return view('adminWstd.pages.vendors.create');
+        return view('admin.vendorsCreate');
     }
 
-    public function store(VendorStoreRequest $request, VendorStoreUsecase $usecase)
+    public function store(VendorRequest $request)
     {
-        return $usecase($request);
+        $id = $this->service->store($request->all())->getId();
+        return redirect()->route('admin.vendors.show', compact('id'));
     }
 
-    public function update(int $id, VendorUpdateRequest $request, VendorUpdateUsecase $usecase)
+    public function update(int $id, VendorRequest $request)
     {
-        return $usecase($id, $request);
+        $id = $this->service->update($id, $request->all())->getId();
+        return redirect()->route('admin.vendors.show', compact('id'));
     }
 }

@@ -1,29 +1,23 @@
 <?php
 
-namespace Wstd\Domain\Models\Car;
+namespace Wstd\Domain\Models\Vendor;
 
 use Wstd\Domain\Models\ValueObjectText;
 use Wstd\Domain\Modules\Models\ValueObjectTrait;
 
-/**
- * @todo 内容なし
- */
-final class CarValueVin implements ValueObjectText
+final class VendorValueName implements ValueObjectText
 {
     use ValueObjectTrait;
 
-    const NAME = 'vin';
+    const NAME = 'name';
 
-    const LABEL = '車両No';
+    const LABEL = '事業者名';
 
-    /**
-     * @var string
-     */
     private $value;
 
-    public function __construct(string $vin)
+    public function __construct(string $name)
     {
-        $this->value = $vin;
+        $this->value = $name;
     }
 
     public function getValue()

@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Spatie\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -178,6 +179,7 @@ return [
         /*
          * Wstd Application Service Providers...
          */
+        Wstd\Application\Providers\BladeServiceProvider::class,
         Wstd\Application\Providers\CollectionServiceProvider::class,
         Wstd\Application\Providers\RelationServiceProvider::class,
         Wstd\Application\Providers\RepositoryServiceProvider::class,

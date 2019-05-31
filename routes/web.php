@@ -34,10 +34,15 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
     });
 
     Route::get('cars', 'CarController@index')->name('cars.index');
+    Route::post('cars/create', 'CarController@store')->name('cars.store');
     Route::get('cars/{id}', 'CarController@show')->name('cars.show');
     Route::post('cars/{id}', 'CarController@update');
 
+    /** @todo */
+    Route::post('cars/{id}/photos/store', 'CarController@storePhoto')->name('cars.photos.store');
+
     Route::get('shops', 'ShopController@index')->name('shops.index');
+    Route::post('shops/create', 'ShopController@store')->name('shops.store');
     Route::get('shops/{id}', 'ShopController@show')->name('shops.show');
     Route::post('shops/{id}', 'ShopController@update');
 
