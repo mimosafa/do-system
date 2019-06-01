@@ -12,9 +12,9 @@
             @presenter($propertiesInstance)
         </div>
         <div class="col-md-9">
-            @component('admin.modules.box', ['title' => '画像'])
+            @adminBox(['title' => '画像'])
                 @presenter($galleryInstance)
-            @endcomponent
+            @endadminBox
         </div>
     </div>
 

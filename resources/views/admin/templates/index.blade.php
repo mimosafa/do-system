@@ -22,7 +22,7 @@
 @section('page_title', $title)
 
 @section('content')
-    @component('admin.modules.box', compact('id'))
+    @adminBox(compact('id'))
         @include('admin.modules.table')
-    @endcomponent
+    @endadminBox
 @endsection

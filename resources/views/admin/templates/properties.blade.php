@@ -9,7 +9,8 @@
 
 --}}
 
-    @component('admin.modules.box', ['id' => $id])
+    @adminBox(['id' => $id, 'boxContext' => 'primary',])
+
         @isset($header)
 
         <h3 class="text-center">
@@ -39,6 +40,6 @@
 
         @endif
 
-    @endcomponent
+    @endadminBox
 
     @presenter($hiddenForm)

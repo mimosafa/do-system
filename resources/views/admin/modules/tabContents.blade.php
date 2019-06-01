@@ -29,11 +29,11 @@
 
 @else
 
-    @component('admin.modules.box', [
+    @adminBox([
         'id' => $contents[0]->id,
         'title' => $contents[0]->title,
     ])
         @presenter($contents[0])
-    @endcomponent
+    @endadminBox
 
 @endif
