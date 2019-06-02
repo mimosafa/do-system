@@ -9,16 +9,18 @@ use Spatie\ViewModels\ViewModel;
 abstract class Presenter extends ViewModel
 {
     /**
-     * @var string
-     */
-    public $id;
-
-    /**
      * Properties, not arrowed to overwrite by constructing
      *
      * @var array
      */
     protected $guarded = ['guarded'];
+
+    public function __construct($param = null, array $args = [])
+    {
+        // In extending class, do something with $param
+        // and exec `parent::__construct($param, $args)`
+        $this->parseArguments($args);
+    }
 
     /**
      * Should be used by constructor
@@ -38,9 +40,6 @@ abstract class Presenter extends ViewModel
                     $this->{$key} = $value;
                 }
             }
-        }
-        if (! isset($this->id)) {
-            $this->id = e(spl_object_hash($this));
         }
     }
 
