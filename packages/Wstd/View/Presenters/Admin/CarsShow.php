@@ -3,10 +3,8 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
-use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
 use Wstd\View\Presenters\Admin\Modules\Contents;
-use Wstd\View\Presenters\Admin\Modules\FormContainer;
 use Wstd\View\Presenters\Admin\Modules\Gallery;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
@@ -55,7 +53,7 @@ class CarsShow extends IdentifiedPresenter
 
         $this->properties = new Properties($this->entity, compact(
             'id', 'header', 'properties', 'propertyLabels',
-            'propertyValues', 'editableProperties', 'trigger'
+            'propertyValues', 'editableProperties'
         ));
     }
 

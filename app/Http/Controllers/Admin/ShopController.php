@@ -10,9 +10,8 @@ use Wstd\Application\Requests\Admin\ShopsIndexRequest;
 use Wstd\Application\Usecases\Admin\ShopUpdateUsecase;
 
 use Wstd\Domain\Services\ShopService;
-use Wstd\View\Admin\Pages\Shops\Show;
-
 use Wstd\View\Presenters\Admin\ShopsIndex;
+use Wstd\View\Presenters\Admin\ShopsShow;
 use Wstd\View\Presenters\Bridge;
 
 class ShopController extends Controller
@@ -41,9 +40,7 @@ class ShopController extends Controller
     public function show(int $id)
     {
         $entity = $this->service->find($id);
-
-        $view = new Show($entity);
-        return view($view->template(), $view);
+        return Bridge::view(new ShopsShow($entity));
     }
 
     public function store(Request $request)
