@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use Wstd\Application\Requests\Admin\ShopUpdateRequest;
-use Wstd\Application\Requests\Admin\ShopsIndexRequest;
-use Wstd\Application\Usecases\Admin\ShopUpdateUsecase;
-
+use Illuminate\Validation\Rule;
+use Wstd\Application\Requests\Admin\ShopRequest;
+use Wstd\Domain\Models\Shop\ShopValueStatus;
 use Wstd\Domain\Services\ShopService;
 use Wstd\View\Presenters\Admin\ShopsIndex;
 use Wstd\View\Presenters\Admin\ShopsShow;
@@ -31,8 +29,14 @@ class ShopController extends Controller
         $this->service = $service;
     }
 
-    public function index(ShopsIndexRequest $request)
+    public function index(Request $request)
     {
+        $validated = $request->validate([
+            'vendor_id' => 'int',
+            'name' => 'string',
+            'status' => 'array|' . Rule::in(ShopValueStatus::toArray()),
+        ]);
+
         $collection = $this->service->find($request->all());
         return Bridge::view(new ShopsIndex($collection));
     }
@@ -43,7 +47,7 @@ class ShopController extends Controller
         return Bridge::view(new ShopsShow($entity));
     }
 
-    public function store(Request $request)
+    public function store(ShopRequest $request)
     {
         $validated = $request->validate([
             'vendor_id' => 'required|integer',
@@ -54,8 +58,9 @@ class ShopController extends Controller
         return redirect()->route('admin.shops.show', compact('id'));
     }
 
-    public function update(int $id, ShopUpdateRequest $request, ShopUpdateUsecase $usecase)
+    public function update(int $id, ShopRequest $request)
     {
-        return $usecase($id, $request);
+        $id = $this->service->update($id, $request->all())->getId();
+        return redirect()->route('admin.shops.show', compact('id'));
     }
 }

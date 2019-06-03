@@ -1,12 +1,12 @@
 <?php
 
-namespace Wstd\Application\Requests\Admin;
+namespace Wstd\Application\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Wstd\Domain\Models\Shop\ShopValueStatus;
 
-class ShopsIndexRequest extends FormRequest
+class ShopRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,8 @@ class ShopsIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'vendor_id' => 'int',
-            'status' => 'array|' . Rule::in(ShopValueStatus::values()),
+            'name' => 'required|string|max:100',
+            'status' => 'sometimes|required|integer|' . Rule::in(ShopValueStatus::toArray()),
         ];
     }
 }
