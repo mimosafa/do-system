@@ -100,6 +100,11 @@ abstract class AbstractValueStatus extends Enum
         // 'DEREGISTERED' => 'Deregistered',
     ];
 
+    /**
+     * 状態定数に加えない定数
+     *
+     * @see Wstd\Domain\Modules\Models\ValueObjectTrait
+     */
     protected static $excludedConstants = [
         'NAME',
         'LABEL',

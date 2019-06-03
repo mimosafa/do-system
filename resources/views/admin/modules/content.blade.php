@@ -1,27 +1,15 @@
 {{--
 
-    @var array $items
+    @var Wstd\View\Presenters\Presenter $content
+    @var Wstd\View\Presenters\Admin\Modules\FormContainer|null $form
 
 --}}
 
-<div class="adminGallery">
-    @foreach ($items as $item)
-
-    <div class="adminGalleryItem">
-        <a class="adminGalleryItemHandler" href="{{ $item->getUrl() }}" style="background-image: url({{ $item->getUrl('thumb') }})">
-            <span class="adminGalleryItemName">{{ $item->name }}</span>
-        </a>
-    </div>
-
-    @endforeach
-    @if (isset($form) && $form->hasForms())
-
-    {{ $form->toggle() }}
-
-    @endif
-</div>
+    @presenter($content)
 
 @if (isset($form) && $form->hasForms())
+
+    {{ $form->toggle() }}
 
     @php
         $modalContext = $modalContext ?? null;

@@ -7,13 +7,14 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Arr;
 use IteratorAggregate;
 use Wstd\View\Html\Admin\FormFactory;
-use Wstd\View\Presenters\Presenter;
+use Wstd\View\Presenters\IdentifiedPresenter;
 
-class FormContainer extends Presenter implements IteratorAggregate
+class FormContainer extends IdentifiedPresenter implements IteratorAggregate
 {
     /**
-     * @var string|null
+     * @var string
      */
+    public $id;
     public $title;
 
     /**
@@ -25,6 +26,9 @@ class FormContainer extends Presenter implements IteratorAggregate
      * @var string
      */
     protected $submit = 'Submit';
+
+    protected $toggle = 'Edit';
+    protected $toggleAttributes = [];
 
     /**
      * @var string|null 'post' or 'get'
@@ -81,12 +85,6 @@ class FormContainer extends Presenter implements IteratorAggregate
 
     public function submit(): Htmlable
     {
-        $args = $this->submitArguments();
-        return FormFactory::makeSubmit($args)->text($this->submit);
-    }
-
-    protected function submitArguments(): array
-    {
         $args = [];
         if (isset($this->method)) {
             $method = strtolower($this->method);
@@ -102,9 +100,40 @@ class FormContainer extends Presenter implements IteratorAggregate
                 $args['formenctype'] = $this->enctype;
             }
         }
-        return $args;
+        return FormFactory::makeSubmit($args)->text($this->submit);
     }
 
+    public function toggle()
+    {
+        $tag = Arr::pull($this->toggleAttributes, 'tag', 'button');
+        $type = Arr::pull($this->toggleAttributes, 'type', 'button');
+        $class = Arr::pull($this->toggleAttributes, 'class', 'btn-primary btn-block btn-sm');
+        if (is_array($class)) {
+            $class = implode(' ', $class);
+        }
+        $attributes = array_merge($this->toggleAttributes, [
+            'class' => $class,
+            'data-toggle' => 'modal',
+            'data-target' => '#' . $this->id,
+        ]);
+        if ($tag === 'button') {
+            $toggle = FormFactory::makeButton($attributes + ['type' => $type]);
+        }
+        else if ($tag === 'input') {
+            $toggle = FormFactory::makeInput($attributes + ['type' => $type]);
+        }
+        else if ($tag === 'a') {
+            $toggle = FormFactory::makeA($attributes);
+        }
+        if (! isset($toggle)) {
+            throw new \Exception();
+        }
+        return $toggle->html('<b>' . e($this->toggle) . '</b>');
+    }
+
+    /**
+     * @see IteratorAggregate
+     */
     public function getIterator() {
         return new ArrayIterator($this->formItems);
     }

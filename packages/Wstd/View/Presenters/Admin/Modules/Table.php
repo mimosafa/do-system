@@ -3,24 +3,23 @@
 namespace Wstd\View\Presenters\Admin\Modules;
 
 use ArrayAccess;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Traversable;
 use Wstd\View\Presenters\Presenter;
 
 class Table extends Presenter
 {
     /**
-     * e.g. 'users'
-     *
-     * @var string
+     * @var string|null
      */
     public $id;
-
-    public $collectionName;
+    public $title;
 
     /**
      * List items
      *
-     * @var array|Traversable/Countable/ArrayAccess
+     * @var array|Traversable
      */
     public $collection;
 
@@ -37,6 +36,21 @@ class Table extends Presenter
      * @var array
      */
     protected $itemLabels = [];
+
+    /**
+     * Callbacks for item value display,
+     * used by static::td() mrthod
+     *
+     * @var array[callable]
+     */
+    protected $callbacks = [];
+
+    /**
+     * Html attributes
+     *
+     * @var array
+     */
+    protected $attributes = [];
 
     /**
      * @var bool
@@ -58,18 +72,48 @@ class Table extends Presenter
      */
     protected $ignore = ['template'];
 
+    /**
+     * @see Wstd\View\Presenters\Presenter
+     * @var array
+     */
     protected $guarded = ['collection'];
 
     /**
-     * @param array|Traversable/Countable/ArrayAccess
+     * @param array|Traversable
+     * @param array $args
      */
     public function __construct($collection, array $args = [])
     {
+        if (! is_array($collection)) {
+            if (! is_object($collection) || ! ($collection instanceof Traversable)) {
+                throw new \InvalidArgumentException();
+            }
+        }
         $this->collection = $collection;
         $this->parseArguments($args);
-        if (! isset($this->collectionName)) {
-            $this->collectionName = Str::title($this->id);
+    }
+
+    protected function parseArguments(array $args)
+    {
+        $items = Arr::pull($args, 'items', null);
+        $itemLabels = (array) Arr::pull($args, 'itemLabels', []);
+        if (is_array($items)) {
+            if ($items !== array_values($items)) {
+                foreach ($items as $item => $value) {
+                    $this->items[] = $item;
+                    if (is_string($value) && ! isset($itemLabels[$item])) {
+                        $itemLabels[$item] = $value;
+                    }
+                }
+            }
+            else {
+                $this->items = $items;
+            }
         }
+        if (! empty($itemLabels)) {
+            $this->itemLabels = array_merge($itemLabels, $this->itemLabels);
+        }
+        parent::parseArguments($args);
     }
 
     public function tableClasses(): string
@@ -83,17 +127,26 @@ class Table extends Presenter
 
     protected function tableClassArray(): array
     {
-        $classes = ['table'];
-        if ($this->isDataTable) {
-            $classes[] = 'dataTable';
+        $array = ['table'];
+        if (isset($this->attributes['table']) && isset($this->attributes['table']['class'])) {
+            $classes = $this->attributes['table']['class'];
+            if (is_string($classes)) {
+                $classes = explode(' ', $classes);
+            }
+            if (is_array($classes)) {
+                $array = array_merge($array, $classes);
+            }
         }
-        return $classes;
+        if ($this->isDataTable) {
+            $array[] = 'dataTable';
+        }
+        return array_unique(array_filter($array));
     }
 
-    public function tableMiscAttributes(): string
+    public function tableAttributes(): string
     {
         $attr = '';
-        if ($array = $this->tableMiscAttributeArray()) {
+        if ($array = $this->tableAttributeArray()) {
             foreach ($array as $key => $value) {
                 $attr .= ' ' . sprintf('%s="%s"', e($key), e(strval($value)));
             }
@@ -101,9 +154,21 @@ class Table extends Presenter
         return $attr;
     }
 
-    protected function tableMiscAttributeArray():array
+    protected function tableAttributeArray():array
     {
-        return [];
+        $attrs = [];
+        if (isset($this->attributes['table'])) {
+            foreach ($this->attributes['table'] as $key => $value) {
+                if ($key === 'class') {
+                    continue;
+                }
+                $attrs[$key] = $value;
+            }
+        }
+        if (isset($this->id) && filter_var($this->id)) {
+            $attrs['id'] = e($this->id);
+        }
+        return $attrs;
     }
 
     /**
@@ -126,7 +191,23 @@ class Table extends Presenter
      */
     protected function thClasses(string $item): array
     {
-        return ['th_' . $item];
+        $array = ['th_' . $item];
+        if (isset($this->attributes['th']) && isset($this->attributes['th']['class'])) {
+            $classes = $this->attributes['th']['class'];
+            foreach (Arr::wrap($classes) as $class) {
+                if (is_callable($class)) {
+                    $array[] = (string) $class($item);
+                    continue;
+                }
+                if (is_string($class)) {
+                    $class = explode(' ', $class);
+                }
+                if (is_array($class)) {
+                    $array = array_merge($array, $class);
+                }
+            }
+        }
+        return array_unique(array_filter($array));
     }
 
     /**
@@ -159,7 +240,20 @@ class Table extends Presenter
      */
     protected function trClasses($value): array
     {
-        return [];
+        $array = [];
+        if (isset($this->attributes['tr']) && isset($this->attributes['tr']['class'])) {
+            $class = $this->attributes['tr']['class'];
+            if (is_callable($class)) {
+                $array[] = (string) $class($value);
+            }
+            else if (is_string($class)) {
+                $array = array_merge($array, explode(' ', $class));
+            }
+            else if (is_array($class)) {
+                $array = array_merge($array, $class);
+            }
+        }
+        return array_unique(array_filter($array));
     }
 
     /**
@@ -167,7 +261,7 @@ class Table extends Presenter
      * @param mixed $value
      * @return string
      */
-    public function tdAttribute(string $item, $value): string
+    public function tdAttributes(string $item, $value): string
     {
         $attr = '';
         if ($classes = $this->tdClasses($item, $value)) {
@@ -194,6 +288,12 @@ class Table extends Presenter
      */
     public function td(string $item, $value): string
     {
+        if (isset($this->callbacks[$item])) {
+            $callback = $this->callbacks[$item];
+            if (is_callable($callback)) {
+                return $callback($value);
+            }
+        }
         $method = 'get' . Str::studly($item);
         if (method_exists($this, $method)) {
             return $this->{$method}($value); // Unescaped!
@@ -215,22 +315,6 @@ class Table extends Presenter
      */
     public function emptyMessage(): string
     {
-        return 'No ' . $this->collectionName;
-    }
-
-    /**
-     * @return string
-     */
-    public function beforeTable(): string
-    {
-        return '';
-    }
-
-    /**
-     * @return string
-     */
-    public function afterTable(): string
-    {
-        return '';
+        return '<p class="text-center h4">No items</p>';
     }
 }

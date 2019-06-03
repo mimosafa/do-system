@@ -3,12 +3,14 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
-use Wstd\View\Presenters\Presenter;
+use Wstd\View\Html\Admin\FormFactory;
+use Wstd\View\Presenters\IdentifiedPresenter;
+use Wstd\View\Presenters\Admin\Modules\Contents;
+use Wstd\View\Presenters\Admin\Modules\FormContainer;
 use Wstd\View\Presenters\Admin\Modules\Gallery;
-use Wstd\View\Presenters\Admin\Modules\TabContents;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
-class CarsShow extends Presenter
+class CarsShow extends IdentifiedPresenter
 {
     /**
      * @var Wstd\Domain\Models\EntityInterface
@@ -28,12 +30,12 @@ class CarsShow extends Presenter
     /**
      * @var Wstd\View\Presenters\Admin\Templates\Properties
      */
-    public $propertiesInstance;
+    public $properties;
 
     /**
      * @var Wstd\View\Presenters\Admin\Modules\Gallery
      */
-    public $galleryInstance;
+    public $gallery;
 
     public function __construct(EntityInterface $entity)
     {
@@ -50,11 +52,10 @@ class CarsShow extends Presenter
         $propertyLabels = ['vendor' => '事業者',];
         $propertyValues = ['vendor' => $this->vendorPropertyValue(),];
         $editableProperties = ['name', 'vin', 'status',];
-        $title = $trigger = '基本情報を編集する';
 
-        $this->propertiesInstance = new Properties($this->entity, compact(
+        $this->properties = new Properties($this->entity, compact(
             'id', 'header', 'properties', 'propertyLabels',
-            'propertyValues', 'editableProperties', 'title', 'trigger'
+            'propertyValues', 'editableProperties', 'trigger'
         ));
     }
 
@@ -70,13 +71,14 @@ class CarsShow extends Presenter
     protected function initGallery()
     {
         $images = $this->entity->getPhotos();
-
-        $id = 'car_photos';
-        $fileKey = 'image'; // Added file key in request
+        $id = 'car_images';
+        $title = '車両画像';
         $action = route('admin.cars.photos.store', [
-            'id' => $this->entity->getId()
+            'id' => $this->entity->getId(),
         ]);
 
-        $this->galleryInstance = new Gallery($images, compact('id', 'action', 'fileKey'));
+        $gallery = new Gallery($images, compact('id', 'title', 'action'));
+
+        $this->gallery = new Contents($gallery);
     }
 }

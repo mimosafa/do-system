@@ -3,11 +3,17 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
-use Wstd\View\Presenters\Presenter;
-use Wstd\View\Presenters\Admin\Modules\TabContents;
+use Wstd\View\Html\Admin\FormFactory;
+use Wstd\View\Presenters\IdentifiedPresenter;
+use Wstd\View\Presenters\Admin\Includes\CarsTable;
+use Wstd\View\Presenters\Admin\Includes\ShopsTable;
+use Wstd\View\Presenters\Admin\Modules\Content;
+use Wstd\View\Presenters\Admin\Modules\Contents;
+use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
+use Wstd\View\Presenters\Admin\Modules\FormContainer;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
-class VendorsShow extends Presenter
+class VendorsShow extends IdentifiedPresenter
 {
     /**
      * @var Wstd\Domain\Models\EntityInterface
@@ -27,7 +33,7 @@ class VendorsShow extends Presenter
     /**
      * @var Wstd\View\Presenters\Admin\Templates\Properties
      */
-    public $propertiesInstance;
+    public $properties;
 
     /**
      * @var Wstd\View\Presenters\Admin\Modules\TabContents
@@ -51,9 +57,8 @@ class VendorsShow extends Presenter
         $properties = ['id', 'status',];
         $propertyLabels = ['id' => '登録番号',];
         $editableProperties = ['name','status',];
-        $title = $trigger = '基本情報を編集する';
 
-        $this->propertiesInstance = new Properties($this->entity, compact(
+        $this->properties = new Properties($this->entity, compact(
             'id', 'header', 'properties', 'propertyLabels', 'editableProperties', 'title', 'trigger'
         ));
     }
@@ -65,44 +70,85 @@ class VendorsShow extends Presenter
             $this->initShopList(),
         ];
 
-        $this->belongs = new TabContents($contents, [
-            'id' => 'belongs_to_vendor',
-        ]);
+        $this->belongs = new Contents($contents);
     }
 
     /**
      * @return Wstd\View\Presenters\Admin\CarsIndex
      */
-    protected function initCarList(): CarsIndex
+    protected function initCarList()
     {
-        $cars = $this->entity->getCars();
+        $table = new CarsTable($this->entity->getCars(), [
+            'items' => [
+                'thumb', 'name',
+                'vin', 'status',
+            ],
+        ]);
 
-        $addable = true;
-        $items = ['thumb', 'name', 'vin', 'status',];
-        $isDataTable = false;
-        $title = '<i class="fa fa-car"></i> 車両';
-        $vendor_id = $this->entity->getId();
+        return new Content($table, [
+            'id' => 'vendor_cars',
+            'title' => '<i class="fa fa-car"></i> 車両',
+            'form' => $this->initCarForm(),
+        ]);
+    }
 
-        return new CarsIndex($cars, compact(
-            'addable', 'items', 'isDataTable', 'title', 'vendor_id'
-        ));
+    protected function initCarForm()
+    {
+        $formItems = [
+            FormFactory::makeInputText([
+                'name' => 'name',
+                'label' => '車両名',
+            ]),
+            FormFactory::makeInputText([
+                'name' => 'vin',
+                'label' => '車両No',
+            ]),
+            FormFactory::makeInputHidden([
+                'name' => 'vendor_id',
+                'value' => $this->entity->getId(),
+            ]),
+        ];
+
+        return new FormContainer($formItems, [
+            'id' => 'vendor_cars_form',
+            'title' => '車両を追加する',
+            'action' => route('admin.cars.store'),
+        ]);
     }
 
     /**
      * @return Wstd\View\Presenters\Admin\ShopsIndex
      */
-    protected function initShopList(): ShopsIndex
+    protected function initShopList()
     {
-        $shops = $this->entity->getShops();
+        $table = new ShopsTable($this->entity->getShops(), [
+            'items' => ['name', 'status'],
+        ]);
 
-        $addable = true;
-        $items = ['name', 'status',];
-        $isDataTable = false;
-        $title = '<i class="fa fa-coffee"></i> 店舗';
-        $vendor_id = $this->entity->getId();
+        return new Content($table, [
+            'id' => 'vendor_shops',
+            'title' => '<i class="fa fa-coffee"></i> 店舗',
+            'form' => $this->initShopForm(),
+        ]);
+    }
 
-        return new ShopsIndex($shops, compact(
-            'addable', 'items', 'isDataTable', 'title', 'vendor_id'
-        ));
+    protected function initShopForm()
+    {
+        $formItems = [
+            FormFactory::makeInputText([
+                'name' => 'name',
+                'label' => '店舗名',
+            ]),
+            FormFactory::makeInputHidden([
+                'name' => 'vendor_id',
+                'value' => $this->entity->getId(),
+            ]),
+        ];
+
+        return new FormContainer($formItems, [
+            'id' => 'vendor_shops_form',
+            'title' => '店舗を追加する',
+            'action' => route('admin.shops.store'),
+        ]);
     }
 }

@@ -3,21 +3,28 @@
 namespace Wstd\View\Presenters\Admin\Templates;
 
 use Illuminate\Support\Str;
-use Wstd\View\Presenters\Admin\Modules\EntityTable;
+use Wstd\Domain\Models\CollectionInterface;
+use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
+use Wstd\View\Presenters\IdentifiedPresenter;
 
-abstract class Index extends EntityTable
+abstract class Index extends IdentifiedPresenter
 {
     /**
-     * e.g. 'Users List'
+     * e.g. users
      *
      * @var string
+     */
+    public $id;
+
+    /**
+     * @var string Index page title
      */
     public $title;
 
     /**
-     * @var bool
+     * @var Wstd\View\Presenters\Modules\EntitiesTable;
      */
-    public $isDataTable = true;
+    public $tableInstance;
 
     /**
      * Default Blade template
@@ -27,28 +34,19 @@ abstract class Index extends EntityTable
     public $template = 'admin.templates.index';
 
     /**
-     * @param Wstd\Domain\Models\CollectionInterface
-     * @param array $args
+     * Overwrite Wstd\View\Presenters\Presenter::__construct()
      */
     public function __construct($collection, array $args = [])
     {
-        parent::__construct($collection, $args);
-        $this->initTitle();
+        if (! is_object($collection) || ! ($collection instanceof CollectionInterface)) {
+            throw new \InvalidArgumentException();
+        }
+        $this->tableInstance = $this->initTableInstance($collection);
+        $this->parseArguments($args);
     }
 
-    protected function tableMiscAttributeArray(): array
-    {
-        $attrs = [];
-        if ($this->isDataTable) {
-            $attrs['data-page-length'] = '100';
-        }
-        return $attrs;
-    }
-
-    protected function initTitle()
-    {
-        if (! $this->title || ! is_string($this->title)) {
-            $this->title = $this->collectionName;
-        }
-    }
+    /**
+     * @return Wstd\View\Presenters\Modules\EntitiesTable
+     */
+    abstract protected function initTableInstance(CollectionInterface $collection): EntitiesTable;
 }

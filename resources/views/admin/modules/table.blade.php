@@ -1,64 +1,64 @@
 {{--
 
-    @var string $beforeIndex
-    @var Illuminate\Support\Collection $collection
+    @see Wstd\View\Presenters\Admin\Modules\Table
+
     @var string $tableClasses
-    @var string $id
-    @var array[string] $items
-    @var callable $thAttributes(string): string
-    @var callable $th(string): string
-    @var callable $trAttributes(Wstd\Domain\Models\EntityInterface): string
-    @var callable $tdAttribute(string, Wstd\Domain\Models\EntityInterface): string
-    @var callable|bool $getTdMethod(string) callable: string
-    @var string $emptyMessage
-    @var string $afterIndex
+    @var string $tableAttributes <Unescaped!!>
+    @var array $items
+    @var callable $thAttributes(string): string <Unescaped!!>
+    @var callable $th(string): string <Unescaped!!>
+    @var array|Traversable $collection
+    @var callable $trAttributes(mixed): string <Unescaped!!>
+    @var callable $tdAttributes(string, mixed): string <Unescaped!!>
+    @var callable $td(string, mixed): string <Unescaped!!>
+    @var string $emptyMessage <Unescaped!!>
+    @var bool $isDataTable
+    @var string|null $id
+    @var array $dataTableOptions
 
 --}}
 
-    {!! $beforeTable !!}
-    @if (count($collection) !== 0)
+<table class="{{ $tableClasses }}"{!! $tableAttributes !!}>
+    <thead>
+        <tr>
+            @foreach ($items as $item)
 
-    <table class="table{{ $tableClasses }}" id="{{ $id }}_table"{!! $tableMiscAttributes !!}>
-        <thead>
-            <tr>
-                @foreach ($items as $item)
-
-                <th{!! $thAttributes($item) !!}>
-                    {!! $th($item) !!}
-                </th>
-
-                @endforeach
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($collection as $row)
-
-            <tr{!! $trAttributes($row) !!}>
-                @foreach ($items as $item)
-
-                <td{!! $tdAttribute($item, $row) !!}>
-                    {!! $td($item, $row) !!}
-                </td>
-
-                @endforeach
-            </tr>
+            <th{!! $thAttributes($item) !!}>
+                {!! $th($item) !!}
+            </th>
 
             @endforeach
-        </tbody>
-    </table>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse ($collection as $row)
 
-    @else
+        <tr{!! $trAttributes($row) !!}>
+            @foreach ($items as $item)
 
-    <p class="h4 text-center">{!! $emptyMessage !!}</p>
+            <td{!! $tdAttributes($item, $row) !!}>
+                {!! $td($item, $row) !!}
+            </td>
 
-    @endif
-    {!! $afterTable !!}
+            @endforeach
+        </tr>
 
-@if ($isDataTable)
+        @empty
+
+        <tr>
+            <td colspan="{{ count($items) }}">
+                {!! $emptyMessage !!}
+            </td>
+        </tr>
+        @endforelse
+    </tbody>
+</table>
+
+@if ($isDataTable && isset($id) && is_string($id))
     @push('js')
 
     <script>
-        $('#{{ $id }}_table').DataTable({!! json_encode($dataTableOptions) !!});
+        $('#{{ $id }}').DataTable({!! json_encode($dataTableOptions) !!});
     </script>
 
     @endpush

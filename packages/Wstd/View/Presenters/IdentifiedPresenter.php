@@ -2,6 +2,8 @@
 
 namespace Wstd\View\Presenters;
 
+use Illuminate\Support\Str;
+
 abstract class IdentifiedPresenter extends Presenter
 {
     /**
@@ -18,7 +20,7 @@ abstract class IdentifiedPresenter extends Presenter
     {
         parent::parseArguments($args);
         if (! isset($this->id) || ! filter_var($this->id)) {
-            throw \Exception('$id property is not defined.');
+            throw new \Exception('$id property is not defined.');
         }
         if (! isset($this->title) || ! filter_var($this->title)) {
             $this->title = Str::title($this->id);

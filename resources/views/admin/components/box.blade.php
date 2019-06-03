@@ -2,7 +2,7 @@
 
     @var string|null $boxContext 'primary'|'info'|'success'|'warning'|'danger'
     @var string|null $id
-    @var string|null $title
+    @var string|null $title <Unescaped!>
     @var bool|null $collapsable
     @var bool|null $removal
 
@@ -41,7 +41,7 @@
     <div class="box-header with-border">
         @isset($title)
 
-        <h3 class="box-title">{{ $title }}</h3>
+        <h3 class="box-title">{!! $title !!}</h3>
 
         @endisset
         @if ($hasTools)

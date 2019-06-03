@@ -7,10 +7,10 @@ use Illuminate\Support\Str;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\ValueObjectInterface;
 use Wstd\View\Html\Admin\FormFactory;
-use Wstd\View\Presenters\Admin\Modules\HiddenForm;
-use Wstd\View\Presenters\Presenter;
+use Wstd\View\Presenters\Admin\Modules\Content;
+use Wstd\View\Presenters\Admin\Modules\FormContainer;
 
-class Properties extends Presenter
+class Properties extends Content
 {
     /**
      * @var string
@@ -48,14 +48,9 @@ class Properties extends Presenter
     protected $editableProperties = [];
 
     /**
-     * @var Wstd\View\Presenters\Admin\Modules\HiddenForm
+     * @var Wstd\View\Presenters\Admin\Modules\FormContainer
      */
-    public $hiddenForm;
-
-    /**
-     * @var Illuminate\Contracts\Support\Htmlable
-     */
-    public $modalTrigger;
+    public $form;
 
     /**
      * Default Blade template
@@ -64,7 +59,7 @@ class Properties extends Presenter
      */
     public $template = 'admin.templates.properties';
 
-    protected $guarded = ['hiddenForm'];
+    protected $guarded = ['form'];
 
     /**
      * Constructor
@@ -96,8 +91,9 @@ class Properties extends Presenter
             }
         }
         if (! empty($formElements)) {
-            $args['id'] = $this->id . '_forms';
-            $this->hiddenForm = new HiddenForm($formElements, $args);
+            $id = $this->id . '_forms';
+            $title = $toggle = '基本情報を編集する';
+            $this->form = new FormContainer($formElements, compact('id', 'title', 'toggle'));
         }
     }
 

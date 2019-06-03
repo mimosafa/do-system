@@ -1,7 +1,8 @@
 {{--
 
     @var string $title
-    @var Wstd\View\Presenters\Admin\Templates\Properties $propertiesInstance
+    @var Wstd\View\Presenters\Admin\Templates\Properties $properties
+    @var Wstd\View\Presenters\Admin\Modules\Contents $gallery
 
 --}}
 
@@ -9,12 +10,10 @@
 
     <div class="row">
         <div class="col-md-3">
-            @presenter($propertiesInstance)
+            @presenter($properties)
         </div>
         <div class="col-md-9">
-            @adminBox(['title' => '画像'])
-                @presenter($galleryInstance)
-            @endadminBox
+            @presenter($gallery)
         </div>
     </div>
 

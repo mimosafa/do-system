@@ -37,6 +37,11 @@ class FormFactory
         return static::makeInputText($args)->readonly();
     }
 
+    public static function makeA(array $args = []): Htmlable
+    {
+        return El\A::create()->attributes($args);
+    }
+
     public static function makeInput(array $args = []): Htmlable
     {
         return El\Input::create()->attributes($args);
