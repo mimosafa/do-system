@@ -7,10 +7,10 @@ use Illuminate\Support\Str;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\ValueObjectInterface;
 use Wstd\View\Html\Admin\FormFactory;
-use Wstd\View\Presenters\Admin\Modules\HiddenForm;
-use Wstd\View\Presenters\Presenter;
+use Wstd\View\Presenters\Admin\Modules\Content;
+use Wstd\View\Presenters\Admin\Modules\FormContainer;
 
-class Properties extends Presenter
+class Properties extends Content
 {
     /**
      * @var string
@@ -48,14 +48,9 @@ class Properties extends Presenter
     protected $editableProperties = [];
 
     /**
-     * @var Wstd\View\Presenters\Admin\Modules\HiddenForm
+     * @var Wstd\View\Presenters\Admin\Modules\FormContainer
      */
-    public $hiddenForm;
-
-    /**
-     * @var Illuminate\Contracts\Support\Htmlable
-     */
-    public $modalTrigger;
+    public $form;
 
     /**
      * Default Blade template
@@ -63,6 +58,8 @@ class Properties extends Presenter
      * @var string
      */
     public $template = 'admin.templates.properties';
+
+    protected $guarded = ['form'];
 
     /**
      * Constructor
@@ -75,12 +72,7 @@ class Properties extends Presenter
     public function __construct(EntityInterface $entity, array $args = [])
     {
         $this->entity = $entity;
-        if (! empty($args)) {
-            if (isset($args['hiddenForm'])) {
-                unset($args['hiddenForm']);
-            }
-            $this->parseArguments($args);
-        }
+        $this->parseArguments($args);
         if (! empty($this->editableProperties) && is_array($this->editableProperties)) {
             $this->initFormItems($args);
         }
@@ -99,8 +91,9 @@ class Properties extends Presenter
             }
         }
         if (! empty($formElements)) {
-            $args['id'] = $this->id . '_forms';
-            $this->hiddenForm = new HiddenForm($formElements, $args);
+            $id = $this->id . '_forms';
+            $title = $toggle = '基本情報を編集する';
+            $this->form = new FormContainer($formElements, compact('id', 'title', 'toggle'));
         }
     }
 

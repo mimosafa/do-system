@@ -9,36 +9,53 @@
 
 --}}
 
-    @component('admin.modules.box', ['id' => $id])
-        @isset($header)
+@adminBox(['id' => $id, 'boxContext' => 'primary',])
 
-        <h3 class="text-center">
-            {!! $header !!}
-        </h3>
+    @isset($header)
 
-        @endisset
-        <table class="table">
-            <tbody>
-                @foreach ($properties as $property)
+    <h3 class="text-center">
+        {!! $header !!}
+    </h3>
 
-                <tr>
-                    <th scope="row">
-                        {!! $propertyLabel($property) !!}
-                    </th>
-                    <td class="text-right">
-                        {!! $propertyValue($property) !!}
-                    </td>
-                </tr>
+    @endisset
+    <table class="table">
+        <tbody>
+            @foreach ($properties as $property)
 
-                @endforeach
-            </tbody>
-        </table>
-        @if(isset($hiddenForm))
+            <tr>
+                <th scope="row">
+                    {!! $propertyLabel($property) !!}
+                </th>
+                <td class="text-right">
+                    {!! $propertyValue($property) !!}
+                </td>
+            </tr>
 
-        {{ $hiddenForm->modalTrigger }}
+            @endforeach
+        </tbody>
+    </table>
+    @if(isset($form))
 
-        @endif
+    {{ $form->toggle() }}
 
-    @endcomponent
+    @push('hidden_form')
+        @adminModal([
+            'id' => $form->id,
+            'title' => $form->title,
+        ])
 
-    @presenter($hiddenForm)
+        @foreach ($form as $element)
+            {{ $element }}
+        @endforeach
+
+        @slot('footer')
+            <button class="btn btn-default" data-dismiss="modal">Close</button>
+            {{ $form->submit() }}
+        @endslot
+
+        @endadminModal
+    @endpush
+
+    @endif
+
+@endadminBox

@@ -26,10 +26,18 @@ class BladeServiceProvider extends ServiceProvider
     public function boot()
     {
         /**
+         * Custom directive: `@presenter($presenter)`
+         *
          * @see Wstd\View\Presenters\Bridge
          */
         Blade::directive('presenter', function ($expression) {
             return "<?php echo \$__env->make(\Wstd\View\Presenters\Bridge::defineViewName({$expression}), $expression, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>";
         });
+
+        // Custom directive: modal component in admin
+        Blade::component('admin.components.modal', 'adminModal');
+
+        // Custom directive: box component in admin
+        Blade::component('admin.components.box', 'adminBox');
     }
 }

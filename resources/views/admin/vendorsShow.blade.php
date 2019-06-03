@@ -10,11 +10,11 @@
 
     <div class="row">
         <div class="col-md-3">
-            @presenter($propertiesInstance)
+            @presenter($properties)
         </div>
         <div class="col-md-9">
             @presenter($belongs)
         </div>
     </div>
-    
+
 @endcomponent

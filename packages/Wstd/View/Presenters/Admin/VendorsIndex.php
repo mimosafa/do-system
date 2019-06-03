@@ -2,7 +2,9 @@
 
 namespace Wstd\View\Presenters\Admin;
 
-use Wstd\Domain\Models\EntityInterface;
+use Wstd\Domain\Models\CollectionInterface;
+use Wstd\View\Presenters\Admin\Includes\VendorsTable;
+use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 use Wstd\View\Presenters\Admin\Templates\Index;
 
 class VendorsIndex extends Index
@@ -20,45 +22,22 @@ class VendorsIndex extends Index
     /**
      * @var array
      */
-    public $items = [
+    protected $items = [
         'id',
         'name',
         'status',
     ];
 
-    /**
-     * @var array
-     */
-    protected $itemLabels = [
-        'id' => 'ID',
-        'name' => '事業者名',
-        'status' => '登録状況',
-    ];
-
-    protected function trClasses($entity): array
+    protected function initTableInstance(CollectionInterface $collection): EntitiesTable
     {
-        $classes = [];
-        $status = $entity->getStatus();
-        if (! $status->isRegistered()) {
-            $classes[] = 'status_' . $status->getSlug();
-        }
-        return $classes;
-    }
+        $isDataTable = true;
+        $items = $this->items;
+        $dataTableOptions = [
+            'pageLength' => 100,
+        ];
 
-    protected function getName($entity)
-    {
-        $link = route('admin.vendors.show', ['id' => $entity->getId(),]);
-        $status = $entity->getStatus();
-        $string = sprintf('<a href="%s">%s</a>', e($link), e($entity->getName()));
-        if (! $status->isRegistered()) {
-            $string = sprintf('<small class="muted">[ %s ]</small> ', e(strval($status))) . $string;
-        }
-        return $string;
-    }
-
-    protected function getStatus($entity)
-    {
-        $status = $entity->getStatus();
-        return $status->isRegistered() ? '' : e(strval($status));
+        return new VendorsTable($collection, compact(
+            'isDataTable', 'items', 'dataTableOptions'
+        ));
     }
 }

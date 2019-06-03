@@ -2,33 +2,32 @@
 
 namespace Wstd\View\Presenters\Admin\Modules;
 
+use Spatie\Html\Elements\I;
 use Wstd\View\Html\Admin\FormFactory;
-use Wstd\View\Presenters\Admin\Modules\HiddenForm;
-use Wstd\View\Presenters\Presenter;
+use Wstd\View\Presenters\Admin\Modules\Content;
 
-class Gallery extends Presenter
+class Gallery extends Content
 {
     /**
      * @var string
      */
     public $id;
+    public $title;
+
+    public $action;
 
     /**
      * @var Illuminate\Database\Eloquent\Collection[Spatie\MediaLibrary\Models\Media]
      */
     public $items;
 
-    /**
-     * @var string
-     */
-    protected $fileKey;
+    public $form;
 
-    /**
-     * @var Wstd\View\Presenters\Admin\Modules\HiddenForm
-     */
-    public $hiddenForm;
+    public $modalSize = 'large';
 
     public $template = 'admin.modules.gallery';
+
+    protected $guarded = ['items',];
 
     /**
      * @param Illuminate\Database\Eloquent\Collection[Spatie\MediaLibrary\Models\Media] $items
@@ -37,33 +36,30 @@ class Gallery extends Presenter
     public function __construct($items, array $args = [])
     {
         $this->items = $items;
-        if (! empty($args)) {
-            if (isset($args['items'])) {
-                unset($args['items']);
-            }
-            if (isset($args['hiddenForm'])) {
-                unset($args['hiddenForm']);
-            }
-            $this->parseArguments($args);
-        }
-        $this->initHiddenForm($args);
+        $this->parseArguments($args);
+        $this->initForm();
     }
 
-    protected function initHiddenForm(array $args)
+    protected function initForm()
     {
-        $args['id'] = $this->id . '_form';
-        $args['title'] = '画像を追加する';
-        $args['modalSize'] = 'large';
-        $args['enctype'] = 'multipart/form-data';
+        $form = FormFactory::makeInputFile([
+            'name' => 'image',
+        ]);
 
-        $this->hiddenForm = new HiddenForm($this->formElements(), $args);
-    }
-
-    protected function formElements()
-    {
-        $name = $id = $this->fileKey ?? 'add_to_' . $this->id;
-        return [
-            FormFactory::makeInputFile(compact('name', 'id'))
+        $id = 'add_' . $this->id;
+        $title = $this->title . 'を追加する';
+        $modalSize = 'lg';
+        $action = $this->action;
+        $enctype = 'multipart/form-data';
+        $toggle = I::create()->class('fa fa-fw fa-plus-circle');
+        $toggleAttributes = [
+            'tag' => 'a',
+            'href' => '#',
+            'class' => 'adminGalleryAddItem',
         ];
+
+        $this->form = new FormContainer($form, compact(
+            'id', 'title', 'action', 'enctype', 'toggle', 'toggleAttributes'
+        ));
     }
 }
