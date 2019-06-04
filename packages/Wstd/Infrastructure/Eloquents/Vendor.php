@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Vendor\VendorValueStatus;
 use Wstd\Infrastructure\Eloquents\Car;
+use Wstd\Infrastructure\Eloquents\Item;
 use Wstd\Infrastructure\Eloquents\Shop;
 
 /**
@@ -34,6 +35,11 @@ class Vendor extends Model
     public function cars()
     {
         return $this->hasMany(Car::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
     }
 
     public function shops()

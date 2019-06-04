@@ -13,7 +13,7 @@ class ItemsIndex extends index
     public $title = '商品一覧';
 
     public $items = [
-        'name', 'status',
+        'vendor_id', 'vendor', 'name', 'status',
     ];
 
     protected function initTableInstance(CollectionInterface $collection): EntitiesTable

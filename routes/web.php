@@ -42,6 +42,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
     Route::post('cars/{id}/photos/store', 'CarController@storePhoto')->name('cars.photos.store');
 
     Route::get('items', 'ItemController@index')->name('items.index');
+    Route::post('items/create', 'ItemController@store')->name('items.store');
 
     Route::get('shops', 'ShopController@index')->name('shops.index');
     Route::post('shops/create', 'ShopController@store')->name('shops.store');

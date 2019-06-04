@@ -4,6 +4,7 @@ namespace Wstd\Domain\Models\Vendor;
 
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\Car\CarCollectionInterface;
+use Wstd\Domain\Models\Item\ItemCollectionInterface;
 use Wstd\Domain\Models\Shop\ShopCollectionInterface;
 
 interface VendorInterface extends EntityInterface
@@ -33,4 +34,6 @@ interface VendorInterface extends EntityInterface
      * @return Wstd\Domain\Models\Shop\ShopCollectionInterface
      */
     public function getShops(): ShopCollectionInterface;
+
+    public function getItems(): ItemCollectionInterface;
 }

@@ -6,6 +6,7 @@ use Wstd\Domain\Models\EntityInterface;
 use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
 use Wstd\View\Presenters\Admin\Includes\CarsTable;
+use Wstd\View\Presenters\Admin\Includes\ItemsTable;
 use Wstd\View\Presenters\Admin\Includes\ShopsTable;
 use Wstd\View\Presenters\Admin\Modules\Content;
 use Wstd\View\Presenters\Admin\Modules\Contents;
@@ -68,6 +69,7 @@ class VendorsShow extends IdentifiedPresenter
         $contents = [
             $this->initCarList(),
             $this->initShopList(),
+            $this->initItemList(),
         ];
 
         $this->belongs = new Contents($contents);
@@ -149,6 +151,39 @@ class VendorsShow extends IdentifiedPresenter
             'id' => 'vendor_shops_form',
             'title' => '店舗を追加する',
             'action' => route('admin.shops.store'),
+        ]);
+    }
+
+    protected function initItemList()
+    {
+        $table = new ItemsTable($this->entity->getItems(), [
+            'items' => ['name', 'status',],
+        ]);
+
+        return new Content($table, [
+            'id' => 'vendor_items',
+            'title' => '<i class="fa fa-fw fa-cutlery "></i> 商品',
+            'form' => $this->initItemForm(),
+        ]);
+    }
+
+    protected function initItemForm()
+    {
+        $forms = [
+            FormFactory::makeInputText([
+                'name' => 'name',
+                'label' => '商品名',
+            ]),
+            FormFactory::makeInputHidden([
+                'name' => 'vendor_id',
+                'value' => $this->entity->getId(),
+            ]),
+        ];
+
+        return new FormContainer($forms, [
+            'id' => 'vendor_items_form',
+            'title' => '商品を追加する',
+            'action' => route('admin.items.store'),
         ]);
     }
 }
