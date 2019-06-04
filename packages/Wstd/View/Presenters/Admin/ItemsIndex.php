@@ -13,14 +13,22 @@ class ItemsIndex extends index
     public $title = '商品一覧';
 
     public $items = [
-        'vendor_id', 'vendor', 'name', 'status',
+        'thumb', 'vendor_id', 'vendor', 'name', 'status',
     ];
 
     protected function initTableInstance(CollectionInterface $collection): EntitiesTable
     {
         $isDataTable = true;
         $items = $this->items;
+        $dataTableOptions = [
+            'pageLength' => 100,
+            'order' => [
+                [1, 'asc'],
+            ],
+        ];
 
-        return new ItemsTable($collection, compact('isDataTable', 'items'));
+        return new ItemsTable($collection, compact(
+            'isDataTable', 'items', 'dataTableOptions'
+        ));
     }
 }

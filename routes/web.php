@@ -46,6 +46,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
     Route::get('items/{id}', 'ItemController@show')->name('items.show');
     Route::post('items/{id}', 'ItemController@update');
 
+    /** @todo */
+    Route::post('items/{id}/photos/store', 'ItemController@storePhoto')->name('items.photos.store');
+
     Route::get('shops', 'ShopController@index')->name('shops.index');
     Route::post('shops/create', 'ShopController@store')->name('shops.store');
     Route::get('shops/{id}', 'ShopController@show')->name('shops.show');

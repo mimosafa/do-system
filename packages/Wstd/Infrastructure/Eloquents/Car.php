@@ -8,7 +8,7 @@ use Wstd\Domain\Models\Car\CarValueStatus;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
 use Wstd\Infrastructure\Modules\Files\HasFiles;
 use Wstd\Infrastructure\Modules\Files\HasFilesTrait;
-use Wstd\Infrastructure\Modules\Files\HasImagesTrait;
+use Wstd\Infrastructure\Modules\Files\HasCarPhotosTrait;
 
 /**
  * @property int|null $id
@@ -28,7 +28,7 @@ class Car extends Model implements HasFiles
 {
     use SoftDeletes,
         BelongsToVendorTrait,
-        HasFilesTrait, HasImagesTrait;
+        HasFilesTrait, HasCarPhotosTrait;
 
     protected $imagesCollectionName = 'cars';
 

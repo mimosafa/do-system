@@ -4,6 +4,8 @@ namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\Item\ItemInterface;
 use Wstd\View\Presenters\IdentifiedPresenter;
+use Wstd\View\Presenters\Admin\Modules\Contents;
+use Wstd\View\Presenters\Admin\Modules\Gallery;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
 class ItemsShow extends IdentifiedPresenter
@@ -14,11 +16,13 @@ class ItemsShow extends IdentifiedPresenter
     public $title = '商品詳細';
 
     public $properties;
+    public $gallery;
 
     public function __construct(ItemInterface $entity)
     {
         $this->entity = $entity;
         $this->initProperties();
+        $this->initGallery();
     }
 
     protected function initProperties()
@@ -43,5 +47,19 @@ class ItemsShow extends IdentifiedPresenter
         $link = route('admin.vendors.show', ['id' => $vendor->getId()]);
 
         return sprintf('<a href="%s">%s</a>', $link, '<i class="fa fa-user"></i> ' . e($name));
+    }
+
+    protected function initGallery()
+    {
+        $images = $this->entity->getPhotos();
+        $id = 'food_images';
+        $title = '商品画像';
+        $action = route('admin.items.photos.store', [
+            'id' => $this->entity->getId(),
+        ]);
+
+        $gallery = new Gallery($images, compact('id', 'title', 'action'));
+
+        $this->gallery = new Contents($gallery);
     }
 }

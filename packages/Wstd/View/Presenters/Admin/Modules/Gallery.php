@@ -23,6 +23,8 @@ class Gallery extends Content
 
     public $form;
 
+    protected $nameForInput;
+
     public $modalSize = 'large';
 
     public $template = 'admin.modules.gallery';
@@ -43,7 +45,7 @@ class Gallery extends Content
     protected function initForm()
     {
         $form = FormFactory::makeInputFile([
-            'name' => 'image',
+            'name' => $this->nameForInput ?? 'image',
         ]);
 
         $id = 'add_' . $this->id;

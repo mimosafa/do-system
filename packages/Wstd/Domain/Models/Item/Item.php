@@ -38,4 +38,9 @@ final class Item implements ItemInterface
     {
         return ItemValueStatus::of($this->eloquent->status);
     }
+
+    public function getPhotos()
+    {
+        return $this->eloquent->food_photos;
+    }
 }

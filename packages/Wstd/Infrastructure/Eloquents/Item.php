@@ -8,12 +8,16 @@ use Wstd\Domain\Models\Item\ItemValueStatus;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableInterface;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableTrait;
+use Wstd\Infrastructure\Modules\Files\HasFiles;
+use Wstd\Infrastructure\Modules\Files\HasFilesTrait;
+use Wstd\Infrastructure\Modules\Files\HasFoodPhotosTrait;
 
-class Item extends Model implements AdvertisableInterface
+class Item extends Model implements AdvertisableInterface, HasFiles
 {
     use SoftDeletes,
         BelongsToVendorTrait,
-        AdvertisableTrait;
+        AdvertisableTrait,
+        HasFilesTrait, HasFoodPhotosTrait;
 
     protected $guarded = ['id'];
 
