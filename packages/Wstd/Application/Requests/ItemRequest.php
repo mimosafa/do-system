@@ -28,6 +28,8 @@ class ItemRequest extends FormRequest
         return [
             'name' => 'sometimes|required|string|max:100',
             'status' => 'sometimes|required|integer|' . Rule::in(ItemValueStatus::toArray()),
+            'copy' => 'nullable|string|max:30',
+            'description' => 'nullable|string|max:80',
         ];
     }
 }

@@ -3,9 +3,14 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\Item\ItemInterface;
+use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
+use Wstd\View\Presenters\Admin\Modules\Content;
 use Wstd\View\Presenters\Admin\Modules\Contents;
+use Wstd\View\Presenters\Admin\Modules\FormContainer;
 use Wstd\View\Presenters\Admin\Modules\Gallery;
+use Wstd\View\Presenters\Admin\Modules\Section;
+use Wstd\View\Presenters\Admin\Modules\Sections;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
 class ItemsShow extends IdentifiedPresenter
@@ -17,12 +22,13 @@ class ItemsShow extends IdentifiedPresenter
 
     public $properties;
     public $gallery;
+    public $contents;
 
     public function __construct(ItemInterface $entity)
     {
         $this->entity = $entity;
         $this->initProperties();
-        $this->initGallery();
+        $this->initContents();
     }
 
     protected function initProperties()
@@ -49,17 +55,68 @@ class ItemsShow extends IdentifiedPresenter
         return sprintf('<a href="%s">%s</a>', $link, '<i class="fa fa-user"></i> ' . e($name));
     }
 
+    protected function initContents()
+    {
+        $contents = [
+            $this->initGallery(),
+            $this->initTexts(),
+        ];
+
+        $this->contents = new Contents($contents);
+    }
+
     protected function initGallery()
     {
         $images = $this->entity->getPhotos();
         $id = 'food_images';
-        $title = '商品画像';
+        $title = '<i class="fa fa-camera"></i> 商品画像';
         $action = route('admin.items.photos.store', [
             'id' => $this->entity->getId(),
         ]);
 
-        $gallery = new Gallery($images, compact('id', 'title', 'action'));
+        return new Gallery($images, compact('id', 'title', 'action'));
+    }
 
-        $this->gallery = new Contents($gallery);
+    protected function initTexts()
+    {
+        $copy = new Section($this->entity->getCopy(), [
+            'header' => '商品コピー',
+        ]);
+        $description = new Section($this->entity->getDescription(), [
+            'header' => '商品説明',
+        ]);
+
+        $texts = new Sections([
+            $copy, $description,
+        ]);
+
+        return new Content($texts, [
+            'id' => 'food_desc',
+            'title' => '<i class="fa fa-comments"></i> 商品説明',
+            'form' => $this->initTextsForm(),
+        ]);
+    }
+
+    protected function initTextsForm()
+    {
+        $forms = [
+            FormFactory::makeInputText([
+                'name' => 'copy',
+                'label' => '商品コピー',
+                'maxLength' => 30,
+                'value' => $this->entity->getCopy(),
+            ]),
+            FormFactory::makeInputText([
+                'name' => 'description',
+                'label' => '商品説明',
+                'maxLength' => 80,
+                'value' => $this->entity->getDescription(),
+            ]),
+        ];
+
+        return new FormContainer($forms, [
+            'id' => 'edit_texts',
+            'title' => '商品説明を編集する',
+        ]);
     }
 }

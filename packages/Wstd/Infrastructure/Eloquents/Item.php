@@ -25,4 +25,16 @@ class Item extends Model implements AdvertisableInterface, HasFiles
         'status' => ItemValueStatus::UNREGISTERED,
         'order' => 0,
     ];
+
+    public function setCopyAttribute(?string $value)
+    {
+        $this->setAdvertisement('title_secondary', $value);
+        return $this;
+    }
+
+    public function setDescriptionAttribute(?string $value)
+    {
+        $this->setAdvertisement('description_primary', $value);
+        return $this;
+    }
 }

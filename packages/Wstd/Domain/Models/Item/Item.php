@@ -39,6 +39,19 @@ final class Item implements ItemInterface
         return ItemValueStatus::of($this->eloquent->status);
     }
 
+    public function getCopy(): ?ItemValueCopy
+    {
+        return ItemValueCopy::of($this->eloquent->getAdvertisement('title_secondary'));
+    }
+
+    public function getDescription(): ?ItemValueDescription
+    {
+        return ItemValueDescription::of($this->eloquent->getAdvertisement('description_primary'));
+    }
+
+    /**
+     * @todo
+     */
     public function getPhotos()
     {
         return $this->eloquent->food_photos;

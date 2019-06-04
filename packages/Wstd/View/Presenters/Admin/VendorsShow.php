@@ -157,7 +157,9 @@ class VendorsShow extends IdentifiedPresenter
     protected function initItemList()
     {
         $table = new ItemsTable($this->entity->getItems(), [
-            'items' => ['name', 'status',],
+            'items' => [
+                'thumb', 'name', 'copy', 'status',
+            ],
         ]);
 
         return new Content($table, [

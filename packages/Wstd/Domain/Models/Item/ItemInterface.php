@@ -18,4 +18,8 @@ interface ItemInterface extends EntityInterface
     public function getVendor(): VendorInterface;
 
     public function getStatus(): ?ItemValueStatus;
+
+    public function getCopy(): ?ItemValueCopy;
+
+    public function getDescription(): ?ItemValueDescription;
 }
