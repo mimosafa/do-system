@@ -65,6 +65,12 @@ class FormFactory
         return static::makeInput($args);
     }
 
+    public static function makeTextarea(array $args = []): Htmlable
+    {
+        $value = Arr::pull($args, 'value', null);
+        return El\Textarea::create()->attributes($args)->value($value);
+    }
+
     public static function makeSelect(array $options, array $args = []): Htmlable
     {
         $value = Arr::pull($args, 'value', null);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Advertisement;
+namespace Wstd\Infrastructure\Modules\Advertisement;
 
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableIntterface;
 use Wstd\Infrastructure\Modules\Advertisement\Models\Advertisement as Model;

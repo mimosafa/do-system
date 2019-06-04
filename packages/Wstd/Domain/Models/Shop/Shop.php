@@ -2,7 +2,10 @@
 
 namespace Wstd\Domain\Models\Shop;
 
+use Wstd\Domain\Models\Shop\ShopValueDescription;
+use Wstd\Domain\Models\Shop\ShopValueLongDescription;
 use Wstd\Domain\Models\Shop\ShopValueStatus;
+use Wstd\Domain\Models\Shop\ShopValueSubTitle;
 use Wstd\Domain\Models\Vendor\Vendor;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 use Wstd\Infrastructure\Eloquents\Shop as Eloquent;
@@ -44,5 +47,20 @@ final class Shop implements ShopInterface
     public function getStatus(): ?ShopValueStatus
     {
         return ShopValueStatus::of($this->eloquent->status);
+    }
+
+    public function getSubTitle(): ?ShopValueSubTitle
+    {
+        return ShopValueSubTitle::of($this->eloquent->getAdvertisement('title_secondary'));
+    }
+
+    public function getDescription(): ?ShopValueDescription
+    {
+        return ShopValueDescription::of($this->eloquent->getAdvertisement('description_primary'));
+    }
+
+    public function getLongDescription(): ?ShopValueLongDescription
+    {
+        return ShopValueLongDescription::of($this->eloquent->getAdvertisement('content_primary'));
     }
 }
