@@ -13,7 +13,7 @@
             @presenter($properties)
         </div>
         <div class="col-md-9">
-            {{-- --}}
+            @presenter($texts)
         </div>
     </div>
 

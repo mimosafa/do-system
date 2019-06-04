@@ -26,8 +26,11 @@ class ShopRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:100',
+            'name' => 'sometimes|required|string|max:100',
             'status' => 'sometimes|required|integer|' . Rule::in(ShopValueStatus::toArray()),
+            'sub_title' => 'nullable|string|max:30',
+            'description' => 'nullable|string|max:80',
+            'long_description' => 'nullable|string',
         ];
     }
 }
