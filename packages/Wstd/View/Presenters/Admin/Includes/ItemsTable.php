@@ -34,7 +34,7 @@ class ItemsTable extends EntitiesTable
 
     protected function getName($entity)
     {
-        $link = '#'; // route('admin.shops.show', ['id' => $entity->getId(),]);
+        $link = route('admin.items.show', ['id' => $entity->getId(),]);
         $status = $entity->getStatus();
         $string = sprintf('<a href="%s">%s</a>', e($link), e($entity->getName()));
         if (! $status->isRegistered()) {

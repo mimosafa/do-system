@@ -37,7 +37,7 @@ class ShopController extends Controller
             'status' => 'array|' . Rule::in(ShopValueStatus::toArray()),
         ]);
 
-        $collection = $this->service->find($request->all());
+        $collection = $this->service->find($validated);
         return Bridge::view(new ShopsIndex($collection));
     }
 
