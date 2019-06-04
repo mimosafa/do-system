@@ -26,6 +26,16 @@ class Item extends Model implements AdvertisableInterface, HasFiles
         'order' => 0,
     ];
 
+    public function getCopyAttribute()
+    {
+        return $this->getAdvertisement('title_secondary');
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->getAdvertisement('description_primary');
+    }
+
     public function setCopyAttribute(?string $value)
     {
         $this->setAdvertisement('title_secondary', $value);

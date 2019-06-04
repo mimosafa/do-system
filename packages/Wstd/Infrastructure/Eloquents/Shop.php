@@ -22,6 +22,21 @@ class Shop extends Model implements AdvertisableInterface
         'order' => 0,
     ];
 
+    public function getSubTitleAttribute()
+    {
+        return $this->getAdvertisement('title_secondary');
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->getAdvertisement('description_primary');
+    }
+
+    public function getLongDescriptionAttribute()
+    {
+        return $this->getAdvertisement('content_primary');
+    }
+
     public function setSubTitleAttribute(?string $value)
     {
         $this->setAdvertisement('title_secondary', $value);

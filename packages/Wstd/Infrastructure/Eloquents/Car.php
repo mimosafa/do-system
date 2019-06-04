@@ -21,16 +21,14 @@ use Wstd\Infrastructure\Modules\Files\HasCarPhotosTrait;
  * @see Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait
  * @property Wstd\Infrastructure\Eloquents\Vendor $vendor
  *
- * @see Wstd\Infrastructure\Modules\Files\HasImagesTrait
- * @property Collection $images
+ * @see Wstd\Infrastructure\Modules\Files\HasCarPhotosTrait
+ * @property Collection $car_photos
  */
 class Car extends Model implements HasFiles
 {
     use SoftDeletes,
         BelongsToVendorTrait,
         HasFilesTrait, HasCarPhotosTrait;
-
-    protected $imagesCollectionName = 'cars';
 
     protected $guarded = ['id'];
 

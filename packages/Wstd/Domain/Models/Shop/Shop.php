@@ -47,16 +47,16 @@ final class Shop implements ShopInterface
 
     public function getSubTitle(): ?ShopValueSubTitle
     {
-        return ShopValueSubTitle::of($this->eloquent->getAdvertisement('title_secondary'));
+        return ShopValueSubTitle::of($this->eloquent->sub_title);
     }
 
     public function getDescription(): ?ShopValueDescription
     {
-        return ShopValueDescription::of($this->eloquent->getAdvertisement('description_primary'));
+        return ShopValueDescription::of($this->eloquent->description);
     }
 
     public function getLongDescription(): ?ShopValueLongDescription
     {
-        return ShopValueLongDescription::of($this->eloquent->getAdvertisement('content_primary'));
+        return ShopValueLongDescription::of($this->eloquent->long_description);
     }
 }

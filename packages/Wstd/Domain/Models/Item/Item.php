@@ -41,12 +41,12 @@ final class Item implements ItemInterface
 
     public function getCopy(): ?ItemValueCopy
     {
-        return ItemValueCopy::of($this->eloquent->getAdvertisement('title_secondary'));
+        return ItemValueCopy::of($this->eloquent->copy);
     }
 
     public function getDescription(): ?ItemValueDescription
     {
-        return ItemValueDescription::of($this->eloquent->getAdvertisement('description_primary'));
+        return ItemValueDescription::of($this->eloquent->description);
     }
 
     /**

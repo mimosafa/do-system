@@ -54,7 +54,7 @@ trait HasCarPhotosTrait
      */
     protected function getCarPhotosCollectionName(): string
     {
-        return $this->imagesCollectionName ?? 'cars';
+        return $this->carPhotosCollectionName ?? 'cars';
     }
 
     /**

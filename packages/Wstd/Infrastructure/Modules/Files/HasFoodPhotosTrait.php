@@ -54,7 +54,7 @@ trait HasFoodPhotosTrait
      */
     protected function getFoodPhotosCollectionName(): string
     {
-        return $this->imagesCollectionName ?? 'foods';
+        return $this->foodPhotosCollectionName ?? 'foods';
     }
 
     /**
