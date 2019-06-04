@@ -64,4 +64,14 @@ trait HasFoodPhotosTrait
     {
         return $this->getMedia($this->getFoodPhotosCollectionName());
     }
+
+    /**
+     * @param string|Symfony\Component\HttpFoundation\File\UploadedFile $file
+     */
+    public function setFoodPhotoAttribute($file)
+    {
+        $this->addMedia($file)->toMediaCollection($this->getFoodPhotosCollectionName());
+
+        return $this;
+    }
 }

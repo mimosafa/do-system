@@ -64,4 +64,14 @@ trait HasCarPhotosTrait
     {
         return $this->getMedia($this->getCarPhotosCollectionName());
     }
+
+    /**
+     * @param string|Symfony\Component\HttpFoundation\File\UploadedFile $file
+     */
+    public function setCarPhotoAttribute($file)
+    {
+        $this->addMedia($file)->toMediaCollection($this->getCarPhotosCollectionName());
+
+        return $this;
+    }
 }

@@ -38,16 +38,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
     Route::get('cars/{id}', 'CarController@show')->name('cars.show');
     Route::post('cars/{id}', 'CarController@update');
 
-    /** @todo */
-    Route::post('cars/{id}/photos/store', 'CarController@storePhoto')->name('cars.photos.store');
-
     Route::get('items', 'ItemController@index')->name('items.index');
     Route::post('items/create', 'ItemController@store')->name('items.store');
     Route::get('items/{id}', 'ItemController@show')->name('items.show');
     Route::post('items/{id}', 'ItemController@update');
-
-    /** @todo */
-    Route::post('items/{id}/photos/store', 'ItemController@storePhoto')->name('items.photos.store');
 
     Route::get('shops', 'ShopController@index')->name('shops.index');
     Route::post('shops/create', 'ShopController@store')->name('shops.store');

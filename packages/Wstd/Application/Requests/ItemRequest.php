@@ -30,6 +30,7 @@ class ItemRequest extends FormRequest
             'status' => 'sometimes|required|integer|' . Rule::in(ItemValueStatus::toArray()),
             'copy' => 'nullable|string|max:30',
             'description' => 'nullable|string|max:80',
+            'food_photo' => 'file|image|mimes:jpeg,png,jpg',
         ];
     }
 }

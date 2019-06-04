@@ -70,11 +70,12 @@ class ItemsShow extends IdentifiedPresenter
         $images = $this->entity->getPhotos();
         $id = 'food_images';
         $title = '<i class="fa fa-camera"></i> 商品画像';
-        $action = route('admin.items.photos.store', [
-            'id' => $this->entity->getId(),
-        ]);
+        /**
+         * @see Wstd\Application\Requests\ItemRequest
+         */
+        $nameForInput = 'food_photo';
 
-        return new Gallery($images, compact('id', 'title', 'action'));
+        return new Gallery($images, compact('id', 'title', 'nameForInput'));
     }
 
     protected function initTexts()

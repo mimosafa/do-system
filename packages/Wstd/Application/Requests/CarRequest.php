@@ -26,9 +26,10 @@ class CarRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:100',
-            'vin' => 'required|string|max:20',
+            'name' => 'sometimes|required|string|max:100',
+            'vin' => 'sometimes|required|string|max:20',
             'status' => 'sometimes|required|integer|' . Rule::in(CarValueStatus::toArray()),
+            'car_photo' => 'file|image|mimes:jpeg,png,jpg',
         ];
     }
 }
