@@ -135,7 +135,7 @@ return [
                 ],
                 [
                     'text' => '商品一覧',
-                    'url'  => '#',
+                    'url'  => 'admin/items',
                     'icon' => 'cutlery',
                 ],
                 [
