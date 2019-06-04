@@ -49,7 +49,7 @@ class Gallery extends Content
         ]);
 
         $id = 'add_' . $this->id;
-        $title = $this->title . 'を追加する';
+        $title = strip_tags($this->title) . 'を追加する';
         $modalSize = 'lg';
         $action = $this->action;
         $enctype = 'multipart/form-data';
