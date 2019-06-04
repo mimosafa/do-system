@@ -37,7 +37,7 @@ class ShopController extends Controller
             'status' => 'array|' . Rule::in(ShopValueStatus::toArray()),
         ]);
 
-        $collection = $this->service->find($request->all());
+        $collection = $this->service->find($validated);
         return Bridge::view(new ShopsIndex($collection));
     }
 
@@ -49,12 +49,7 @@ class ShopController extends Controller
 
     public function store(ShopRequest $request)
     {
-        $validated = $request->validate([
-            'vendor_id' => 'required|integer',
-            'name' => 'required|string|max:100',
-        ]);
-
-        $id = $this->service->store($validated)->getId();
+        $id = $this->service->store($request->all())->getId();
         return redirect()->route('admin.shops.show', compact('id'));
     }
 

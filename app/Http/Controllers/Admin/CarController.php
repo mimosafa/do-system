@@ -59,20 +59,4 @@ class CarController extends Controller
         $id = $this->service->update($id, $request->all())->getId();
         return redirect()->route('admin.cars.show', compact('id'));
     }
-
-    /**
-     * @todo
-     */
-    public function storePhoto(int $id, Request $request)
-    {
-        $validated = $request->validate([
-            'image' => 'required|file|image|mimes:jpeg,png,jpg',
-        ]);
-
-        $eloquent = \Wstd\Infrastructure\Eloquents\Car::find($id);
-        $eloquent->addMediaFromRequest('image')->toMediaCollection('cars');
-        $id = $eloquent->id;
-
-        return redirect()->route('admin.cars.show', compact('id'));
-    }
 }

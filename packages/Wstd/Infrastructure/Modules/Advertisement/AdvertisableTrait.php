@@ -26,7 +26,9 @@ trait AdvertisableTrait
         });
 
         static::saved(function($model) {
-            $model->advertisementInstance->save();
+            if (isset($model->advertisementInstance)) {
+                $model->advertisementInstance->save();
+            }
         });
     }
 

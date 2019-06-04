@@ -19,6 +19,11 @@ class CollectionServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            \Wstd\Domain\Models\Item\ItemCollectionInterface::class,
+            \Wstd\Domain\Models\Item\ItemCollection::class
+        );
+
+        $this->app->bind(
             \Wstd\Domain\Models\Shop\ShopCollectionInterface::class,
             \Wstd\Domain\Models\Shop\ShopCollection::class
         );

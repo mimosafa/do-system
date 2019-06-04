@@ -4,9 +4,9 @@ namespace Wstd\Application\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Wstd\Domain\Models\Car\CarValueStatus;
+use Wstd\Domain\Models\Item\ItemValueStatus;
 
-class CarRequest extends FormRequest
+class ItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +27,10 @@ class CarRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|max:100',
-            'vin' => 'sometimes|required|string|max:20',
-            'status' => 'sometimes|required|integer|' . Rule::in(CarValueStatus::toArray()),
-            'car_photo' => 'file|image|mimes:jpeg,png,jpg',
+            'status' => 'sometimes|required|integer|' . Rule::in(ItemValueStatus::toArray()),
+            'copy' => 'nullable|string|max:30',
+            'description' => 'nullable|string|max:80',
+            'food_photo' => 'file|image|mimes:jpeg,png,jpg',
         ];
     }
 }

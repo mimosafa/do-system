@@ -71,11 +71,12 @@ class CarsShow extends IdentifiedPresenter
         $images = $this->entity->getPhotos();
         $id = 'car_images';
         $title = '車両画像';
-        $action = route('admin.cars.photos.store', [
-            'id' => $this->entity->getId(),
-        ]);
+        /**
+         * @see Wstd\Application\Requests\CarRequest
+         */
+        $nameForInput = 'car_photo';
 
-        $gallery = new Gallery($images, compact('id', 'title', 'action'));
+        $gallery = new Gallery($images, compact('id', 'title', 'nameForInput'));
 
         $this->gallery = new Contents($gallery);
     }

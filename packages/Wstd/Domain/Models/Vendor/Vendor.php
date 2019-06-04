@@ -3,10 +3,12 @@
 namespace Wstd\Domain\Models\Vendor;
 
 use Wstd\Domain\Models\Car\CarCollectionInterface;
+use Wstd\Domain\Models\Car\CarRepositoryInterface;
+use Wstd\Domain\Models\Item\ItemCollectionInterface;
+use Wstd\Domain\Models\Item\ItemRepositoryInterface;
 use Wstd\Domain\Models\Shop\ShopCollectionInterface;
+use Wstd\Domain\Models\Shop\ShopRepositoryInterface;
 use Wstd\Infrastructure\Eloquents\Vendor as Eloquent;
-use Wstd\Infrastructure\Repositories\CarRepository;
-use Wstd\Infrastructure\Repositories\ShopRepository;
 
 final class Vendor implements VendorInterface
 {
@@ -60,8 +62,14 @@ final class Vendor implements VendorInterface
      */
     public function getCars(): CarCollectionInterface
     {
-        $repository = resolve(CarRepository::class);
+        $repository = resolve(CarRepositoryInterface::class);
         return $repository->makeCollectionFromEloquents($this->eloquent->cars);
+    }
+
+    public function getItems(): ItemCollectionInterface
+    {
+        $repository = resolve(ItemRepositoryInterface::class);
+        return $repository->makeCollectionFromEloquents($this->eloquent->items);
     }
 
     /**
@@ -71,7 +79,7 @@ final class Vendor implements VendorInterface
      */
     public function getShops(): ShopCollectionInterface
     {
-        $repository = resolve(ShopRepository::class);
+        $repository = resolve(ShopRepositoryInterface::class);
         return $repository->makeCollectionFromEloquents($this->eloquent->shops);
     }
 }
