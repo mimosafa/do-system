@@ -2,7 +2,7 @@
 
 namespace Wstd\View\Presenters\Admin\Includes;
 
-use Wstd\Domain\Models\Car\CarCollection;
+use Wstd\Domain\Models\Car\CarCollectionInterface;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 
 class CarsTable extends EntitiesTable
@@ -18,11 +18,8 @@ class CarsTable extends EntitiesTable
         'name' => '車両名',
     ];
 
-    public function __construct($cars, array $args = [])
+    public function __construct(CarCollectionInterface $cars, array $args = [])
     {
-        if (! is_object($cars) || ! ($cars instanceof CarCollection)) {
-            throw new \InvalidArgumentException();
-        }
         parent::__construct($cars, $args);
     }
 

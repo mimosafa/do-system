@@ -2,7 +2,7 @@
 
 namespace Wstd\View\Presenters\Admin\Includes;
 
-use Wstd\Domain\Models\Shop\ShopCollection;
+use Wstd\Domain\Models\Shop\ShopCollectionInterface;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 
 class ShopsTable extends EntitiesTable
@@ -17,11 +17,8 @@ class ShopsTable extends EntitiesTable
         'name' => '店舗名',
     ];
 
-    public function __construct($shop, array $args = [])
+    public function __construct(ShopCollectionInterface $shop, array $args = [])
     {
-        if (! is_object($shop) || ! ($shop instanceof ShopCollection)) {
-            throw new \InvalidArgumentException();
-        }
         parent::__construct($shop, $args);
     }
 

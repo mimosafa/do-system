@@ -32,11 +32,8 @@ class Content extends IdentifiedPresenter
 
     protected $guarded = ['content'];
 
-    public function __construct($content, array $args = [])
+    public function __construct(Presenter $content, array $args = [])
     {
-        if (! $content instanceof Presenter) {
-            throw new \InvalidArgumentException();
-        }
         $this->content = $content;
         $this->parseArguments($args);
     }

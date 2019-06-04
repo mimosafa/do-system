@@ -2,7 +2,7 @@
 
 namespace Wstd\View\Presenters\Admin\Includes;
 
-use Wstd\Domain\Models\Vendor\VendorCollection;
+use Wstd\Domain\Models\Vendor\VendorCollectionInterface;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 
 class VendorsTable extends EntitiesTable
@@ -17,11 +17,8 @@ class VendorsTable extends EntitiesTable
         'status' => '登録状況',
     ];
 
-    public function __construct($vendors, array $args = [])
+    public function __construct(VendorCollectionInterface $vendors, array $args = [])
     {
-        if (! is_object($vendors) || ! ($vendors instanceof VendorCollection)) {
-            throw new \InvalidArgumentException();
-        }
         parent::__construct($vendors, $args);
     }
 

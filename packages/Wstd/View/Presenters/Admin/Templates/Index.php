@@ -35,12 +35,12 @@ abstract class Index extends IdentifiedPresenter
 
     /**
      * Overwrite Wstd\View\Presenters\Presenter::__construct()
+     *
+     * @param Wstd\Domain\Models\CollectionInterface $collection
+     * @param array $args
      */
-    public function __construct($collection, array $args = [])
+    public function __construct(CollectionInterface $collection, array $args = [])
     {
-        if (! is_object($collection) || ! ($collection instanceof CollectionInterface)) {
-            throw new \InvalidArgumentException();
-        }
         $this->tableInstance = $this->initTableInstance($collection);
         $this->parseArguments($args);
     }

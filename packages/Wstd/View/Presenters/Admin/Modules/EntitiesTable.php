@@ -23,11 +23,8 @@ class EntitiesTable extends Table
      * @param Wstd\Domain\Models\CollectionInterface
      * @param array $args
      */
-    public function __construct($collection, array $args = [])
+    public function __construct(CollectionInterface $collection, array $args = [])
     {
-        if (! is_object($collection) || ! ($collection instanceof CollectionInterface)) {
-            throw new \InvalidArgumentException();
-        }
         parent::__construct($collection, $args);
     }
 
