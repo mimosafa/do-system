@@ -26,6 +26,7 @@ class RelationServiceProvider extends ServiceProvider
     {
         Relation::morphMap([
             'car'    => \Wstd\Infrastructure\Eloquents\Car::class,
+            'item'   => \Wstd\Infrastructure\Eloquents\Item::class,
             'shop'   => \Wstd\Infrastructure\Eloquents\Shop::class,
             'vendor' => \Wstd\Infrastructure\Eloquents\Vendor::class,
         ]);

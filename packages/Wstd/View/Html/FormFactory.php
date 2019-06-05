@@ -73,8 +73,16 @@ class FormFactory
 
     public static function makeSelect(array $options, array $args = []): Htmlable
     {
+        $multiple = Arr::pull($args, 'multiple', false);
         $value = Arr::pull($args, 'value', null);
-        return El\Select::create()->options($options)->attributes($args)->value($value);
+        $select = El\Select::create()->options($options)->attributes($args);
+        if (filter_var($multiple, \FILTER_VALIDATE_BOOLEAN)) {
+            $select = $select->multiple();
+        }
+        if (! empty($value)) {
+            $select = $select->value($value);
+        }
+        return $select;
     }
 
     public static function makeLabel(array $args = []): Htmlable

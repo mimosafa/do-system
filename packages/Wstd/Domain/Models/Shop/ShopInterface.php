@@ -3,6 +3,7 @@
 namespace Wstd\Domain\Models\Shop;
 
 use Wstd\Domain\Models\EntityInterface;
+use Wstd\Domain\Models\Item\ItemCollectionInterface;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 
 interface ShopInterface extends EntityInterface
@@ -22,9 +23,13 @@ interface ShopInterface extends EntityInterface
      */
     public function getStatus(): ?ShopValueStatus;
 
+    public function getItems(): ItemCollectionInterface;
+
     public function getSubTitle(): ?ShopValueSubTitle;
 
     public function getDescription(): ?ShopValueDescription;
 
     public function getLongDescription(): ?ShopValueLongDescription;
+
+    public function getPhoto();
 }

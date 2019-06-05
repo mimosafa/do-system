@@ -5,6 +5,7 @@ namespace Wstd\View\Presenters\Admin;
 use Wstd\Domain\Models\Shop\ShopInterface;
 use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
+use Wstd\View\Presenters\Admin\Includes\ItemsTable;
 use Wstd\View\Presenters\Admin\Modules\Content;
 use Wstd\View\Presenters\Admin\Modules\Contents;
 use Wstd\View\Presenters\Admin\Modules\FormContainer;
@@ -20,15 +21,27 @@ class ShopsShow extends IdentifiedPresenter
 
     public $title = '店舗詳細';
 
+    /**
+     * @var Wstd\Domain\Models\Item\ItemCollection
+     */
+    private $items;
+
+    /**
+     * @var Wstd\View\Presenters\Admin\Templates\Properties
+     */
     public $properties;
 
-    public $texts;
+    /**
+     * @var Wstd\View\Presenters\Admin\Modules\Contents
+     */
+    public $contents;
 
     public function __construct(ShopInterface $entity)
     {
         $this->entity = $entity;
+        $this->items = $entity->getItems();
         $this->initProperties();
-        $this->initTexts();
+        $this->initContents();
     }
 
     protected function initProperties()
@@ -55,6 +68,16 @@ class ShopsShow extends IdentifiedPresenter
         return sprintf('<a href="%s">%s</a>', $link, '<i class="fa fa-user"></i> ' . e($name));
     }
 
+    protected function initContents()
+    {
+        $contents = [
+            $this->initItems(),
+            $this->initTexts(),
+        ];
+
+        $this->contents = new Contents($contents);
+    }
+
     protected function initTexts()
     {
         $subTitle = new Section($this->entity->getSubTitle(), [
@@ -71,11 +94,11 @@ class ShopsShow extends IdentifiedPresenter
             $subTitle, $description, $longDescription,
         ]);
 
-        $this->texts = new Contents(new Content($texts, [
+        return new Content($texts, [
             'id' => 'shop_texts',
-            'title' => '紹介文',
+            'title' => '<i class="fa fa-comments"></i> 紹介文',
             'form' => $this->initTextsForm(),
-        ]));
+        ]);
     }
 
     protected function initTextsForm()
@@ -104,6 +127,49 @@ class ShopsShow extends IdentifiedPresenter
         return new FormContainer($forms, [
             'id' => 'edit_texts',
             'title' => '紹介文を編集する',
+        ]);
+    }
+
+    protected function initItems()
+    {
+        $table = new ItemsTable($this->items, [
+            'items' => [
+                'thumb', 'name', 'copy', 'status',
+            ],
+        ]);
+
+        return new Content($table, [
+            'id' => 'vendor_items',
+            'title' => '<i class="fa fa-fw fa-cutlery "></i> 商品',
+            'form' => $this->initItemsForm(),
+        ]);
+    }
+
+    protected function initItemsForm()
+    {
+        $vendorItems = $this->entity->getVendor()->getItems();
+
+        $options = [];
+        foreach ($vendorItems as $vendorItem) {
+            $options[$vendorItem->getId()] = $vendorItem->getName();
+        }
+
+        $values = [];
+        foreach ($this->items as $item) {
+            $values[] = $item->getId();
+        }
+
+        $form = FormFactory::makeSelect($options, [
+            'name' => 'items',
+            'multiple' => true,
+            'label' => '商品選択',
+            'value' => $values,
+            'select2' => true,
+        ]);
+
+        return new FormContainer($form, [
+            'id' => 'add_item_form',
+            'title' => '商品を追加する',
         ]);
     }
 }

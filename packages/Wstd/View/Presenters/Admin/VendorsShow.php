@@ -82,8 +82,10 @@ class VendorsShow extends IdentifiedPresenter
     {
         $table = new CarsTable($this->entity->getCars(), [
             'items' => [
-                'thumb', 'name',
-                'vin', 'status',
+                'thumb',
+                'name',
+                'vin',
+                'status',
             ],
         ]);
 
@@ -124,7 +126,11 @@ class VendorsShow extends IdentifiedPresenter
     protected function initShopList()
     {
         $table = new ShopsTable($this->entity->getShops(), [
-            'items' => ['name', 'status'],
+            'items' => [
+                'thumb',
+                'name',
+                'status',
+            ],
         ]);
 
         return new Content($table, [

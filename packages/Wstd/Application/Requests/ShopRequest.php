@@ -31,6 +31,8 @@ class ShopRequest extends FormRequest
             'sub_title' => 'nullable|string|max:30',
             'description' => 'nullable|string|max:80',
             'long_description' => 'nullable|string',
+            'items' => 'array',
+            'items.*' => 'integer',
         ];
     }
 }

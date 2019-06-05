@@ -23,7 +23,7 @@ class ShopsIndex extends Index
      * @var array
      */
     public $items = [
-        'vendor_id', 'vendor', 'name', 'status',
+        'thumb', 'vendor_id', 'vendor', 'name', 'status',
     ];
 
     protected function initTableInstance(CollectionInterface $collection): EntitiesTable
@@ -32,6 +32,9 @@ class ShopsIndex extends Index
         $items = $this->items;
         $dataTableOptions = [
             'pageLength' => 100,
+            'order' => [
+                [1, 'asc'],
+            ],
         ];
 
         return new ShopsTable($collection, compact(

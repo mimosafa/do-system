@@ -12,6 +12,7 @@ class ShopsTable extends EntitiesTable
     public $title = '店舗';
 
     public $itemLabels = [
+        'thumb' => '商品写真',
         'vendor_id' => '事業者ID',
         'vendor' => '事業者',
         'name' => '店舗名',
@@ -47,6 +48,17 @@ class ShopsTable extends EntitiesTable
             $string = sprintf('<small class="muted">[ %s ]</small> ', e(strval($status))) . $string;
         }
         return $string;
+    }
+
+    protected function getThumb($entity)
+    {
+        if ($photo = $entity->getPhoto()) {
+            return sprintf(
+                '<a href="#" style="background-image:url(%s)" class="thumbImage"></a>',
+                $photo->getUrl('thumb')
+            );
+        }
+        return '<span class="noImage thumbImage">No Image</span>';
     }
 
     protected function getName($entity)
