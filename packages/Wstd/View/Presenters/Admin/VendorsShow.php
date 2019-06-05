@@ -129,6 +129,7 @@ class VendorsShow extends IdentifiedPresenter
             'items' => [
                 'thumb',
                 'name',
+                'items',
                 'status',
             ],
         ]);

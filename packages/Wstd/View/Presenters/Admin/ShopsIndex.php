@@ -23,7 +23,7 @@ class ShopsIndex extends Index
      * @var array
      */
     public $items = [
-        'thumb', 'vendor_id', 'vendor', 'name', 'status',
+        'thumb', 'vendor_id', 'vendor', 'name', 'items', 'status',
     ];
 
     protected function initTableInstance(CollectionInterface $collection): EntitiesTable

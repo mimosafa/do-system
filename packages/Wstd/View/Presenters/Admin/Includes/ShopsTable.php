@@ -16,6 +16,7 @@ class ShopsTable extends EntitiesTable
         'vendor_id' => '事業者ID',
         'vendor' => '事業者',
         'name' => '店舗名',
+        'items' => '提供商品',
     ];
 
     public function __construct(ShopCollectionInterface $shop, array $args = [])
@@ -76,5 +77,21 @@ class ShopsTable extends EntitiesTable
     {
         $status = $entity->getStatus();
         return $status->isRegistered() ? '' : e(strval($status));
+    }
+
+    protected function getItems($entity)
+    {
+        $return = [];
+        $items = $entity->getItems();
+        if ($items->isNotEmpty()) {
+            foreach ($items as $item) {
+                $return[] = sprintf(
+                    '<a href="%s">%s</a>',
+                    route('admin.items.show', ['id' => e($item->getId()),]),
+                    e($item->getName())
+                );
+            }
+        }
+        return implode(', ', $return);
     }
 }
