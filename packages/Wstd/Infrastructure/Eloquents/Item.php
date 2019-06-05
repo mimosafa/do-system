@@ -8,9 +8,9 @@ use Wstd\Domain\Models\Item\ItemValueStatus;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableInterface;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableTrait;
-use Wstd\Infrastructure\Modules\Files\HasFiles;
-use Wstd\Infrastructure\Modules\Files\HasFilesTrait;
-use Wstd\Infrastructure\Modules\Files\HasFoodPhotosTrait;
+use Wstd\Infrastructure\Modules\File\HasFiles;
+use Wstd\Infrastructure\Modules\File\HasFilesTrait;
+use Wstd\Infrastructure\Modules\File\HasFoodPhotosTrait;
 
 class Item extends Model implements AdvertisableInterface, HasFiles
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wstd\Infrastructure\Modules\Files;
+namespace Wstd\Infrastructure\Modules\File;
 
 use Spatie\MediaLibrary\File;
 
