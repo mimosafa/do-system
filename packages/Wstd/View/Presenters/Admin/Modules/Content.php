@@ -32,7 +32,11 @@ class Content extends IdentifiedPresenter
 
     protected $guarded = ['content'];
 
-    public function __construct(Presenter $content, array $args = [])
+    /**
+     * @param Wstd\View\Presenters\Presenter|string $content
+     * @param array $args
+     */
+    public function __construct($content, array $args = [])
     {
         $this->content = $content;
         $this->parseArguments($args);

@@ -5,7 +5,11 @@
 
 --}}
 
+@if ($content instanceof \Wstd\View\Presenters\Presenter)
     @presenter($content)
+@else
+    {!! $content !!}
+@endif
 
 @if (isset($form) && $form->hasForms())
 
