@@ -3,6 +3,7 @@
 namespace Wstd\Domain\Models\Item;
 
 use Wstd\Domain\Models\EntityInterface;
+use Wstd\Domain\Models\Shop\ShopCollectionInterface;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 
 interface ItemInterface extends EntityInterface
@@ -16,6 +17,8 @@ interface ItemInterface extends EntityInterface
      * @return Wstd\Domain\Models\Vendor\VendorInterface
      */
     public function getVendor(): VendorInterface;
+
+    public function getShops(): ShopCollectionInterface;
 
     public function getStatus(): ?ItemValueStatus;
 

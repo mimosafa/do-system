@@ -5,8 +5,10 @@ namespace Wstd\View\Presenters\Admin\Includes;
 use Wstd\Domain\Models\Car\CarCollectionInterface;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 
-class CarsTable extends EntitiesTable
+class TableForCars extends EntitiesTable
 {
+    use TableForBelongsToVendorTrait;
+
     public $id = 'cars_table';
 
     public $title = '車両';
@@ -31,23 +33,6 @@ class CarsTable extends EntitiesTable
             $classes[] = 'status_' . $status->getSlug();
         }
         return $classes;
-    }
-
-    protected function getVendorId($entity)
-    {
-        return e($entity->getVendor()->getId());
-    }
-
-    protected function getVendor($entity)
-    {
-        $vendor = $entity->getVendor();
-        $link = route('admin.vendors.show', ['id' => $vendor->getId(),]);
-        $status = $vendor->getStatus();
-        $string = sprintf('<a href="%s">%s</a>', e($link), e($vendor->getName()));
-        if (! $status->isRegistered()) {
-            $string = sprintf('<small class="muted">[ %s ]</small> ', e(strval($status))) . $string;
-        }
-        return $string;
     }
 
     protected function getThumb($entity)

@@ -37,6 +37,10 @@ class Table extends Presenter
      */
     protected $itemLabels = [];
 
+    protected $hiddenColumns = [];
+
+    protected $hiddenMobileColumns = [];
+
     /**
      * Callbacks for item value display,
      * used by static::td() mrthod
@@ -207,6 +211,9 @@ class Table extends Presenter
                 }
             }
         }
+        if (in_array($item, $this->hiddenColumns, true)) {
+            $array[] = 'hidden';
+        }
         return array_unique(array_filter($array));
     }
 
@@ -278,7 +285,11 @@ class Table extends Presenter
      */
     protected function tdClasses(string $item, $value): array
     {
-        return ['td_' . e($item)];
+        $array = ['td_' . e($item)];
+        if (in_array($item, $this->hiddenColumns, true)) {
+            $array[] = 'hidden';
+        }
+        return $array;
     }
 
     /**

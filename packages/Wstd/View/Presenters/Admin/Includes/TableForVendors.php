@@ -5,7 +5,7 @@ namespace Wstd\View\Presenters\Admin\Includes;
 use Wstd\Domain\Models\Vendor\VendorCollectionInterface;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 
-class VendorsTable extends EntitiesTable
+class TableForVendors extends EntitiesTable
 {
     public $id = 'vendors_table';
 

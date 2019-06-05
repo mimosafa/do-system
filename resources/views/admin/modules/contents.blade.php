@@ -18,6 +18,7 @@
     @adminBox([
         'id' => $content->id,
         'title' => $content->title,
+        'boxContext' => $boxContext ?? null,
     ])
 
     @presenter($content)

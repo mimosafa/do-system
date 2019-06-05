@@ -5,7 +5,7 @@ namespace Wstd\View\Presenters\Admin;
 use Wstd\Domain\Models\Shop\ShopInterface;
 use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
-use Wstd\View\Presenters\Admin\Includes\ItemsTable;
+use Wstd\View\Presenters\Admin\Includes\TableForItems;
 use Wstd\View\Presenters\Admin\Modules\Content;
 use Wstd\View\Presenters\Admin\Modules\Contents;
 use Wstd\View\Presenters\Admin\Modules\FormContainer;
@@ -132,7 +132,7 @@ class ShopsShow extends IdentifiedPresenter
 
     protected function initItems()
     {
-        $table = new ItemsTable($this->items, [
+        $table = new TableForItems($this->items, [
             'items' => [
                 'thumb', 'name', 'copy', 'status',
             ],

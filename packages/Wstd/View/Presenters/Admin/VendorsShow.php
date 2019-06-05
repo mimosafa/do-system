@@ -5,9 +5,9 @@ namespace Wstd\View\Presenters\Admin;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
-use Wstd\View\Presenters\Admin\Includes\CarsTable;
-use Wstd\View\Presenters\Admin\Includes\ItemsTable;
-use Wstd\View\Presenters\Admin\Includes\ShopsTable;
+use Wstd\View\Presenters\Admin\Includes\TableForCars;
+use Wstd\View\Presenters\Admin\Includes\TableForItems;
+use Wstd\View\Presenters\Admin\Includes\TableForShops;
 use Wstd\View\Presenters\Admin\Modules\Content;
 use Wstd\View\Presenters\Admin\Modules\Contents;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
@@ -80,7 +80,7 @@ class VendorsShow extends IdentifiedPresenter
      */
     protected function initCarList()
     {
-        $table = new CarsTable($this->entity->getCars(), [
+        $table = new TableForCars($this->entity->getCars(), [
             'items' => [
                 'thumb',
                 'name',
@@ -125,7 +125,7 @@ class VendorsShow extends IdentifiedPresenter
      */
     protected function initShopList()
     {
-        $table = new ShopsTable($this->entity->getShops(), [
+        $table = new TableForShops($this->entity->getShops(), [
             'items' => [
                 'thumb',
                 'name',
@@ -163,7 +163,7 @@ class VendorsShow extends IdentifiedPresenter
 
     protected function initItemList()
     {
-        $table = new ItemsTable($this->entity->getItems(), [
+        $table = new TableForItems($this->entity->getItems(), [
             'items' => [
                 'thumb', 'name', 'copy', 'status',
             ],
