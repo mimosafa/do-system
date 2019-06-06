@@ -57,7 +57,6 @@ class Gallery extends Content
         $toggleAttributes = [
             'tag' => 'a',
             'href' => '#',
-            'class' => 'adminGalleryAddItem',
         ];
 
         $this->form = new FormContainer($form, compact(

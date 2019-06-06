@@ -16,7 +16,7 @@
     @endforeach
     @if (isset($form) && $form->hasForms())
 
-    {{ $form->toggle() }}
+    {{ $form->toggle()->forgetAttribute('class')->class('adminGalleryAddItem') }}
 
     @endif
 </div>
