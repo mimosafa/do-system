@@ -1,1 +1,3 @@
-console.log('hello');
+require('./includes/hiddenForm');
+require('./includes/tabs');
+require('./includes/select2');

@@ -1,7 +1,7 @@
 let rules = {
   "no-unused-vars": ["warn", {"vars": "local", "args": "none"}],
   "no-undef": "warn",
-  "no-redeclear": "warn",
+  "no-redeclare": "warn",
   "no-debugger": "warn",
   "no-console": "warn",
   "no-empty": "warn"
