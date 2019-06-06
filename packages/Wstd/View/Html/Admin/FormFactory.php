@@ -41,9 +41,19 @@ class FormFactory extends BaseFormFactory
 
     public static function makeSelect(array $options, array $args = []): Htmlable
     {
+        $select2 = Arr::pull($args, 'select2', false);
+
+        $select = parent::makeSelect($options, $args);
+        if (filter_var($select2, \FILTER_VALIDATE_BOOLEAN)) {
+            $select = $select->class('select2');
+        }
+        else {
+            $select = $select->class('form-control');
+        }
+
         return self::makeFormGroup(
             self::makeLabelFromArguments($args),
-            parent::makeSelect($options, $args)->class('form-control')
+            $select
         );
     }
 

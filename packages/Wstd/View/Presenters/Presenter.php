@@ -18,7 +18,7 @@ abstract class Presenter extends ViewModel
     public function __construct($param = null, array $args = [])
     {
         // In extending class, do something with $param
-        // and exec `parent::__construct($param, $args)`
+        // and exec `parent::__construct($param, $args);` or `$this->parseArguments($args);`
         $this->parseArguments($args);
     }
 

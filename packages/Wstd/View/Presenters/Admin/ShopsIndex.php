@@ -3,7 +3,7 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\CollectionInterface;
-use Wstd\View\Presenters\Admin\Includes\ShopsTable;
+use Wstd\View\Presenters\Admin\Includes\TableForShops;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 use Wstd\View\Presenters\Admin\Templates\Index;
 
@@ -23,7 +23,12 @@ class ShopsIndex extends Index
      * @var array
      */
     public $items = [
-        'vendor_id', 'vendor', 'name', 'status',
+        'vendor_id',
+        'thumb',
+        'vendor',
+        'name',
+        'items',
+        'status',
     ];
 
     protected function initTableInstance(CollectionInterface $collection): EntitiesTable
@@ -32,10 +37,17 @@ class ShopsIndex extends Index
         $items = $this->items;
         $dataTableOptions = [
             'pageLength' => 100,
+            'columnDefs' => [
+                [
+                    'width' => 125,
+                    'targets' => 1,
+                ]
+            ],
         ];
+        $hiddenColumns = ['vendor_id'];
 
-        return new ShopsTable($collection, compact(
-            'isDataTable', 'items', 'dataTableOptions'
+        return new TableForShops($collection, compact(
+            'isDataTable', 'items', 'dataTableOptions', 'hiddenColumns'
         ));
     }
 }

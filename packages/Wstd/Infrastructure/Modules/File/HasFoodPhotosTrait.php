@@ -1,10 +1,10 @@
 <?php
 
-namespace Wstd\Infrastructure\Modules\Files;
+namespace Wstd\Infrastructure\Modules\File;
 
 use Spatie\MediaLibrary\File;
 
-trait HasCarPhotosTrait
+trait HasFoodPhotosTrait
 {
     /**
      * Mime Types accepted
@@ -27,9 +27,9 @@ trait HasCarPhotosTrait
      */
     # protected $imagesCollectionName = 'awesome_images';
 
-    public function hasFileCollectionCarPhotos()
+    public function hasFileCollectionFoodPhotos()
     {
-        $collectionName = $this->getCarPhotosCollectionName();
+        $collectionName = $this->getFoodPhotosCollectionName();
         $acceptsFiles = static::$imagesAcceptableMimeTypes;
 
         $this
@@ -52,25 +52,25 @@ trait HasCarPhotosTrait
      *
      * @return string
      */
-    protected function getCarPhotosCollectionName(): string
+    protected function getFoodPhotosCollectionName(): string
     {
-        return $this->imagesCollectionName ?? 'cars';
+        return $this->foodPhotosCollectionName ?? 'foods';
     }
 
     /**
      * Images collection getter
      */
-    public function getCarPhotosAttribute()
+    public function getFoodPhotosAttribute()
     {
-        return $this->getMedia($this->getCarPhotosCollectionName());
+        return $this->getMedia($this->getFoodPhotosCollectionName());
     }
 
     /**
      * @param string|Symfony\Component\HttpFoundation\File\UploadedFile $file
      */
-    public function setCarPhotoAttribute($file)
+    public function setFoodPhotoAttribute($file)
     {
-        $this->addMedia($file)->toMediaCollection($this->getCarPhotosCollectionName());
+        $this->addMedia($file)->toMediaCollection($this->getFoodPhotosCollectionName());
 
         return $this;
     }

@@ -5,12 +5,13 @@ namespace Wstd\Infrastructure\Eloquents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Item\ItemValueStatus;
+use Wstd\Infrastructure\Eloquents\Shop;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableInterface;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableTrait;
-use Wstd\Infrastructure\Modules\Files\HasFiles;
-use Wstd\Infrastructure\Modules\Files\HasFilesTrait;
-use Wstd\Infrastructure\Modules\Files\HasFoodPhotosTrait;
+use Wstd\Infrastructure\Modules\File\HasFiles;
+use Wstd\Infrastructure\Modules\File\HasFilesTrait;
+use Wstd\Infrastructure\Modules\File\HasFoodPhotosTrait;
 
 class Item extends Model implements AdvertisableInterface, HasFiles
 {
@@ -25,6 +26,21 @@ class Item extends Model implements AdvertisableInterface, HasFiles
         'status' => ItemValueStatus::UNREGISTERED,
         'order' => 0,
     ];
+
+    public function shops()
+    {
+        return $this->morphedByMany(Shop::class, 'item_belong');
+    }
+
+    public function getCopyAttribute()
+    {
+        return $this->getAdvertisement('title_secondary');
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->getAdvertisement('description_primary');
+    }
 
     public function setCopyAttribute(?string $value)
     {

@@ -5,6 +5,7 @@ namespace Wstd\Infrastructure\Eloquents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Shop\ShopValueStatus;
+use Wstd\Infrastructure\Eloquents\Item;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableInterface;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableTrait;
@@ -21,6 +22,33 @@ class Shop extends Model implements AdvertisableInterface
         'status' => ShopValueStatus::UNREGISTERED,
         'order' => 0,
     ];
+
+    public function items()
+    {
+        return $this->morphToMany(Item::class, 'item_belong');
+    }
+
+    public function setItemsAttribute(array $values)
+    {
+        $this->items()->detach();
+        $this->items()->attach($values);
+        return $this;
+    }
+
+    public function getSubTitleAttribute()
+    {
+        return $this->getAdvertisement('title_secondary');
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->getAdvertisement('description_primary');
+    }
+
+    public function getLongDescriptionAttribute()
+    {
+        return $this->getAdvertisement('content_primary');
+    }
 
     public function setSubTitleAttribute(?string $value)
     {

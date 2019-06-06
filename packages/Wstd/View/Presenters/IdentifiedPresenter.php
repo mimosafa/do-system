@@ -23,7 +23,7 @@ abstract class IdentifiedPresenter extends Presenter
             throw new \Exception('$id property is not defined.');
         }
         if (! isset($this->title) || ! filter_var($this->title)) {
-            $this->title = Str::title($this->id);
+            $this->title = str_replace(['-', '_',], ' ', Str::title($this->id));
         }
     }
 }

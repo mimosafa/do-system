@@ -25,4 +25,8 @@
     $(this).find('a:first').tab('show');
   });
 
+  $('.select2').select2({
+    width: 'style',
+  });
+
 }(jQuery)

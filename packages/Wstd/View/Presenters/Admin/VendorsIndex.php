@@ -3,7 +3,7 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\CollectionInterface;
-use Wstd\View\Presenters\Admin\Includes\VendorsTable;
+use Wstd\View\Presenters\Admin\Includes\TableForVendors;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 use Wstd\View\Presenters\Admin\Templates\Index;
 
@@ -36,7 +36,7 @@ class VendorsIndex extends Index
             'pageLength' => 100,
         ];
 
-        return new VendorsTable($collection, compact(
+        return new TableForVendors($collection, compact(
             'isDataTable', 'items', 'dataTableOptions'
         ));
     }

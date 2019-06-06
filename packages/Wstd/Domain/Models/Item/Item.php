@@ -2,6 +2,8 @@
 
 namespace Wstd\Domain\Models\Item;
 
+use Wstd\Domain\Models\Shop\ShopCollectionInterface;
+use Wstd\Domain\Models\Shop\ShopRepositoryInterface;
 use Wstd\Domain\Models\Vendor\Vendor;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 use Wstd\Infrastructure\Eloquents\Item as Eloquent;
@@ -29,6 +31,12 @@ final class Item implements ItemInterface
         return new Vendor($eloquent->id);
     }
 
+    public function getShops(): ShopCollectionInterface
+    {
+        $repository = resolve(ShopRepositoryInterface::class);
+        return $repository->makeCollectionFromEloquents($this->eloquent->shops);
+    }
+
     public function getName(): ItemValueName
     {
         return ItemValueName::of($this->eloquent->name);
@@ -41,12 +49,12 @@ final class Item implements ItemInterface
 
     public function getCopy(): ?ItemValueCopy
     {
-        return ItemValueCopy::of($this->eloquent->getAdvertisement('title_secondary'));
+        return ItemValueCopy::of($this->eloquent->copy);
     }
 
     public function getDescription(): ?ItemValueDescription
     {
-        return ItemValueDescription::of($this->eloquent->getAdvertisement('description_primary'));
+        return ItemValueDescription::of($this->eloquent->description);
     }
 
     /**

@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Car\CarValueStatus;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
-use Wstd\Infrastructure\Modules\Files\HasFiles;
-use Wstd\Infrastructure\Modules\Files\HasFilesTrait;
-use Wstd\Infrastructure\Modules\Files\HasCarPhotosTrait;
+use Wstd\Infrastructure\Modules\File\HasFiles;
+use Wstd\Infrastructure\Modules\File\HasFilesTrait;
+use Wstd\Infrastructure\Modules\File\HasCarPhotosTrait;
 
 /**
  * @property int|null $id
@@ -21,16 +21,14 @@ use Wstd\Infrastructure\Modules\Files\HasCarPhotosTrait;
  * @see Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait
  * @property Wstd\Infrastructure\Eloquents\Vendor $vendor
  *
- * @see Wstd\Infrastructure\Modules\Files\HasImagesTrait
- * @property Collection $images
+ * @see Wstd\Infrastructure\Modules\File\HasCarPhotosTrait
+ * @property Collection $car_photos
  */
 class Car extends Model implements HasFiles
 {
     use SoftDeletes,
         BelongsToVendorTrait,
         HasFilesTrait, HasCarPhotosTrait;
-
-    protected $imagesCollectionName = 'cars';
 
     protected $guarded = ['id'];
 

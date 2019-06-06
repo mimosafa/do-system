@@ -32,11 +32,12 @@ class Content extends IdentifiedPresenter
 
     protected $guarded = ['content'];
 
+    /**
+     * @param Wstd\View\Presenters\Presenter|string $content
+     * @param array $args
+     */
     public function __construct($content, array $args = [])
     {
-        if (! $content instanceof Presenter) {
-            throw new \InvalidArgumentException();
-        }
         $this->content = $content;
         $this->parseArguments($args);
     }

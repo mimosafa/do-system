@@ -20,14 +20,23 @@ class ItemsShow extends IdentifiedPresenter
     public $id = 'item';
     public $title = '商品詳細';
 
+    /**
+     * @var Wstd\View\Presenters\Admin\Templates\Properties
+     */
     public $properties;
-    public $gallery;
+
+    public $shops;
+
+    /**
+     * @var Wstd\View\Presenters\Admin\Modules\Contents
+     */
     public $contents;
 
     public function __construct(ItemInterface $entity)
     {
         $this->entity = $entity;
         $this->initProperties();
+        $this->initShops();
         $this->initContents();
     }
 
@@ -53,6 +62,35 @@ class ItemsShow extends IdentifiedPresenter
         $link = route('admin.vendors.show', ['id' => $vendor->getId()]);
 
         return sprintf('<a href="%s">%s</a>', $link, '<i class="fa fa-user"></i> ' . e($name));
+    }
+
+    protected function initShops()
+    {
+        $shops = $this->entity->getShops();
+        $content = '';
+        if ($shops->isNotEmpty()) {
+            $array = [];
+            foreach ($shops as $shop) {
+                $array[] = sprintf(
+                    '<a href="%s">%s</a>',
+                    route('admin.shops.show', ['id' => e($shop->getId()),]),
+                    e($shop->getName())
+                );
+            }
+            $content .= implode(' <span class="text-muted">/</span> ', $array);
+        }
+        else {
+            $content .= '<span class="text-muted">None</span>';
+        }
+
+        $this->shops = new Contents(
+            new Content($content, [
+                'id' => 'handling_shops',
+                'title' => '<i class="fa fa-coffee"></i> 取扱店舗',
+            ]), [
+                'boxContext' => 'primary',
+            ]
+        );
     }
 
     protected function initContents()
