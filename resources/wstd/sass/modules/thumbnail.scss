@@ -1,0 +1,39 @@
+%thumb {
+  display: block;
+  height: 60px;
+  width: 80px;
+
+  @media (min-width: 768px) {
+    height: 90px;
+    width: 120px;
+  }
+}
+
+.thumbImage {
+  @extend %thumb;
+
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  &:hover {
+    background-size: contain;
+    background-color: #ddd;
+  }
+}
+
+.noImage {
+  @extend %thumb;
+
+  background: #ccc;
+  text-align: center;
+  color: #fff;
+  font-weight: 400;
+  line-height: 60px;
+
+  @media (min-width: 768px) {
+    font-weight: 700;
+    line-height: 90px;
+  }
+}

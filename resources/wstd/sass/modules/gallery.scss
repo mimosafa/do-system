@@ -1,0 +1,52 @@
+.adminGallery {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, .5fr));
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, .25fr));
+  }
+
+  &Item {
+    height: 150px;
+
+    & > a {
+      color: #fff;
+      display: block;
+      height: 100%;
+      width: 100%;
+      position: relative;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: #333;
+
+      &:hover {
+        background-size: contain;
+      }
+
+      & > .adminGalleryItemName {
+        display: block;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        background-color: rgba(33, 33, 33, 0.5);
+        height: 1.75em;
+        text-align: center;
+        font-size: .75em;
+      }
+    }
+  }
+
+  &AddItem {
+    color: #fefefe;
+    background-color: #eee;
+    font-size: 100px;
+    line-height: 150px;
+    text-align: center;
+  }
+}
