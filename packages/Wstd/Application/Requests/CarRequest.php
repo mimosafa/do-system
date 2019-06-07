@@ -18,6 +18,17 @@ class CarRequest extends FormRequest
         return true;
     }
 
+    public function all($keys = null)
+    {
+        $all = parent::all($keys);
+
+        if (isset($all['car_photos']) && ! is_array($all['car_photos'])) {
+            $all['car_photos'] = explode(',', $all['car_photos']);
+        }
+
+        return $all;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,6 +41,8 @@ class CarRequest extends FormRequest
             'vin' => 'sometimes|required|string|max:20',
             'status' => 'sometimes|required|integer|' . Rule::in(CarValueStatus::toArray()),
             'car_photo' => 'file|image|mimes:jpeg,png,jpg',
+            'car_photos' => 'array',
+            'car_photos.*' => 'integer',
         ];
     }
 }

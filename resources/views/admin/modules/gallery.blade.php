@@ -4,24 +4,44 @@
 
 --}}
 
-<div class="adminGallery">
+@php
+    $addable = $addable && isset($form) && $form->hasForms();
+    $sortable = $sortable && count($items) > 1;
+@endphp
+
+<div class="adminGallery{{ $sortable ? ' sortable' : '' }}">
     @foreach ($items as $item)
 
     <div class="adminGalleryItem">
-        <a class="adminGalleryItemHandler" href="{{ $item->getUrl() }}" style="background-image: url({{ $item->getUrl('thumb') }})">
+        <a href="{{ $item->getUrl() }}" style="background-image: url({{ $item->getUrl('thumb') }})">
             <span class="adminGalleryItemName">{{ $item->name }}</span>
+            @if ($sortable)
+
+            <span class="sortHandler"><i class="fa fa-arrows"></i></span>
+
+            @endif
         </a>
     </div>
 
     @endforeach
-    @if (isset($form) && $form->hasForms())
+    @if ($sortable)
 
-    {{ $form->toggle() }}
+    {{ $sortResult }}
+
+    @endif
+    @if ($addable)
+
+    {{ $form->toggle()->forgetAttribute('class')->class('adminGalleryAddItem') }}
 
     @endif
 </div>
+@if ($sortable)
 
-@if (isset($form) && $form->hasForms())
+{{ $sortSubmit }}
+
+@endif
+
+@if ($addable)
 
     @php
         $modalContext = $modalContext ?? null;

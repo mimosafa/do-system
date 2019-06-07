@@ -13,9 +13,11 @@
 @endsection
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('wstd/css/do-system.css') }}">
+    <link rel="stylesheet" href="{{ mix('/wstd/css/admin.css') }}">
 @endpush
 
 @push('js')
-    <script src="{{ asset('wstd/js/do-system.js') }}"></script>
+    <script src="{{ mix('/wstd/js/manifest.js') }}"></script>
+    <script src="{{ mix('/wstd/js/vendor.js') }}"></script>
+    <script src="{{ mix('/wstd/js/admin.js') }}"></script>
 @endpush

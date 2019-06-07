@@ -21,15 +21,26 @@ class Gallery extends Content
      */
     public $items;
 
+    /**
+     * @var Wstd\View\Presenters\Admin\Modules\FormContainer
+     */
     public $form;
 
-    protected $nameForInput;
+    public $addable = false;
+    protected $nameForAdd;
+    protected $defaultNameForAdd = 'image';
+
+    public $sortable = false;
+    protected $beforeSort = [];
+    protected $nameForSort;
+    protected $defaultNameForSort = 'images';
+    protected $updateItemsOrder = 'Save items order';
 
     public $modalSize = 'large';
 
     public $template = 'admin.modules.gallery';
 
-    protected $guarded = ['items',];
+    protected $guarded = ['items', 'defaultNameForAdd', 'defaultNameForSort',];
 
     /**
      * @param Illuminate\Database\Eloquent\Collection[Spatie\MediaLibrary\Models\Media] $items
@@ -39,13 +50,28 @@ class Gallery extends Content
     {
         $this->items = $items;
         $this->parseArguments($args);
-        $this->initForm();
+        if ($this->addable) {
+            $this->initForm();
+        }
+        if ($this->sortable) {
+            $this->initSortable();
+        }
+    }
+
+    protected function nameForAdd()
+    {
+        return $this->nameForAdd ?? $this->defaultNameForAdd;
+    }
+
+    protected function nameForSort()
+    {
+        return $this->nameForSort ?? $this->defaultNameForSort;
     }
 
     protected function initForm()
     {
         $form = FormFactory::makeInputFile([
-            'name' => $this->nameForInput ?? 'image',
+            'name' => $this->nameForAdd(),
         ]);
 
         $id = 'add_' . $this->id;
@@ -57,11 +83,41 @@ class Gallery extends Content
         $toggleAttributes = [
             'tag' => 'a',
             'href' => '#',
-            'class' => 'adminGalleryAddItem',
         ];
 
         $this->form = new FormContainer($form, compact(
             'id', 'title', 'action', 'enctype', 'toggle', 'toggleAttributes'
         ));
+    }
+
+    protected function initSortable()
+    {
+        $this->items->each(function ($item, $i) {
+            $this->beforeSort[$i] = $item->id;
+        });
+    }
+
+    public function sortResult()
+    {
+        $dataName = $this->nameForSort();
+        $dataOld = $value = implode(',', $this->beforeSort);
+
+        return FormFactory::makeInputHidden([
+            'data-name' => $dataName,
+            'data-old' => $dataOld,
+            'value' => $value,
+            'class' => 'sort-result',
+        ]);
+    }
+
+    public function sortSubmit()
+    {
+        return FormFactory::makeButton([
+            'text' => $this->updateItemsOrder,
+            'class' => 'btn btn-info btn-block btn-sm',
+            'style' => 'margin-top: 15px; visibility: hidden;',
+            'disabled' => 'disabled',
+            // 'onclick' => 'return false;',
+        ]);
     }
 }

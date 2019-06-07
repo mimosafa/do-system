@@ -18,6 +18,7 @@ class ItemsShow extends IdentifiedPresenter
     protected $entity;
 
     public $id = 'item';
+
     public $title = '商品詳細';
 
     /**
@@ -108,12 +109,17 @@ class ItemsShow extends IdentifiedPresenter
         $images = $this->entity->getPhotos();
         $id = 'food_images';
         $title = '<i class="fa fa-camera"></i> 商品画像';
+        $addable = true;
+        $sortable = true;
         /**
          * @see Wstd\Application\Requests\ItemRequest
          */
-        $nameForInput = 'food_photo';
+        $nameForAdd = 'food_photo';
+        $nameForSort = 'food_photos';
 
-        return new Gallery($images, compact('id', 'title', 'nameForInput'));
+        return new Gallery($images, compact(
+            'id', 'title', 'addable', 'sortable', 'nameForAdd', 'nameForSort'
+        ));
     }
 
     protected function initTexts()
