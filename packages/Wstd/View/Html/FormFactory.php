@@ -92,7 +92,8 @@ class FormFactory
 
     public static function makeButton(array $args = []): Htmlable
     {
-        return El\Button::create()->attributes($args);
+        $text = Arr::pull($args, 'text');
+        return El\Button::create()->attributes($args)->text($text);
     }
 
     public static function makeSubmit(array $args = []): Htmlable
@@ -100,8 +101,8 @@ class FormFactory
         $tag = Arr::pull($args, 'tag', 'button');
         $args['type'] = 'submit';
         if ($tag === 'button') {
-            $text = Arr::pull($args, 'text', 'Submit');
-            return static::makeButton($args)->text($text);
+            $args['text'] = $args['text'] ?? 'Submit';
+            return static::makeButton($args);
         }
         else if ($tag === 'input') {
             return static::makeInput($args);

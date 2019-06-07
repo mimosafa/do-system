@@ -2,7 +2,9 @@
 
 namespace Wstd\Infrastructure\Modules\File;
 
+use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\File;
+use Spatie\MediaLibrary\Models\Media;
 
 trait HasCarPhotosTrait
 {
@@ -63,6 +65,29 @@ trait HasCarPhotosTrait
     public function getCarPhotosAttribute()
     {
         return $this->getMedia($this->getCarPhotosCollectionName());
+    }
+
+    public function setCarPhotosAttribute($photos)
+    {
+        if (! is_array($photos) || $photos instanceof Collection) {
+            throw new \InvalidArgumentException();
+        }
+        foreach ($photos as $i => $photo) {
+            if (filter_var($photo, \FILTER_VALIDATE_INT)) {
+                $photo = Media::find($photo);
+            }
+            if (! ($photo instanceof Media)) {
+                throw new \InvalidArgumentException();
+            }
+            if ($photo->collection_name !== $this->getCarPhotosCollectionName()) {
+                throw new \InvalidArgumentException();
+            }
+            if ($photo->model_id !== $this->id) {
+                throw new \InvalidArgumentException();
+            }
+            $photo->order_column = $i;
+            $photo->save();
+        }
     }
 
     /**

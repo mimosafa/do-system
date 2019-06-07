@@ -18,6 +18,17 @@ class ItemRequest extends FormRequest
         return true;
     }
 
+    public function all($keys = null)
+    {
+        $all = parent::all($keys);
+
+        if (isset($all['food_photos']) && ! is_array($all['food_photos'])) {
+            $all['food_photos'] = explode(',', $all['food_photos']);
+        }
+
+        return $all;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,6 +42,8 @@ class ItemRequest extends FormRequest
             'copy' => 'nullable|string|max:30',
             'description' => 'nullable|string|max:80',
             'food_photo' => 'file|image|mimes:jpeg,png,jpg',
+            'food_photos' => 'array',
+            'food_photos.*' => 'integer',
         ];
     }
 }

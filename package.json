@@ -31,5 +31,8 @@
         "stylelint-webpack-plugin": "^0.10.5",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "sortablejs": "^1.10.0-rc2"
     }
 }
