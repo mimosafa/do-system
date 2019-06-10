@@ -44,6 +44,8 @@ class ItemRequest extends FormRequest
             'status' => 'sometimes|required|integer|' . Rule::in(ItemValueStatus::toArray()),
             'copy' => 'nullable|string|max:30',
             'description' => 'nullable|string|max:80',
+            'shops' => 'array',
+            'shops.*' => 'integer',
             'food_photo' => 'file|image|mimes:jpeg,png,jpg',
             'food_photos' => 'array',
             'food_photos.*' => 'integer',
