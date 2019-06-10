@@ -3676,44 +3676,194 @@ __webpack_require__(/*! ./includes/gallery */ "./resources/wstd/js/includes/gall
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sortablejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sortablejs */ "./node_modules/sortablejs/modular/sortable.esm.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-var sortables = $('.adminGallery.sortable');
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+
+var galleries = document.getElementsByClassName('adminGallery');
 var _iteratorNormalCompletion = true;
 var _didIteratorError = false;
 var _iteratorError = undefined;
 
 try {
   var _loop = function _loop() {
-    var sortable = _step.value;
-    var submit = sortable.nextElementSibling;
-    new sortablejs__WEBPACK_IMPORTED_MODULE_0__["default"](sortable, {
-      draggable: '.adminGalleryItem',
-      handle: '.sortHandler',
-      onEnd: function onEnd(e) {
-        if (e.newIndex !== e.oldIndex) {
-          var resultEl = sortable.getElementsByClassName('sort-result')[0];
-          var currentValue = resultEl.getAttribute('value');
-          var newValueArray = currentValue.split(',');
-          var moved = newValueArray.splice(e.oldIndex, 1)[0];
-          newValueArray.splice(e.newIndex, 0, moved);
-          var newValue = newValueArray.join(',');
-          resultEl.setAttribute('value', newValue);
+    var gallery = _step.value;
+    var submit = gallery.nextElementSibling;
 
-          if (resultEl.getAttribute('data-old') !== newValue) {
-            resultEl.setAttribute('name', resultEl.getAttribute('data-name'));
-            submit.style.visibility = 'visible';
-            submit.removeAttribute('disabled');
-          } else {
-            resultEl.removeAttribute('name');
-            submit.style.visibility = 'hidden';
-            submit.setAttribute('disabled', 'disabled');
+    submit.init = function (context) {
+      if (context === false) {
+        submit.style.visibility = 'hidden';
+        submit.setAttribute('disabled', 'disabled');
+      } else {
+        submit.style.visibility = 'visible';
+        submit.removeAttribute('disabled');
+
+        if (context === 'sort') {
+          submit.textContent = submit.dataset.sorttext;
+        } else if (context === 'remove') {
+          submit.textContent = submit.dataset.removetext;
+        }
+      }
+    };
+
+    gallery.reset = function () {};
+
+    if (gallery.classList.contains('sortable')) {
+      var sortResult = gallery.querySelector('input.sort-result');
+      var order = sortResult.dataset.order.split(',');
+
+      gallery.sorted = function () {
+        gallery.classList.add('sorting');
+        sortResult.setAttribute('name', sortResult.getAttribute('data-name'));
+        submit.init('sort');
+      };
+
+      gallery.init = function () {
+        gallery.classList.remove('sorting');
+        sortResult.removeAttribute('name');
+        sortResult.value = order.join(',');
+      };
+
+      gallery.checkOrder = function (_order) {
+        if (JSON.stringify(order) === JSON.stringify(_order)) {
+          gallery.init();
+          submit.init(false);
+        } else {
+          gallery.sorted();
+        }
+      };
+
+      gallery.reset = function () {
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = _toConsumableArray(order).reverse()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var id = _step2.value;
+            var item = gallery.querySelector('[data-id="' + id + '"]');
+            gallery.insertBefore(item, gallery.firstElementChild);
+          }
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+              _iterator2["return"]();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
+
+        gallery.init();
+      };
+
+      new sortablejs__WEBPACK_IMPORTED_MODULE_0__["default"](gallery, {
+        draggable: '.adminGalleryItem',
+        handle: '.sortHandler',
+        onEnd: function onEnd(e) {
+          if (e.newIndex !== e.oldIndex) {
+            var currentValue = sortResult.value;
+            var newValueArray = currentValue.split(',');
+            var moved = newValueArray.splice(e.oldIndex, 1)[0];
+            newValueArray.splice(e.newIndex, 0, moved);
+            var newValue = newValueArray.join(',');
+            sortResult.setAttribute('value', newValue);
+            gallery.checkOrder(newValueArray);
+          }
+        }
+      });
+    }
+
+    if (gallery.classList.contains('removal')) {
+      var items = gallery.getElementsByClassName('adminGalleryItem');
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        var _loop2 = function _loop2() {
+          var item = _step3.value;
+          var handle = item.querySelector('.removeHandler');
+          var removeResult = gallery.querySelector('input.remove-result');
+          var removeArray = [];
+          handle.addEventListener('click', function (e) {
+            e.preventDefault();
+            var item = e.target.closest('.adminGalleryItem');
+            item.classList.toggle('remove');
+            var removeItems = gallery.querySelectorAll('.adminGalleryItem.remove');
+
+            if (removeItems.length) {
+              var _iteratorNormalCompletion4 = true;
+              var _didIteratorError4 = false;
+              var _iteratorError4 = undefined;
+
+              try {
+                for (var _iterator4 = removeItems[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                  var removeItem = _step4.value;
+                  removeArray.push(removeItem.dataset.id);
+                }
+              } catch (err) {
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
+              } finally {
+                try {
+                  if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
+                    _iterator4["return"]();
+                  }
+                } finally {
+                  if (_didIteratorError4) {
+                    throw _iteratorError4;
+                  }
+                }
+              }
+
+              removeResult.value = removeArray.join(',');
+              removeResult.setAttribute('name', removeResult.dataset.name);
+              gallery.reset();
+              submit.init('remove');
+              gallery.classList.add('removing');
+            } else {
+              removeResult.value = '';
+              removeResult.removeAttribute('name');
+              submit.init(false);
+              gallery.classList.remove('removing');
+            }
+
+            removeArray = [];
+          });
+        };
+
+        for (var _iterator3 = items[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          _loop2();
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+            _iterator3["return"]();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
           }
         }
       }
-    });
+    }
   };
 
-  for (var _iterator = sortables[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+  for (var _iterator = galleries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
     _loop();
   }
 } catch (err) {

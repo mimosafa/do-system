@@ -59,6 +59,17 @@ trait HasFoodPhotosTrait
         return $this->foodPhotosCollectionName ?? 'foods';
     }
 
+    /**
+     * Images collection getter
+     */
+    public function getFoodPhotosAttribute()
+    {
+        return $this->getMedia($this->getFoodPhotosCollectionName());
+    }
+
+    /**
+     * Sort photos
+     */
     public function setFoodPhotosAttribute($photos)
     {
         if (! is_array($photos) || $photos instanceof Collection) {
@@ -83,14 +94,8 @@ trait HasFoodPhotosTrait
     }
 
     /**
-     * Images collection getter
-     */
-    public function getFoodPhotosAttribute()
-    {
-        return $this->getMedia($this->getFoodPhotosCollectionName());
-    }
-
-    /**
+     * Add single photo
+     *
      * @param string|Symfony\Component\HttpFoundation\File\UploadedFile $file
      */
     public function setFoodPhotoAttribute($file)
@@ -98,5 +103,32 @@ trait HasFoodPhotosTrait
         $this->addMedia($file)->toMediaCollection($this->getFoodPhotosCollectionName());
 
         return $this;
+    }
+
+    /**
+     * Remove photos
+     */
+    public function setRemoveFoodPhotosAttribute($photos)
+    {
+        if (! is_array($photos) || $photos instanceof Collection) {
+            throw new \InvalidArgumentException();
+        }
+        foreach ($photos as $photo) {
+            if (filter_var($photo, \FILTER_VALIDATE_INT)) {
+                $photo = Media::find($photo);
+            }
+            if (! ($photo instanceof Media)) {
+                throw new \InvalidArgumentException();
+            }
+            if ($photo->collection_name !== $this->getFoodPhotosCollectionName()) {
+                throw new \InvalidArgumentException();
+            }
+            if ($photo->model_id !== $this->id) {
+                throw new \InvalidArgumentException();
+            }
+            $photo->delete();
+
+            return $this;
+        }
     }
 }

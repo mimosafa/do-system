@@ -44,16 +44,56 @@
         cursor: move;
       }
 
+      .removeHandler {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        opacity: .25;
+        cursor: default;
+
+        i:before {
+          content: "\f00d"; // fa-remove
+        }
+      }
+
       &:hover {
         background-size: contain;
 
         .adminGalleryItemName {
           opacity: .25;
         }
-        .sortHandler {
+        .sortHandler, .removeHandler {
           opacity: .8;
         }
       }
+    }
+  }
+
+  &Item.remove {
+    a {
+      filter: grayscale(100%);
+      background-size: contain;
+
+      .removeHandler {
+        opacity: 1;
+        i:before {
+          content: "\f14a"; // fa-check-square
+        }
+      }
+
+      .adminGalleryItemName {
+        opacity: 1;
+      }
+
+      .sortHandler {
+        display: none;
+      }
+    }
+  }
+
+  &.removing {
+    a .sortHandler {
+      display: none;
     }
   }
 

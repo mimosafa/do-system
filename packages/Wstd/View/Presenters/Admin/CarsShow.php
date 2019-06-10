@@ -73,14 +73,17 @@ class CarsShow extends IdentifiedPresenter
         $title = '車両画像';
         $addable = true;
         $sortable = true;
+        $removal = true;
         /**
          * @see Wstd\Application\Requests\CarRequest
          */
         $nameForAdd = 'car_photo';
         $nameForSort = 'car_photos';
+        $nameForRemove = 'remove_car_photos';
 
         $gallery = new Gallery($images, compact(
-            'id', 'title', 'addable', 'sortable', 'nameForAdd', 'nameForSort'
+            'id', 'title', 'addable', 'sortable', 'removal',
+            'nameForAdd', 'nameForSort', 'nameForRemove'
         ));
 
         $this->gallery = new Contents($gallery);

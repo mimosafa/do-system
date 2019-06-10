@@ -111,14 +111,17 @@ class ItemsShow extends IdentifiedPresenter
         $title = '<i class="fa fa-camera"></i> 商品画像';
         $addable = true;
         $sortable = true;
+        $removal = true;
         /**
          * @see Wstd\Application\Requests\ItemRequest
          */
         $nameForAdd = 'food_photo';
         $nameForSort = 'food_photos';
+        $nameForRemove = 'remove_food_photos';
 
         return new Gallery($images, compact(
-            'id', 'title', 'addable', 'sortable', 'nameForAdd', 'nameForSort'
+            'id', 'title', 'addable', 'sortable', 'removal',
+            'nameForAdd', 'nameForSort', 'nameForRemove'
         ));
     }
 
