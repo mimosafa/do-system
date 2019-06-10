@@ -127,8 +127,8 @@ trait HasFoodPhotosTrait
                 throw new \InvalidArgumentException();
             }
             $photo->delete();
-
-            return $this;
         }
+
+        return $this;
     }
 }

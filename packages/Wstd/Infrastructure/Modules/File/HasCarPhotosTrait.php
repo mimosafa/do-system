@@ -129,8 +129,8 @@ trait HasCarPhotosTrait
                 throw new \InvalidArgumentException();
             }
             $photo->delete();
-
-            return $this;
         }
+
+        return $this;
     }
 }

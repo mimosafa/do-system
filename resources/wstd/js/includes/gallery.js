@@ -95,7 +95,6 @@ for (let gallery of galleries) {
 
         e.preventDefault();
 
-        let item = e.target.closest('.adminGalleryItem');
         item.classList.toggle('remove');
 
         let removeItems = gallery.querySelectorAll('.adminGalleryItem.remove');
