@@ -25,6 +25,9 @@ class CarRequest extends FormRequest
         if (isset($all['car_photos']) && ! is_array($all['car_photos'])) {
             $all['car_photos'] = explode(',', $all['car_photos']);
         }
+        if (isset($all['remove_car_photos']) && ! is_array($all['remove_car_photos'])) {
+            $all['remove_car_photos'] = explode(',', $all['remove_car_photos']);
+        }
 
         return $all;
     }
@@ -43,6 +46,8 @@ class CarRequest extends FormRequest
             'car_photo' => 'file|image|mimes:jpeg,png,jpg',
             'car_photos' => 'array',
             'car_photos.*' => 'integer',
+            'remove_car_photos' => 'array',
+            'remove_car_photos.*' => 'integer',
         ];
     }
 }

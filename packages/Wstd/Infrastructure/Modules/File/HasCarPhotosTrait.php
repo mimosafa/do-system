@@ -67,6 +67,9 @@ trait HasCarPhotosTrait
         return $this->getMedia($this->getCarPhotosCollectionName());
     }
 
+    /**
+     * Sort photos
+     */
     public function setCarPhotosAttribute($photos)
     {
         if (! is_array($photos) || $photos instanceof Collection) {
@@ -88,14 +91,45 @@ trait HasCarPhotosTrait
             $photo->order_column = $i;
             $photo->save();
         }
+
+        return $this;
     }
 
     /**
+     * Add single photo
+     *
      * @param string|Symfony\Component\HttpFoundation\File\UploadedFile $file
      */
     public function setCarPhotoAttribute($file)
     {
         $this->addMedia($file)->toMediaCollection($this->getCarPhotosCollectionName());
+
+        return $this;
+    }
+
+    /**
+     * Remove photos
+     */
+    public function setRemoveCarPhotosAttribute($photos)
+    {
+        if (! is_array($photos) || $photos instanceof Collection) {
+            throw new \InvalidArgumentException();
+        }
+        foreach ($photos as $photo) {
+            if (filter_var($photo, \FILTER_VALIDATE_INT)) {
+                $photo = Media::find($photo);
+            }
+            if (! ($photo instanceof Media)) {
+                throw new \InvalidArgumentException();
+            }
+            if ($photo->collection_name !== $this->getCarPhotosCollectionName()) {
+                throw new \InvalidArgumentException();
+            }
+            if ($photo->model_id !== $this->id) {
+                throw new \InvalidArgumentException();
+            }
+            $photo->delete();
+        }
 
         return $this;
     }

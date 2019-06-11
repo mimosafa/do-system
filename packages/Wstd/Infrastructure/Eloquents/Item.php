@@ -32,6 +32,14 @@ class Item extends Model implements AdvertisableInterface, HasFiles
         return $this->morphedByMany(Shop::class, 'item_belong');
     }
 
+    public function setShopsAttribute(array $values)
+    {
+        $this->shops()->detach();
+        $this->shops()->attach($values);
+
+        return $this;
+    }
+
     public function getCopyAttribute()
     {
         return $this->getAdvertisement('title_secondary');

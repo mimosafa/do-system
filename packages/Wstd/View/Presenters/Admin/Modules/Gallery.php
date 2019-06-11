@@ -34,7 +34,14 @@ class Gallery extends Content
     protected $beforeSort = [];
     protected $nameForSort;
     protected $defaultNameForSort = 'images';
-    protected $updateItemsOrder = 'Save items order';
+    protected $updateItemsOrderText = 'Save items order';
+    protected $updateItemsOrderStyle = 'info';
+
+    public $removal = false;
+    protected $nameForRemove;
+    protected $defaultNameForRemove = 'remove_images';
+    protected $updateItemsRemoveText = 'Execute delete';
+    protected $updateItemsRemoveStyle = 'danger';
 
     public $modalSize = 'large';
 
@@ -66,6 +73,11 @@ class Gallery extends Content
     protected function nameForSort()
     {
         return $this->nameForSort ?? $this->defaultNameForSort;
+    }
+
+    protected function nameForRemove()
+    {
+        return $this->nameForRemove ?? $this->defaultNameForRemove;
     }
 
     protected function initForm()
@@ -100,20 +112,35 @@ class Gallery extends Content
     public function sortResult()
     {
         $dataName = $this->nameForSort();
-        $dataOld = $value = implode(',', $this->beforeSort);
+        $dataOrder = $value = implode(',', $this->beforeSort);
 
         return FormFactory::makeInputHidden([
             'data-name' => $dataName,
-            'data-old' => $dataOld,
+            'data-order' => $dataOrder,
             'value' => $value,
             'class' => 'sort-result',
         ]);
     }
 
-    public function sortSubmit()
+    public function removedItems()
+    {
+        $dataName = $this->nameForRemove();
+
+        return FormFactory::makeInputHidden([
+            'data-name' => $dataName,
+            'value' => '',
+            'class' => 'remove-result',
+        ]);
+    }
+
+    public function submit()
     {
         return FormFactory::makeButton([
-            'text' => $this->updateItemsOrder,
+            'text' => $this->updateItemsOrderText,
+            'data-sorttext' => $this->updateItemsOrderText,
+            // 'data-sortstyle' => $this->updateItemsOrderStyle,
+            'data-removetext' => $this->updateItemsRemoveText,
+            // 'data-removestyle' => $this->updateItemsRemoveStyle,
             'class' => 'btn btn-info btn-block btn-sm',
             'style' => 'margin-top: 15px; visibility: hidden;',
             'disabled' => 'disabled',

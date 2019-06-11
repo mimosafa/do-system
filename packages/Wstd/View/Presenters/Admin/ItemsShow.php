@@ -84,14 +84,50 @@ class ItemsShow extends IdentifiedPresenter
             $content .= '<span class="text-muted">None</span>';
         }
 
+        $form = $this->initShopsForm();
+
+        if ($form) {
+            $content .= '<hr>';
+        }
+
         $this->shops = new Contents(
             new Content($content, [
                 'id' => 'handling_shops',
                 'title' => '<i class="fa fa-coffee"></i> 取扱店舗',
+                'form' => $form,
             ]), [
                 'boxContext' => 'primary',
             ]
         );
+    }
+
+    protected function initShopsForm()
+    {
+        $vendorShops = $this->entity->getVendor()->getShops();
+
+        $options = [];
+        foreach ($vendorShops as $vendorShop) {
+            $options[$vendorShop->getId()] = $vendorShop->getName();
+        }
+
+        $values = [];
+        foreach ($this->entity->getShops() as $shop) {
+            $values[] = $shop->getId();
+        }
+
+        $form = FormFactory::makeSelect($options, [
+            'name' => 'shops',
+            'multiple' => true,
+            'label' => '取扱店舗',
+            'value' => $values,
+            'select2' => true,
+        ]);
+
+        return new FormContainer($form, [
+            'id' => 'add_shop_form',
+            'title' => '取扱店舗を変更する',
+            'toggle' => '取扱店舗を変更する',
+        ]);
     }
 
     protected function initContents()
@@ -111,14 +147,17 @@ class ItemsShow extends IdentifiedPresenter
         $title = '<i class="fa fa-camera"></i> 商品画像';
         $addable = true;
         $sortable = true;
+        $removal = true;
         /**
          * @see Wstd\Application\Requests\ItemRequest
          */
         $nameForAdd = 'food_photo';
         $nameForSort = 'food_photos';
+        $nameForRemove = 'remove_food_photos';
 
         return new Gallery($images, compact(
-            'id', 'title', 'addable', 'sortable', 'nameForAdd', 'nameForSort'
+            'id', 'title', 'addable', 'sortable', 'removal',
+            'nameForAdd', 'nameForSort', 'nameForRemove'
         ));
     }
 

@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .adminGallery {
   display: grid;
   gap: 10px;
@@ -51,6 +53,18 @@
   cursor: move;
 }
 
+.adminGalleryItem a .removeHandler {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  opacity: 0.25;
+  cursor: default;
+}
+
+.adminGalleryItem a .removeHandler i:before {
+  content: "\F00D";
+}
+
 .adminGalleryItem a:hover {
   background-size: contain;
 }
@@ -59,8 +73,35 @@
   opacity: 0.25;
 }
 
-.adminGalleryItem a:hover .sortHandler {
+.adminGalleryItem a:hover .sortHandler,
+.adminGalleryItem a:hover .removeHandler {
   opacity: 0.8;
+}
+
+.adminGalleryItem.remove a {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  background-size: contain;
+}
+
+.adminGalleryItem.remove a .removeHandler {
+  opacity: 1;
+}
+
+.adminGalleryItem.remove a .removeHandler i:before {
+  content: "\F14A";
+}
+
+.adminGalleryItem.remove a .adminGalleryItemName {
+  opacity: 1;
+}
+
+.adminGalleryItem.remove a .sortHandler {
+  display: none;
+}
+
+.adminGallery.removing a .sortHandler {
+  display: none;
 }
 
 .adminGalleryAddItem {
