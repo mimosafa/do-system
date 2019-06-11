@@ -77,6 +77,10 @@ final class VendorRepository implements VendorRepositoryInterface
      */
     private function query(array $params)
     {
+        if (empty($params)) {
+            return Vendor::indexable()->get();
+        }
+
         extract($params);
 
         return (new Vendor())->when(isset($name), function($query) use (&$name) {

@@ -67,4 +67,12 @@ class Shop extends Model implements AdvertisableInterface
         $this->setAdvertisement('content_primary', $value);
         return $this;
     }
+
+    /**
+     * Local scope for index without query requests
+     */
+    public function scopeIndexable($query)
+    {
+        return $query->whereIn('status', ShopValueStatus::getIndexableValues());
+    }
 }

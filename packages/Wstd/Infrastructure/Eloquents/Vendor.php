@@ -2,6 +2,7 @@
 
 namespace Wstd\Infrastructure\Eloquents;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Vendor\VendorValueStatus;
@@ -45,5 +46,13 @@ class Vendor extends Model
     public function shops()
     {
         return $this->hasMany(Shop::class);
+    }
+
+    /**
+     * Local scope for index without query requests
+     */
+    public function scopeIndexable($query)
+    {
+        return $query->whereIn('status', VendorValueStatus::getIndexableValues());
     }
 }

@@ -78,6 +78,10 @@ final class CarRepository implements CarRepositoryInterface
      */
     private function query(array $params)
     {
+        if (empty($params)) {
+            return Car::indexable()->get();
+        }
+
         extract($params);
 
         return (new Car())->when(isset($vendor_id), function($query) use (&$vendor_id) {

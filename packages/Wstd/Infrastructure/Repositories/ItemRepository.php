@@ -46,6 +46,10 @@ final class ItemRepository implements ItemRepositoryInterface
 
     private function query(array $params)
     {
+        if (empty($params)) {
+            return Eloquent::indexable()->get();
+        }
+
         extract($params);
 
         return (new Eloquent())->when(isset($vendor_id), function ($query) use (&$vendor_id) {

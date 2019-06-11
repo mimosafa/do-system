@@ -78,6 +78,10 @@ final class ShopRepository implements ShopRepositoryInterface
      */
     private function query(array $params)
     {
+        if (empty($params)) {
+            return Shop::indexable()->get();
+        }
+
         extract($params);
 
         return (new Shop())->when(isset($vendor_id), function($query) use (&$vendor_id) {
