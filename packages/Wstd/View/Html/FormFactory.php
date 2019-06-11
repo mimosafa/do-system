@@ -4,6 +4,7 @@ namespace Wstd\View\Html;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Arr;
+use Illuminate\Support\HtmlString;
 use Spatie\Html\Elements as El;
 use Wstd\Domain\Models\ValueObjectInterface;
 use Wstd\Domain\Models\ValueObjectEnum;
@@ -83,6 +84,45 @@ class FormFactory
             $select = $select->value($value);
         }
         return $select;
+    }
+
+    public static function makeCheckboxes(array $options, array $args = []): Htmlable
+    {
+        $value = Arr::pull($args, 'value', []);
+        if ($name = Arr::pull($args, 'name')) {
+            $name .= '[]';
+        }
+        $class = Arr::pull($args, 'class');
+        if (is_array($class)) {
+            $class = implode(' ', $class);
+        }
+        $labelClass = Arr::pull($args, 'labelClass');
+        if (is_array($labelClass)) {
+            $labelClass = implode(' ', $labelClass);
+        }
+
+        $html = '';
+        foreach ($options as $val => $label) {
+            $html .= '<label';
+            if ($labelClass) {
+                $html .= ' class="' . e($labelClass) . '"';
+            }
+            $html .= '>' . "\n";
+            $html .= "\t" . '<input type="checkbox" value="' . e($val) . '"';
+            if ($class) {
+                $html .= ' class="' . e($class) . '"';
+            }
+            if ($name) {
+                $html .= ' name="' . e($name) . '"';
+            }
+            if (in_array($val, (array) $value)) {
+                $html .= ' checked';
+            }
+            $html .= '> ' . e($label) . "\n";
+            $html .= '</label>';
+        }
+
+        return new HtmlString($html);
     }
 
     public static function makeLabel(array $args = []): Htmlable

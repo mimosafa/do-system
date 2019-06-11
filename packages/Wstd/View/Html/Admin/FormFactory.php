@@ -4,6 +4,7 @@ namespace Wstd\View\Html\Admin;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Arr;
+use Illuminate\Support\HtmlString;
 use Spatie\Html\Elements as El;
 use Wstd\View\Html\FormFactory as BaseFormFactory;
 
@@ -55,6 +56,21 @@ class FormFactory extends BaseFormFactory
             self::makeLabelFromArguments($args),
             $select
         );
+    }
+
+    public static function makeCheckboxes(array $options, array $args = []): Htmlable
+    {
+        $html = '';
+        if ($label = Arr::pull($args, 'label')) {
+            $html .= '<div class="form-group">' . "\n";
+            $html .= "\t" . '<label>' . e($label) . '</label>' . "\n";
+            $html .= '<div class="clearfix"></div>';
+        }
+        $html .= parent::makeCheckboxes($options, $args)->toHtml() . "\n";
+        if ($label) {
+            $html .= '</div>';
+        }
+        return new HtmlString($html);
     }
 
     public static function makeButton(array $args = []): Htmlable
