@@ -2,13 +2,11 @@
 
 namespace Wstd\View\Presenters\Admin;
 
-use Illuminate\Support\HtmlString;
 use Wstd\Domain\Models\CollectionInterface;
-use Wstd\Domain\Models\vendor\VendorValueStatus;
+use Wstd\Domain\Models\Vendor\VendorValueStatus;
 use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\Admin\Includes\TableForVendors;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
-use Wstd\View\Presenters\Admin\Modules\FormContainer;
 use Wstd\View\Presenters\Admin\Templates\Index;
 
 class VendorsIndex extends Index
@@ -33,20 +31,9 @@ class VendorsIndex extends Index
     ];
 
     /**
-     * @var Wstd\View\Presenters\Admin\Modules\FormContainer
-     */
-    public $filter;
-
-    /**
      * @var array[int]
      */
     protected $indexedStatuses = [];
-
-    public function __construct(CollectionInterface $collection, array $args = [])
-    {
-        parent::__construct($collection, $args);
-        $this->filter = $this->initFilter();
-    }
 
     protected function initTableInstance(CollectionInterface $collection): EntitiesTable
     {
@@ -61,7 +48,7 @@ class VendorsIndex extends Index
         ));
     }
 
-    protected function initFilter()
+    protected function initFilterForms()
     {
         $statuses = VendorValueStatus::values();
         $options = [];
@@ -69,33 +56,11 @@ class VendorsIndex extends Index
             $options[$status->getValue()] = $status->getLabel();
         }
 
-        $form = FormFactory::makeCheckboxes($options, [
+        return FormFactory::makeCheckboxes($options, [
             'label' => 'Filter by ' . VendorValueStatus::valueObjectLabel(),
             'labelClass' => 'checkbox-inline',
             'value' => $this->indexedStatuses,
             'name' => 'status',
         ]);
-
-        return new FormContainer($form, [
-            'id' => $this->id . '_filter',
-            'title' => 'Filter ' . $this->title,
-        ]);
-    }
-
-    public function title()
-    {
-        if (! isset($this->filter)) {
-            return $this->title;
-        }
-
-        $target = e($this->id . '_filter');
-        $toggle = <<<TGGL
-        <small>
-            <a href="#" data-toggle="modal" data-target="#{$target}">
-                <i class="fa fa-filter"></i>
-            </a>
-        </small>
-TGGL;
-        return new HtmlString(e($this->title) . $toggle);
     }
 }

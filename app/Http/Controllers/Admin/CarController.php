@@ -38,8 +38,9 @@ class CarController extends Controller
             'status' => 'array|' . Rule::in(CarValueStatus::toArray()),
         ]);
 
+        $indexedStatuses = $request->status ?? CarValueStatus::getIndexableValues();
         $collection = $this->service->find($request->all());
-        return Bridge::view(new CarsIndex($collection));
+        return Bridge::view(new CarsIndex($collection, compact('indexedStatuses')));
     }
 
     public function show(int $id)

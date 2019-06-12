@@ -37,8 +37,9 @@ class ShopController extends Controller
             'status' => 'array|' . Rule::in(ShopValueStatus::toArray()),
         ]);
 
+        $indexedStatuses = $request->status ?? ShopValueStatus::getIndexableValues();
         $collection = $this->service->find($validated);
-        return Bridge::view(new ShopsIndex($collection));
+        return Bridge::view(new ShopsIndex($collection, compact('indexedStatuses')));
     }
 
     public function show(int $id)

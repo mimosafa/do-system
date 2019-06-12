@@ -29,8 +29,9 @@ class ItemController extends Controller
             'status' => 'array|' . Rule::in(ItemValueStatus::toArray()),
         ]);
 
+        $indexedStatuses = $request->status ?? ItemValueStatus::getIndexableValues();
         $collection = $this->service->find($validated);
-        return Bridge::view(new ItemsIndex($collection));
+        return Bridge::view(new ItemsIndex($collection, compact('indexedStatuses')));
     }
 
     public function show(int $id)

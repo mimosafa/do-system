@@ -3,6 +3,8 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\CollectionInterface;
+use Wstd\Domain\Models\Shop\ShopValueStatus;
+use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\Admin\Includes\TableForShops;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 use Wstd\View\Presenters\Admin\Templates\Index;
@@ -31,6 +33,11 @@ class ShopsIndex extends Index
         'status',
     ];
 
+    /**
+     * @var array[int]
+     */
+    protected $indexedStatuses = [];
+
     protected function initTableInstance(CollectionInterface $collection): EntitiesTable
     {
         $isDataTable = true;
@@ -49,5 +56,21 @@ class ShopsIndex extends Index
         return new TableForShops($collection, compact(
             'isDataTable', 'items', 'dataTableOptions', 'hiddenColumns'
         ));
+    }
+
+    protected function initFilterForms()
+    {
+        $statuses = ShopValueStatus::values();
+        $options = [];
+        foreach ($statuses as $status) {
+            $options[$status->getValue()] = $status->getLabel();
+        }
+
+        return FormFactory::makeCheckboxes($options, [
+            'label' => 'Filter by ' . ShopValueStatus::valueObjectLabel(),
+            'labelClass' => 'checkbox-inline',
+            'value' => $this->indexedStatuses,
+            'name' => 'status',
+        ]);
     }
 }
