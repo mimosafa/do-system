@@ -81,12 +81,14 @@ abstract class Index extends IdentifiedPresenter
     }
 
     /**
-     * @return string|Illuminate\Support\HtmlString
+     * @see resources/view/admin/templates/base.blade.php
+     *
+     * @return null|Illuminate\Support\HtmlString
      */
-    public function title()
+    public function titleAddon()
     {
         if (! isset($this->filter)) {
-            return $this->title;
+            return null;
         }
 
         $target = $this->filterId();
@@ -97,7 +99,7 @@ abstract class Index extends IdentifiedPresenter
             </a>
         </small>
 TGGL;
-        return new HtmlString(e($this->title) . $toggle);
+        return new HtmlString($toggle);
     }
 
     /**
