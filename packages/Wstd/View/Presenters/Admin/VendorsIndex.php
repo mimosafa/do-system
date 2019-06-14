@@ -3,6 +3,8 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\CollectionInterface;
+use Wstd\Domain\Models\Vendor\VendorValueStatus;
+use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\Admin\Includes\TableForVendors;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 use Wstd\View\Presenters\Admin\Templates\Index;
@@ -28,6 +30,11 @@ class VendorsIndex extends Index
         'status',
     ];
 
+    /**
+     * @var array[int]
+     */
+    protected $indexedStatuses = [];
+
     protected function initTableInstance(CollectionInterface $collection): EntitiesTable
     {
         $isDataTable = true;
@@ -39,5 +46,21 @@ class VendorsIndex extends Index
         return new TableForVendors($collection, compact(
             'isDataTable', 'items', 'dataTableOptions'
         ));
+    }
+
+    protected function initFilterForms()
+    {
+        $statuses = VendorValueStatus::values();
+        $options = [];
+        foreach ($statuses as $status) {
+            $options[$status->getValue()] = $status->getLabel();
+        }
+
+        return FormFactory::makeCheckboxes($options, [
+            'label' => 'Filter by ' . VendorValueStatus::valueObjectLabel(),
+            'labelClass' => 'checkbox-inline',
+            'value' => $this->indexedStatuses,
+            'name' => 'status',
+        ]);
     }
 }

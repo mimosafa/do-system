@@ -8,7 +8,9 @@
     @includeWhen($errors->any(), 'admin.includes.alertError')
     <h1>
         @yield('page_title')
-        @yield('post_page_title')
+        @isset($titleAddon)
+            {{ $titleAddon }}
+        @endisset
     </h1>
 @endsection
 

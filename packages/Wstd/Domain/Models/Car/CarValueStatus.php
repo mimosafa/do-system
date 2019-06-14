@@ -24,7 +24,6 @@ final class CarValueStatus extends AbstractValueStatus implements ValueObjectEnu
     protected static $indexables = [
         self::UNREGISTERED,
         self::REGISTERED,
-        self::SUSPENDED,
     ];
 
     protected $labels = [

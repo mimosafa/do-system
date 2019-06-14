@@ -52,7 +52,6 @@ final class VendorValueStatus extends AbstractValueStatus implements ValueObject
     protected static $indexables = [
         self::UNREGISTERED,
         self::REGISTERED,
-        self::SUSPENDED,
     ];
 
     protected $labels = [

@@ -61,4 +61,12 @@ class Item extends Model implements AdvertisableInterface, HasFiles
         $this->setAdvertisement('description_primary', $value);
         return $this;
     }
+
+    /**
+     * Local scope for index without query requests
+     */
+    public function scopeIndexable($query)
+    {
+        return $query->whereIn('status', ItemValueStatus::getIndexableValues());
+    }
 }

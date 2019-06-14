@@ -41,4 +41,12 @@ class Car extends Model implements HasFiles
         'status' => CarValueStatus::UNREGISTERED,
         'order'  => 0,
     ];
+
+    /**
+     * Local scope for index without query requests
+     */
+    public function scopeIndexable($query)
+    {
+        return $query->whereIn('status', CarValueStatus::getIndexableValues());
+    }
 }

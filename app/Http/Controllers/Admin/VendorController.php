@@ -36,8 +36,9 @@ class VendorController extends Controller
             'status' => 'array|' . Rule::in(VendorValueStatus::toArray()),
         ]);
 
+        $indexedStatuses = $request->status ?? VendorValueStatus::getIndexableValues();
         $collection = $this->service->find($request->all());
-        return Bridge::view(new VendorsIndex($collection));
+        return Bridge::view(new VendorsIndex($collection, compact('indexedStatuses')));
     }
 
     public function show(int $id)
