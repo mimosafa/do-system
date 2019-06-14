@@ -25,7 +25,7 @@ class Shop extends Model implements AdvertisableInterface
 
     public function items()
     {
-        return $this->morphToMany(Item::class, 'item_belong');
+        return $this->morphToMany(Item::class, 'item_belong')->withPivot('order');
     }
 
     public function setItemsAttribute(array $values)

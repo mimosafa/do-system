@@ -50,7 +50,8 @@ final class Shop implements ShopInterface
     public function getItems(): ItemCollectionInterface
     {
         $repository = resolve(ItemRepositoryInterface::class);
-        return $repository->makeCollectionFromEloquents($this->eloquent->items);
+        $collection = $this->eloquent->items->sortBy('pivot.order');
+        return $repository->makeCollectionFromEloquents($collection);
     }
 
     public function getSubTitle(): ?ShopValueSubTitle
