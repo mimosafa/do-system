@@ -12,5 +12,6 @@ $('.modal').each(function() {
         $formItems.attr('disabled', 'disabled');
         $form.removeAttr('action');
       })
+    ;
   }
 });

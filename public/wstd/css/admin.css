@@ -1,5 +1,20 @@
 @charset "UTF-8";
 
+.sortable-table .sort-handler-head {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.sortable-table tr .sort-handler {
+  cursor: move;
+  opacity: 0.25;
+  vertical-align: middle;
+}
+
+.sortable-table tr .sort-handler:hover {
+  opacity: 0.5;
+}
+
 .adminGallery {
   display: grid;
   gap: 10px;

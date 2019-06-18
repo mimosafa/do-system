@@ -11,6 +11,7 @@ use Wstd\View\Presenters\Admin\Modules\Contents;
 use Wstd\View\Presenters\Admin\Modules\FormContainer;
 use Wstd\View\Presenters\Admin\Modules\Section;
 use Wstd\View\Presenters\Admin\Modules\Sections;
+use Wstd\View\Presenters\Admin\Templates\Belongs;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
 class ShopsShow extends IdentifiedPresenter
@@ -136,12 +137,28 @@ class ShopsShow extends IdentifiedPresenter
             'items' => [
                 'thumb', 'name', 'copy', 'status',
             ],
+            'attributes' => [
+                'table' => [
+                    'class' => 'sortable-table',
+                ],
+            ],
         ]);
 
-        return new Content($table, [
-            'id' => 'vendor_items',
+        $beforeSort = [];
+        foreach ($this->items as $item) {
+            $beforeSort[] = $item->getId();
+        }
+
+        return new Belongs($table, [
+            'id' => 'shop_items',
             'title' => '<i class="fa fa-fw fa-cutlery "></i> 商品',
-            'form' => $this->initItemsForm(),
+            'exchangable' => true,
+            'exchangeForm' => $this->initItemsForm(),
+            'exchangeText' => '商品を追加・削除する',
+            'sortable' => true,
+            'beforeSort' => $beforeSort,
+            'nameForSort' => 'items',
+            'sortText' => '並び替えを保存する',
         ]);
     }
 

@@ -70,6 +70,16 @@ class EntitiesTable extends Table
         return class_exists($maybeEntityClass) ? $maybeEntityClass : '';
     }
 
+    public function hasRow(): bool
+    {
+        return $this->collection->isNotEmpty();
+    }
+
+    public function countRow(): int
+    {
+        return $this->collection->count();
+    }
+
     /**
      * @return string
      */

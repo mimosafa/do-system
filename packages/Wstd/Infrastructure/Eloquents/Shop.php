@@ -25,13 +25,17 @@ class Shop extends Model implements AdvertisableInterface
 
     public function items()
     {
-        return $this->morphToMany(Item::class, 'item_belong');
+        return $this->morphToMany(Item::class, 'item_belong')->withPivot('order');
     }
 
     public function setItemsAttribute(array $values)
     {
         $this->items()->detach();
-        $this->items()->attach($values);
+        $items = [];
+        foreach ($values as $order => $id) {
+            $items[$id] = ['order' => $order];
+        }
+        $this->items()->attach($items);
         return $this;
     }
 
