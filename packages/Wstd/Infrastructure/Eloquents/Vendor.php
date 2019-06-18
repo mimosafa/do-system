@@ -48,6 +48,42 @@ class Vendor extends Model
         return $this->hasMany(Shop::class);
     }
 
+    public function setCarsAttribute(array $cars)
+    {
+        foreach ($cars as $order => $id) {
+            $car = Car::find($id);
+            if ($car->vendor_id !== $this->id) {
+                throw new \InvalidArgumentException();
+            }
+            $car->order = $order;
+            $car->save();
+        }
+    }
+
+    public function setItemsAttribute(array $items)
+    {
+        foreach ($items as $order => $id) {
+            $item = Item::find($id);
+            if ($item->vendor_id !== $this->id) {
+                throw new \InvalidArgumentException();
+            }
+            $item->order = $order;
+            $item->save();
+        }
+    }
+
+    public function setShopsAttribute(array $shops)
+    {
+        foreach ($shops as $order => $id) {
+            $shop = Shop::find($id);
+            if ($shop->vendor_id !== $this->id) {
+                throw new \InvalidArgumentException();
+            }
+            $shop->order = $order;
+            $shop->save();
+        }
+    }
+
     /**
      * Local scope for index without query requests
      */

@@ -12,6 +12,7 @@ use Wstd\View\Presenters\Admin\Modules\Content;
 use Wstd\View\Presenters\Admin\Modules\Contents;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 use Wstd\View\Presenters\Admin\Modules\FormContainer;
+use Wstd\View\Presenters\Admin\Templates\Belongs;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
 class VendorsShow extends IdentifiedPresenter
@@ -87,12 +88,28 @@ class VendorsShow extends IdentifiedPresenter
                 'vin',
                 'status',
             ],
+            'attributes' => [
+                'table' => [
+                    'class' => 'sortable-table',
+                ],
+            ],
         ]);
 
-        return new Content($table, [
+        $beforeSort = [];
+        foreach ($this->entity->getCars() as $car) {
+            $beforeSort[] = $car->getId();
+        }
+
+        return new Belongs($table, [
             'id' => 'vendor_cars',
             'title' => '<i class="fa fa-car"></i> 車両',
-            'form' => $this->initCarForm(),
+            'exchangable' => true,
+            'exchangeForm' => $this->initCarForm(),
+            'exchangeText' => '車両を追加する',
+            'sortable' => true,
+            'beforeSort' => $beforeSort,
+            'nameForSort' => 'cars',
+            'sortText' => '車両の並び順を保存する',
         ]);
     }
 
@@ -132,12 +149,28 @@ class VendorsShow extends IdentifiedPresenter
                 'items',
                 'status',
             ],
+            'attributes' => [
+                'table' => [
+                    'class' => 'sortable-table',
+                ],
+            ],
         ]);
 
-        return new Content($table, [
+        $beforeSort = [];
+        foreach ($this->entity->getShops() as $shop) {
+            $beforeSort[] = $shop->getId();
+        }
+
+        return new Belongs($table, [
             'id' => 'vendor_shops',
             'title' => '<i class="fa fa-coffee"></i> 店舗',
-            'form' => $this->initShopForm(),
+            'exchangable' => true,
+            'exchangeForm' => $this->initShopForm(),
+            'exchangeText' => '店舗を追加する',
+            'sortable' => true,
+            'beforeSort' => $beforeSort,
+            'nameForSort' => 'shops',
+            'sortText' => '店舗の並び順を保存する',
         ]);
     }
 
@@ -167,12 +200,28 @@ class VendorsShow extends IdentifiedPresenter
             'items' => [
                 'thumb', 'name', 'copy', 'status',
             ],
+            'attributes' => [
+                'table' => [
+                    'class' => 'sortable-table',
+                ],
+            ],
         ]);
 
-        return new Content($table, [
+        $beforeSort = [];
+        foreach ($this->entity->getItems() as $item) {
+            $beforeSort[] = $item->getId();
+        }
+
+        return new Belongs($table, [
             'id' => 'vendor_items',
-            'title' => '<i class="fa fa-fw fa-cutlery "></i> 商品',
-            'form' => $this->initItemForm(),
+            'title' => '<i class="fa fa-cutlery"></i> 商品',
+            'exchangable' => true,
+            'exchangeForm' => $this->initShopForm(),
+            'exchangeText' => '商品を追加する',
+            'sortable' => true,
+            'beforeSort' => $beforeSort,
+            'nameForSort' => 'items',
+            'sortText' => '商品の並び順を保存する',
         ]);
     }
 
