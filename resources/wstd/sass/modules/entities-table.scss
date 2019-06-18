@@ -1,0 +1,21 @@
+.sortable-table {
+
+  .sort-handler-head {
+    transform: rotate(90deg);
+  }
+
+  tr {
+
+    .sort-handler {
+      cursor: move;
+      opacity: .25;
+      vertical-align: middle;
+
+      &:hover {
+        opacity: .5;
+      }
+    }
+
+  }
+
+}

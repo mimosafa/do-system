@@ -18,6 +18,17 @@ class ShopRequest extends FormRequest
         return true;
     }
 
+    public function all($keys = null)
+    {
+        $all = parent::all($keys);
+
+        if (isset($all['items']) && ! is_array($all['items'])) {
+            $all['items'] = explode(',', $all['items']);
+        }
+
+        return $all;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

@@ -31,7 +31,11 @@ class Shop extends Model implements AdvertisableInterface
     public function setItemsAttribute(array $values)
     {
         $this->items()->detach();
-        $this->items()->attach($values);
+        $items = [];
+        foreach ($values as $order => $id) {
+            $items[$id] = ['order' => $order];
+        }
+        $this->items()->attach($items);
         return $this;
     }
 
