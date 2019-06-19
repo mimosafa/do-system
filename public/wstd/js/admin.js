@@ -1,5 +1,185 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["/wstd/js/admin"],{
 
+/***/ "./node_modules/js-cookie/src/js.cookie.js":
+/*!*************************************************!*\
+  !*** ./node_modules/js-cookie/src/js.cookie.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * JavaScript Cookie v2.2.0
+ * https://github.com/js-cookie/js-cookie
+ *
+ * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+ * Released under the MIT license
+ */
+;(function (factory) {
+	var registeredInModuleLoader = false;
+	if (true) {
+		!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		registeredInModuleLoader = true;
+	}
+	if (true) {
+		module.exports = factory();
+		registeredInModuleLoader = true;
+	}
+	if (!registeredInModuleLoader) {
+		var OldCookies = window.Cookies;
+		var api = window.Cookies = factory();
+		api.noConflict = function () {
+			window.Cookies = OldCookies;
+			return api;
+		};
+	}
+}(function () {
+	function extend () {
+		var i = 0;
+		var result = {};
+		for (; i < arguments.length; i++) {
+			var attributes = arguments[ i ];
+			for (var key in attributes) {
+				result[key] = attributes[key];
+			}
+		}
+		return result;
+	}
+
+	function init (converter) {
+		function api (key, value, attributes) {
+			var result;
+			if (typeof document === 'undefined') {
+				return;
+			}
+
+			// Write
+
+			if (arguments.length > 1) {
+				attributes = extend({
+					path: '/'
+				}, api.defaults, attributes);
+
+				if (typeof attributes.expires === 'number') {
+					var expires = new Date();
+					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
+					attributes.expires = expires;
+				}
+
+				// We're using "expires" because "max-age" is not supported by IE
+				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
+
+				try {
+					result = JSON.stringify(value);
+					if (/^[\{\[]/.test(result)) {
+						value = result;
+					}
+				} catch (e) {}
+
+				if (!converter.write) {
+					value = encodeURIComponent(String(value))
+						.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+				} else {
+					value = converter.write(value, key);
+				}
+
+				key = encodeURIComponent(String(key));
+				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+				key = key.replace(/[\(\)]/g, escape);
+
+				var stringifiedAttributes = '';
+
+				for (var attributeName in attributes) {
+					if (!attributes[attributeName]) {
+						continue;
+					}
+					stringifiedAttributes += '; ' + attributeName;
+					if (attributes[attributeName] === true) {
+						continue;
+					}
+					stringifiedAttributes += '=' + attributes[attributeName];
+				}
+				return (document.cookie = key + '=' + value + stringifiedAttributes);
+			}
+
+			// Read
+
+			if (!key) {
+				result = {};
+			}
+
+			// To prevent the for loop in the first place assign an empty array
+			// in case there are no cookies at all. Also prevents odd result when
+			// calling "get()"
+			var cookies = document.cookie ? document.cookie.split('; ') : [];
+			var rdecode = /(%[0-9A-Z]{2})+/g;
+			var i = 0;
+
+			for (; i < cookies.length; i++) {
+				var parts = cookies[i].split('=');
+				var cookie = parts.slice(1).join('=');
+
+				if (!this.json && cookie.charAt(0) === '"') {
+					cookie = cookie.slice(1, -1);
+				}
+
+				try {
+					var name = parts[0].replace(rdecode, decodeURIComponent);
+					cookie = converter.read ?
+						converter.read(cookie, name) : converter(cookie, name) ||
+						cookie.replace(rdecode, decodeURIComponent);
+
+					if (this.json) {
+						try {
+							cookie = JSON.parse(cookie);
+						} catch (e) {}
+					}
+
+					if (key === name) {
+						result = cookie;
+						break;
+					}
+
+					if (!key) {
+						result[name] = cookie;
+					}
+				} catch (e) {}
+			}
+
+			return result;
+		}
+
+		api.set = api;
+		api.get = function (key) {
+			return api.call(api, key);
+		};
+		api.getJSON = function () {
+			return api.apply({
+				json: true
+			}, [].slice.call(arguments));
+		};
+		api.defaults = {};
+
+		api.remove = function (key, attributes) {
+			api(key, '', extend(attributes, {
+				expires: -1
+			}));
+		};
+
+		api.withConverter = init;
+
+		return api;
+	}
+
+	return init(function () {});
+}));
+
+
+/***/ }),
+
 /***/ "./node_modules/sortablejs/modular/sortable.esm.js":
 /*!*********************************************************!*\
   !*** ./node_modules/sortablejs/modular/sortable.esm.js ***!
@@ -3697,21 +3877,23 @@ try {
     var gallery = _step.value;
     var submit = gallery.nextElementSibling;
 
-    submit.init = function (context) {
-      if (context === false) {
-        submit.style.visibility = 'hidden';
-        submit.setAttribute('disabled', 'disabled');
-      } else {
-        submit.style.visibility = 'visible';
-        submit.removeAttribute('disabled');
+    if (submit) {
+      submit.init = function (context) {
+        if (context === false) {
+          submit.style.visibility = 'hidden';
+          submit.setAttribute('disabled', 'disabled');
+        } else {
+          submit.style.visibility = 'visible';
+          submit.removeAttribute('disabled');
 
-        if (context === 'sort') {
-          submit.textContent = submit.dataset.sorttext;
-        } else if (context === 'remove') {
-          submit.textContent = submit.dataset.removetext;
+          if (context === 'sort') {
+            submit.textContent = submit.dataset.sorttext;
+          } else if (context === 'remove') {
+            submit.textContent = submit.dataset.removetext;
+          }
         }
-      }
-    };
+      };
+    }
 
     gallery.reset = function () {};
 
@@ -3959,61 +4141,64 @@ try {
 
     toggleOrSubmit.initToggle();
     var sortStateEl = table.parentNode.getElementsByClassName('sort-state')[0];
-    var sortState = sortStateEl.dataset.order.split(',');
-    var handlerTh = document.createElement('th');
-    handlerTh.innerHTML = '<i class="sort-handler-head fa fa-exchange"></i>';
-    table.querySelector('thead tr').appendChild(handlerTh);
-    var tbody = table.querySelector('tbody');
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
 
-    try {
-      for (var _iterator2 = tbody.getElementsByTagName('tr')[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        var tr = _step2.value;
-        var handler = document.createElement('td');
-        handler.title = 'Sort this row';
-        handler.style.verticalAlign = 'middle';
-        handler.innerHTML = '<span class="sort-handler"><i class="fa fa-bars"></i></span>';
-        tr.appendChild(handler);
-      }
-    } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
-    } finally {
+    if (sortStateEl) {
+      var sortState = sortStateEl.dataset.order.split(',');
+      var handlerTh = document.createElement('th');
+      handlerTh.innerHTML = '<i class="sort-handler-head fa fa-exchange"></i>';
+      table.querySelector('thead tr').appendChild(handlerTh);
+      var tbody = table.querySelector('tbody');
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
       try {
-        if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-          _iterator2["return"]();
+        for (var _iterator2 = tbody.getElementsByTagName('tr')[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var tr = _step2.value;
+          var handler = document.createElement('td');
+          handler.title = 'Sort this row';
+          handler.style.verticalAlign = 'middle';
+          handler.innerHTML = '<span class="sort-handler"><i class="fa fa-bars"></i></span>';
+          tr.appendChild(handler);
         }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
-    }
-
-    new sortablejs__WEBPACK_IMPORTED_MODULE_0__["default"](table.querySelector('tbody'), {
-      draggable: 'tr',
-      handle: '.sort-handler',
-      onEnd: function onEnd(e) {
-        if (e.newIndex !== e.oldIndex) {
-          var currentValue = sortStateEl.value;
-          var sortStateNow = currentValue.split(',');
-          var moved = sortStateNow.splice(e.oldIndex, 1)[0];
-          sortStateNow.splice(e.newIndex, 0, moved);
-          var newOrder = sortStateNow.join(',');
-          sortStateEl.value = newOrder;
-
-          if (JSON.stringify(sortState) !== JSON.stringify(sortStateNow)) {
-            toggleOrSubmit.initSubmit();
-            sortStateEl.name = sortStateEl.dataset.name;
-          } else {
-            toggleOrSubmit.initToggle();
-            sortStateEl.removeAttribute('name');
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
           }
         }
       }
-    });
+
+      new sortablejs__WEBPACK_IMPORTED_MODULE_0__["default"](table.querySelector('tbody'), {
+        draggable: 'tr',
+        handle: '.sort-handler',
+        onEnd: function onEnd(e) {
+          if (e.newIndex !== e.oldIndex) {
+            var currentValue = sortStateEl.value;
+            var sortStateNow = currentValue.split(',');
+            var moved = sortStateNow.splice(e.oldIndex, 1)[0];
+            sortStateNow.splice(e.newIndex, 0, moved);
+            var newOrder = sortStateNow.join(',');
+            sortStateEl.value = newOrder;
+
+            if (JSON.stringify(sortState) !== JSON.stringify(sortStateNow)) {
+              toggleOrSubmit.initSubmit();
+              sortStateEl.name = sortStateEl.dataset.name;
+            } else {
+              toggleOrSubmit.initToggle();
+              sortStateEl.removeAttribute('name');
+            }
+          }
+        }
+      });
+    }
   };
 
   for (var _iterator = sortableTables[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
@@ -4040,11 +4225,30 @@ try {
 /*!********************************************!*\
   !*** ./resources/wstd/js/includes/tabs.js ***!
   \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_0__);
 
 $('.nav-tabs-custom').each(function () {
-  $(this).find('a:first').tab('show');
+  var path = location.pathname.match(/\/admin\/([a-z-]+)/)[1];
+  var key = 'shown_nav_tab_' + path;
+  var shown = js_cookie__WEBPACK_IMPORTED_MODULE_0___default.a.get(key);
+
+  if (shown === undefined) {
+    $(this).find('a:first').tab('show');
+  } else {
+    $('a[href="' + shown + '"]').tab('show');
+  }
+
+  $(this).on('shown.bs.tab', function (e) {
+    js_cookie__WEBPACK_IMPORTED_MODULE_0___default.a.set(key, e.target.getAttribute('href'), {
+      expires: 7
+    });
+  });
 });
 
 /***/ }),

@@ -6,22 +6,24 @@ for (let gallery of galleries) {
 
   let submit = gallery.nextElementSibling;
 
-  submit.init = (context) => {
-    if (context === false) {
-      submit.style.visibility = 'hidden';
-      submit.setAttribute('disabled', 'disabled');
-    }
-    else {
-      submit.style.visibility = 'visible';
-      submit.removeAttribute('disabled');
-      if (context === 'sort') {
-        submit.textContent = submit.dataset.sorttext;
+  if (submit) {
+    submit.init = (context) => {
+      if (context === false) {
+        submit.style.visibility = 'hidden';
+        submit.setAttribute('disabled', 'disabled');
       }
-      else if (context === 'remove') {
-        submit.textContent = submit.dataset.removetext;
+      else {
+        submit.style.visibility = 'visible';
+        submit.removeAttribute('disabled');
+        if (context === 'sort') {
+          submit.textContent = submit.dataset.sorttext;
+        }
+        else if (context === 'remove') {
+          submit.textContent = submit.dataset.removetext;
+        }
       }
-    }
-  };
+    };
+  }
 
   gallery.reset = () => {};
 
