@@ -216,7 +216,7 @@ class VendorsShow extends IdentifiedPresenter
             'id' => 'vendor_items',
             'title' => '<i class="fa fa-cutlery"></i> 商品',
             'exchangable' => true,
-            'exchangeForm' => $this->initShopForm(),
+            'exchangeForm' => $this->initItemForm(),
             'exchangeText' => '商品を追加する',
             'sortable' => true,
             'beforeSort' => $beforeSort,
