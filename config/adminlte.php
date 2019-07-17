@@ -139,12 +139,28 @@ return [
                     'icon' => 'cutlery',
                 ],
                 [
-                    'text' => '新規追加',
+                    'text' => '新規事業者追加',
                     'url'  => 'admin/vendors/create',
                     'icon' => 'plus',
                 ],
             ],
         ],
+        [
+            'text' => '行政情報',
+            'icon' => 'institution',
+            'submenu' => [
+                [
+                    'text' => '保健所一覧',
+                    'url'  => 'admin/health-centers',
+                    'icon' => 'heart',
+                ],
+                [
+                    'text' => '市区郡町村',
+                    'url'  => 'admin/cities',
+                    'icon' => 'map',
+                ],
+            ],
+        ]
     ],
 
     /*
