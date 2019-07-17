@@ -19,8 +19,23 @@ class RepositoryServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
+            \Wstd\Domain\Models\City\CityRepositoryInterface::class,
+            \Wstd\Infrastructure\Repositories\CityRepository::class
+        );
+
+        $this->app->singleton(
+            \Wstd\Domain\Models\HealthCenter\HealthCenterRepositoryInterface::class,
+            \Wstd\Infrastructure\Repositories\HealthCenterRepository::class
+        );
+
+        $this->app->singleton(
             \Wstd\Domain\Models\Item\ItemRepositoryInterface::class,
             \Wstd\Infrastructure\Repositories\ItemRepository::class
+        );
+
+        $this->app->singleton(
+            \Wstd\Domain\Models\Prefecture\PrefectureRepositoryInterface::class,
+            \Wstd\Infrastructure\Repositories\PrefectureRepository::class
         );
 
         $this->app->singleton(

@@ -39,7 +39,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Wstd\\": "packages/Wstd/"
+            "Wstd\\": "packages/Wstd/",
+            "AdministrationJa\\": "packages/mimosafa/administration-ja/"
         },
         "classmap": [
             "database/seeds",
