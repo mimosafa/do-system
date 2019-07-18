@@ -19,7 +19,7 @@ class Cities
             return;
         }
 
-        $json = file_get_contents(__DIR__ . '/json/cities.json');
+        $json = file_get_contents(__DIR__ . '/json/cities.min.json');
         self::$citiesRawData = json_decode($json, true);
 
         foreach (self::$citiesRawData as $array) {

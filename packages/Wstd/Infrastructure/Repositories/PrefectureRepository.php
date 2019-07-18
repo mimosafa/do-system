@@ -22,7 +22,7 @@ class PrefectureRepository implements PrefectureRepositoryInterface
         $array = $this->db->getAll();
         $prefectures = [];
         foreach ($array as $prefecture) {
-            $prefecture[] = new Prefecture($prefecture['prefecture_id'], $prefecture['prefecture_name']);
+            $prefectures[] = new Prefecture($prefecture['prefecture_id'], $prefecture['prefecture_name']);
         }
         return new Collection($prefectures);
     }

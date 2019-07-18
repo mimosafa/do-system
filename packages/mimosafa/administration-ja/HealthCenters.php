@@ -19,7 +19,7 @@ class HealthCenters
             return;
         }
 
-        $json = file_get_contents(__DIR__ . '/json/health_centers.json');
+        $json = file_get_contents(__DIR__ . '/json/health_centers.min.json');
         self::$healthCentersRawData = json_decode($json, true);
 
         foreach (self::$healthCentersRawData as $array) {

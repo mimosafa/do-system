@@ -57,7 +57,7 @@ class Prefectures
     public function getAll(): array
     {
         $array = [];
-        foreach ($self::$prefectures as $id => $name) {
+        foreach (self::$prefectures as $id => $name) {
             $array[] = [
                 'prefecture_id'   => $id,
                 'prefecture_name' => $name,

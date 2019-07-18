@@ -155,7 +155,7 @@ return [
                     'icon' => 'heart',
                 ],
                 [
-                    'text' => '市区郡町村',
+                    'text' => '地方自治体一覧',
                     'url'  => 'admin/cities',
                     'icon' => 'map',
                 ],
