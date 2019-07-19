@@ -14,6 +14,11 @@ class CollectionServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
+            \Wstd\Domain\Models\BusinessArea\BusinessAreaCollectionInterface::class,
+            \Wstd\Domain\Models\BusinessArea\BusinessAreaCollection::class
+        );
+
+        $this->app->bind(
             \Wstd\Domain\Models\Car\CarCollectionInterface::class,
             \Wstd\Domain\Models\Car\CarCollection::class
         );
