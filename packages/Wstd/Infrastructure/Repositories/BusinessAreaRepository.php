@@ -44,6 +44,8 @@ final class BusinessAreaRepository implements BusinessAreaRepositoryInterface
     {
         extract($params);
 
-        return (new Eloquent())->get();
+        return (new Eloquent())->when(isset($prefecture_id), function ($query) use (&$prefecture_id) {
+            return $query->where('business_areas.prefecture_id', '=', $prefecture_id);
+        })->get();
     }
 }

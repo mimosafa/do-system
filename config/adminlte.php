@@ -150,6 +150,11 @@ return [
             'icon' => 'institution',
             'submenu' => [
                 [
+                    'text' => '営業区域一覧',
+                    'url'  => 'admin/business-areas',
+                    'icon' => 'object-group',
+                ],
+                [
                     'text' => '保健所一覧',
                     'url'  => 'admin/health-centers',
                     'icon' => 'heart',

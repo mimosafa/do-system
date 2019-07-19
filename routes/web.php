@@ -33,6 +33,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
         return view('home');
     });
 
+    Route::get('business-areas', 'BusinessAreaController@index')->name('businessAreas.index');
+
     Route::get('cars', 'CarController@index')->name('cars.index');
     Route::post('cars/create', 'CarController@store')->name('cars.store');
     Route::get('cars/{id}', 'CarController@show')->name('cars.show');
