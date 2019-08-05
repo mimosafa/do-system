@@ -160,8 +160,8 @@ return [
                     'icon' => 'heart',
                 ],
                 [
-                    'text' => '地方自治体一覧',
-                    'url'  => 'admin/cities',
+                    'text' => '地方公共団体一覧',
+                    'url'  => 'admin/municipalities',
                     'icon' => 'map',
                 ],
             ],

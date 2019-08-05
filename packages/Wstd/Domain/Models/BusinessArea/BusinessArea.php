@@ -2,8 +2,8 @@
 
 namespace Wstd\Domain\Models\BusinessArea;
 
-use Wstd\Domain\Models\City\CityInterface;
-use Wstd\Domain\Models\City\CityRepositoryInterface;
+use Wstd\Domain\Models\Municipality\MunicipalityInterface;
+use Wstd\Domain\Models\Municipality\MunicipalityRepositoryInterface;
 use Wstd\Domain\Models\Prefecture\PrefectureInterface;
 use Wstd\Domain\Models\Prefecture\PrefectureRepositoryInterface;
 use Wstd\Infrastructure\Eloquents\BusinessArea as Eloquent;
@@ -31,7 +31,7 @@ final class BusinessArea implements BusinessAreaInterface
 
     public function getName(): string
     {
-        if ($city = $this->getCity()) {
+        if ($city = $this->getMunicipality()) {
             return $this->makeNameString($city);
         }
         return $this->makeNameString($this->getPrefecture());
@@ -43,22 +43,27 @@ final class BusinessArea implements BusinessAreaInterface
         return $repository->findById($this->eloquent->prefecture_id);
     }
 
-    public function getCity(): ?CityInterface
+    public function getMunicipality(): ?MunicipalityInterface
     {
         if (!$cityId = $this->eloquent->city_id) {
             return null;
         }
 
-        $repository = resolve(CityRepositoryInterface::class);
+        $repository = resolve(MunicipalityRepositoryInterface::class);
         return $repository->findById($cityId);
     }
 
     /**
      * @todo
      */
-    public function contains(CityInterface $city): bool
+    public function contains(MunicipalityInterface $city): bool
     {
         return false;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     private function makeNameString($cityOrPref): string

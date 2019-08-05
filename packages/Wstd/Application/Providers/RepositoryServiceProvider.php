@@ -39,6 +39,11 @@ class RepositoryServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
+            \Wstd\Domain\Models\Municipality\MunicipalityRepositoryInterface::class,
+            \Wstd\Infrastructure\Repositories\MunicipalityRepository::class
+        );
+
+        $this->app->singleton(
             \Wstd\Domain\Models\Prefecture\PrefectureRepositoryInterface::class,
             \Wstd\Infrastructure\Repositories\PrefectureRepository::class
         );

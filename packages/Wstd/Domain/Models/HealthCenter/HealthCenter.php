@@ -2,8 +2,10 @@
 
 namespace Wstd\Domain\Models\HealthCenter;
 
-use Wstd\Domain\Models\City\CityInterface;
-use Wstd\Domain\Models\City\CityRepositoryInterface;
+use Wstd\Domain\Models\BusinessArea\BusinessAreaInterface;
+use Wstd\Domain\Models\BusinessArea\BusinessAreaRepositoryInterface;
+use Wstd\Domain\Models\Municipality\MunicipalityInterface;
+use Wstd\Domain\Models\Municipality\MunicipalityRepositoryInterface;
 use Wstd\Domain\Models\Prefecture\PrefectureInterface;
 use Wstd\Domain\Models\Prefecture\PrefectureRepositoryInterface;
 
@@ -50,7 +52,7 @@ final class HealthCenter implements HealthCenterInterface
     public function getAdministration()
     {
         if ($this->administration_type === 'city') {
-            return $this->getCity();
+            return $this->getMunicipality();
         }
         else if ($this->administration_type === 'prefecture') {
             return $this->getPrefecture();
@@ -63,10 +65,15 @@ final class HealthCenter implements HealthCenterInterface
         return $repository->findById($this->prefecture_id);
     }
 
-    public function getCity(): CityInterface
+    public function getMunicipality(): MunicipalityInterface
     {
-        $repository = resolve(CityRepositoryInterface::class);
+        $repository = resolve(MunicipalityRepositoryInterface::class);
         return $repository->findById($this->city_id);
+    }
+
+    public function getBusinessArea(): BusinessAreaInterface
+    {
+        //
     }
 
     public function __toString()
