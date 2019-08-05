@@ -108,6 +108,13 @@ final class Municipality implements MunicipalityInterface
         $division = $this->getDivision();
         if ($division->isWard()) {
             $repository = resolve(MunicipalityRepositoryInterface::class);
+            $designatedCityId = (int) (substr($this->getCode(), 0, 4) . '0');
+            $administration = $repository->findById($designatedCityId);
+
+            if ($administration && $administration->getDivision()->isDesignatedCity()) {
+                return $administration;
+            }
+
             $designatedCityId = (int) (substr($this->getCode(), 0, 3) . '00');
 
             return $repository->findById($designatedCityId);
