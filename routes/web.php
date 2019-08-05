@@ -40,8 +40,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
     Route::get('cars/{id}', 'CarController@show')->name('cars.show');
     Route::post('cars/{id}', 'CarController@update');
 
-    Route::get('cities', 'CityController@index')->name('cities.index');
-
     Route::get('health-centers', 'HealthCenterController@index')->name('healthCenters.index');
 
     Route::get('items', 'ItemController@index')->name('items.index');
