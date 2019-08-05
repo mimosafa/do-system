@@ -71,9 +71,16 @@ final class HealthCenter implements HealthCenterInterface
         return $repository->findById($this->city_id);
     }
 
-    public function getBusinessArea(): BusinessAreaInterface
+    public function getBusinessArea(): ?BusinessAreaInterface
     {
-        //
+        $repository = resolve(BusinessAreaRepositoryInterface::class);
+        $administration = $this->getAdministration();
+
+        if ($administration instanceof PrefectureInterface) {
+            return $repository->findByPrefecture($administration);
+        }
+
+        return $repository->findByMunicipality($administration);
     }
 
     public function __toString()

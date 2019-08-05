@@ -29,7 +29,7 @@ class HealthCentersIndex extends Index
     {
         $isDataTable = true;
         $items = [
-            'administration', 'name',
+            'administration', 'name', 'business_area',
         ];
         $dataTableOptions = [
             'pageLength' => 100,

@@ -13,6 +13,7 @@ class TableForHealthCenters extends EntitiesTable
         'prefecture' => '都道府県',
         'administration' => '設置主体',
         'name' => '保健所名称',
+        'business_area' => '許可地域',
     ];
 
     protected function getPrefecture($entity)

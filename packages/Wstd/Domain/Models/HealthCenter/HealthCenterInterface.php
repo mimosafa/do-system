@@ -15,7 +15,7 @@ interface HealthCenterInterface
     public function getAdministration();
     public function getPrefecture(): PrefectureInterface;
     public function getMunicipality(): MunicipalityInterface;
-    public function getBusinessArea(): BusinessAreaInterface;
+    public function getBusinessArea(): ?BusinessAreaInterface;
 
     public function __toString();
 }
