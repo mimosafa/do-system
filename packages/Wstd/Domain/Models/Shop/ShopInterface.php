@@ -2,11 +2,12 @@
 
 namespace Wstd\Domain\Models\Shop;
 
+use Wstd\Domain\Models\BelongsToVendorInterface;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\Item\ItemCollectionInterface;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 
-interface ShopInterface extends EntityInterface
+interface ShopInterface extends EntityInterface, BelongsToVendorInterface
 {
     /**
      * @return string

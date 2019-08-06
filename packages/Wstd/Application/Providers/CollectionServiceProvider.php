@@ -19,6 +19,11 @@ class CollectionServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            \Wstd\Domain\Models\BusinessPermit\BusinessPermitCollectionInterface::class,
+            \Wstd\Domain\Models\BusinessPermit\BusinessPermitCollection::class
+        );
+
+        $this->app->bind(
             \Wstd\Domain\Models\Car\CarCollectionInterface::class,
             \Wstd\Domain\Models\Car\CarCollection::class
         );

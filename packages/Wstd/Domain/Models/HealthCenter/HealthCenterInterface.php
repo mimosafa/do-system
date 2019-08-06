@@ -2,14 +2,13 @@
 
 namespace Wstd\Domain\Models\HealthCenter;
 
+use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\BusinessArea\BusinessAreaInterface;
 use Wstd\Domain\Models\Municipality\MunicipalityInterface;
 use Wstd\Domain\Models\Prefecture\PrefectureInterface;
 
-interface HealthCenterInterface
+interface HealthCenterInterface extends EntityInterface
 {
-    public function getId(): int;
-
     public function getName(): string;
 
     public function getAdministration();

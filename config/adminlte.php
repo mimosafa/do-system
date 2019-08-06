@@ -129,6 +129,11 @@ return [
                     'icon' => 'car',
                 ],
                 [
+                    'text' => '営業許可一覧',
+                    'url'  => 'admin/business-permits',
+                    'icon' => 'file-text',
+                ],
+                [
                     'text' => '店舗一覧',
                     'url'  => 'admin/shops',
                     'icon' => 'coffee',

@@ -14,13 +14,18 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(
-            \Wstd\Domain\Models\Car\CarRepositoryInterface::class,
-            \Wstd\Infrastructure\Repositories\CarRepository::class
+            \Wstd\Domain\Models\BusinessArea\BusinessAreaRepositoryInterface::class,
+            \Wstd\Infrastructure\Repositories\BusinessAreaRepository::class
         );
 
         $this->app->singleton(
-            \Wstd\Domain\Models\BusinessArea\BusinessAreaRepositoryInterface::class,
-            \Wstd\Infrastructure\Repositories\BusinessAreaRepository::class
+            \Wstd\Domain\Models\BusinessPermit\BusinessPermitRepositoryInterface::class,
+            \Wstd\Infrastructure\Repositories\BusinessPermitRepository::class
+        );
+        
+        $this->app->singleton(
+            \Wstd\Domain\Models\Car\CarRepositoryInterface::class,
+            \Wstd\Infrastructure\Repositories\CarRepository::class
         );
 
         $this->app->singleton(

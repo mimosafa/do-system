@@ -2,12 +2,13 @@
 
 namespace Wstd\Domain\Models\Car;
 
+use Wstd\Domain\Models\BelongsToVendorInterface;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\Car\CarValueStatus;
 use Wstd\Domain\Models\Car\CarValueVin;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 
-interface CarInterface extends EntityInterface
+interface CarInterface extends EntityInterface, BelongsToVendorInterface
 {
     /**
      * @return string

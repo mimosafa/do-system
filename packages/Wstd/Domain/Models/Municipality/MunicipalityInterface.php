@@ -2,12 +2,12 @@
 
 namespace Wstd\Domain\Models\Municipality;
 
+use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\BusinessArea\BusinessAreaInterface;
 use Wstd\Domain\Models\Prefecture\PrefectureInterface;
 
-interface MunicipalityInterface
+interface MunicipalityInterface extends EntityInterface
 {
-    public function getId(): int;
     public function getCode(): string;
     public function getName(): string;
     public function getNameKana(): string;
