@@ -4,8 +4,10 @@ namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\View\Presenters\IdentifiedPresenter;
+use Wstd\View\Presenters\Admin\Includes\TableForBusinessPermits;
 use Wstd\View\Presenters\Admin\Modules\Contents;
 use Wstd\View\Presenters\Admin\Modules\Gallery;
+use Wstd\View\Presenters\Admin\Templates\Belongs;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
 class CarsShow extends IdentifiedPresenter
@@ -31,15 +33,15 @@ class CarsShow extends IdentifiedPresenter
     public $properties;
 
     /**
-     * @var Wstd\View\Presenters\Admin\Modules\Gallery
+     * @var Wstd\View\Presenters\Admin\Modules\Contents
      */
-    public $gallery;
+    public $contents;
 
     public function __construct(EntityInterface $entity)
     {
         $this->entity = $entity;
         $this->initProperties();
-        $this->initGallery();
+        $this->initContents();
     }
 
     protected function initProperties()
@@ -66,11 +68,21 @@ class CarsShow extends IdentifiedPresenter
         return sprintf('<a href="%s">%s</a>', $link, '<i class="fa fa-user"></i> ' . e($name));
     }
 
+    protected function initContents()
+    {
+        $contents = [
+            $this->initGallery(),
+            $this->initBusinessPermits(),
+        ];
+
+        $this->contents = new Contents($contents);
+    }
+
     protected function initGallery()
     {
         $images = $this->entity->getPhotos();
         $id = 'car_images';
-        $title = '車両画像';
+        $title = '<i class="fa fa-camera"></i> 車両画像';
         $addable = true;
         $sortable = true;
         $removal = true;
@@ -81,11 +93,29 @@ class CarsShow extends IdentifiedPresenter
         $nameForSort = 'car_photos';
         $nameForRemove = 'remove_car_photos';
 
-        $gallery = new Gallery($images, compact(
+        return new Gallery($images, compact(
             'id', 'title', 'addable', 'sortable', 'removal',
             'nameForAdd', 'nameForSort', 'nameForRemove'
         ));
+    }
 
-        $this->gallery = new Contents($gallery);
+    protected function initBusinessPermits()
+    {
+        $items = [
+            'permission',
+            'business_area',
+            'health_center',
+            'end_date',
+        ];
+
+        $table = new TableForBusinessPermits(
+            $this->entity->getBusinessPermits(),
+            compact('items')
+        );
+
+        return new Belongs($table, [
+            'id' => 'car_business_permits',
+            'title' => '<i class="fa fa-file-text"></i> 営業許可',
+        ]);
     }
 }

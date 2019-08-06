@@ -2,7 +2,7 @@
 
     @var string $title
     @var Wstd\View\Presenters\Admin\Templates\Properties $properties
-    @var Wstd\View\Presenters\Admin\Modules\Contents $gallery
+    @var Wstd\View\Presenters\Admin\Modules\Contents $contents
 
 --}}
 
@@ -13,7 +13,7 @@
             @presenter($properties)
         </div>
         <div class="col-md-9">
-            @presenter($gallery)
+            @presenter($contents)
         </div>
     </div>
 

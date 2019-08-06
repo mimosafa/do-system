@@ -4,8 +4,7 @@ namespace Wstd\Domain\Models\Car;
 
 use Wstd\Domain\Models\BelongsToVendorInterface;
 use Wstd\Domain\Models\EntityInterface;
-use Wstd\Domain\Models\Car\CarValueStatus;
-use Wstd\Domain\Models\Car\CarValueVin;
+use Wstd\Domain\Models\BusinessPermit\BusinessPermitCollectionInterface;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 
 interface CarInterface extends EntityInterface, BelongsToVendorInterface
@@ -42,4 +41,6 @@ interface CarInterface extends EntityInterface, BelongsToVendorInterface
      * @return array
      */
     public function getPhotos();
+
+    public function getBusinessPermits(): BusinessPermitCollectionInterface;
 }

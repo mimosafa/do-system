@@ -39,6 +39,8 @@ final class BusinessPermitRepository implements BusinessPermitRepositoryInterfac
     {
         extract($params);
 
-        return (new Eloquent())->get();
+        return (new Eloquent())->when(isset($car_id), function ($query) use (&$car_id) {
+            return $query->where('business_permits.approved_type', '=', 'car')->where('business_permits.approved_id', '=', $car_id);
+        })->get();
     }
 }
