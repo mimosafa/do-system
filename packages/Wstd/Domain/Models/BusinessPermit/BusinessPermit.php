@@ -17,6 +17,7 @@ use Wstd\Infrastructure\Eloquents\Car as CarEloquent;
 final class BusinessPermit implements BusinessPermitInterface
 {
     private $eloquent;
+    private $approved;
 
     public function __construct(int $id)
     {
@@ -30,13 +31,24 @@ final class BusinessPermit implements BusinessPermitInterface
 
     public function getApproved(): EntityInterface
     {
+        if ($this->approved) {
+            return $this->approved;
+        }
+
         $approvedEloquent = $this->eloquent->approved;
 
         if ($approvedEloquent instanceof CarEloquent) {
-            return new Car($approvedEloquent->id);
+            return $this->approved = new Car($approvedEloquent->id);
         }
 
         throw new \Exception();
+    }
+
+    public function getApprovedType(): BusinessPermitValueApprovedType
+    {
+        $approved = $this->getApproved();
+
+        return BusinessPermitValueApprovedType::of($approved);
     }
 
     public function getVendor(): VendorInterface
@@ -64,9 +76,9 @@ final class BusinessPermit implements BusinessPermitInterface
         return $healthCenter->getBusinessArea();
     }
 
-    public function getBusinessCategory()
+    public function getBusinessCategory(): BusinessPermitValueBusinessCategory
     {
-        //
+        return BusinessPermitValueBusinessCategory::of($this->eloquent->business_category);
     }
 
     public function getEndDate(): Carbon

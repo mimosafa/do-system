@@ -11,9 +11,10 @@ use Wstd\Domain\Models\Vendor\VendorInterface;
 interface BusinessPermitInterface extends EntityInterface
 {
     public function getApproved(): EntityInterface;
+    public function getApprovedType(): BusinessPermitValueApprovedType;
     public function getVendor(): VendorInterface;
     public function getHealthCenter(): HealthCenterInterface;
     public function getBusinessArea(): BusinessAreaInterface;
-    public function getBusinessCategory();
+    public function getBusinessCategory(): BusinessPermitValueBusinessCategory;
     public function getEndDate(): Carbon;
 }

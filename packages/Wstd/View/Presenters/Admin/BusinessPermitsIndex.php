@@ -18,9 +18,9 @@ class BusinessPermitsIndex extends Index
         $items = [
             'vendor',
             'approved',
+            'permission',
             'business_area',
             'health_center',
-            'business_category',
             'end_date',
         ];
         $dataTableOptions = [
