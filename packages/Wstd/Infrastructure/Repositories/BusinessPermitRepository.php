@@ -22,6 +22,11 @@ final class BusinessPermitRepository implements BusinessPermitRepositoryInterfac
         //
     }
 
+    public function store(array $params): BusinessPermitInterface
+    {
+        return BusinessPermitFactory::make($params);
+    }
+
     private function makeCollectionFromEloquents(Collection $eloquents): BusinessPermitCollectionInterface
     {
         $collection = resolve(BusinessPermitCollectionInterface::class);

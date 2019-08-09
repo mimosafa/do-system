@@ -36,6 +36,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
     Route::get('business-areas', 'BusinessAreaController@index')->name('businessAreas.index');
 
     Route::get('business-permits', 'BusinessPermitController@index')->name('businessPermits.index');
+    Route::post('business-permits/create', 'BusinessPermitController@store')->name('businessPermits.store');
 
     Route::get('cars', 'CarController@index')->name('cars.index');
     Route::post('cars/create', 'CarController@store')->name('cars.store');

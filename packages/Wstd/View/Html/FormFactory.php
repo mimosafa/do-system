@@ -54,6 +54,12 @@ class FormFactory
         return static::makeInput($args);
     }
 
+    public static function makeInputDate(array $args = []): Htmlable
+    {
+        $args['type'] = 'date';
+        return static::makeInput($args);
+    }
+
     public static function makeInputFile(array $args = []): Htmlable
     {
         $args['type'] = 'file';

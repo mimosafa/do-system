@@ -87,4 +87,9 @@ final class HealthCenter implements HealthCenterInterface
     {
         return $this->getName();
     }
+
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
 }

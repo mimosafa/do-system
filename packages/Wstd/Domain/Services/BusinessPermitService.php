@@ -3,6 +3,7 @@
 namespace Wstd\Domain\Services;
 
 use InvalidArgumentException;
+use Wstd\Domain\Models\BusinessPermit\BusinessPermitInterface;
 use Wstd\Domain\Models\BusinessPermit\BusinessPermitRepositoryInterface;
 
 class BusinessPermitService
@@ -23,5 +24,10 @@ class BusinessPermitService
             return $this->repository->find($params);
         }
         throw new InvalidArgumentException(__METHOD__ . ' function accepts integer or array. Input: ' . $params);
+    }
+
+    public function store(array $params): BusinessPermitInterface
+    {
+        return $this->repository->store($params);
     }
 }
