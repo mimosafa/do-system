@@ -81,8 +81,17 @@ final class BusinessPermit implements BusinessPermitInterface
         return BusinessPermitValueBusinessCategory::of($this->eloquent->business_category);
     }
 
+    public function getStartDate(): Carbon
+    {
+        $carbon = new Carbon($this->eloquent->start_date);
+        $carbon->setToStringFormat('Y/m/d');
+        return $carbon;
+    }
+
     public function getEndDate(): Carbon
     {
-        return new Carbon($this->eloquent->end_date);
+        $carbon = new Carbon($this->eloquent->end_date);
+        $carbon->setToStringFormat('Y/m/d');
+        return $carbon;
     }
 }

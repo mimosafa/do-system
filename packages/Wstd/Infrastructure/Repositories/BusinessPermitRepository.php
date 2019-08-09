@@ -19,7 +19,8 @@ final class BusinessPermitRepository implements BusinessPermitRepositoryInterfac
 
     public function findById(int $id): ?BusinessPermitInterface
     {
-        //
+        $eloquent = Eloquent::find($id);
+        return $eloquent ? BusinessPermitFactory::makeFromEloquent($eloquent) : null;
     }
 
     public function store(array $params): BusinessPermitInterface

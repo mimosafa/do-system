@@ -12,6 +12,7 @@ class TableForBusinessPermits extends EntitiesTable
     public $itemLabels = [
         'vendor' => '事業者',
         'approved' => '許可対象',
+        'permission' => '営業許可',
         'approved_type' => '施設区分',
         'business_area' => '許可地域',
         'health_center' => '申請先',
@@ -26,8 +27,8 @@ class TableForBusinessPermits extends EntitiesTable
         if ($type = $entity->getApprovedType()->getLabel()) {
             $string .= " ({$type})";
         }
-
-        $url = '#';
+        $id = $entity->getId();
+        $url = route('admin.businessPermits.show', compact('id'));
 
         return sprintf('<a href="%s">%s</a>', e($url), e($string));
     }
