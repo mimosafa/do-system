@@ -2,8 +2,8 @@
 
 namespace Wstd\Domain\Models\Car;
 
-use Wstd\Domain\Models\Car\CarValueVin;
-use Wstd\Domain\Models\Car\CarValueStatus;
+use Wstd\Domain\Models\BusinessPermit\BusinessPermitCollectionInterface;
+use Wstd\Domain\Models\BusinessPermit\BusinessPermitRepositoryInterface;
 use Wstd\Domain\Models\Vendor\Vendor;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 use Wstd\Infrastructure\Eloquents\Car as Eloquent;
@@ -82,5 +82,13 @@ final class Car implements CarInterface
     public function getPhotos()
     {
         return $this->eloquent->car_photos;
+    }
+
+    public function getBusinessPermits(): BusinessPermitCollectionInterface
+    {
+        $repository = resolve(BusinessPermitRepositoryInterface::class);
+        $car_id = $this->getId();
+
+        return $repository->find(compact('car_id'));
     }
 }

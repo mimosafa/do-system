@@ -71,10 +71,10 @@ class Belongs extends Content
     public function sortState()
     {
         if (! isset($this->beforeSort) || ! is_array($this->beforeSort)) {
-            throw new \Exception();
+            return '';
         }
         if (! isset($this->nameForSort) || ! is_string($this->nameForSort)) {
-            throw new \Exception();
+            return '';
         }
         $value = implode(',', $this->beforeSort);
 
@@ -88,6 +88,10 @@ class Belongs extends Content
 
     public function toggleOrSubmit()
     {
+        if (! $this->exchangable && ! $this->sortable) {
+            return '';
+        }
+
         $params = [
             'type' => 'button',
             'class' => 'btn-primary btn-block btn-sm',

@@ -17,5 +17,5 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate,
     /**
      * @return string Label of collection
      */
-    public static function collectionLAbel(): string;
+    public static function collectionLabel(): string;
 }

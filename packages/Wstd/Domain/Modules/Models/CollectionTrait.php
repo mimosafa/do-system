@@ -20,7 +20,7 @@ trait CollectionTrait
     /**
      * @return string Label of collection
      */
-    public static function collectionLAbel(): string
+    public static function collectionLabel(): string
     {
         if (defined(get_called_class() . '::LABEL') && static::LABEL) {
             return (string) static::LABEL;

@@ -33,15 +33,25 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
         return view('home');
     });
 
+    Route::get('business-areas', 'BusinessAreaController@index')->name('businessAreas.index');
+
+    Route::get('business-permits', 'BusinessPermitController@index')->name('businessPermits.index');
+    Route::post('business-permits/create', 'BusinessPermitController@store')->name('businessPermits.store');
+    Route::get('business-permits/{id}', 'BusinessPermitController@show')->name('businessPermits.show');
+
     Route::get('cars', 'CarController@index')->name('cars.index');
     Route::post('cars/create', 'CarController@store')->name('cars.store');
     Route::get('cars/{id}', 'CarController@show')->name('cars.show');
     Route::post('cars/{id}', 'CarController@update');
 
+    Route::get('health-centers', 'HealthCenterController@index')->name('healthCenters.index');
+
     Route::get('items', 'ItemController@index')->name('items.index');
     Route::post('items/create', 'ItemController@store')->name('items.store');
     Route::get('items/{id}', 'ItemController@show')->name('items.show');
     Route::post('items/{id}', 'ItemController@update');
+
+    Route::get('municipalities', 'MunicipalityController@index')->name('municipalities.index');
 
     Route::get('shops', 'ShopController@index')->name('shops.index');
     Route::post('shops/create', 'ShopController@store')->name('shops.store');

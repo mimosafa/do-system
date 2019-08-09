@@ -129,6 +129,11 @@ return [
                     'icon' => 'car',
                 ],
                 [
+                    'text' => '営業許可一覧',
+                    'url'  => 'admin/business-permits',
+                    'icon' => 'file-text',
+                ],
+                [
                     'text' => '店舗一覧',
                     'url'  => 'admin/shops',
                     'icon' => 'coffee',
@@ -139,12 +144,33 @@ return [
                     'icon' => 'cutlery',
                 ],
                 [
-                    'text' => '新規追加',
+                    'text' => '新規事業者追加',
                     'url'  => 'admin/vendors/create',
                     'icon' => 'plus',
                 ],
             ],
         ],
+        [
+            'text' => '行政情報',
+            'icon' => 'institution',
+            'submenu' => [
+                [
+                    'text' => '営業区域一覧',
+                    'url'  => 'admin/business-areas',
+                    'icon' => 'object-group',
+                ],
+                [
+                    'text' => '保健所一覧',
+                    'url'  => 'admin/health-centers',
+                    'icon' => 'heart',
+                ],
+                [
+                    'text' => '地方公共団体一覧',
+                    'url'  => 'admin/municipalities',
+                    'icon' => 'map',
+                ],
+            ],
+        ]
     ],
 
     /*

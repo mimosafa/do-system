@@ -105,7 +105,7 @@ abstract class AbstractValueStatus extends Enum
      *
      * @see Wstd\Domain\Modules\Models\ValueObjectTrait
      */
-    protected static $excludedConstants = [
+    protected static $excluded = [
         'NAME',
         'LABEL',
     ];
@@ -209,7 +209,7 @@ abstract class AbstractValueStatus extends Enum
         $class = \get_called_class();
         if (! isset(static::$cache[$class])) {
             $array = array_filter(parent::toArray(), function($value, $key) {
-                return ! in_array($key, static::$excludedConstants, true) && static::isEnabledStatus($value);
+                return ! in_array($key, static::$excluded, true) && static::isEnabledStatus($value);
             }, \ARRAY_FILTER_USE_BOTH);
             static::$cache[$class] = $array;
         }

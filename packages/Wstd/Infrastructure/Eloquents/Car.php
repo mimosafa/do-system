@@ -5,6 +5,7 @@ namespace Wstd\Infrastructure\Eloquents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Car\CarValueStatus;
+use Wstd\Infrastructure\Eloquents\BusinessPermit;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
 use Wstd\Infrastructure\Modules\File\HasFiles;
 use Wstd\Infrastructure\Modules\File\HasFilesTrait;
@@ -41,6 +42,11 @@ class Car extends Model implements HasFiles
         'status' => CarValueStatus::UNREGISTERED,
         'order'  => 0,
     ];
+
+    public function businessPermits()
+    {
+        return $this->morphMany(BusinessPermit::class, 'approved');
+    }
 
     /**
      * Local scope for index without query requests
