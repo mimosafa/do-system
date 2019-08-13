@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Wstd\Domain\Models\BusinessArea\BusinessAreaRepositoryInterface;
+use Wstd\Domain\Services\BusinessAreaService;
 use Wstd\View\Presenters\Admin\BusinessAreasIndex;
 use Wstd\View\Presenters\Bridge;
 
 class BusinessAreaController extends Controller
 {
-    private $repository;
+    private $service;
 
-    public function __construct(BusinessAreaRepositoryInterface $repository)
+    public function __construct(BusinessAreaService $service)
     {
-        $this->repository = $repository;
+        $this->service = $service;
     }
 
     public function index(Request $request)
@@ -23,7 +23,7 @@ class BusinessAreaController extends Controller
             'prefecture_id' => 'int|min:1|max:47',
         ]);
 
-        $collection = $this->repository->find($request->all());
+        $collection = $this->service->find($request->all());
         return Bridge::view(new BusinessAreasIndex($collection));
     }
 }
