@@ -35,4 +35,10 @@ class BusinessPermitController extends Controller
         $id = $this->service->store($request->all())->getId();
         return redirect()->route('admin.businessPermits.show', compact('id'));
     }
+
+    public function update(int $id, BusinessPermitRequest $request)
+    {
+        $id = $this->service->update($id, $request->all())->getId();
+        return redirect()->route('admin.businessPermits.show', compact('id'));
+    }
 }

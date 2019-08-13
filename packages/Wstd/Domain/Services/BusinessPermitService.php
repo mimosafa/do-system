@@ -30,4 +30,10 @@ class BusinessPermitService
     {
         return $this->repository->store($params);
     }
+
+    public function update(int $id, array $params): BusinessPermitInterface
+    {
+        $params['id'] = $id;
+        return $this->store($params);
+    }
 }

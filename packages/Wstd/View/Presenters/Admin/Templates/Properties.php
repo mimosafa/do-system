@@ -45,6 +45,11 @@ class Properties extends Content
     /**
      * @var array
      */
+    protected $propertyForms = [];
+
+    /**
+     * @var array
+     */
     protected $editableProperties = [];
 
     /**
@@ -85,6 +90,9 @@ class Properties extends Content
             $method = Str::camel($property) . 'Form';
             if (method_exists($this, $method)) {
                 $formElements[] = $this->{$method}(); /** @var Htmlable */
+            }
+            else if (isset($this->propertyForms[$property])) {
+                $formElements[] = $this->propertyForms[$property]; /** @var Htmlable */
             }
             else if ($formItem = $this->formFactory($property)) {
                 $formElements[] = $formItem;
