@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\HtmlString;
 use Spatie\Html\Elements as El;
 use Wstd\Domain\Models\ValueObjectInterface;
+use Wstd\Domain\Models\ValueObjectDate;
 use Wstd\Domain\Models\ValueObjectEnum;
 use Wstd\Domain\Models\ValueObjectText;
 
@@ -26,6 +27,9 @@ class FormFactory
 
         if ($valueObject instanceof ValueObjectText) {
             return static::makeInputText($args);
+        }
+        if ($valueObject instanceof ValueObjectDate) {
+            return static::makeInputDate($args);
         }
         if ($valueObject instanceof ValueObjectEnum) {
             $options = [];
