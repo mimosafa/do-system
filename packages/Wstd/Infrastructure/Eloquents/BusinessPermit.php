@@ -2,8 +2,10 @@
 
 namespace Wstd\Infrastructure\Eloquents;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Wstd\Infrastructure\Eloquents\Car;
+use Wstd\Infrastructure\Eloquents\Vendor;
 
 class BusinessPermit extends Model
 {
@@ -18,6 +20,17 @@ class BusinessPermit extends Model
         'aplicant_properties' => 'array',
         'other_properties' => 'array',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder
+                ->orderBy('health_center_id', 'asc')
+            ;
+        });
+    }
 
     public function approved()
     {

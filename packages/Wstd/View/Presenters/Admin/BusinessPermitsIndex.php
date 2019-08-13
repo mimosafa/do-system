@@ -25,6 +25,7 @@ class BusinessPermitsIndex extends Index
         ];
         $dataTableOptions = [
             'pageLength' => 100,
+            'ordering' => false,
         ];
 
         return new TableForBusinessPermits($collection, compact(

@@ -3,6 +3,8 @@
 namespace Wstd\View\Presenters\Admin;
 
 use Wstd\Domain\Models\EntityInterface;
+use Wstd\Domain\Models\HealthCenter\HealthCenterRepositoryInterface;
+use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
@@ -48,10 +50,19 @@ class BusinessPermitsShow extends IdentifiedPresenter
             'approved' => $this->getApproved(),
             'prefecture' => $this->getPrefecture(),
         ];
+        $editableProperties = [
+            'business_category',
+            'health_center',
+            'start_date',
+            'end_date',
+        ];
+        $propertyForms = [
+            'health_center' => $this->healthCenterForm(),
+        ];
 
         $this->properties = new Properties($this->entity, compact(
             'id', 'header', 'properties', 'propertyLabels',
-            'propertyValues'
+            'propertyValues', 'editableProperties', 'propertyForms'
         ));
     }
 
@@ -96,5 +107,26 @@ class BusinessPermitsShow extends IdentifiedPresenter
     protected function getPrefecture()
     {
         return $this->entity->getBusinessArea()->getPrefecture();
+    }
+
+    protected function healthCenterForm()
+    {
+        $healthCenter = $this->entity->getHealthCenter();
+        $prefecture_id = $healthCenter->getPrefecture()->getId();
+        $repository = resolve(HealthCenterRepositoryInterface::class);
+        $healthCenters = $repository->find(compact('prefecture_id'));
+
+        $options = [];
+        foreach ($healthCenters as $hc) {
+            $options[$hc->getId()] = $hc->getName();
+        }
+
+        $name = 'health_center_id';
+        $value = $healthCenter->getId();
+        $label = '申請先保健所';
+
+        return FormFactory::makeSelect($options, compact(
+            'name', 'value', 'label'
+        ));
     }
 }

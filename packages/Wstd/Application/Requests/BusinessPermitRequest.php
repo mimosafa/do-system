@@ -3,7 +3,6 @@
 namespace Wstd\Application\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class BusinessPermitRequest extends FormRequest
 {

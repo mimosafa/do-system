@@ -32,6 +32,14 @@ class FormFactory extends BaseFormFactory
         );
     }
 
+    public static function makeInputDate(array $args = []): Htmlable
+    {
+        return self::makeFormGroup(
+            self::makeLabelFromArguments($args),
+            parent::makeInputDate($args)->class('form-control')
+        );
+    }
+
     public static function makeTextarea(array $args = []): Htmlable
     {
         return self::makeFormGroup(

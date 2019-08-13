@@ -5,11 +5,6 @@ namespace Wstd\Domain\Models;
 interface ValueObjectEnum extends ValueObjectInterface
 {
     /**
-     * @return string key string of enum value
-     */
-    public function getSlug(): string;
-
-    /**
      * @return string Label of enum value
      */
     public function getLabel();

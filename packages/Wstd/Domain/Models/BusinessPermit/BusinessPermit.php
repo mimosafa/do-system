@@ -2,7 +2,6 @@
 
 namespace Wstd\Domain\Models\BusinessPermit;
 
-use Carbon\Carbon;
 use Wstd\Domain\Models\BelongsToVendorInterface;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\BusinessArea\BusinessAreaInterface;
@@ -81,17 +80,13 @@ final class BusinessPermit implements BusinessPermitInterface
         return BusinessPermitValueBusinessCategory::of($this->eloquent->business_category);
     }
 
-    public function getStartDate(): Carbon
+    public function getStartDate(): BusinessPermitValueStartDate
     {
-        $carbon = new Carbon($this->eloquent->start_date);
-        $carbon->setToStringFormat('Y/m/d');
-        return $carbon;
+        return BusinessPermitValueStartDate::of($this->eloquent->start_date);
     }
 
-    public function getEndDate(): Carbon
+    public function getEndDate(): BusinessPermitValueEndDate
     {
-        $carbon = new Carbon($this->eloquent->end_date);
-        $carbon->setToStringFormat('Y/m/d');
-        return $carbon;
+        return BusinessPermitValueEndDate::of($this->eloquent->end_date);
     }
 }
