@@ -38,4 +38,9 @@ class FoodBusinessCategories
     {
         return self::$categoriesKeyValue;
     }
+
+    public static function toArray()
+    {
+        return self::$categoriesKeyValue;
+    }
 }

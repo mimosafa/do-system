@@ -3,12 +3,15 @@
 namespace Wstd\Domain\Models\BusinessPermit;
 
 use AdministrationJa\FoodBusinessCategories;
-use Wstd\Domain\Models\ValueObjectInterface;
+use Wstd\Domain\Models\ValueObjectEnum;
 use Wstd\Domain\Modules\Models\ValueObjectTrait;
 
-class BusinessPermitValueBusinessCategory implements ValueObjectInterface
+class BusinessPermitValueBusinessCategory implements ValueObjectEnum
 {
     use ValueObjectTrait;
+
+    const NAME = 'business_category';
+    const LABEL = '食品営業区分';
 
     private $categoryId;
     private $categoryName;
@@ -44,6 +47,30 @@ class BusinessPermitValueBusinessCategory implements ValueObjectInterface
     public function getDescription()
     {
         return $this->categoryDescription;
+    }
+
+    public function equals($value): bool
+    {
+        return $value instanceof self
+            && $this->getValue() === $value->getValue()
+            && \get_called_class() === \get_class($value)
+        ;
+    }
+
+    public static function values()
+    {
+        $values = [];
+
+        foreach (static::toArray() as $key => $value) {
+            $values[$key] = new static($key);
+        }
+
+        return $values;
+    }
+
+    public static function toArray()
+    {
+        return self::$foodBusinessCategories::toArray();
     }
 
     public function __toString()
