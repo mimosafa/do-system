@@ -16,5 +16,6 @@ interface BusinessPermitInterface extends EntityInterface
     public function getHealthCenter(): HealthCenterInterface;
     public function getBusinessArea(): BusinessAreaInterface;
     public function getBusinessCategory(): BusinessPermitValueBusinessCategory;
-    public function getEndDate(): Carbon;
+    public function getStartDate(): BusinessPermitValueStartDate;
+    public function getEndDate(): BusinessPermitValueEndDate;
 }
