@@ -73,7 +73,8 @@ final class Brand implements BrandInterface
     {
         $items = $this->getItems();
         foreach ($items as $item) {
-            if ($photos = $item->getPhotos()) {
+            $photos = $item->getPhotos();
+            if ($photos->isNotEmpty()) {
                 return $photos->first();
             }
         }
