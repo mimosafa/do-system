@@ -33,6 +33,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
         return view('home');
     });
 
+    Route::get('brands', 'BrandController@index')->name('brands.index');
+    Route::post('brands/create', 'BrandController@store')->name('brands.store');
+    Route::get('brands/{id}', 'BrandController@show')->name('brands.show');
+    Route::post('brands/{id}', 'BrandController@update');
+
     Route::get('business-areas', 'BusinessAreaController@index')->name('businessAreas.index');
 
     Route::get('business-permits', 'BusinessPermitController@index')->name('businessPermits.index');
@@ -53,11 +58,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')
     Route::post('items/{id}', 'ItemController@update');
 
     Route::get('municipalities', 'MunicipalityController@index')->name('municipalities.index');
-
-    Route::get('shops', 'ShopController@index')->name('shops.index');
-    Route::post('shops/create', 'ShopController@store')->name('shops.store');
-    Route::get('shops/{id}', 'ShopController@show')->name('shops.show');
-    Route::post('shops/{id}', 'ShopController@update');
 
     Route::get('vendors', 'VendorController@index')->name('vendors.index');
     Route::get('vendors/create', 'VendorController@create')->name('vendors.create');

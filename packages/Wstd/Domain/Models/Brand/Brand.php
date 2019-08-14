@@ -1,17 +1,17 @@
 <?php
 
-namespace Wstd\Domain\Models\Shop;
+namespace Wstd\Domain\Models\Brand;
 
 use Wstd\Domain\Models\Item\ItemCollectionInterface;
 use Wstd\Domain\Models\Item\ItemRepositoryInterface;
 use Wstd\Domain\Models\Vendor\Vendor;
 use Wstd\Domain\Models\Vendor\VendorInterface;
-use Wstd\Infrastructure\Eloquents\Shop as Eloquent;
+use Wstd\Infrastructure\Eloquents\Brand as Eloquent;
 
-final class Shop implements ShopInterface
+final class Brand implements BrandInterface
 {
     /**
-     * @var Wstd\Infrastructure\Eloquents\Shop
+     * @var Wstd\Infrastructure\Eloquents\Brand
      */
     private $eloquent;
 
@@ -40,11 +40,11 @@ final class Shop implements ShopInterface
     }
 
     /**
-     * @return ShopValueStatus
+     * @return BrandValueStatus
      */
-    public function getStatus(): ?ShopValueStatus
+    public function getStatus(): ?BrandValueStatus
     {
-        return ShopValueStatus::of($this->eloquent->status);
+        return BrandValueStatus::of($this->eloquent->status);
     }
 
     public function getItems(): ItemCollectionInterface
@@ -54,19 +54,19 @@ final class Shop implements ShopInterface
         return $repository->makeCollectionFromEloquents($collection);
     }
 
-    public function getSubTitle(): ?ShopValueSubTitle
+    public function getSubTitle(): ?BrandValueSubTitle
     {
-        return ShopValueSubTitle::of($this->eloquent->sub_title);
+        return BrandValueSubTitle::of($this->eloquent->sub_title);
     }
 
-    public function getDescription(): ?ShopValueDescription
+    public function getDescription(): ?BrandValueDescription
     {
-        return ShopValueDescription::of($this->eloquent->description);
+        return BrandValueDescription::of($this->eloquent->description);
     }
 
-    public function getLongDescription(): ?ShopValueLongDescription
+    public function getLongDescription(): ?BrandValueLongDescription
     {
-        return ShopValueLongDescription::of($this->eloquent->long_description);
+        return BrandValueLongDescription::of($this->eloquent->long_description);
     }
 
     public function getPhoto()

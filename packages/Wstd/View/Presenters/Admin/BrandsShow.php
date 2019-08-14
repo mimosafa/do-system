@@ -2,7 +2,7 @@
 
 namespace Wstd\View\Presenters\Admin;
 
-use Wstd\Domain\Models\Shop\ShopInterface;
+use Wstd\Domain\Models\Brand\BrandInterface;
 use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
 use Wstd\View\Presenters\Admin\Includes\TableForItems;
@@ -14,13 +14,13 @@ use Wstd\View\Presenters\Admin\Modules\Sections;
 use Wstd\View\Presenters\Admin\Templates\Belongs;
 use Wstd\View\Presenters\Admin\Templates\Properties;
 
-class ShopsShow extends IdentifiedPresenter
+class BrandsShow extends IdentifiedPresenter
 {
     protected $entity;
 
-    public $id = 'shop';
+    public $id = 'brand';
 
-    public $title = '店舗詳細';
+    public $title = 'ブランド詳細';
 
     /**
      * @var Wstd\Domain\Models\Item\ItemCollection
@@ -37,7 +37,7 @@ class ShopsShow extends IdentifiedPresenter
      */
     public $contents;
 
-    public function __construct(ShopInterface $entity)
+    public function __construct(BrandInterface $entity)
     {
         $this->entity = $entity;
         $this->items = $entity->getItems();
@@ -96,7 +96,7 @@ class ShopsShow extends IdentifiedPresenter
         ]);
 
         return new Content($texts, [
-            'id' => 'shop_texts',
+            'id' => 'brand_texts',
             'title' => '<i class="fa fa-comments"></i> 紹介文',
             'form' => $this->initTextsForm(),
         ]);
@@ -150,7 +150,7 @@ class ShopsShow extends IdentifiedPresenter
         }
 
         return new Belongs($table, [
-            'id' => 'shop_items',
+            'id' => 'brand_items',
             'title' => '<i class="fa fa-fw fa-cutlery "></i> 商品',
             'exchangable' => true,
             'exchangeForm' => $this->initItemsForm(),

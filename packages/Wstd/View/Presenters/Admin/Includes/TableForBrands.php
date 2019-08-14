@@ -2,28 +2,28 @@
 
 namespace Wstd\View\Presenters\Admin\Includes;
 
-use Wstd\Domain\Models\Shop\ShopCollectionInterface;
+use Wstd\Domain\Models\Brand\BrandCollectionInterface;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
 
-class TableForShops extends EntitiesTable
+class TableForBrands extends EntitiesTable
 {
     use TableForBelongsToVendorTrait;
 
-    public $id = 'shops_table';
+    public $id = 'brands_table';
 
-    public $title = '店舗';
+    public $title = 'ブランド';
 
     public $itemLabels = [
         'thumb' => '商品写真',
         'vendor_id' => '事業者ID',
         'vendor' => '事業者',
-        'name' => '店舗名',
+        'name' => 'ブランド名',
         'items' => '提供商品',
     ];
 
-    public function __construct(ShopCollectionInterface $shop, array $args = [])
+    public function __construct(BrandCollectionInterface $brand, array $args = [])
     {
-        parent::__construct($shop, $args);
+        parent::__construct($brand, $args);
     }
 
     protected function trClasses($entity): array
@@ -49,7 +49,7 @@ class TableForShops extends EntitiesTable
 
     protected function getName($entity)
     {
-        $link = route('admin.shops.show', ['id' => $entity->getId(),]);
+        $link = route('admin.brands.show', ['id' => $entity->getId(),]);
         $status = $entity->getStatus();
         $string = sprintf('<a href="%s">%s</a>', e($link), e($entity->getName()));
         if (! $status->isRegistered()) {

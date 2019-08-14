@@ -26,7 +26,7 @@ class ItemsShow extends IdentifiedPresenter
      */
     public $properties;
 
-    public $shops;
+    public $brands;
 
     /**
      * @var Wstd\View\Presenters\Admin\Modules\Contents
@@ -37,7 +37,7 @@ class ItemsShow extends IdentifiedPresenter
     {
         $this->entity = $entity;
         $this->initProperties();
-        $this->initShops();
+        $this->initBrands();
         $this->initContents();
     }
 
@@ -65,17 +65,17 @@ class ItemsShow extends IdentifiedPresenter
         return sprintf('<a href="%s">%s</a>', $link, '<i class="fa fa-user"></i> ' . e($name));
     }
 
-    protected function initShops()
+    protected function initBrands()
     {
-        $shops = $this->entity->getShops();
+        $brands = $this->entity->getBrands();
         $content = '';
-        if ($shops->isNotEmpty()) {
+        if ($brands->isNotEmpty()) {
             $array = [];
-            foreach ($shops as $shop) {
+            foreach ($brands as $brand) {
                 $array[] = sprintf(
                     '<a href="%s">%s</a>',
-                    route('admin.shops.show', ['id' => e($shop->getId()),]),
-                    e($shop->getName())
+                    route('admin.brands.show', ['id' => e($brand->getId()),]),
+                    e($brand->getName())
                 );
             }
             $content .= implode(' <span class="text-muted">/</span> ', $array);
@@ -84,16 +84,16 @@ class ItemsShow extends IdentifiedPresenter
             $content .= '<span class="text-muted">None</span>';
         }
 
-        $form = $this->initShopsForm();
+        $form = $this->initBrandsForm();
 
         if ($form) {
             $content .= '<hr>';
         }
 
-        $this->shops = new Contents(
+        $this->brands = new Contents(
             new Content($content, [
-                'id' => 'handling_shops',
-                'title' => '<i class="fa fa-coffee"></i> 取扱店舗',
+                'id' => 'handling_brands',
+                'title' => '<i class="fa fa-coffee"></i> 取扱店舗 (ブランド)',
                 'form' => $form,
             ]), [
                 'boxContext' => 'primary',
@@ -101,32 +101,32 @@ class ItemsShow extends IdentifiedPresenter
         );
     }
 
-    protected function initShopsForm()
+    protected function initBrandsForm()
     {
-        $vendorShops = $this->entity->getVendor()->getShops();
+        $vendorBrands = $this->entity->getVendor()->getBrands();
 
         $options = [];
-        foreach ($vendorShops as $vendorShop) {
-            $options[$vendorShop->getId()] = $vendorShop->getName();
+        foreach ($vendorBrands as $vendorBrand) {
+            $options[$vendorBrand->getId()] = $vendorBrand->getName();
         }
 
         $values = [];
-        foreach ($this->entity->getShops() as $shop) {
-            $values[] = $shop->getId();
+        foreach ($this->entity->getBrands() as $brand) {
+            $values[] = $brand->getId();
         }
 
         $form = FormFactory::makeSelect($options, [
-            'name' => 'shops',
+            'name' => 'brands',
             'multiple' => true,
-            'label' => '取扱店舗',
+            'label' => '取扱店舗 (ブランド)',
             'value' => $values,
             'select2' => true,
         ]);
 
         return new FormContainer($form, [
-            'id' => 'add_shop_form',
-            'title' => '取扱店舗を変更する',
-            'toggle' => '取扱店舗を変更する',
+            'id' => 'add_brand_form',
+            'title' => '取扱店舗 (ブランド) を変更する',
+            'toggle' => '取扱店舗 (ブランド) を変更する',
         ]);
     }
 

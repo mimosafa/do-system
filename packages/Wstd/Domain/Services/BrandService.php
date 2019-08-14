@@ -3,22 +3,22 @@
 namespace Wstd\Domain\Services;
 
 use InvalidArgumentException;
-use Wstd\Domain\Models\Shop\ShopCollectionInterface;
-use Wstd\Domain\Models\Shop\ShopInterface;
-use Wstd\Domain\Models\Shop\ShopRepositoryInterface;
+use Wstd\Domain\Models\Brand\BrandCollectionInterface;
+use Wstd\Domain\Models\Brand\BrandInterface;
+use Wstd\Domain\Models\Brand\BrandRepositoryInterface;
 
-class ShopService
+class BrandService
 {
     private $repository;
 
-    public function __construct(ShopRepositoryInterface $repository)
+    public function __construct(BrandRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
 
     /**
-     * Find single shop entity by `id`,
-     * or find shops collection by condition(array parameters)
+     * Find single brand entity by `id`,
+     * or find brands collection by condition(array parameters)
      *
      * @param int|array
      * @return mixed
@@ -28,25 +28,25 @@ class ShopService
     {
         if (is_int($params)) {
             /**
-             * @return Wstd\Domain\Models\Shop\ShopInterface
+             * @return Wstd\Domain\Models\Brand\BrandInterface
              */
             return $this->repository->findById($params);
         }
         if (is_array($params)) {
             /**
-             * @return Wstd\Domain\Models\Shop\ShopCollectionInterface
+             * @return Wstd\Domain\Models\Brand\BrandCollectionInterface
              */
             return $this->repository->find($params);
         }
         throw new InvalidArgumentException(__METHOD__ . ' function accepts integer or array. Input: ' . $params);
     }
 
-    public function store(array $params): ShopInterface
+    public function store(array $params): BrandInterface
     {
         return $this->repository->store($params);
     }
 
-    public function update(int $id, array $params): ShopInterface
+    public function update(int $id, array $params): BrandInterface
     {
         $params['id'] = $id;
         return $this->store($params);

@@ -134,8 +134,8 @@ return [
                     'icon' => 'file-text',
                 ],
                 [
-                    'text' => '店舗一覧',
-                    'url'  => 'admin/shops',
+                    'text' => 'ブランド一覧',
+                    'url'  => 'admin/brands',
                     'icon' => 'coffee',
                 ],
                 [

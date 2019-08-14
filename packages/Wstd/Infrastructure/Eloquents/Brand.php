@@ -4,13 +4,13 @@ namespace Wstd\Infrastructure\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Wstd\Domain\Models\Shop\ShopValueStatus;
+use Wstd\Domain\Models\Brand\BrandValueStatus;
 use Wstd\Infrastructure\Eloquents\Item;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableInterface;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableTrait;
 
-class Shop extends Model implements AdvertisableInterface
+class Brand extends Model implements AdvertisableInterface
 {
     use SoftDeletes,
         BelongsToVendorTrait,
@@ -19,7 +19,7 @@ class Shop extends Model implements AdvertisableInterface
     protected $guarded = ['id'];
 
     protected $attributes = [
-        'status' => ShopValueStatus::UNREGISTERED,
+        'status' => BrandValueStatus::UNREGISTERED,
         'order' => 0,
     ];
 
@@ -77,6 +77,6 @@ class Shop extends Model implements AdvertisableInterface
      */
     public function scopeIndexable($query)
     {
-        return $query->whereIn('status', ShopValueStatus::getIndexableValues());
+        return $query->whereIn('status', BrandValueStatus::getIndexableValues());
     }
 }

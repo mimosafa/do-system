@@ -1,30 +1,25 @@
 <?php
 
-namespace Wstd\Domain\Models\Shop;
+namespace Wstd\Domain\Models\Brand;
 
 use Wstd\Domain\Models\ValueObjectText;
 use Wstd\Domain\Modules\Models\ValueObjectTrait;
 
-final class ShopValueDescription implements ValueObjectText
+final class BrandValueLongDescription implements ValueObjectText
 {
     use ValueObjectTrait;
 
-    const NAME = 'description';
+    const NAME = 'long_description';
 
-    const LABEL = '紹介文';
+    const LABEL = '長文紹介文';
 
     /**
      * @var string
      */
     private $value;
 
-    private $max = 80;
-
     public function __construct(?string $value)
     {
-        if (mb_strlen($value) > $this->max) {
-            throw new \InvalidArgumentException();
-        }
         $this->value = $value;
     }
 

@@ -1,24 +1,24 @@
 <?php
 
-namespace Wstd\Domain\Models\Shop;
+namespace Wstd\Domain\Models\Brand;
 
 use Wstd\Domain\Models\ValueObjectText;
 use Wstd\Domain\Modules\Models\ValueObjectTrait;
 
-final class ShopValueSubTitle implements ValueObjectText
+final class BrandValueDescription implements ValueObjectText
 {
     use ValueObjectTrait;
 
-    const NAME = 'sub_title';
+    const NAME = 'description';
 
-    const LABEL = '短文紹介';
+    const LABEL = '紹介文';
 
     /**
      * @var string
      */
     private $value;
 
-    private $max = 30;
+    private $max = 80;
 
     public function __construct(?string $value)
     {

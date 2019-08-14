@@ -4,9 +4,9 @@ namespace Wstd\Application\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Wstd\Domain\Models\Shop\ShopValueStatus;
+use Wstd\Domain\Models\Brand\BrandValueStatus;
 
-class ShopRequest extends FormRequest
+class BrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,7 +38,7 @@ class ShopRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|max:100',
-            'status' => 'sometimes|required|integer|' . Rule::in(ShopValueStatus::toArray()),
+            'status' => 'sometimes|required|integer|' . Rule::in(BrandValueStatus::toArray()),
             'sub_title' => 'nullable|string|max:30',
             'description' => 'nullable|string|max:80',
             'long_description' => 'nullable|string',

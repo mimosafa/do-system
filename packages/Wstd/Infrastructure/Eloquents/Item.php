@@ -5,7 +5,7 @@ namespace Wstd\Infrastructure\Eloquents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Item\ItemValueStatus;
-use Wstd\Infrastructure\Eloquents\Shop;
+use Wstd\Infrastructure\Eloquents\Brand;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableInterface;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableTrait;
@@ -27,15 +27,15 @@ class Item extends Model implements AdvertisableInterface, HasFiles
         'order' => 0,
     ];
 
-    public function shops()
+    public function brands()
     {
-        return $this->morphedByMany(Shop::class, 'item_belong');
+        return $this->morphedByMany(Brand::class, 'item_belong');
     }
 
-    public function setShopsAttribute(array $values)
+    public function setBrandsAttribute(array $values)
     {
-        $this->shops()->detach();
-        $this->shops()->attach($values);
+        $this->brands()->detach();
+        $this->brands()->attach($values);
 
         return $this;
     }
