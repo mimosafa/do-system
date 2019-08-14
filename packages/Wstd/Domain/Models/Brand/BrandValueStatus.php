@@ -1,12 +1,12 @@
 <?php
 
-namespace Wstd\Domain\Models\Shop;
+namespace Wstd\Domain\Models\Brand;
 
 use Wstd\Domain\Models\ValueObjectEnum;
 use Wstd\Domain\Modules\Models\AbstractValueStatus;
 use Wstd\Domain\Modules\Models\ValueObjectTrait;
 
-final class ShopValueStatus extends AbstractValueStatus implements ValueObjectEnum
+final class BrandValueStatus extends AbstractValueStatus implements ValueObjectEnum
 {
     use ValueObjectTrait;
 

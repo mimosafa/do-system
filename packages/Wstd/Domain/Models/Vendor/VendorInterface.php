@@ -5,7 +5,7 @@ namespace Wstd\Domain\Models\Vendor;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\Car\CarCollectionInterface;
 use Wstd\Domain\Models\Item\ItemCollectionInterface;
-use Wstd\Domain\Models\Shop\ShopCollectionInterface;
+use Wstd\Domain\Models\Brand\BrandCollectionInterface;
 
 interface VendorInterface extends EntityInterface
 {
@@ -29,11 +29,11 @@ interface VendorInterface extends EntityInterface
     public function getCars(): CarCollectionInterface;
 
     /**
-     * 所属している店舗を取得
+     * 所属しているブランドを取得
      *
-     * @return Wstd\Domain\Models\Shop\ShopCollectionInterface
+     * @return Wstd\Domain\Models\Brand\BrandCollectionInterface
      */
-    public function getShops(): ShopCollectionInterface;
+    public function getBrands(): BrandCollectionInterface;
 
     public function getItems(): ItemCollectionInterface;
 }

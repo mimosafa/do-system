@@ -14,6 +14,11 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(
+            \Wstd\Domain\Models\Brand\BrandRepositoryInterface::class,
+            \Wstd\Infrastructure\Repositories\BrandRepository::class
+        );
+
+        $this->app->singleton(
             \Wstd\Domain\Models\BusinessArea\BusinessAreaRepositoryInterface::class,
             \Wstd\Infrastructure\Repositories\BusinessAreaRepository::class
         );
@@ -22,7 +27,7 @@ class RepositoryServiceProvider extends ServiceProvider
             \Wstd\Domain\Models\BusinessPermit\BusinessPermitRepositoryInterface::class,
             \Wstd\Infrastructure\Repositories\BusinessPermitRepository::class
         );
-        
+
         $this->app->singleton(
             \Wstd\Domain\Models\Car\CarRepositoryInterface::class,
             \Wstd\Infrastructure\Repositories\CarRepository::class
@@ -46,11 +51,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(
             \Wstd\Domain\Models\Prefecture\PrefectureRepositoryInterface::class,
             \Wstd\Infrastructure\Repositories\PrefectureRepository::class
-        );
-
-        $this->app->singleton(
-            \Wstd\Domain\Models\Shop\ShopRepositoryInterface::class,
-            \Wstd\Infrastructure\Repositories\ShopRepository::class
         );
 
         $this->app->singleton(

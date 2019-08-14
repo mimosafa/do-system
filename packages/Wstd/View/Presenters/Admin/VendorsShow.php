@@ -7,7 +7,7 @@ use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
 use Wstd\View\Presenters\Admin\Includes\TableForCars;
 use Wstd\View\Presenters\Admin\Includes\TableForItems;
-use Wstd\View\Presenters\Admin\Includes\TableForShops;
+use Wstd\View\Presenters\Admin\Includes\TableForBrands;
 use Wstd\View\Presenters\Admin\Modules\Content;
 use Wstd\View\Presenters\Admin\Modules\Contents;
 use Wstd\View\Presenters\Admin\Modules\EntitiesTable;
@@ -69,7 +69,7 @@ class VendorsShow extends IdentifiedPresenter
     {
         $contents = [
             $this->initCarList(),
-            $this->initShopList(),
+            $this->initBrandList(),
             $this->initItemList(),
         ];
 
@@ -138,11 +138,11 @@ class VendorsShow extends IdentifiedPresenter
     }
 
     /**
-     * @return Wstd\View\Presenters\Admin\ShopsIndex
+     * @return Wstd\View\Presenters\Admin\BrandsIndex
      */
-    protected function initShopList()
+    protected function initBrandList()
     {
-        $table = new TableForShops($this->entity->getShops(), [
+        $table = new TableForBrands($this->entity->getBrands(), [
             'items' => [
                 'thumb',
                 'name',
@@ -157,29 +157,29 @@ class VendorsShow extends IdentifiedPresenter
         ]);
 
         $beforeSort = [];
-        foreach ($this->entity->getShops() as $shop) {
-            $beforeSort[] = $shop->getId();
+        foreach ($this->entity->getBrands() as $brand) {
+            $beforeSort[] = $brand->getId();
         }
 
         return new Belongs($table, [
-            'id' => 'vendor_shops',
-            'title' => '<i class="fa fa-coffee"></i> 店舗',
+            'id' => 'vendor_brands',
+            'title' => '<i class="fa fa-coffee"></i> ブランド',
             'exchangable' => true,
-            'exchangeForm' => $this->initShopForm(),
-            'exchangeText' => '店舗を追加する',
+            'exchangeForm' => $this->initBrandForm(),
+            'exchangeText' => 'ブランドを追加する',
             'sortable' => true,
             'beforeSort' => $beforeSort,
-            'nameForSort' => 'shops',
-            'sortText' => '店舗の並び順を保存する',
+            'nameForSort' => 'brands',
+            'sortText' => 'ブランドの並び順を保存する',
         ]);
     }
 
-    protected function initShopForm()
+    protected function initBrandForm()
     {
         $formItems = [
             FormFactory::makeInputText([
                 'name' => 'name',
-                'label' => '店舗名',
+                'label' => 'ブランド名',
             ]),
             FormFactory::makeInputHidden([
                 'name' => 'vendor_id',
@@ -188,9 +188,9 @@ class VendorsShow extends IdentifiedPresenter
         ];
 
         return new FormContainer($formItems, [
-            'id' => 'vendor_shops_form',
-            'title' => '店舗を追加する',
-            'action' => route('admin.shops.store'),
+            'id' => 'vendor_brands_form',
+            'title' => 'ブランドを追加する',
+            'action' => route('admin.brands.store'),
         ]);
     }
 

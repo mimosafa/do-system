@@ -1,11 +1,11 @@
 <?php
 
-namespace Wstd\Domain\Models\Shop;
+namespace Wstd\Domain\Models\Brand;
 
 use Illuminate\Support\Collection;
 use Wstd\Domain\Modules\Models\CollectionTrait;
 
-class ShopCollection extends Collection implements ShopCollectionInterface
+class BrandCollection extends Collection implements BrandCollectionInterface
 {
     use CollectionTrait;
 }

@@ -14,6 +14,11 @@ class CollectionServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
+            \Wstd\Domain\Models\Brand\BrandCollectionInterface::class,
+            \Wstd\Domain\Models\Brand\BrandCollection::class
+        );
+
+        $this->app->bind(
             \Wstd\Domain\Models\BusinessArea\BusinessAreaCollectionInterface::class,
             \Wstd\Domain\Models\BusinessArea\BusinessAreaCollection::class
         );
@@ -31,11 +36,6 @@ class CollectionServiceProvider extends ServiceProvider
         $this->app->bind(
             \Wstd\Domain\Models\Item\ItemCollectionInterface::class,
             \Wstd\Domain\Models\Item\ItemCollection::class
-        );
-
-        $this->app->bind(
-            \Wstd\Domain\Models\Shop\ShopCollectionInterface::class,
-            \Wstd\Domain\Models\Shop\ShopCollection::class
         );
 
         $this->app->bind(

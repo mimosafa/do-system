@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Vendor\VendorValueStatus;
 use Wstd\Infrastructure\Eloquents\Car;
 use Wstd\Infrastructure\Eloquents\Item;
-use Wstd\Infrastructure\Eloquents\Shop;
+use Wstd\Infrastructure\Eloquents\Brand;
 
 /**
  * @property int|null $id
@@ -43,9 +43,9 @@ class Vendor extends Model
         return $this->hasMany(Item::class);
     }
 
-    public function shops()
+    public function brands()
     {
-        return $this->hasMany(Shop::class);
+        return $this->hasMany(Brand::class);
     }
 
     public function setCarsAttribute(array $cars)
@@ -72,15 +72,15 @@ class Vendor extends Model
         }
     }
 
-    public function setShopsAttribute(array $shops)
+    public function setBrandsAttribute(array $brands)
     {
-        foreach ($shops as $order => $id) {
-            $shop = Shop::find($id);
-            if ($shop->vendor_id !== $this->id) {
+        foreach ($brands as $order => $id) {
+            $brand = Brand::find($id);
+            if ($brand->vendor_id !== $this->id) {
                 throw new \InvalidArgumentException();
             }
-            $shop->order = $order;
-            $shop->save();
+            $brand->order = $order;
+            $brand->save();
         }
     }
 

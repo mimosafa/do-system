@@ -4,7 +4,7 @@ namespace Wstd\Domain\Models\Item;
 
 use Wstd\Domain\Models\BelongsToVendorInterface;
 use Wstd\Domain\Models\EntityInterface;
-use Wstd\Domain\Models\Shop\ShopCollectionInterface;
+use Wstd\Domain\Models\Brand\BrandCollectionInterface;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 
 interface ItemInterface extends EntityInterface, BelongsToVendorInterface
@@ -19,7 +19,7 @@ interface ItemInterface extends EntityInterface, BelongsToVendorInterface
      */
     public function getVendor(): VendorInterface;
 
-    public function getShops(): ShopCollectionInterface;
+    public function getBrands(): BrandCollectionInterface;
 
     public function getStatus(): ?ItemValueStatus;
 

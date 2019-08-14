@@ -6,8 +6,8 @@ use Wstd\Domain\Models\Car\CarCollectionInterface;
 use Wstd\Domain\Models\Car\CarRepositoryInterface;
 use Wstd\Domain\Models\Item\ItemCollectionInterface;
 use Wstd\Domain\Models\Item\ItemRepositoryInterface;
-use Wstd\Domain\Models\Shop\ShopCollectionInterface;
-use Wstd\Domain\Models\Shop\ShopRepositoryInterface;
+use Wstd\Domain\Models\Brand\BrandCollectionInterface;
+use Wstd\Domain\Models\Brand\BrandRepositoryInterface;
 use Wstd\Infrastructure\Eloquents\Vendor as Eloquent;
 
 final class Vendor implements VendorInterface
@@ -73,13 +73,13 @@ final class Vendor implements VendorInterface
     }
 
     /**
-     * 所属している店舗を取得
+     * 所属しているブランドを取得
      *
-     * @return Wstd\Domain\Models\Shop\ShopCollectionInterface
+     * @return Wstd\Domain\Models\Brand\BrandCollectionInterface
      */
-    public function getShops(): ShopCollectionInterface
+    public function getBrands(): BrandCollectionInterface
     {
-        $repository = resolve(ShopRepositoryInterface::class);
-        return $repository->makeCollectionFromEloquents($this->eloquent->shops);
+        $repository = resolve(BrandRepositoryInterface::class);
+        return $repository->makeCollectionFromEloquents($this->eloquent->brands);
     }
 }

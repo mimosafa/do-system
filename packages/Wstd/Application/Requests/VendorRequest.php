@@ -25,8 +25,8 @@ class VendorRequest extends FormRequest
         if (isset($all['cars']) && ! is_array($all['cars'])) {
             $all['cars'] = explode(',', $all['cars']);
         }
-        if (isset($all['shops']) && ! is_array($all['shops'])) {
-            $all['shops'] = explode(',', $all['shops']);
+        if (isset($all['brands']) && ! is_array($all['brands'])) {
+            $all['brands'] = explode(',', $all['brands']);
         }
         if (isset($all['items']) && ! is_array($all['items'])) {
             $all['items'] = explode(',', $all['items']);
@@ -47,8 +47,8 @@ class VendorRequest extends FormRequest
             'status' => 'sometimes|required|integer|' . Rule::in(VendorValueStatus::toArray()),
             'cars' => 'array',
             'cars.*' => 'integer',
-            'shops' => 'array',
-            'shops.*' => 'integer',
+            'brands' => 'array',
+            'brands.*' => 'integer',
             'items' => 'array',
             'items.*' => 'integer',
         ];

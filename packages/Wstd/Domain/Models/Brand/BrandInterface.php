@@ -1,13 +1,13 @@
 <?php
 
-namespace Wstd\Domain\Models\Shop;
+namespace Wstd\Domain\Models\Brand;
 
 use Wstd\Domain\Models\BelongsToVendorInterface;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\Domain\Models\Item\ItemCollectionInterface;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 
-interface ShopInterface extends EntityInterface, BelongsToVendorInterface
+interface BrandInterface extends EntityInterface, BelongsToVendorInterface
 {
     /**
      * @return string
@@ -20,17 +20,17 @@ interface ShopInterface extends EntityInterface, BelongsToVendorInterface
     public function getVendor(): VendorInterface;
 
     /**
-     * @return Wstd\Domain\Models\Shop\ShopValueStatus|null
+     * @return Wstd\Domain\Models\Brand\BrandValueStatus|null
      */
-    public function getStatus(): ?ShopValueStatus;
+    public function getStatus(): ?BrandValueStatus;
 
     public function getItems(): ItemCollectionInterface;
 
-    public function getSubTitle(): ?ShopValueSubTitle;
+    public function getSubTitle(): ?BrandValueSubTitle;
 
-    public function getDescription(): ?ShopValueDescription;
+    public function getDescription(): ?BrandValueDescription;
 
-    public function getLongDescription(): ?ShopValueLongDescription;
+    public function getLongDescription(): ?BrandValueLongDescription;
 
     public function getPhoto();
 }
