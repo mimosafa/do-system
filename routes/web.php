@@ -22,6 +22,10 @@ Route::redirect('/home', '/admin');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
+    Route::get('login', function () {
+        return view('admin.auth.login');
+    });
+
     Route::middleware('auth')->group(function () {
 
         /*
