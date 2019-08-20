@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Wstd\Application\Requests\Admin\VendorRequest;
@@ -26,6 +25,8 @@ class VendorController extends Controller
      */
     public function __construct(VendorService $service)
     {
+        parent::__construct();
+        
         $this->service = $service;
     }
 

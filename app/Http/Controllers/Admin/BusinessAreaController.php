@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Wstd\Domain\Services\BusinessAreaService;
 use Wstd\View\Presenters\Admin\BusinessAreasIndex;
@@ -14,6 +13,8 @@ class BusinessAreaController extends Controller
 
     public function __construct(BusinessAreaService $service)
     {
+        parent::__construct();
+        
         $this->service = $service;
     }
 
