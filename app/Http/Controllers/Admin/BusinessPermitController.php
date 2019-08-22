@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Wstd\Application\Requests\Admin\BusinessPermitRequest;
 use Wstd\Domain\Services\BusinessPermitService;
 use Wstd\View\Presenters\Bridge;
@@ -15,6 +14,8 @@ class BusinessPermitController extends Controller
 
     public function __construct(BusinessPermitService $service)
     {
+        parent::__construct();
+        
         $this->service = $service;
     }
 

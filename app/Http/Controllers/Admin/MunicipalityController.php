@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Wstd\Domain\Models\Municipality\MunicipalityRepositoryInterface;
 use Wstd\View\Presenters\Admin\MunicipalitiesIndex;
@@ -14,6 +13,8 @@ class MunicipalityController extends Controller
 
     public function __construct(MunicipalityRepositoryInterface $repository)
     {
+        parent::__construct();
+        
         $this->repository = $repository;
     }
 

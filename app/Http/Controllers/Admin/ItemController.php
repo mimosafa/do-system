@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Wstd\Application\Requests\Admin\ItemRequest;
@@ -18,6 +17,8 @@ class ItemController extends Controller
 
     public function __construct(ItemService $service)
     {
+        parent::__construct();
+        
         $this->service = $service;
     }
 

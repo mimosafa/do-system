@@ -1,12 +1,13 @@
 <?php
 
-namespace App;
+namespace Wstd\Infrastructure\Eloquents;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Wstd\Application\Notifications\ResetPasswordForAdministrator;
 
-class User extends Authenticatable
+class Administrator extends Authenticatable
 {
     use Notifiable;
 
@@ -36,4 +37,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Overwrite Illuminate\Auth\Passwords\CanResetPassword::sendPasswordResetNotification()
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordForAdministrator($token));
+    }
 }

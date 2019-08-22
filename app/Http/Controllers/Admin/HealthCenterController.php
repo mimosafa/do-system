@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Wstd\Domain\Models\HealthCenter\HealthCenterRepositoryInterface;
 use Wstd\View\Presenters\Admin\HealthCentersIndex;
@@ -14,6 +13,8 @@ class HealthCenterController extends Controller
 
     public function __construct(HealthCenterRepositoryInterface $repository)
     {
+        parent::__construct();
+        
         $this->repository = $repository;
     }
 

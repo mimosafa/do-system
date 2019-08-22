@@ -1,5 +1,8 @@
 <?php
 
+use Wstd\Infrastructure\Eloquents\User;
+use Wstd\Infrastructure\Eloquents\Administrator;
+
 return [
 
     /*
@@ -46,6 +49,12 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        // For multi-auth
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -68,13 +77,19 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => User::class,
         ],
 
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        // For multi-auth
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => Administrator::class,
+        ],
     ],
 
     /*
@@ -97,6 +112,13 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+        ],
+
+        // For multi-auth
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 15,
         ],
     ],
 
