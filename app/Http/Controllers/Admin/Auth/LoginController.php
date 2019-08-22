@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'admin';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -45,6 +45,17 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view('admin.auth.login');
+    }
+
+    /**
+     * Overwrite Illuminate\Foundation\Auth\AuthenticatesUsers::loggedOut()
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return mixed
+     */
+    protected function loggedOut(Request $request)
+    {
+        return redirect($this->redirectTo . '/login');
     }
 
     /**
