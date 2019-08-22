@@ -93,7 +93,11 @@ return [
 
     'login_url' => 'admin/login',
 
-    'register_url' => 'register',
+    'register_url' => null,
+
+    'password_reset_url' => 'admin/password/reset',
+
+    'password_email_url' => 'admin/password/email',
 
     /*
     |--------------------------------------------------------------------------
