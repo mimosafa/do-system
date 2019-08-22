@@ -12,21 +12,22 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
-Auth::routes();
-
-// Hide '/home' (, for now...)
-Route::redirect('/home', '/admin');
+/**
+ * @see Illuminate\Routing\Router::auth()
+ * @see /vendors/laravel/framework/src/Illuminate/Routing/Router#1149
+ */
+# Auth::routes();
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('login', function () {
-        return view('admin.auth.login');
-    });
+    Route::get('login', 'Auth\\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\\LoginController@login');
+    Route::post('logout', 'Auth\\LoginController@logout')->name('logout');
 
-    Route::middleware('auth')->group(function () {
+    Route::middleware('auth:admin')->group(function () {
 
         /*
         |----------------------------------------------------------------------
