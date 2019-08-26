@@ -5,6 +5,7 @@ namespace Wstd\View\Presenters\Admin;
 use Wstd\Domain\Models\Brand\BrandInterface;
 use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
+use Wstd\View\Presenters\Admin\Includes\TableForCars;
 use Wstd\View\Presenters\Admin\Includes\TableForItems;
 use Wstd\View\Presenters\Admin\Modules\Content;
 use Wstd\View\Presenters\Admin\Modules\Contents;
@@ -27,6 +28,9 @@ class BrandsShow extends IdentifiedPresenter
      */
     private $items;
 
+    private $availableCarsCollection;
+    public $availableCars;
+
     /**
      * @var Wstd\View\Presenters\Admin\Templates\Properties
      */
@@ -41,8 +45,10 @@ class BrandsShow extends IdentifiedPresenter
     {
         $this->entity = $entity;
         $this->items = $entity->getItems();
+        $this->availableCarsCollection = $entity->getAvailableCars();
         $this->initProperties();
         $this->initContents();
+        $this->initAvailableCars();
     }
 
     protected function initProperties()
@@ -188,5 +194,23 @@ class BrandsShow extends IdentifiedPresenter
             'id' => 'add_item_form',
             'title' => '商品を追加する',
         ]);
+    }
+
+    protected function initAvailableCars()
+    {
+        $table = new TableForCars($this->availableCarsCollection, [
+            'items' => [
+                'thumb', 'name',
+            ],
+        ]);
+
+        $this->availableCars = new Contents(
+            new Belongs($table, [
+                'id' => 'brand_available_cars',
+                'title' => '<i class="fa fa-fw fa-car "></i> 提供可能な車両',
+            ]), [
+                'boxContext' => 'primary',
+            ]
+        );
     }
 }

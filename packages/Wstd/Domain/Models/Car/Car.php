@@ -2,6 +2,8 @@
 
 namespace Wstd\Domain\Models\Car;
 
+use Wstd\Domain\Models\Brand\BrandCollectionInterface;
+use Wstd\Domain\Models\Brand\BrandRepositoryInterface;
 use Wstd\Domain\Models\BusinessPermit\BusinessPermitCollectionInterface;
 use Wstd\Domain\Models\BusinessPermit\BusinessPermitRepositoryInterface;
 use Wstd\Domain\Models\Vendor\Vendor;
@@ -72,6 +74,13 @@ final class Car implements CarInterface
     public function getStatus(): ?CarValueStatus
     {
         return CarValueStatus::of($this->eloquent->status);
+    }
+
+    public function getAvailableBrands(): BrandCollectionInterface
+    {
+        $repository = resolve(BrandRepositoryInterface::class);
+        $collection = $this->eloquent->availableBrands;
+        return $repository->makeCollectionFromEloquents($collection);
     }
 
     /**

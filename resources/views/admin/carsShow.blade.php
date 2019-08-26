@@ -11,6 +11,7 @@
     <div class="row">
         <div class="col-md-3">
             @presenter($properties)
+            @presenter($availableBrands)
         </div>
         <div class="col-md-9">
             @presenter($contents)
