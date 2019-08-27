@@ -208,9 +208,40 @@ class BrandsShow extends IdentifiedPresenter
             new Belongs($table, [
                 'id' => 'brand_available_cars',
                 'title' => '<i class="fa fa-fw fa-car "></i> 提供可能な車両',
+                'exchangable' => true,
+                'exchangeForm' => $this->initAvailableCarsForm(),
+                'exchangeText' => '提供可能な車両を変更する',
             ]), [
                 'boxContext' => 'primary',
             ]
         );
+    }
+
+    protected function initAvailableCarsForm()
+    {
+        $vendorCars = $this->entity->getVendor()->getCars();
+
+        $options = [];
+        foreach ($vendorCars as $vendorCar) {
+            $options[$vendorCar->getId()] = $vendorCar->getName();
+        }
+
+        $values = [];
+        foreach ($this->availableCarsCollection as $car) {
+            $values[] = $car->getId();
+        }
+
+        $form = FormFactory::makeSelect($options, [
+            'name' => 'available_cars',
+            'multiple' => true,
+            'label' => '提供可能な車両',
+            'value' => $values,
+            'select2' => true,
+        ]);
+
+        $id = 'edit_available_cars';
+        $title = $toggle = '提供可能な車両';
+
+        return new FormContainer($form, compact('id', 'title', 'toggle'));
     }
 }

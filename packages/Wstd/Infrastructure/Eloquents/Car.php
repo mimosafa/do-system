@@ -56,6 +56,12 @@ class Car extends Model implements HasFiles
             ->using(Kitchencar::class)->withTimestamps();
     }
 
+    public function setAvailableBrandsAttribute(array $values)
+    {
+        $this->availableBrands()->sync($values);
+        return $this;
+    }
+
     /**
      * Local scope for index without query requests
      */

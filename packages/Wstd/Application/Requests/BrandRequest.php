@@ -44,6 +44,8 @@ class BrandRequest extends FormRequest
             'long_description' => 'nullable|string',
             'items' => 'array',
             'items.*' => 'integer',
+            'available_cars' => 'sometimes|present|array',
+            'available_cars.*' => 'exists:brands,id',
         ];
     }
 }

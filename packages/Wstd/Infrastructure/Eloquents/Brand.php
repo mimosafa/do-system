@@ -36,6 +36,12 @@ class Brand extends Model implements AdvertisableInterface
             ->using(Kitchencar::class)->withTimestamps();
     }
 
+    public function setAvailableCarsAttribute(array $values)
+    {
+        $this->availableCars()->sync($values);
+        return $this;
+    }
+
     public function setItemsAttribute(array $values)
     {
         $this->items()->detach();

@@ -48,6 +48,8 @@ class CarRequest extends FormRequest
             'car_photos.*' => 'integer',
             'remove_car_photos' => 'array',
             'remove_car_photos.*' => 'integer',
+            'available_brands' => 'sometimes|present|array',
+            'available_brands.*' => 'exists:brands,id',
         ];
     }
 }
