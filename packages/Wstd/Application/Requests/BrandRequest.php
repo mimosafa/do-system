@@ -26,6 +26,14 @@ class BrandRequest extends FormRequest
             $all['items'] = explode(',', $all['items']);
         }
 
+        if (isset($all['detach_available_cars']) && $all['detach_available_cars']) {
+            unset($all['detach_available_cars']);
+            if (! isset($all['available_cars'])) {
+                // Detach all cars
+                $all['available_cars'] = [];
+            }
+        }
+
         return $all;
     }
 

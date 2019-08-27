@@ -231,17 +231,26 @@ class BrandsShow extends IdentifiedPresenter
             $values[] = $car->getId();
         }
 
-        $form = FormFactory::makeSelect($options, [
-            'name' => 'available_cars',
-            'multiple' => true,
-            'label' => '提供可能な車両',
-            'value' => $values,
-            'select2' => true,
-        ]);
+        $forms = [
+            FormFactory::makeSelect($options, [
+                'name' => 'available_cars',
+                'multiple' => true,
+                'label' => '提供可能な車両',
+                'value' => $values,
+                'select2' => true,
+            ]),
+        ];
+
+        if (! empty($values)) {
+            $forms[] = FormFactory::makeInputHidden([
+                'name' => 'detach_available_cars',
+                'value' => 1,
+            ]);
+        }
 
         $id = 'edit_available_cars';
         $title = $toggle = '提供可能な車両';
 
-        return new FormContainer($form, compact('id', 'title', 'toggle'));
+        return new FormContainer($forms, compact('id', 'title', 'toggle'));
     }
 }
