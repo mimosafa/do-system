@@ -29,12 +29,12 @@ class CarRequest extends FormRequest
             $all['remove_car_photos'] = explode(',', $all['remove_car_photos']);
         }
 
-        if (isset($all['detach_available_brands']) && $all['detach_available_brands']) {
-            unset($all['detach_available_brands']);
-            if (! isset($all['available_brands'])) {
+        if (isset($all['detach_available_brands'])) {
+            if (! isset($all['available_brands']) && $all['detach_available_brands']) {
                 // Detach all brands
                 $all['available_brands'] = [];
             }
+            unset($all['detach_available_brands']);
         }
 
         return $all;
