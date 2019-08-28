@@ -4,6 +4,7 @@ namespace Wstd\Domain\Models\Brand;
 
 use Wstd\Domain\Models\BelongsToVendorInterface;
 use Wstd\Domain\Models\EntityInterface;
+use Wstd\Domain\Models\Car\CarCollectionInterface;
 use Wstd\Domain\Models\Item\ItemCollectionInterface;
 use Wstd\Domain\Models\Vendor\VendorInterface;
 
@@ -25,6 +26,8 @@ interface BrandInterface extends EntityInterface, BelongsToVendorInterface
     public function getStatus(): ?BrandValueStatus;
 
     public function getItems(): ItemCollectionInterface;
+
+    public function getAvailableCars(): CarCollectionInterface;
 
     public function getSubTitle(): ?BrandValueSubTitle;
 

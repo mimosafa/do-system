@@ -5,7 +5,9 @@ namespace Wstd\Infrastructure\Eloquents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Brand\BrandValueStatus;
+use Wstd\Infrastructure\Eloquents\Car;
 use Wstd\Infrastructure\Eloquents\Item;
+use Wstd\Infrastructure\Eloquents\Kitchencar;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableInterface;
 use Wstd\Infrastructure\Modules\Advertisement\AdvertisableTrait;
@@ -26,6 +28,18 @@ class Brand extends Model implements AdvertisableInterface
     public function items()
     {
         return $this->morphToMany(Item::class, 'item_belong')->withPivot('order');
+    }
+
+    public function availableCars()
+    {
+        return $this->belongsToMany(Car::class, 'kitchencars')
+            ->using(Kitchencar::class)->withTimestamps();
+    }
+
+    public function setAvailableCarsAttribute(array $values)
+    {
+        $this->availableCars()->sync($values);
+        return $this;
     }
 
     public function setItemsAttribute(array $values)

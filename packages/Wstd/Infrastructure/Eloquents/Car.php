@@ -5,7 +5,9 @@ namespace Wstd\Infrastructure\Eloquents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wstd\Domain\Models\Car\CarValueStatus;
+use Wstd\Infrastructure\Eloquents\Brand;
 use Wstd\Infrastructure\Eloquents\BusinessPermit;
+use Wstd\Infrastructure\Eloquents\Kitchencar;
 use Wstd\Infrastructure\Modules\Eloquent\BelongsToVendorTrait;
 use Wstd\Infrastructure\Modules\File\HasFiles;
 use Wstd\Infrastructure\Modules\File\HasFilesTrait;
@@ -46,6 +48,18 @@ class Car extends Model implements HasFiles
     public function businessPermits()
     {
         return $this->morphMany(BusinessPermit::class, 'approved');
+    }
+
+    public function availableBrands()
+    {
+        return $this->belongsToMany(Brand::class, 'kitchencars')
+            ->using(Kitchencar::class)->withTimestamps();
+    }
+
+    public function setAvailableBrandsAttribute(array $values)
+    {
+        $this->availableBrands()->sync($values);
+        return $this;
     }
 
     /**

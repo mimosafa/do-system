@@ -2,6 +2,8 @@
 
 namespace Wstd\Domain\Models\Brand;
 
+use Wstd\Domain\Models\Car\CarCollectionInterface;
+use Wstd\Domain\Models\Car\CarRepositoryInterface;
 use Wstd\Domain\Models\Item\ItemCollectionInterface;
 use Wstd\Domain\Models\Item\ItemRepositoryInterface;
 use Wstd\Domain\Models\Vendor\Vendor;
@@ -51,6 +53,13 @@ final class Brand implements BrandInterface
     {
         $repository = resolve(ItemRepositoryInterface::class);
         $collection = $this->eloquent->items->sortBy('pivot.order');
+        return $repository->makeCollectionFromEloquents($collection);
+    }
+
+    public function getAvailableCars(): CarCollectionInterface
+    {
+        $repository = resolve(CarRepositoryInterface::class);
+        $collection = $this->eloquent->availableCars;
         return $repository->makeCollectionFromEloquents($collection);
     }
 

@@ -7,6 +7,7 @@ use AdministrationJa\Prefectures;
 use Wstd\Domain\Models\EntityInterface;
 use Wstd\View\Html\Admin\FormFactory;
 use Wstd\View\Presenters\IdentifiedPresenter;
+use Wstd\View\Presenters\Admin\Includes\TableForBrands;
 use Wstd\View\Presenters\Admin\Includes\TableForBusinessPermits;
 use Wstd\View\Presenters\Admin\Modules\Contents;
 use Wstd\View\Presenters\Admin\Modules\FormContainer;
@@ -41,11 +42,16 @@ class CarsShow extends IdentifiedPresenter
      */
     public $contents;
 
+    private $availableBrandsCollection;
+    public $availableBrands;
+
     public function __construct(EntityInterface $entity)
     {
         $this->entity = $entity;
+        $this->availableBrandsCollection = $entity->getAvailableBrands();
         $this->initProperties();
         $this->initContents();
+        $this->initAvailableBrands();
     }
 
     protected function initProperties()
@@ -227,5 +233,63 @@ class CarsShow extends IdentifiedPresenter
         ]);
 
         return FormFactory::makeFormGroup($label, $input);
+    }
+
+    protected function initAvailableBrands()
+    {
+        $table = new TableForBrands($this->availableBrandsCollection, [
+            'items' => [
+                'thumb', 'name',
+            ],
+        ]);
+
+        $this->availableBrands = new Contents(
+            new Belongs($table, [
+                'id' => 'car_available_brands',
+                'title' => '<i class="fa fa-fw fa-coffee "></i> 取扱いブランド',
+                'exchangable' => true,
+                'exchangeForm' => $this->initAvailableBrandsForm(),
+                'exchangeText' => '取扱いブランドを変更する',
+            ]), [
+                'boxContext' => 'primary',
+            ]
+        );
+    }
+
+    protected function initAvailableBrandsForm()
+    {
+        $vendorBrands = $this->entity->getVendor()->getBrands();
+
+        $options = [];
+        foreach ($vendorBrands as $vendorBrand) {
+            $options[$vendorBrand->getId()] = $vendorBrand->getName();
+        }
+
+        $values = [];
+        foreach ($this->availableBrandsCollection as $brand) {
+            $values[] = $brand->getId();
+        }
+
+        $forms = [
+            FormFactory::makeSelect($options, [
+                'name' => 'available_brands',
+                'multiple' => true,
+                'label' => '取扱いブランド',
+                'value' => $values,
+                'select2' => true,
+            ])
+        ];
+
+        if (! empty($values)) {
+            $forms[] = FormFactory::makeInputHidden([
+                'name' => 'detach_available_brands',
+                'value' => 1,
+            ]);
+        }
+
+        $id = 'edit_available_brands';
+        $title = $toggle = '取扱いブランドを変更する';
+
+        return new FormContainer($forms, compact('id', 'title', 'toggle'));
     }
 }
