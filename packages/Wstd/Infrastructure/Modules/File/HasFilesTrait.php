@@ -2,6 +2,7 @@
 
 namespace Wstd\Infrastructure\Modules\File;
 
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 trait HasFilesTrait
@@ -14,7 +15,7 @@ trait HasFilesTrait
     public function registerMediaCollections()
     {
         foreach (\get_class_methods($this) as $method) {
-            if (starts_with($method, 'hasFileCollection')) {
+            if (Str::startsWith($method, 'hasFileCollection')) {
                 $this->{$method}();
             }
         }
