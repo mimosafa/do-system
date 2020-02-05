@@ -113,11 +113,13 @@ return [
 
     'menu' => [
         '管理情報',
+        /*
         [
             'text' => '出店リスト',
             'url'  => 'admin/kitchencars',
             'icon' => 'truck',
         ],
+        */
         [
             'text' => '出店者情報',
             'icon' => 'database',
