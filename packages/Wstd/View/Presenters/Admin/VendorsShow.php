@@ -61,7 +61,7 @@ class VendorsShow extends IdentifiedPresenter
         $editableProperties = ['name','status',];
 
         $this->properties = new Properties($this->entity, compact(
-            'id', 'header', 'properties', 'propertyLabels', 'editableProperties', 'title', 'trigger'
+            'id', 'header', 'properties', 'propertyLabels', 'editableProperties'
         ));
     }
 
