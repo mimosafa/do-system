@@ -169,7 +169,7 @@ class CarsShow extends IdentifiedPresenter
         $class = 'select-prefecture';
 
         return FormFactory::makeSelect($options, compact(
-            'name', 'label', 'class'
+            'label', 'class'
         ));
     }
 
