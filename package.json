@@ -23,7 +23,7 @@
         "eslint": "^5.16.0",
         "eslint-loader": "^2.1.2",
         "eslint-plugin-vue": "^5.2.2",
-        "jquery": "^3.2",
+        "jquery": "^3.5",
         "laravel-mix": "^4.0.7",
         "laravel-mix-eslint": "^0.1.3",
         "laravel-mix-merge-manifest": "^0.1.2",
